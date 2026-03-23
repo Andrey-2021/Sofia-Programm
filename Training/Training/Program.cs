@@ -1,10 +1,42 @@
+using DbLibrary;
+using Microsoft.EntityFrameworkCore;
+using Radzen;
 using Training.Components;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+//builder.Services.AddRazorComponents()
+//    .AddInteractiveServerComponents();
+
+//Включаем подробное описание ошибок в браузере
+// статья "Параметры обработчика канала на стороне сервера" -  https://learn.microsoft.com/ru-ru/aspnet/core/blazor/fundamentals/signalr?view=aspnetcore-8.0#server-side-circuit-handler-options
 builder.Services.AddRazorComponents()
-    .AddInteractiveServerComponents();
+            .AddInteractiveServerComponents(options =>
+            {
+                options.DetailedErrors = builder.Environment.IsDevelopment();//true; https://learn.microsoft.com/ru-ru/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-8.0
+                                                                             //options.DisconnectedCircuitMaxRetained = 100;
+                                                                             //options.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(3);
+                                                                             //options.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);
+                                                                             //options.MaxBufferedUnacknowledgedRenderBatches = 10;
+            });
+
+
+builder.Services.AddTransient<DbRepository>(); // регистрируем репозиторий
+
+string connectionString = "Data Source = WIN10PC; Initial Catalog =2026TrainingCRM ; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+builder.Services.AddDbContextFactory<SqlDbContext>
+        (
+            options => options.UseSqlServer(connectionString
+                                            // описание  EnableRetryOnFailure -  https://makolyte.com/how-to-do-retries-in-ef-core/
+                                            , options => { options.EnableRetryOnFailure(); }
+                                            )
+            );
+
+
+
+builder.Services.AddRadzenComponents(); // Для Radzen компонентов
+
 
 var app = builder.Build();
 

@@ -1,0 +1,20 @@
+﻿@attribute [Route(ProjectRouters.createDb)]
+@inherits CreateDbPageModel
+<PageTitle>Создать БД</PageTitle>
+
+<h3>Создание новой БД</h3>
+
+<div>
+    <button class="btn btn-primary" @onclick="CretaeNewDb">Создать новую БД</button>
+</div>
+<div>
+    @CreteDbMassage
+</div>
+<br />
+<div>
+    <button class="btn btn-primary" @onclick="SaveDataInDb">Записать начальные данные в БД</button>
+</div>
+<div>
+    @SaveDbMassage
+</div>
+

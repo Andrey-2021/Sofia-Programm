@@ -1,3 +1,6 @@
 <Solution>
+  <Project Path="DbLibrary/DbLibrary.csproj" Id="b628f4ea-f4f5-4842-8dbe-e0ef7ed55ac4" />
+  <Project Path="Entities/Entities.csproj" Id="93250a86-8511-4dd7-9974-bc5e87133e78" />
+  <Project Path="InitDb/InitDb.csproj" Id="bd14e882-871e-4641-bcc9-77c45dfa9fa8" />
   <Project Path="Training/Training.csproj" />
 </Solution>
