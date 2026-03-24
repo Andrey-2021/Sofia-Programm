@@ -1,4 +1,5 @@
 using DbLibrary;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.EntityFrameworkCore;
 using Radzen;
 using Training.Components;
@@ -23,6 +24,13 @@ builder.Services.AddRazorComponents()
 
 
 builder.Services.AddTransient<DbRepository>(); // регистрируем репозиторий
+
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
+builder.Services.AddScoped<MyUserOperationService>();
+
+builder.Services.AddAuthorization();
+builder.Services.AddCascadingAuthenticationState(); //новая аутентификация
+
 
 string connectionString = "Data Source = WIN10PC; Initial Catalog =2026TrainingCRM ; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 builder.Services.AddDbContextFactory<SqlDbContext>

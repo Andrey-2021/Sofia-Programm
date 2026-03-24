@@ -18,7 +18,7 @@ public class RegisteredUsersPageModel : ComponentBase
     /// </summary>
     protected string? ErrorMassage { get; set; }
 
-    public IEnumerable<RegisteredUser>? Entities { get; set; }
+    public IEnumerable<MyUser>? Entities { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
@@ -26,7 +26,7 @@ public class RegisteredUsersPageModel : ComponentBase
 
         IsBusy = true;
         var repository = ServiceProvider.GetRequiredService<DbRepository>();
-        var result = await repository.GetEntitiesAsync<RegisteredUser>();
+        var result = await repository.GetEntitiesAsync<MyUser>();
         Entities = result.data;
 
         if (result.ex is null)

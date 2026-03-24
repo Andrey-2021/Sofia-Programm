@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Entities;
+﻿namespace Entities;
 
 /// <summary>
 /// Ответ на вопрос курса
 /// </summary>
-public class Answer
+public class WrongAnswer
 {
     /// <summary>
     /// Id
@@ -16,13 +12,13 @@ public class Answer
     public int Id { get; set; }
 
     /// <summary>
-    /// Ответ на вопрос
+    /// Неправильный ответ на вопрос
     /// </summary>
     [Required(ErrorMessage = "Введите ответ")]
     [StringLength(LengthConstants.answerMaxLength, MinimumLength = LengthConstants.answerMinLength, ErrorMessage = "Длина вопроса должна быть не менее {2} и не более {1} символов")]
     [Comment("Ответ на вопрос")]
     [DisplayName("Ответ на вопрос")]
-    public string Qestion { get; set; } = default!;
+    public string Answer { get; set; } = default!;
 
     /// <summary>
     /// Id вопроса

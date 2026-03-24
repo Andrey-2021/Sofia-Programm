@@ -5,7 +5,20 @@ public static class ProjectRouters
 	public const string homeHref = "";
 	public const string home = "/" + homeHref;
 
-	public const string aboutUsHref = "about-us";
+    /// <summary>
+	/// Страница входа (ввод логина и пароля)
+	/// </summary>
+	public const string inputLoginandPasswordHref = "";
+    public const string inputLoginandPassword = "/" + inputLoginandPasswordHref;
+
+    /// <summary>
+	/// Вход выполнен
+	/// </summary>
+	public const string loginedHref = "logined";
+    public const string logined = "/" + loginedHref;
+
+
+    public const string aboutUsHref = "about-us";
 	public const string aboutUs = "/" + aboutUsHref;
 
     public const string createDbHref = "create-db";

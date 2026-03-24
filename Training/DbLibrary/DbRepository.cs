@@ -1,4 +1,5 @@
 ﻿using Entities.Interfaces;
+using System.Linq.Expressions;
 
 namespace DbLibrary;
 
@@ -26,7 +27,7 @@ public class DbRepository
                 if (!dbAvailableResult)
                     return (false, null) ;// throw new Exception("Сервер БД не доступен.");
 
-                var result = db.Set<RegisteredUser>().Count();//проверяем что есть таблица в БД. Считаем, что если есть таблица, то есть и другие таблицы.
+                var result = db.Set<MyUser>().Count();//проверяем что есть таблица в БД. Считаем, что если есть таблица, то есть и другие таблицы.
                 if (result >= 0)
                     return (true,null);
                 return (false, null);
@@ -82,7 +83,7 @@ public class DbRepository
                 if (rezult)
                 {
                     var users = UserSeeder.GetSampleUsers();
-                    await db.RegisteredUsers.AddRangeAsync(users);
+                    await db.MyUsers.AddRangeAsync(users);
 
                     await db.SaveChangesAsync();
                 }
@@ -200,5 +201,49 @@ public class DbRepository
             return (entity, ex);
         }
     }
+
+    public async Task<(TEntity? entity, Exception? ex)> GetFirstOrDefaultAsync<TEntity>(Expression<Func<TEntity, bool>>? predicate = null,
+                                                                Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+                                                                Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+                                                                TrackingType trackingType = TrackingType.NoTracking)
+        where TEntity : class
+    {
+        try
+        {
+            using var db = contextFactory.CreateDbContext();
+
+            var _dbSet = db.Set<TEntity>();
+
+            var query = trackingType switch
+            {
+                TrackingType.NoTracking => _dbSet.AsNoTracking(),
+                TrackingType.NoTrackingWithIdentityResolution => _dbSet.AsNoTrackingWithIdentityResolution(),
+                TrackingType.Tracking => _dbSet,
+                _ => throw new ArgumentOutOfRangeException(nameof(trackingType), trackingType, null)
+            };
+
+            if (include is not null)
+            {
+                query = include(query);
+            }
+
+            if (predicate is not null)
+            {
+                query = query.Where(predicate);
+            }
+
+            var rezult= orderBy is not null
+                ? await orderBy(query).FirstOrDefaultAsync()
+                : await query.FirstOrDefaultAsync();
+
+            return (rezult, null);
+        }
+        catch (Exception ex)
+        {
+            return (null, ex);
+        }
+        
+    }
+
 }
 

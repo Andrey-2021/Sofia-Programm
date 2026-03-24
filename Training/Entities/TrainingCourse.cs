@@ -1,4 +1,6 @@
-﻿namespace Entities;
+﻿using System.Reflection.Emit;
+
+namespace Entities;
 
 /// <summary>
 /// Учебный курс
@@ -21,6 +23,16 @@ public class TrainingCourse
     public string Name { get; set; } = default!;
 
     /// <summary>
+    /// Описание курса.
+    /// </summary>
+    public string? Description { get; set; }
+
+    /// <summary>
+    /// Продолжительность курса в часах.
+    /// </summary>
+    public int DurationHours { get; set; }
+
+    /// <summary>
     /// Дата создания курса
     /// </summary>
     [Required(ErrorMessage = "Введите дату создания курса")]
@@ -30,4 +42,35 @@ public class TrainingCourse
     [DisplayName("Дата создания курса")]
 
     public DateTime ContractDate { get; set; } = DateTime.Now;
+
+    /// <summary>
+    /// Уровень сложности курса
+    /// </summary>
+    [Range(0, LengthConstants.courceDifficultyLevelLength, ErrorMessage = "Не введён уровень сложности")]
+    [Comment("Уровень сложности курса")]
+    [DisplayName("Уровень сложности курса")]
+    public int DifficultyLevel { get; set; }
+
+    /// <summary>
+    /// Id владельца курса
+    /// </summary>
+    /// <remarks>
+	/// Внешний ключ. Связь Один-Ко-Многим
+	///</remarks>
+    [Required(ErrorMessage = "Обязательно должн быть выбран владелец курса")]
+    [Range(1, int.MaxValue, ErrorMessage = "Не выбрана владелец курса")]
+    [Comment("Id владелеца курса")]
+    [DisplayName("Id владелеца курса")]
+    public int RegisteredUserId { get; set; }
+
+    /// <summary>
+    /// Владелец курса
+    /// </summary>
+	/// <remarks>
+	/// Навигационное свойство. Связь один-ко-многим
+	///</remarks>
+    [Comment("Владелец курса")]
+    [DisplayName("Владелец курса")]
+    public MyUser? RegisteredUser { get; set; }
+
 }

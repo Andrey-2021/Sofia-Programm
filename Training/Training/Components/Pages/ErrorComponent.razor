@@ -1,0 +1,40 @@
+﻿
+<PageTitle>404 — Страница не найдена</PageTitle>
+@* <HeadContent>
+	<meta name="description" content="К сожалению, запрашиваемая Вами страница не найдена. Пожалуйста, перейдите в существующий раздел">
+	<meta name="keywords" content="@SeoConstants.end_description">
+</HeadContent> *@
+
+<div class="error-mycontainer">
+	<div class="error-box">
+		<img src="/images/color-bricks.jpg" alt="lemurs" class="bg-image" />
+
+		<div class="error-mytext">
+			<h1>Страница не найдена</h1>
+			<div>
+				К сожалению, такой страницы нет на нашем сайте.
+			</div>
+			<div>
+				Возможно Вы ввели неправильны адрес или
+			</div>
+			<div>
+				страница была удалена с сервера.
+			</div>
+			<br />
+			<div>
+				Можно перейти на <a href="/">главную страницу сайта</a>
+			</div>
+
+		</div>
+	</div>
+</div>
+
+@code {
+		[Inject] public NavigationManager MyNavigationManager { get; set; } = default!;
+
+		protected override void OnInitialized()
+		{
+			//todo вернуть  Serilog.Log.Error($"Ошика 404, нет такой страницы: {MyNavigationManager.Uri}. Компонент: " + nameof(ErrorComponent));
+			base.OnInitialized();
+		}
+}

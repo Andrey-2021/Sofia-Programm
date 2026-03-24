@@ -1,21 +1,36 @@
 ﻿using Entities.Enums;
-using System.ComponentModel.DataAnnotations.Schema;
 namespace Entities;
 
 /// <summary>
 /// Данные вводимые при регистрации пользователя
 /// </summary>
-public class RegisteredUser :  IHaveId
+public class MyUser :  IHaveId
 {
     /// <summary>
     /// Id
     /// </summary>
     public int Id { get; set; }
 
-	/// <summary>
-	/// Login
+    [ValidateComplexType]
+    [Required]
+    public Manager Manager { get; set; }
+
+    /// <summary>
+	/// Токен входа
 	/// </summary>
-	[Required(ErrorMessage = "Обязательно должна быть введен логин")]
+	[MaxLength(600)]
+    public string? UserGuid { get; set; }
+
+    /// <summary>
+    /// Дата последнего входа на сайт
+    /// </summary>
+    public DateTime LastOperationDate { get; set; }
+
+
+    /// <summary>
+    /// Login
+    /// </summary>
+    [Required(ErrorMessage = "Обязательно должна быть введен логин")]
     [StringLength(LengthConstants.loginMaxLength, MinimumLength = LengthConstants.loginMinLength, ErrorMessage = "Длина логина должна быть не менее {2} и не более {1} символов")]
     [Comment("Логин")]
     [DisplayName("Логин")]
@@ -48,18 +63,46 @@ public class RegisteredUser :  IHaveId
     public RoleEnum? Role { get; set; }
 
     /// <summary>
+	/// Время прекращения действия токена
+	/// </summary>
+	public DateTime ExpiredAt { get; set; }
+
+    /// <summary>
+    /// Счётчик попыток входа
+    /// </summary>
+    public int PasswordInputCount { get; set; } = 0;
+
+    /// <summary>
     /// Конструктор по умолчанию.
     /// </summary>
-    public RegisteredUser() 
-    { }
+    public MyUser() 
+    {
+        Manager = new();
+    }
+
+    public MyUser(string? guid, int hours)
+    {
+        UserGuid = guid;
+        ExpiredAt = DateTime.Now.AddHours(hours);
+        LastOperationDate = DateTime.Now;
+    }
 
     /// <summary>
     /// Конструктор с инициализацией.
     /// </summary>
-    public RegisteredUser(string login, string password, RoleEnum role)
+    public MyUser(string login, string password, RoleEnum role, Manager manager)
     {
         Login = login;
 		Password = password;
 		Role = role;
+        Manager = manager;
+    }
+
+    public void ClearForLogout()
+    {
+        UserGuid = null;
+        LastOperationDate = DateTime.Now;
+        ExpiredAt = DateTime.Now;
+        PasswordInputCount = 0;
     }
 }

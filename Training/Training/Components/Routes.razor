@@ -1,6 +1,38 @@
-﻿<Router AppAssembly="typeof(Program).Assembly" NotFoundPage="typeof(Pages.NotFound)">
+﻿@using Training.Components.Pages.LoginedPages
+@using Training.Components.Pages
+@using Microsoft.AspNetCore.Components.Authorization
+
+
+@* <Router AppAssembly="typeof(Program).Assembly" NotFoundPage="typeof(Pages.NotFound)">
     <Found Context="routeData">
         <RouteView RouteData="routeData" DefaultLayout="typeof(Layout.MainLayout)" />
         <FocusOnNavigate RouteData="routeData" Selector="h1" />
     </Found>
-</Router>
+</Router> *@
+
+<CascadingAuthenticationState>
+	<Router AppAssembly="@typeof(Program).Assembly">
+		<Found Context="routeData">
+			<AuthorizeRouteView RouteData="@routeData" DefaultLayout="@typeof(Layout.MainLayout)">
+				<Authorizing>
+					Авторизация. Минутку...
+				</Authorizing>
+				<NotAuthorized>
+					Пользователь не авторизован
+					<LoginComponent>
+					</LoginComponent>
+				</NotAuthorized>
+			</AuthorizeRouteView>
+			<FocusOnNavigate RouteData="@routeData" Selector="h4" />
+		</Found>
+
+		@* настроил переход на страницу в Program.cs *@
+		<NotFound>
+			<PageTitle>Нет такой страницы</PageTitle>
+			<LayoutView Layout="@typeof(Layout.MainLayout)">
+				@* <p role="alert">Простите, нет страницы с таким адресом.</p> *@
+				<ErrorComponent/>
+			</LayoutView>
+		</NotFound>
+	</Router>
+</CascadingAuthenticationState>

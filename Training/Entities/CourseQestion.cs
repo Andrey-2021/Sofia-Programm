@@ -12,13 +12,28 @@ public class CourseQestion
     public int Id { get; set; }
 
     /// <summary>
-    /// Вопрос курса
+    /// Кандзи
     /// </summary>
-    [Required(ErrorMessage = "Введите вопрос")]
-    [StringLength(LengthConstants.qestionMaxLength, MinimumLength = LengthConstants.qestionMinLength, ErrorMessage = "Длина вопроса должна быть не менее {2} и не более {1} символов")]
+    [Required(ErrorMessage = "Введите Кандзи")]
+    [StringLength(LengthConstants.qestionMaxLength, MinimumLength = LengthConstants.qestionMinLength, ErrorMessage = "Длина кандзи должна быть не менее {2} и не более {1} символов")]
     [Comment("Вопрос курса")]
     [DisplayName("Вопрос курса")]
-    public string Qestion { get; set; } = default!;
+    public string KanjiWord { get; set; } = default!;
+
+    /// <summary>
+    /// Хирагана
+    /// </summary>
+    public string? HiraganaWord { get; set; }
+
+    /// <summary>
+    /// Катакана
+    /// </summary>
+    public string? KatakanaWord { get; set; }
+
+    /// <summary>
+    /// Русское слово
+    /// </summary>
+    public string? RussianWord { get; set; }
 
     /// <summary>
     /// Id учебного курса
@@ -30,7 +45,7 @@ public class CourseQestion
     [Range(1, int.MaxValue, ErrorMessage = "Не выбрана учебный курс")]
     [Comment("Id учебного курса")]
     [DisplayName("Id учебного курса")]
-    public int MedicalServiceTypeId { get; set; }
+    public int TrainingCourseId { get; set; }
 
     /// <summary>
     /// Учебный курс
@@ -42,5 +57,11 @@ public class CourseQestion
     [DisplayName("Учебный курс")]
     public TrainingCourse? TrainingCourse { get; set; }
 
-    // уровень сложности
+    /// <summary>
+    /// Уровень сложности вопроса
+    /// </summary>
+    [Range(0, LengthConstants.qestionDifficultyLevelLength, ErrorMessage = "Не выбрана уровень сложности")]
+    [Comment("Уровень сложности вопроса")]
+    [DisplayName("Уровень сложности вопроса")]
+    public int DifficultyLevel { get; set; }
 }

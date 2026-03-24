@@ -1,6 +1,6 @@
 ﻿namespace Entities;
 
-internal class LengthConstants
+public class LengthConstants
 {
 
     /// <summary>
@@ -29,6 +29,23 @@ internal class LengthConstants
 
     public const int answerMaxLength = 255;
     public const int answerMinLength = 4;
+
+    /// <summary>
+    /// Максимальный уровень сложности курса
+    /// </summary>
+    public const int courceDifficultyLevelLength = 5;
+
+    /// <summary>
+    /// Максимальный уровень сложности вопроса
+    /// </summary>
+    public const int qestionDifficultyLevelLength = 5;
+
+    /// <summary>
+	/// Максимальная количество попыток ввода пароля
+	/// </summary>
+	public const byte maxPasswordInputCount = 5;
+
+
 
 
 

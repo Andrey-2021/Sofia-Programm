@@ -1,0 +1,51 @@
+﻿@inherits LoginComponentModel
+@* @page "/" *@
+@attribute [Route(ProjectRouters.inputLoginandPassword)]
+<PageTitle>Вход</PageTitle>
+@if (!IsInit)
+{
+	<h3>Минутку, идёт проверка...</h3>
+}
+else
+{
+	<br />
+	<br />
+	<div class="my-window-conteiner">
+		<div class="my-window-box">
+			<h3 style="text-align:center;">Вход</h3>
+
+			<EditForm EditContext="editContext" OnValidSubmit="OnLoginAsync">
+				<DataAnnotationsValidator />
+				@* <ValidationSummary /> *@
+
+				<label for="username">Логин:</label>
+				<InputText id="username" @bind-Value="LoginModel.Login" class="form-control" autocomplete="off" />
+				<ValidationMessage For="@(() => LoginModel.Login)" />
+
+				<label for="password" style="margin-top:0.7rem;">Пароль:</label>
+				<InputText id="password" @bind-Value="LoginModel.Password" class="form-control" autocomplete="off" />
+				<ValidationMessage For="@(() => LoginModel.Password)" />
+				
+				<br />
+				<RadzenStack Orientation="Orientation.Horizontal" JustifyContent="JustifyContent.Center" Gap="1rem">
+					<RadzenButton IsBusy=@IsBusy type="submit" Text="Войти" ButtonStyle="ButtonStyle.Primary" />
+					@* <button type="submit" class="btn btn-primary">Войти</button> *@
+
+					<RadzenButton IsBusy=@IsBusy Click=@CreateNewLoginModel Text="Очистить поля" ButtonStyle="ButtonStyle.Warning" />
+					@* <button type="button" class="btn btn-warning" @onclick="@CreateNewLoginModel">Очистить поля</button> *@
+
+					@* <button type="button" class="btn btn-secondary" @onclick="@OnCancel">Отмена</button> *@
+					<RadzenButton IsBusy=@IsBusy Click=@OnCancel Text="Отмена" ButtonStyle="ButtonStyle.Secondary" />
+				</RadzenStack>
+			</EditForm>
+		</div>
+	</div>
+}
+
+@if (!string.IsNullOrEmpty(Message))
+{
+	<div>
+		<div>@Message </div>
+		<div>@DateTime.Now</div>
+	</div>
+}
