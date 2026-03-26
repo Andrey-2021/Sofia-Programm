@@ -1,6 +1,4 @@
-﻿using System.Reflection.Emit;
-
-namespace Entities;
+﻿namespace Entities;
 
 /// <summary>
 /// Учебный курс
@@ -40,7 +38,6 @@ public class TrainingCourse
     [Range(typeof(DateTime), "1/1/2000", "1/1/2035", ErrorMessage = "Дата заключения вне допустимого диапазона")]
     [Comment("Дата создания курса")]
     [DisplayName("Дата создания курса")]
-
     public DateTime ContractDate { get; set; } = DateTime.Now;
 
     /// <summary>
@@ -52,6 +49,11 @@ public class TrainingCourse
     public int DifficultyLevel { get; set; }
 
     /// <summary>
+    /// Курс виден всем
+    /// </summary>
+    public bool IsVisableForAll { get; set; } = false;
+
+    /// <summary>
     /// Id владельца курса
     /// </summary>
     /// <remarks>
@@ -61,7 +63,7 @@ public class TrainingCourse
     [Range(1, int.MaxValue, ErrorMessage = "Не выбрана владелец курса")]
     [Comment("Id владелеца курса")]
     [DisplayName("Id владелеца курса")]
-    public int RegisteredUserId { get; set; }
+    public int MyUserId { get; set; }
 
     /// <summary>
     /// Владелец курса
@@ -71,6 +73,21 @@ public class TrainingCourse
 	///</remarks>
     [Comment("Владелец курса")]
     [DisplayName("Владелец курса")]
-    public MyUser? RegisteredUser { get; set; }
+    public MyUser? MyUser { get; set; }
 
+    /// <summary>
+    /// Конструктор по умолчанию
+    /// </summary>
+    public TrainingCourse()
+    { 
+    }
+
+    /// <summary>
+    /// Конструктор с пареметром
+    /// </summary>
+    public TrainingCourse(MyUser myUser)
+    {
+        //MyUser = myUser;
+        MyUserId = myUser.Id;
+    }
 }

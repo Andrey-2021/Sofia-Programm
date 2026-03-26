@@ -118,14 +118,13 @@ public class MyUserOperationService
 
 
 
-        if (findUserResult.ex == null)
+        if (findUserResult.ex != null) // Если ошибка
         {
             MyUser = null;
             return findUserResult.ex;
         }
 
-        //Нет данных в БД
-        if (findUserResult.entity == null)
+        if (findUserResult.entity == null) // Нет данных в БД - Нет пользователя с таким ключом в БД
         {
             var result = await CreateNewUserAsync();
             MyUser = result.myUser;

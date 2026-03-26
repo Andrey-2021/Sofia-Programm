@@ -1,4 +1,5 @@
-﻿using Entities.Interfaces;
+﻿using DbLibrary.Helpers;
+using Entities.Interfaces;
 using System.Linq.Expressions;
 
 namespace DbLibrary;
@@ -84,6 +85,12 @@ public class DbRepository
                 {
                     var users = UserSeeder.GetSampleUsers();
                     await db.MyUsers.AddRangeAsync(users);
+
+                    var trainingCourse = TrainingCourseJapaneseSeeder.GetSampleCourses(users);
+                    await db.TrainingCourses.AddRangeAsync(trainingCourse);
+
+                    var questions = CommonCourseQuestionSeeder.GetQuestions(trainingCourse);
+                    await db.CourseQestions.AddRangeAsync(questions);
 
                     await db.SaveChangesAsync();
                 }
@@ -174,6 +181,26 @@ public class DbRepository
         }
     }
 
+
+    public async Task<OperationResponce<TEntity>> UpdateEntity<TEntity>(TEntity entity)
+    where TEntity : class
+    {
+        try
+        {
+            using var db = contextFactory.CreateDbContext();
+            var result = db.Update<TEntity>(entity);
+            var n = await db.SaveChangesAsync();
+
+            return OperationResponce<TEntity>.SetSuccessfullOperation(result.Entity, "Объект обновлён (сохранён) в БД");
+        }
+        catch (Exception ex)
+        {
+            return OperationResponce<TEntity>.SetExceptionOperation("Ошибка при обновлении (сохранении) объекта в БД", ex);
+        }
+    }
+
+
+
     /// <summary>
 	/// Удалить сущность в БД
 	/// </summary>
@@ -245,5 +272,10 @@ public class DbRepository
         
     }
 
+
+    public async Task<(IEnumerable<TrainingCourse> data, Exception? ex)> GetAllMyTrainingCourse(MyUser myUser)
+    {
+        return await GetEntitiesAsync<TrainingCourse>();
+    }
 }
 

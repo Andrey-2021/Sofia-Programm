@@ -1,0 +1,16 @@
+﻿
+/*
+    перенос строк
+    https://stackoverflow.com/questions/64157834/how-can-i-have-new-line-in-blazor
+*/
+.show-operation-error-message {
+    text-align: left;
+    color: orangered;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    /*white-space: normal;*/
+}
+
+.my-error-box{
+    margin:0 0 4px 0;
+}

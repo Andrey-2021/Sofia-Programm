@@ -1,0 +1,160 @@
+﻿@attribute [Route(ProjectRouters.addTrainingCoursePage)]
+@inherits AddTrainingCoursePageModel
+<PageTitle>Создание курса</PageTitle>
+
+<div class="my-window-conteiner">
+    <div class="my-window-box">
+        <h3>Создать новый курс</h3>
+
+        <ShowOperrationErrorComponent BaseOperationResponce=@SaveEntityOperationResponce />
+
+        @if (EditContext != null)
+        {
+            <EditForm EditContext=@EditContext OnValidSubmit="@OnSaveValidEntityClick">
+                <ObjectGraphDataAnnotationsValidator />
+                <div class="input-table">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <RadzenStack Orientation="Orientation.Horizontal"
+                                                 Wrap="FlexWrap.NoWrap"
+                                                 Style="width:100%;"
+                                                 AlignItems="AlignItems.Center">
+                                        <div class="required-field">*</div>
+                                        <RadzenLabel Component="_name">Название:</RadzenLabel>
+                                    </RadzenStack>
+                                </td>
+                                <td>
+                                    <RadzenTextBox Name="_name"
+                                                   @bind-Value=@(MainEntity!.Name)
+                                                   Style="width: 100%;"
+                                                   aria-label="Default TextBox" autofocus
+                                                   AutoCompleteType="AutoCompleteType.Off" />
+                                    <ValidationMessage For="@(() => MainEntity!.Name)" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <RadzenStack Orientation="Orientation.Horizontal"
+                                                 Wrap="FlexWrap.NoWrap"
+                                                 Style="width:100%;"
+                                                 AlignItems="AlignItems.Center">
+                                        <div class="required-field">*</div>
+                                        <RadzenLabel Component="_description">Описание:</RadzenLabel>
+                                    </RadzenStack>
+                                </td>
+                                <td>
+                                    <RadzenTextBox Name="_description"
+                                                   @bind-Value=@(MainEntity!.Description)
+                                                   Style="width: 100%;"
+                                                   aria-label="Default TextBox" autofocus
+                                                   tabindex="2"
+                                                   AutoCompleteType="AutoCompleteType.Off" /> @* autocomplete="off" *@
+                                    <ValidationMessage For="@(() => MainEntity!.Description)" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <RadzenStack Orientation="Orientation.Horizontal"
+                                                 Wrap="FlexWrap.NoWrap"
+                                                 Style="width:100%;"
+                                                 AlignItems="AlignItems.Center">
+                                        <div class="required-field">*</div>
+                                        <RadzenLabel Component="_durationHours">Продолжительность курса (часв):</RadzenLabel>
+                                    </RadzenStack>
+                                </td>
+                                <td>
+                                    <RadzenNumeric Name="_durationHours
+                                    Min="0"
+                                                   Max="5"
+                                                   TValue="int"
+                                                   @bind-Value=@MainEntity.DurationHours
+                                                   AutoCompleteType="AutoCompleteType.Off"
+                                                   Step="1"
+                                                   Placeholder="0"
+                                                   TextAlign="TextAlign.Right" />
+                                    <ValidationMessage For="@(() => MainEntity!.DurationHours)" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.NoWrap" Style="width:100%;" AlignItems="AlignItems.Center">
+                                        <div class="required-field">*</div>
+                                        <RadzenLabel Component="_contractDate">Дата создания курса:</RadzenLabel>
+                                    </RadzenStack>
+                                </td>
+                                <td>
+                                    <RadzenTextBox Name="_contractDate"
+                                                   Style="width: 100%;"
+                                                   aria-label="Default TextBox" autofocus
+                                                   tabindex="2"
+                                                   ReadOnly="true"
+                                                   Disabled="true"
+                                                   Value=@(MainEntity!.ContractDate.ToLongDateString())>
+                                    </RadzenTextBox>
+
+                                    <ValidationMessage For="@(() => MainEntity!.ContractDate)" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.NoWrap" Style="width:100%;" AlignItems="AlignItems.Center">
+                                        <div class="required-field">*</div>
+                                        <RadzenLabel Component="_difficultyLevel">
+                                            @($"Уровень сложности курса (от 0 до {@LengthConstants.courceDifficultyLevelLength}):")
+                                        </RadzenLabel>
+                                    </RadzenStack>
+                                </td>
+                                <td>
+                                    <RadzenNumeric Name="_difficultyLevel"
+                                                   Min="0"
+                                                   Max="5"
+                                                   TValue="int"
+                                                   @bind-Value=@MainEntity.DifficultyLevel
+                                                   AutoCompleteType="AutoCompleteType.Off"
+                                                   Step="1"
+                                                   Placeholder="0"
+                                                   TextAlign="TextAlign.Right" />
+                                    <ValidationMessage For="@(() => MainEntity!.DifficultyLevel)" />
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td>
+                                    <RadzenStack Orientation="Orientation.Horizontal"
+                                                 Wrap="FlexWrap.NoWrap"
+                                                 Style="width:100%;"
+                                                 AlignItems="AlignItems.Center">
+                                        <div class="required-field">*</div>
+                                        <RadzenLabel Component="_isVisableForAll">Курс виден всем:</RadzenLabel>
+                                    </RadzenStack>
+                                </td>
+                                <td>
+                                    <RadzenLabel Text="Виден" Component="True" />
+                                    <RadzenSwitch @bind-Value=@MainEntity.IsVisableForAll
+                                                  Name="_isVisableForAll" />
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <RadzenStack Orientation="Orientation.Horizontal" Gap="2rem" JustifyContent="JustifyContent.Center">
+                    <RadzenButton type="submit" style="width: 160px" IsBusy=@IsBusy Text="Сохранить"
+                                  Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" TabIndex="10" />
+
+                    <RadzenButton type="button" style="width: 160px" Click=@(() => OnCancelClick()) Text="Отмена"
+                                  Shade="Shade.Light" ButtonStyle="ButtonStyle.Warning" TabIndex="11" />
+                </RadzenStack>
+            </EditForm>
+        }
+
+    </div>
+</div>

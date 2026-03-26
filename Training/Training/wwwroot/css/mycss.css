@@ -1,0 +1,87 @@
+﻿
+:root {
+    --my-menu-background-color: #99ff99;
+    --my-menu-hover-background-color: green;
+    --work-order-add-dialog-vh: 95vh;
+    --work-order-input-box-vh: calc( var(--work-order-add-dialog-vh)/2-5vh);
+}
+
+.my-window-conteiner {
+    display: flex;
+    justify-content: center;
+}
+
+.my-window-box {
+    width: max-content;
+    margin: 0rem 1rem 1rem 1rem;
+    padding: 2rem 3rem 2rem 3rem;
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+}
+
+    .my-window-box:hover {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+.my-window-box-100with {
+    width: 100%;
+    margin: 0rem 1rem 1rem 1rem;
+    padding: 2rem 3rem 2rem 3rem;
+    background-color: #ffffff;
+    border: 1px solid #f0f0f0;
+    box-shadow: 0 3px 6px rgba(0,0,0,0.25);
+}
+
+    .my-window-box-100with:hover {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+
+.input-table {
+    /*width:100%;*/
+    /*background-color:coral;*/
+    /*padding:10px;*/
+}
+
+    .input-table table {
+        width: 100%;
+        border-collapse: separate;
+        border-spacing: 10px 5px;
+        margin-bottom: 1rem;
+    }
+
+    /*.input-table table, th, td {
+        border: 1px solid black;
+        background-color: yellow;
+    }*/
+
+
+    .input-table td {
+        vertical-align: middle;
+    }
+
+    .input-table table td:first-child {
+        text-align: right;
+        /*background-color:antiquewhite;*/
+        width: 1px;
+        white-space: nowrap;
+       
+    }
+
+    .input-table table td:nth-child(2) {
+        min-width: 20rem;
+        text-align: left;
+    }
+
+
+    /*Выводим содержимое в одну строку, без переносов*/
+.inline-box {
+    display: flex;
+    flex-wrap:nowrap;
+    align-items:flex-end;
+    background-color:aquamarine;
+}
+
+.required-field {
+    color:red;
+}

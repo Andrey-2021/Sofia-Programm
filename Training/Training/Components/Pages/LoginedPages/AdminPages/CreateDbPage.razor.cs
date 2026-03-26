@@ -1,4 +1,4 @@
-﻿namespace Training.Components.Pages.AdminPages;
+﻿namespace Training.Components.Pages.LoginedPages.AdminPages;
 
 public class CreateDbPageModel: ComponentBase
 {

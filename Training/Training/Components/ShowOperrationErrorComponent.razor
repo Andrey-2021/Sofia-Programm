@@ -1,0 +1,80 @@
+﻿@using DbLibrary.Helpers
+@using Radzen.Blazor
+@if (BaseOperationResponce != null && !BaseOperationResponce.IsSuccessfullOperation)
+{
+	@if (ErrorMessage != null)
+	{
+		<div class="my-error-box">
+		<RadzenAccordion style="--rz-accordion-item-background-color:#f7d0da;">
+			<Items>
+				<RadzenAccordionItem Text=@(ErrorMessage+text)
+									 Icon="error"
+									 CollapseTitle="Свернуть" ExpandTitle="Развернуть"
+									 CollapseAriaLabel="Свернуть подробности" ExpandAriaLabel="Развернуть подробности">
+					@if (!string.IsNullOrEmpty(BaseOperationResponce?.Exception?.Message))
+					{
+						<div>
+							Exception: @(BaseOperationResponce?.Exception?.Message);
+						</div>
+					}
+					@if (!string.IsNullOrEmpty(BaseOperationResponce?.Exception?.InnerException?.Message))
+					{
+						<div>
+							InnerException: @(BaseOperationResponce?.Exception?.InnerException?.Message);
+						</div>
+					}
+				</RadzenAccordionItem>
+			</Items>
+		</RadzenAccordion>
+		</div>
+	}
+
+	@* @if (ErrorMessage != null)
+	{
+		<div class="show-operation-error-message">
+			@((MarkupString)ErrorMessage)
+		</div>
+		<div>
+			@text
+		</div>
+	}
+
+
+	#if DEBUG
+	@if (BaseOperationResponce?.Exception?.Message!=null)
+	{
+	<div>
+		Exception: @(BaseOperationResponce?.Exception?.Message);
+	</div>
+	}
+
+	@if (BaseOperationResponce?.Exception?.InnerException?.Message != null)
+	{
+		<div>
+			InnerException: @(BaseOperationResponce?.Exception?.InnerException?.Message);
+		</div>
+	}
+	#endif  *@
+}
+
+
+@code {
+	//todo поменяять цвет компонента на красный
+
+	[Parameter]
+	public BaseOperationResponce? BaseOperationResponce { get; set; }
+	private string? ErrorMessage { get; set; }
+	private string text = " (Попробуйте обновить страницу или выполнить операцию позже)";
+
+	protected override void OnParametersSet()
+	{
+		if (BaseOperationResponce == null) ErrorMessage = null;
+		else ErrorMessage = BaseOperationResponce.MessageForUser;
+
+		// #if DEBUG
+		// 		ErrorMessage = ErrorMessage
+		// 		+ Environment.NewLine + $"Exception: {BaseOperationResponce?.Exception?.Message}"
+		// 		+ Environment.NewLine + $"InnerException: {BaseOperationResponce?.Exception?.InnerException?.Message}";
+		// #endif
+	}
+}

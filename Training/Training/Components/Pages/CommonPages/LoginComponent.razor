@@ -14,7 +14,7 @@ else
 		<div class="my-window-box">
 			<h3 style="text-align:center;">Вход</h3>
 
-			<EditForm EditContext="editContext" OnValidSubmit="OnLoginAsync">
+			<EditForm EditContext="editContext" OnValidSubmit="OnLoginClick">
 				<DataAnnotationsValidator />
 				@* <ValidationSummary /> *@
 
@@ -31,11 +31,11 @@ else
 					<RadzenButton IsBusy=@IsBusy type="submit" Text="Войти" ButtonStyle="ButtonStyle.Primary" />
 					@* <button type="submit" class="btn btn-primary">Войти</button> *@
 
-					<RadzenButton IsBusy=@IsBusy Click=@CreateNewLoginModel Text="Очистить поля" ButtonStyle="ButtonStyle.Warning" />
+					<RadzenButton IsBusy=@IsBusy Click=@OnClearelClick Text="Очистить поля" ButtonStyle="ButtonStyle.Warning" />
 					@* <button type="button" class="btn btn-warning" @onclick="@CreateNewLoginModel">Очистить поля</button> *@
 
 					@* <button type="button" class="btn btn-secondary" @onclick="@OnCancel">Отмена</button> *@
-					<RadzenButton IsBusy=@IsBusy Click=@OnCancel Text="Отмена" ButtonStyle="ButtonStyle.Secondary" />
+					<RadzenButton IsBusy=@IsBusy Click=@OnCancelClick Text="Отмена" ButtonStyle="ButtonStyle.Secondary" />
 				</RadzenStack>
 			</EditForm>
 		</div>

@@ -1,11 +1,53 @@
-﻿
-@inherits LoginedUsersLayoutModel
+﻿@inherits LoginedUsersLayoutModel
 <PageTitle>Поставщики</PageTitle>
 <RadzenComponents />
 
+<RadzenLayout>
+    
+    <RadzenHeader>
+        <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Center" Gap="0">
+            <RadzenSidebarToggle Click="@(() => sidebar1Expanded = !sidebar1Expanded)" />
+            <RadzenLabel Text="Добро пожаловать " />
+        </RadzenStack>
+    </RadzenHeader>
 
-<h3>LoginedUsersLayout</h3>
+    <RadzenSidebar @bind-Expanded="@sidebar1Expanded">
+        <RadzenPanelMenu>
+            <RadzenPanelMenuItem Text="На главную" Icon="home" Path=@($"{ProjectRouters.loginedHomePage}") />
+            <RadzenPanelMenuItem Text="О нас" Icon="home" Path=@($"{ProjectRouters.aboutUsHref}") />
+
+            <RadzenPanelMenuItem Text="Все курсы" Icon="home" Path=@($"{ProjectRouters.allTrainingCoursesPageHref}") />
+            <RadzenPanelMenuItem Text="Создать курс" Icon="home" Path=@($"{ProjectRouters.addTrainingCoursePageHref}") />
+            <RadzenPanelMenuItem Text="Пройденные тесты" Icon="home" Path=@($"{ProjectRouters.completedTestsHref}") />
+
+            <RadzenPanelMenuItem Text="Администратор" Icon="admin_panel_settings" Expanded="false">
+                <RadzenPanelMenuItem Text="Создать БД" Icon="database" Path=@($"{ProjectRouters.createDbHref}") />
+                <RadzenPanelMenuItem Text="Пользователи" Icon="group" Path=@ProjectRouters.registeredUsersHref />
+            </RadzenPanelMenuItem>
+            <RadzenPanelMenuItem Text="Выход" Icon="logout" Click=@OnLogoutClick />
+
+        </RadzenPanelMenu>
+    </RadzenSidebar>
+
+    <RadzenBody>
+        <CascadingValue Value="@MyUserOperationService.MyUser">
+            <div class="rz-p-4">
+                @Body
+            </div>
+        </CascadingValue>
+    </RadzenBody>
+
+    <RadzenFooter>
+        2026г.
+    </RadzenFooter>
+</RadzenLayout>
+
+<div id="blazor-error-ui" data-nosnippet>
+    An unhandled error has occurred.
+    <a href="." class="reload">Reload</a>
+    <span class="dismiss">🗙</span>
+</div>
 
 @code {
-
+    bool sidebar1Expanded = true;
 }

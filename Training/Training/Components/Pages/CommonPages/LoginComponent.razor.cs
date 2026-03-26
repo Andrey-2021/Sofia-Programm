@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Forms;
-namespace Training.Components.Pages;
+namespace Training.Components.Pages.CommonPages;
 
 public class LoginComponentModel : ComponentBase
 {
@@ -23,7 +23,7 @@ public class LoginComponentModel : ComponentBase
 			await MyUserOperationService.InitUserAsync();
 			if (!await CheckAuthenticationAsync())
 			{
-				CreateNewLoginModel();
+				OnClearelClick();
 				IsInit = true;
 				StateHasChanged();
 			}
@@ -39,7 +39,7 @@ public class LoginComponentModel : ComponentBase
 
 			if (user?.Identity is not null && user.Identity.IsAuthenticated)
 			{
-				NavigationManager.NavigateTo(ProjectRouters.loginedHref);
+				NavigationManager.NavigateTo(ProjectRouters.loginedHomePageHref);
 				return true;
 			}
 		}
@@ -47,13 +47,19 @@ public class LoginComponentModel : ComponentBase
 		return false;
 	}
 
-	protected void CreateNewLoginModel()
+	/// <summary>
+	/// Очистить поля
+	/// </summary>
+	protected void OnClearelClick()
 	{
 		LoginModel = new();
 		editContext = new EditContext(LoginModel);
 	}
 
-	protected async Task OnLoginAsync()
+	/// <summary>
+	/// Вход
+	/// </summary>
+	protected async Task OnLoginClick()
 	{
 		var loginResult = await MyUserOperationService.LoginAsync(LoginModel);
 
@@ -78,12 +84,15 @@ public class LoginComponentModel : ComponentBase
 		}
 
 		if (loginResult.isLogin == true)
-			NavigationManager.NavigateTo(ProjectRouters.loginedHref);//todo заменил на свою страницу, не проверил
+			NavigationManager.NavigateTo(ProjectRouters.loginedHomePageHref);//todo заменил на свою страницу, не проверил
 		else
 			Message = "Неизвестная ошибка. Пожалуйста обновите страницу и повторите вход.";
 	}
 
-	protected void OnCancel()
+	/// <summary>
+	/// Отмена
+	/// </summary>
+	protected void OnCancelClick()
 	{
 		//throw new Exception();
 		//NavigationManager.NavigateTo(ProjectRouters.homeHref);

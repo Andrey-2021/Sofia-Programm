@@ -1,0 +1,95 @@
+﻿@attribute [Route(ProjectRouters.allTrainingCoursesPage)]
+@inherits AllTrainingCoursesPageModel
+<PageTitle>Курсы</PageTitle>
+
+<h3>Все мои курсы</h3>
+
+@if (TrainingCourses == null)
+{
+    <div>
+        Нет курсов
+    </div>
+}
+else
+{
+    
+        
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Название курса
+                </th>
+                <th>
+                    Описание курса
+                </th>
+                <th>
+                    Продолжительность курса (часов).
+                </th>
+                <th>
+                    Дата создания курса
+                </th>
+                <th>
+                    Уровень сложности
+                </th>
+                <th>
+                    Курс виден всем
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in TrainingCourses)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>
+                        @item.Description
+                    </td>
+                    <td>
+                        @item.DurationHours
+                    </td>
+                    <td>
+                        @item.ContractDate
+                    </td>
+                    <td>
+                        @item.DifficultyLevel
+                    </td>
+                    <td>
+                        @item.IsVisableForAll
+                    </td>
+                    <td>
+                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                      title="Пройти" Icon="close" Size="ButtonSize.Medium"
+                                      Click="@(args =>OnStartTestClick(item))">
+                        </RadzenButton>
+                    </td>
+                    <td>
+                        <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                      title="Редактировать" Icon="edit" Size="ButtonSize.Medium"
+                                      Click="@(args => OnEditClick(item))">
+                        </RadzenButton>
+                    </td>
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>
+                    Всего
+                </th>
+            </tr>
+        </tfoot>
+
+    </table>
+    
+}
+
+
+

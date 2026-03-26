@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Radzen;
 using System.Collections.ObjectModel;
-namespace Training.Components.Pages.AdminPages;
+namespace Training.Components.Pages.LoginedPages.AdminPages;
 
 public class RegisteredUsersPageModel : ComponentBase
 {

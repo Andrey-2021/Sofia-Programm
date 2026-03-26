@@ -26,7 +26,6 @@ public class MyUser :  IHaveId
     /// </summary>
     public DateTime LastOperationDate { get; set; }
 
-
     /// <summary>
     /// Login
     /// </summary>

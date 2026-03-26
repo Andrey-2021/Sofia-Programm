@@ -36,8 +36,6 @@ public static class UserSeeder
     }
 }
 
-
-
 public static class ManagerSeeder
 {
     /// <summary>

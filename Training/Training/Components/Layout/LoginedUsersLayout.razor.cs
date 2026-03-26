@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Components.Authorization;
-
 namespace Training.Components.Layout;
 
 public class LoginedUsersLayoutModel : LayoutComponentBase
@@ -8,7 +7,6 @@ public class LoginedUsersLayoutModel : LayoutComponentBase
     [Inject] public MyUserOperationService MyUserOperationService { get; protected set; } = default!;
 
     protected bool sidebarExpanded = false;
-    //private bool isFirst = true;
     protected bool IsInit { get; set; } = false;
 
     [CascadingParameter] private Task<AuthenticationState>? AuthenticationState { get; set; }
@@ -23,7 +21,6 @@ public class LoginedUsersLayoutModel : LayoutComponentBase
             }
 
             IsInit = await CheckAuthenticationAsync();
-            //IsInit = true;
             StateHasChanged();
         }
     }
@@ -49,9 +46,9 @@ public class LoginedUsersLayoutModel : LayoutComponentBase
     }
 
     /// <summary>
-    /// Выход
+    /// Выход из личного кабинета
     /// </summary>
-    protected async Task Logout()
+    protected async Task OnLogoutClick()
     {
         await MyUserOperationService.LogoutAsync();
         NavigationManager.NavigateTo(ProjectRouters.homeHref);

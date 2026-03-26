@@ -12,7 +12,7 @@ public class CourseQestion
     public int Id { get; set; }
 
     /// <summary>
-    /// Кандзи
+    /// Кандзи (иероглифы)
     /// </summary>
     [Required(ErrorMessage = "Введите Кандзи")]
     [StringLength(LengthConstants.qestionMaxLength, MinimumLength = LengthConstants.qestionMinLength, ErrorMessage = "Длина кандзи должна быть не менее {2} и не более {1} символов")]
@@ -21,12 +21,12 @@ public class CourseQestion
     public string KanjiWord { get; set; } = default!;
 
     /// <summary>
-    /// Хирагана
+    /// Хирагана (слоговая азбука, 46 знаков)
     /// </summary>
     public string? HiraganaWord { get; set; }
 
     /// <summary>
-    /// Катакана
+    /// Катакана (слоговая азбука, 46 знаков)
     /// </summary>
     public string? KatakanaWord { get; set; }
 
