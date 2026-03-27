@@ -14,7 +14,7 @@
     <RadzenSidebar @bind-Expanded="@sidebar1Expanded">
         <RadzenPanelMenu>
             <RadzenPanelMenuItem Text="На главную" Icon="home" Path=@($"{ProjectRouters.loginedHomePage}") />
-            <RadzenPanelMenuItem Text="О нас" Icon="home" Path=@($"{ProjectRouters.aboutUsHref}") />
+            @* <RadzenPanelMenuItem Text="О нас" Icon="home" Path=@($"{ProjectRouters.aboutUsHref}") /> *@
 
             <RadzenPanelMenuItem Text="Все курсы" Icon="home" Path=@($"{ProjectRouters.allTrainingCoursesPageHref}") />
             <RadzenPanelMenuItem Text="Создать курс" Icon="home" Path=@($"{ProjectRouters.addTrainingCoursePageHref}") />

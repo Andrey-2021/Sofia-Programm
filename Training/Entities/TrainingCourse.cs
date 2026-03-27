@@ -75,6 +75,8 @@ public class TrainingCourse
     [DisplayName("Владелец курса")]
     public MyUser? MyUser { get; set; }
 
+    public IList<CourseQestion>? CourseQestions { get; set; }
+    
     /// <summary>
     /// Конструктор по умолчанию
     /// </summary>

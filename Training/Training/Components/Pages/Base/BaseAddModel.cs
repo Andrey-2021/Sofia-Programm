@@ -7,11 +7,6 @@ public class BaseAddModel<TEntity> : BaseModel
     where TEntity : class, new()
 {
     /// <summary>
-    /// Флаг показывает что выполняется операция
-    /// </summary>
-    public bool IsBusy { get; set; }
-
-    /// <summary>
     /// EditContext для EditForm с MainEntity
     /// </summary>
     public EditContext? EditContext { get; protected set; }

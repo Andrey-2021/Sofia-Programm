@@ -1,0 +1,57 @@
+﻿<div class="card-box">
+    <h3>Карточка</h3>
+    <div>
+        Вопрос @CurrentNumber из @TotalNumber. Уровень сложности: @CourseQestion?.DifficultyLevel
+    </div>
+    <br />
+    <div>
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        Кандзи (иероглиф):
+                    </td>
+                    <td>
+                        @CourseQestion?.KanjiWord
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Хирагана:
+                    </td>
+                    <td>
+                        @CourseQestion?.HiraganaWord
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Катакана:
+                    </td>
+                    <td>
+                        @CourseQestion?.KatakanaWord
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Перевод:
+                    </td>
+                    <td>
+                        @CourseQestion?.RussianWord
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@code {
+    [Parameter]
+    public CourseQestion? CourseQestion { get; set; }
+
+    [Parameter]
+    public int TotalNumber { get; set; }
+
+    [Parameter]
+    public int CurrentNumber { get; set; }
+
+}

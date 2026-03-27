@@ -24,7 +24,7 @@ else
                     Описание курса
                 </th>
                 <th>
-                    Продолжительность курса (часов).
+                    Продолжительность курса (минут).
                 </th>
                 <th>
                     Дата создания курса
@@ -65,8 +65,20 @@ else
                         @item.IsVisableForAll
                     </td>
                     <td>
-                        <RadzenButton ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                      title="Пройти" Icon="close" Size="ButtonSize.Medium"
+                        <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                      title="Прсомотреть" Icon="visibility" Size="ButtonSize.Medium"
+                                      Click="@(args =>OnViewTrainingCourseClick(item))">
+                        </RadzenButton>
+                    </td>
+                    <td>
+                        <RadzenButton ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                      title="Заучивание" Icon="cognition" Size="ButtonSize.Medium"
+                                      Click="@(args =>OnMemorizationTrainingCourseClick(item))">
+                        </RadzenButton>
+                    </td>
+                    <td>
+                        <RadzenButton ButtonStyle="ButtonStyle.Warning" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                      title="Тест" Icon="play_circle" Size="ButtonSize.Medium"
                                       Click="@(args =>OnStartTestClick(item))">
                         </RadzenButton>
                     </td>

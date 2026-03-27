@@ -273,6 +273,50 @@ public class DbRepository
     }
 
 
+    public async Task<OperationResponce<TEntity?>> GetFirstOrDefault<TEntity>(Expression<Func<TEntity, bool>>? predicate = null,
+                                                                Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+                                                                Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+                                                                TrackingType trackingType = TrackingType.NoTracking)
+        where TEntity : class
+    {
+        try
+        {
+            using var db = contextFactory.CreateDbContext();
+
+            var _dbSet = db.Set<TEntity>();
+
+            var query = trackingType switch
+            {
+                TrackingType.NoTracking => _dbSet.AsNoTracking(),
+                TrackingType.NoTrackingWithIdentityResolution => _dbSet.AsNoTrackingWithIdentityResolution(),
+                TrackingType.Tracking => _dbSet,
+                _ => throw new ArgumentOutOfRangeException(nameof(trackingType), trackingType, null)
+            };
+
+            if (include is not null)
+            {
+                query = include(query);
+            }
+
+            if (predicate is not null)
+            {
+                query = query.Where(predicate);
+            }
+
+            var result = orderBy is not null
+                ? await orderBy(query).FirstOrDefaultAsync()
+                : await query.FirstOrDefaultAsync();
+
+            return OperationResponce<TEntity?>.SetSuccessfullOperation(result, "Объект прочитан из БД");
+        }
+        catch (Exception ex)
+        {
+            return OperationResponce<TEntity?>.SetExceptionOperation("Ошибка при чтении данных из БД", ex);
+        }
+
+    }
+
+
     public async Task<(IEnumerable<TrainingCourse> data, Exception? ex)> GetAllMyTrainingCourse(MyUser myUser)
     {
         return await GetEntitiesAsync<TrainingCourse>();

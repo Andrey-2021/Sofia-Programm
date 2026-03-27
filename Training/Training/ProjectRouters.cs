@@ -62,4 +62,50 @@ public static class ProjectRouters
     public const string startTestPageHref = "start-test";
     public const string startTestPage = "/" + startTestPageHref;
 
+    
+    /// <summary>
+    /// Все курсы
+    /// </summary>
+    public const string viewTrainingCourcePageHref = "view-course";
+    public const string viewTrainingCourcePage = "/" + viewTrainingCourcePageHref;
+
+
+    /// <summary>
+    /// Заучивание
+    /// </summary>
+    public const string memorizationTrainingCourcePageHref = "memorization";
+    public const string memorizationTrainingCourcePage = "/" + memorizationTrainingCourcePageHref;
+
+    
+
+
+
+    // -----------------------------------------------------------------
+    /// <summary>
+    /// Название в параметре запроса (URL) для id редактируемой сущности
+    /// </summary>
+    public const string queryParametrNameForEditId = "edited-id";
+
+    /*
+    /// <summary>
+    /// Название в параметре запроса (URL) для выделения объекта c id (строчки в таблице)
+    /// </summary>
+    public const string queryParametrForSelectedRowId = "selected-id";
+
+    /// <summary>
+    /// Название в параметре запроса (URL) для того, чтобы определить находимся ли мы в корзине или просто показываем все сущности
+    /// </summary>
+    public const string queryParametrIsInBasket = "is-in-basket";
+
+
+
+    public const string queryParameterSelectedColorProductId = "color-product-id";
+
+    public const string queryParameterDepartmentId = "parent-id";
+
+    /// <summary>
+    /// Название в параметре запроса (URL) для id сущности, копию которой надо сделать
+    /// </summary>
+    public const string queryParameterNameForCopyId = "copied-id";
+    */
 }

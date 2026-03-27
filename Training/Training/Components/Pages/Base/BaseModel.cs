@@ -10,4 +10,16 @@ public class BaseModel:ComponentBase
 
     [CascadingParameter]
     protected MyUser MyUser { get; set; } = default!;
+
+    /// <summary>
+	/// Id объекта для редактирования
+	/// </summary>
+	[SupplyParameterFromQuery(Name = ProjectRouters.queryParametrNameForEditId)]
+    [Parameter]
+    public int? EditedEntityId { get; set; }
+
+    /// <summary>
+    /// Флаг показывает что выполняется операция
+    /// </summary>
+    public bool IsBusy { get; set; }
 }

@@ -64,4 +64,6 @@ public class CourseQestion
     [Comment("Уровень сложности вопроса")]
     [DisplayName("Уровень сложности вопроса")]
     public int DifficultyLevel { get; set; }
+
+    public ICollection<WrongRussianWordAnswer>? WrongRussianWordAnswers{ get; set; }
 }

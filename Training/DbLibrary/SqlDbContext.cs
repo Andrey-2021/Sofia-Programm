@@ -6,7 +6,7 @@ public class SqlDbContext : DbContext
     public DbSet<MyUser> MyUsers { get; set; }
     public DbSet<TrainingCourse> TrainingCourses{ get; set; }
     public DbSet<CourseQestion> CourseQestions{ get; set; }
-    public DbSet<WrongAnswer> WrongAnswers { get; set; }
+    public DbSet<WrongRussianWordAnswer> WrongRussianWordAnswers { get; set; }
 
 
     public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)

@@ -3,7 +3,7 @@
 /// <summary>
 /// Ответ на вопрос курса
 /// </summary>
-public class WrongAnswer
+public class WrongRussianWordAnswer
 {
     /// <summary>
     /// Id
@@ -41,5 +41,13 @@ public class WrongAnswer
     [Comment("Вопрос курса")]
     [DisplayName("Вопрос курса")]
     public CourseQestion? CourseQestion { get; set; }
+
+    public WrongRussianWordAnswer()
+    { }
+
+    public WrongRussianWordAnswer(string answer)
+    {
+        Answer = answer;
+    }
 
 }
