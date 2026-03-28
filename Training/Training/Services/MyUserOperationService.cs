@@ -24,7 +24,7 @@ public class MyUserOperationService
     /// <summary>
     /// Логин и пароль по умолчанию
     /// </summary>
-    private const string adminEmail = "admin@ya.ru";
+    private const string adminEmail = "admin";
     private const string adminPassword = "1234";
 
     /// <summary>

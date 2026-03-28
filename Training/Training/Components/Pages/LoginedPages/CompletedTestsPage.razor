@@ -3,5 +3,98 @@
 <PageTitle>Курсы</PageTitle>
 
 
-<h3>CompletedTestsPage</h3>
+<h3>Пройденные тесты</h3>
 
+@if (!(CompletedTests?.Count() > 0))
+{
+    <div>
+        У Вас нет курсов, по которым Вы прошли тестирование
+    </div>
+}
+else
+{
+    <table>
+        <thead>
+            <tr>
+                <th>
+                    Дата прохождения
+                </th>
+                <th>
+                    Количество вопросов в курсе
+                </th>
+                <th>
+                    Правильных ответов
+                </th>
+
+
+                <th>
+                    Название
+                </th>
+                <th>
+                    Уровень сложности
+                </th>
+                <th>
+                </th>
+                <th>
+                </th>
+
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in CompletedTests)
+            {
+                <tr>
+                    <td>
+                        @item.ContractDate
+                    </td>
+                    <td>
+                        @item.QestionNumber
+                    </td>
+                    <td>
+                        @item.CountCorrectAnswers
+                    </td>
+                        
+                    <td>
+                        @item.TrainingCourse?.Name
+                    </td>
+                    <td>
+                        @item.TrainingCourse?.DifficultyLevel
+                    </td>
+                    @*  <td>
+                            <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                          title="Прсомотреть" Icon="visibility" Size="ButtonSize.Medium"
+                                          Click="@(args =>OnViewTrainingCourseClick(item))">
+                            </RadzenButton>
+                        </td>
+                        <td>
+                            <RadzenButton ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                          title="Заучивание" Icon="cognition" Size="ButtonSize.Medium"
+                                          Click="@(args =>OnMemorizationTrainingCourseClick(item))">
+                            </RadzenButton>
+                        </td>
+                        <td>
+                            <RadzenButton ButtonStyle="ButtonStyle.Warning" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                          title="Тест" Icon="play_circle" Size="ButtonSize.Medium"
+                                          Click="@(args =>OnStartTestClick(item))">
+                            </RadzenButton>
+                        </td>
+                        <td>
+                            <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                          title="Редактировать" Icon="edit" Size="ButtonSize.Medium"
+                                          Click="@(args => OnEditClick(item))">
+                            </RadzenButton>
+                        </td> *@
+                </tr>
+            }
+        </tbody>
+        <tfoot>
+            <tr>
+                <th>
+                    Всего
+                </th>
+            </tr>
+        </tfoot>
+
+    </table>
+
+}

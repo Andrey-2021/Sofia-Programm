@@ -92,6 +92,16 @@ public class DbRepository
                     var questions = CommonCourseQuestionSeeder.GetQuestions(trainingCourse);
                     await db.CourseQestions.AddRangeAsync(questions);
 
+                    var completedTest = new CompletedTest()
+                    {
+                        TrainingCourse = trainingCourse[0],
+                        MyUser = users[0],
+                        QestionNumber = trainingCourse[0].CourseQestions?.Count??0,
+                        CountCorrectAnswers = (trainingCourse[0].CourseQestions?.Count ?? 0) / 2
+
+                    };
+                    await db.CompletedTests.AddRangeAsync(completedTest);
+
                     await db.SaveChangesAsync();
                 }
             }
@@ -320,6 +330,16 @@ public class DbRepository
     public async Task<(IEnumerable<TrainingCourse> data, Exception? ex)> GetAllMyTrainingCourse(MyUser myUser)
     {
         return await GetEntitiesAsync<TrainingCourse>();
+    }
+
+    public async Task<OperationResponce<TrainingCourse>> GetCourse(int? id)
+    {
+        return await GetFirstOrDefault<TrainingCourse>
+            (predicate: x => x.Id == id,
+            include: x => x.Include(tc => tc.CourseQestions)
+                            .ThenInclude(cq => cq.WrongRussianWordAnswers));
+
+        
     }
 }
 

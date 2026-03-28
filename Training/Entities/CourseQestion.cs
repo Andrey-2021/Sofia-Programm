@@ -33,7 +33,7 @@ public class CourseQestion
     /// <summary>
     /// Русское слово
     /// </summary>
-    public string? RussianWord { get; set; }
+    public string RussianWord { get; set; } = string.Empty;
 
     /// <summary>
     /// Id учебного курса
