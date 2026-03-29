@@ -1,7 +1,113 @@
 ﻿@attribute [Route(ProjectRouters.startTestPage)]
 @inherits StartTestPageModel
-<PageTitle>Курсы</PageTitle>
+<PageTitle>Тестирование</PageTitle>
 
 
-<h3>StartTest</h3>
+<div class="my-window-conteiner">
+    <div class="my-window-box">
+        <h3>Тестирование. Курс: "@(MainEntity?.Name)"</h3>
+
+       
+        <div>
+            @if (!IsTestFinished)
+            {
+                <div class="question_box">
+                    Вопос @(CurrentQestionIndex + 1) из @(QestionNumber)
+                </div>
+                <br />
+                <div>
+
+                    <table>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    Кандзи (иероглиф):
+                                </td>
+                                <td>
+                                    @CurrentCourseQestion?.KanjiWord
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Хирагана:
+                                </td>
+                                <td>
+                                    @CurrentCourseQestion?.HiraganaWord
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Катакана:
+                                </td>
+                                <td>
+                                    @CurrentCourseQestion?.KatakanaWord
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    Правильный ответ, подом уберём этот пункт:
+                                </td>
+                                <td>
+                                    @CurrentCourseQestion?.RussianWord
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <br />
+
+                <div>
+                    <div>
+                        Выберите ответ:
+                    </div>
+                    <br />
+                    @if (RandomAnswers?.RandomAnswers?.Count() > 0)
+                    {
+                        @foreach (var item in RandomAnswers.RandomAnswers)
+                        {
+                            <div class="btn-box">
+                                <button type="button"
+                                        class="btn btn-outline-secondary"
+                                        @onclick="x => OnAnswerClick(item)">
+                                    @item.RussianWord
+                                </button>
+                            </div>
+                        }
+                    }
+                </div>
+            }
+            else
+            {
+                <div>
+                    Тест завершён. Результаты тестирования:
+                </div>
+                
+                <div>
+                    Результаты сохранены.
+                    <ShowOperrationErrorComponent BaseOperationResponce=@SaveEntityOperationResponce />
+                </div>
+
+                <div>
+                    Всего вопросов: @QestionNumber
+                </div>
+                <div>
+                    Правильных ответов: @CountCorrectAnswers
+                </div>
+                
+                <RadzenButton type="button" style="width: 160px" Click=@(() => OnGoToCourceListClick())
+                              Text="К списку курсов"
+                              Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" TabIndex="11" />
+            }
+
+            <br />
+            <br />
+               @*  <RadzenButton type="button" style="width: 160px" Click=@(() => OnCancelClick())
+                              Text="Закрыть"
+                              Shade="Shade.Light" ButtonStyle="ButtonStyle.Warning" TabIndex="11" /> *@
+        </div>
+
+    </div>
+</div>
+
+
 

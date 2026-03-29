@@ -35,7 +35,7 @@ public class MemorizationTrainingCourcePageModel : BaseModel
     /// <summary>
     /// Количество правильных ответов
     /// </summary>
-    protected int CountCorrectAnswers { get; set; } = -1;
+    protected int CountCorrectAnswers { get; set; } = 0;
 
     /// <summary>
     /// Пользователь выбрал ответ
@@ -63,10 +63,7 @@ public class MemorizationTrainingCourcePageModel : BaseModel
 
     }
 
-    public void OnNextClick()
-    {
-        CreateNextQuestion();
-    }
+    
 
     private void CreateNextQuestion()
     {
@@ -82,6 +79,11 @@ public class MemorizationTrainingCourcePageModel : BaseModel
             CurrentCourseQestion = MainEntity?.CourseQestions[CurrentQestionIndex];
 
         RandomAnswers = new(CurrentCourseQestion);
+    }
+
+    public void OnNextClick()
+    {
+        CreateNextQuestion();
     }
 
     protected void OnAnswerClick(TestAnswer testAnswer)

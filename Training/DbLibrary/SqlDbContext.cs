@@ -8,6 +8,7 @@ public class SqlDbContext : DbContext
     public DbSet<CourseQestion> CourseQestions{ get; set; }
     public DbSet<WrongRussianWordAnswer> WrongRussianWordAnswers { get; set; }
     public DbSet<CompletedTest> CompletedTests{ get; set; }
+    public DbSet<SelectedOtherPeopleCourse> SelectedOtherPeopleCourses { get; set; }
 
     public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
     {

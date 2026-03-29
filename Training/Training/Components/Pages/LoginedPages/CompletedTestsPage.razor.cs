@@ -8,7 +8,7 @@ public class CompletedTestsPageModel: BaseModel
 
     protected override async Task OnParametersSetAsync()
     {
-        var rezult = await DbRepository.GetEntitiesAsync<CompletedTest>(include: x=>x.Include(tc=>tc.TrainingCourse));
+        var rezult = await DbRepository.GetAllMyCompletedTest(MyUser);  //await DbRepository.GetEntitiesAsync<CompletedTest>(include: x=>x.Include(tc=>tc.TrainingCourse));
         CompletedTests = rezult.data;
     }
 }

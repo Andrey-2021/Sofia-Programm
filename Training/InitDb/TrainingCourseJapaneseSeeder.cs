@@ -17,7 +17,7 @@ public static class TrainingCourseJapaneseSeeder
     {
         var courses = new List<TrainingCourse>();
 
-        // 1. Азбука Хирагана
+        // 0. Азбука Хирагана
         courses.Add(new TrainingCourse
         {
             Name = "Базовое слова японского языка",
@@ -28,6 +28,59 @@ public static class TrainingCourseJapaneseSeeder
             IsVisableForAll = true,
             MyUser = myUsers[1]
         });
+
+        // 1. Словарь: семья и дом
+        courses.Add(new TrainingCourse
+        {
+            Name = "Японские слова: семья и быт",
+            Description = "Лексика по теме семьи, дома, повседневных дел",
+            DurationHours = 25,
+            ContractDate = new DateTime(2024, 4, 5),
+            DifficultyLevel = 2,
+            IsVisableForAll = true,
+            MyUser = myUsers[3]
+        });
+
+        // 2. Словарь: еда и рестораны
+        courses.Add(new TrainingCourse
+        {
+            Name = "Японская кухня: названия блюд и заказ",
+            Description = "Слова и фразы для похода в ресторан, названия продуктов",
+            DurationHours = 20,
+            ContractDate = new DateTime(2024, 4, 12),
+            DifficultyLevel = 1,
+            IsVisableForAll = true,
+            MyUser = myUsers[4]
+        });
+
+        // 3. Словарь: путешествия и транспорт
+        courses.Add(new TrainingCourse
+        {
+            Name = "Путешествия по Японии: словарь",
+            Description = "Лексика для поездок, ориентирования в городе, покупки билетов",
+            DurationHours = 30,
+            ContractDate = new DateTime(2024, 5, 1),
+            DifficultyLevel = 2,
+            IsVisableForAll = true,
+            MyUser = myUsers[4]
+        });
+
+        // 4. Словарь: работа и бизнес
+        courses.Add(new TrainingCourse
+        {
+            Name = "Бизнес в Японии: словарь и выражения",
+            Description = "Профессиональная лексика, вежливые формы (кэйго)",
+            DurationHours = 45,
+            ContractDate = new DateTime(2024, 5, 20),
+            DifficultyLevel = 4,
+            IsVisableForAll = false,
+            MyUser = myUsers[4]
+        });
+
+
+
+
+
 
         // 1. Азбука Хирагана
         courses.Add(new TrainingCourse
@@ -101,53 +154,11 @@ public static class TrainingCourseJapaneseSeeder
             MyUser = myUsers[3]
         });
 
-        // 7. Словарь: семья и дом
-        courses.Add(new TrainingCourse
-        {
-            Name = "Японские слова: семья и быт",
-            Description = "Лексика по теме семьи, дома, повседневных дел",
-            DurationHours = 25,
-            ContractDate = new DateTime(2024, 4, 5),
-            DifficultyLevel = 2,
-            IsVisableForAll = true,
-            MyUser = myUsers[3]
-        });
+        
 
-        // 8. Словарь: еда и рестораны
-        courses.Add(new TrainingCourse
-        {
-            Name = "Японская кухня: названия блюд и заказ",
-            Description = "Слова и фразы для похода в ресторан, названия продуктов",
-            DurationHours = 20,
-            ContractDate = new DateTime(2024, 4, 12),
-            DifficultyLevel = 1,
-            IsVisableForAll = true,
-            MyUser = myUsers[4]
-        });
+        
 
-        // 9. Словарь: путешествия и транспорт
-        courses.Add(new TrainingCourse
-        {
-            Name = "Путешествия по Японии: словарь",
-            Description = "Лексика для поездок, ориентирования в городе, покупки билетов",
-            DurationHours = 30,
-            ContractDate = new DateTime(2024, 5, 1),
-            DifficultyLevel = 2,
-            IsVisableForAll = true,
-            MyUser = myUsers[4]
-        });
-
-        // 10. Словарь: работа и бизнес
-        courses.Add(new TrainingCourse
-        {
-            Name = "Бизнес-японский: словарь и выражения",
-            Description = "Профессиональная лексика, вежливые формы (кэйго)",
-            DurationHours = 45,
-            ContractDate = new DateTime(2024, 5, 20),
-            DifficultyLevel = 4,
-            IsVisableForAll = false,
-            MyUser = myUsers[4]
-        });
+        
 
         // 11. Ономатопея (звукоподражания)
         courses.Add(new TrainingCourse

@@ -45,6 +45,12 @@ public static class ProjectRouters
     public const string allTrainingCoursesPage= "/" + allTrainingCoursesPageHref;
 
     /// <summary>
+    /// Чужие курсы
+    /// </summary>
+    public const string otherPeoplesCoursesPageHref = "other-peoples-courses";
+    public const string otherPeoplesCoursesPage = "/" + otherPeoplesCoursesPageHref;
+
+    /// <summary>
     /// Добавить курс
     /// </summary>
     public const string addTrainingCoursePageHref = "add-training-course";

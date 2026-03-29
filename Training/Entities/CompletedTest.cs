@@ -76,4 +76,9 @@ public class CompletedTest
     /// </summary>
     public int CountCorrectAnswers { get; set; }
 
+    /// <summary>
+    /// Затраченное время на прохождение курса
+    /// </summary>
+    public int Duration { get; set; }
+
 }

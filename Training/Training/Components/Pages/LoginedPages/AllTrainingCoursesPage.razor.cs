@@ -25,7 +25,7 @@ public class AllTrainingCoursesPageModel: BaseModel
 
     public async Task OnStartTestClick(TrainingCourse entity)
     {
-        NavigationManager.NavigateTo(ProjectRouters.startTestPageHref);
+        NavigationManager.NavigateTo($"{ProjectRouters.startTestPageHref}?{ProjectRouters.queryParametrNameForEditId}={entity.Id}");
     }
 
     public async Task OnEditClick(TrainingCourse entity)

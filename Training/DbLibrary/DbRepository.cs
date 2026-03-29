@@ -1,4 +1,5 @@
 ﻿using DbLibrary.Helpers;
+using Entities.Enums;
 using Entities.Interfaces;
 using System.Linq.Expressions;
 
@@ -26,11 +27,11 @@ public class DbRepository
                 var dbAvailableResult = await db.Database.CanConnectAsync(); //Провеяем доступен ли сервер MSSQL
 
                 if (!dbAvailableResult)
-                    return (false, null) ;// throw new Exception("Сервер БД не доступен.");
+                    return (false, null);// throw new Exception("Сервер БД не доступен.");
 
                 var result = db.Set<MyUser>().Count();//проверяем что есть таблица в БД. Считаем, что если есть таблица, то есть и другие таблицы.
                 if (result >= 0)
-                    return (true,null);
+                    return (true, null);
                 return (false, null);
             }
         }
@@ -78,35 +79,14 @@ public class DbRepository
         {
             using (var db = contextFactory.CreateDbContext())
             {
-                // todo заменить на вызов метода
-                var rezult= await db.Database.CanConnectAsync(); //Провеяем доступен ли сервер MSSQL
-
+                var rezult = await db.Database.CanConnectAsync(); //Провеяем доступен ли сервер MSSQL
                 if (rezult)
                 {
-                    var users = UserSeeder.GetSampleUsers();
-                    await db.MyUsers.AddRangeAsync(users);
-
-                    var trainingCourse = TrainingCourseJapaneseSeeder.GetSampleCourses(users);
-                    await db.TrainingCourses.AddRangeAsync(trainingCourse);
-
-                    var questions = CommonCourseQuestionSeeder.GetQuestions(trainingCourse);
-                    await db.CourseQestions.AddRangeAsync(questions);
-
-                    var completedTest = new CompletedTest()
-                    {
-                        TrainingCourse = trainingCourse[0],
-                        MyUser = users[0],
-                        QestionNumber = trainingCourse[0].CourseQestions?.Count??0,
-                        CountCorrectAnswers = (trainingCourse[0].CourseQestions?.Count ?? 0) / 2
-
-                    };
-                    await db.CompletedTests.AddRangeAsync(completedTest);
-
+                    await MainInit.InitDb(db);
                     await db.SaveChangesAsync();
                 }
             }
             return (true, null);
-
         }
         catch (Exception ex)
         {
@@ -138,6 +118,32 @@ public class DbRepository
             return (new List<TEntity>(), ex);
         }
     }
+
+    public async Task<OperationResponce<IEnumerable<TEntity>?>> GetEntities<TEntity>(System.Linq.Expressions.Expression<Func<TEntity, bool>>? predicate = null,
+                                                                                            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+                                                                                            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
+                                                                                            TrackingType trackingType = TrackingType.NoTracking)
+        where TEntity : class
+    {
+        try
+        {
+            //using var db = contextFactory.CreateDbContext();
+            using (var db = contextFactory.CreateDbContext())
+            {
+                var query = db.Set<TEntity>().AsQueryable(); //.AsSplitQuery();
+                query = TrackingPart(trackingType, query);
+                query = Common_Predicat_OrderBy_Include(query, predicate, orderBy, include);
+                var result = await query.ToListAsync();
+                return OperationResponce<IEnumerable<TEntity>?>.SetSuccessfullOperation(result);
+            }
+        }
+        catch (Exception ex)
+        {
+            return OperationResponce<IEnumerable<TEntity>?>.SetExceptionOperation("Оибка при чтении данных", ex);
+
+        }
+    }
+
 
     protected IQueryable<T> TrackingPart<T>(TrackingType trackingType, IQueryable<T> entities)
         where T : class
@@ -227,7 +233,7 @@ public class DbRepository
 
             if (find != null)
             {
-                var deletedEntity= db.Remove(find);
+                var deletedEntity = db.Remove(find);
                 await db.SaveChangesAsync();
                 return (deletedEntity.Entity, null);
             }
@@ -269,7 +275,7 @@ public class DbRepository
                 query = query.Where(predicate);
             }
 
-            var rezult= orderBy is not null
+            var rezult = orderBy is not null
                 ? await orderBy(query).FirstOrDefaultAsync()
                 : await query.FirstOrDefaultAsync();
 
@@ -279,7 +285,7 @@ public class DbRepository
         {
             return (null, ex);
         }
-        
+
     }
 
 
@@ -327,10 +333,94 @@ public class DbRepository
     }
 
 
-    public async Task<(IEnumerable<TrainingCourse> data, Exception? ex)> GetAllMyTrainingCourse(MyUser myUser)
+    public async Task<(IEnumerable<TrainingCourse>? data, Exception? ex)> GetAllMyTrainingCourse(MyUser myUser)
     {
-        return await GetEntitiesAsync<TrainingCourse>();
+        if (myUser == null)
+            return (null, null);
+
+        if (myUser.Role == RoleEnum.admin) //Если это администратор,
+            return await GetEntitiesAsync<TrainingCourse>(include: x => x.Include(c => c.MyUser)); // Читаем все курсы
+        else
+            return await GetEntitiesAsync<TrainingCourse>(predicate: x => x.MyUserId == myUser.Id, //Читаем только свои курсы
+                                                            include: x => x.Include(c => c.MyUser));
+
     }
+
+    /// <summary>
+    /// Получить все свои курсы
+    /// </summary>
+    /// <param name="myUser">Зарегистрированный пользователь</param>
+    /// <returns>Список своих курсов</returns>
+    public async Task<OperationResponce<IEnumerable<TrainingCourse>>> GetAllMyTrainingCourseAsync(MyUser myUser)
+    {
+        Func<IQueryable<TrainingCourse>, IIncludableQueryable<TrainingCourse, object>>? includeData = (x) => x.Include(ct => ct.MyUser);
+
+        if (myUser.Role == RoleEnum.admin) //Если это администратор,
+            return await GetEntities<TrainingCourse>(include: includeData); // Читаем все курсы
+        else
+            return await GetEntities<TrainingCourse>(include: includeData,
+                                                    predicate: x => x.MyUserId == myUser.Id); //Читаем только свои курсы
+    }
+
+    /// <summary>
+    /// Получить курсы других заристрированных пользователей, которые открыты для всех
+    /// </summary>
+    /// <param name="myUser"></param>
+    /// <returns></returns>
+    public async Task<OperationResponce<(IEnumerable<SelectedOtherPeopleCourse>? mySelectedOtherPeopleCourse, List<TrainingCourse>? allOtherPeopleCourse)>> GetOtherPeoplesCoursesAsync(MyUser myUser)
+    {
+        // Список курсов на которые я уже подписан
+        var mySelectedOtherPeopleCourseResponce = await GetEntities<SelectedOtherPeopleCourse>(predicate: x => x.MyUserId == myUser.Id);
+        if (!mySelectedOtherPeopleCourseResponce.IsSuccessfullOperation) //Если ошибка чтения
+            return OperationResponce<(IEnumerable<SelectedOtherPeopleCourse>? mySelectedCourses, List<TrainingCourse>? allOtherPeopleCourse)>.SetExceptionOperation("Ошибка чтения данных", mySelectedOtherPeopleCourseResponce.Exception);
+
+        // Список всех чужих курсов
+        OperationResponce <IEnumerable<TrainingCourse>> allOtherPeopleCourseResponce;
+        Func<IQueryable<TrainingCourse>, IIncludableQueryable<TrainingCourse, object>>? includeData = (x) => x.Include(ct => ct.MyUser);
+        if (myUser.Role == RoleEnum.admin) //Если это администратор,
+        {
+            allOtherPeopleCourseResponce = await GetEntities<TrainingCourse>(include: includeData,
+                                                                    predicate: x => x.MyUserId != myUser.Id && x.IsVisableForAll == true); // Читаем все открытые курсы
+
+
+        }
+        else
+        {
+            allOtherPeopleCourseResponce = await GetEntities<TrainingCourse>(include: includeData,
+                                                    predicate: x => x.MyUserId != myUser.Id && x.IsVisableForAll == true); //Читаем чужие курсы лоступные для всех
+        }
+
+        if(!allOtherPeopleCourseResponce.IsSuccessfullOperation) //Если ошибка чтения
+            return OperationResponce<(IEnumerable<SelectedOtherPeopleCourse>? mySelectedCourses, List<TrainingCourse>? allOtherPeopleCourse)>.SetExceptionOperation("Ошибка чтения данных", allOtherPeopleCourseResponce.Exception);
+        
+        // Возвращаем результат
+        return OperationResponce<(IEnumerable<SelectedOtherPeopleCourse>? mySelectedCourses, List<TrainingCourse>? allOtherPeopleCourse)>
+            .SetSuccessfullOperation((mySelectedOtherPeopleCourseResponce.Data, allOtherPeopleCourseResponce.Data.ToList()), null);
+    }
+
+
+
+
+
+
+
+    public async Task<(IEnumerable<CompletedTest>? data, Exception? ex)> GetAllMyCompletedTest(MyUser myUser)
+    {
+        if (myUser == null)
+            return (null, null);
+
+        Func<IQueryable<CompletedTest>, IIncludableQueryable<CompletedTest, object>>? includeData = (x) => x.Include(ct => ct.MyUser).
+                                                                                                        Include(ct => ct.TrainingCourse.MyUser);
+
+
+        if (myUser.Role == RoleEnum.admin) //Если это администратор,
+            return await GetEntitiesAsync<CompletedTest>(include: includeData); // Читаем все 
+        else
+            return await GetEntitiesAsync<CompletedTest>(predicate: x => x.MyUserId == myUser.Id, //Читаем только свои 
+                                                            include: includeData);
+
+    }
+
 
     public async Task<OperationResponce<TrainingCourse>> GetCourse(int? id)
     {
@@ -339,7 +429,7 @@ public class DbRepository
             include: x => x.Include(tc => tc.CourseQestions)
                             .ThenInclude(cq => cq.WrongRussianWordAnswers));
 
-        
+
     }
 }
 
