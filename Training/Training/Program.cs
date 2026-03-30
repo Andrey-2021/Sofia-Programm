@@ -14,6 +14,8 @@ builder.Services.AddRazorComponents()
                                                                              //options.DisconnectedCircuitRetentionPeriod = TimeSpan.FromMinutes(3);
                                                                              //options.JSInteropDefaultCallTimeout = TimeSpan.FromMinutes(1);
                                                                              //options.MaxBufferedUnacknowledgedRenderBatches = 10;
+            });
+
 builder.Services.AddTransient<DbRepository>(); // регистрируем репозиторий
 
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
@@ -22,7 +24,7 @@ builder.Services.AddScoped<MyUserOperationService>();
 builder.Services.AddAuthorization();
 builder.Services.AddCascadingAuthenticationState(); //новая аутентификация
 
-//Строка подкючения к БД
+
 string connectionString = "Data Source = WIN10PC; Initial Catalog =2026TrainingCRM ; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
 
 builder.Services.AddDbContextFactory<SqlDbContext>
@@ -32,9 +34,10 @@ builder.Services.AddDbContextFactory<SqlDbContext>
                                             , options => { options.EnableRetryOnFailure(); }
                                             )
             );
+
+
+
 builder.Services.AddRadzenComponents(); // Для Radzen компонентов
-
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
