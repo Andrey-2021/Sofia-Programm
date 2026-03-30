@@ -18,6 +18,12 @@
                 <th>
                     Роль
                 </th>
+                <th>
+                    Редактировать
+                </th>
+                <th>
+                    Удалить
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -35,6 +41,18 @@
                         <td>
                             @item.Role
                         </td>
+                        <td>
+                            <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                          title="Редактировать" Icon="edit" Size="ButtonSize.Medium"
+                                          Click="@(args => OnEditCommand(item))">
+                            </RadzenButton>
+                        </td>
+                        <td>
+                            <RadzenButton ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                          title="Удалить" Icon="close" Size="ButtonSize.Medium"
+                                          Click="@(args =>OnDelCommandMenuAsync(item))">
+                            </RadzenButton>
+                        </td>
                     </tr>
                 }
             }
@@ -48,3 +66,19 @@ else
         @ErrorMassage
     </div>
 }
+
+
+<RadzenStack Orientation="Orientation.Horizontal" Gap="1rem">
+    <h3>Пользователи</h3>
+    <div>
+        <RadzenButton IsBusy=@IsBusy
+                      Icon="cached" ButtonStyle="ButtonStyle.Primary" Shade="Shade.Lighter"
+                      Click=@(()=>OnReloadEvent(this, EventArgs.Empty)) Text="Обновить" title="Обновить таблицу" />
+        <span style="margin-left:10px;"></span>
+        <RadzenButton IsBusy=@IsBusy
+                      Icon="add" ButtonStyle="ButtonStyle.Success" Shade="Shade.Lighter"
+                      Click=@OnAddCommand Text="Добавить" title="Добавить пользователя" />
+    </div>
+</RadzenStack>
+<br />
+

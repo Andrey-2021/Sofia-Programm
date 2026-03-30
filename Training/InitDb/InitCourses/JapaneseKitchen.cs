@@ -15,7 +15,7 @@ internal class JapaneseKitchen
             KatakanaWord = "スシ",
             RussianWord = "суши",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Сашими"),
@@ -33,7 +33,7 @@ internal class JapaneseKitchen
             KatakanaWord = "サシミ",
             RussianWord = "сашими",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Суши"),
@@ -51,7 +51,7 @@ internal class JapaneseKitchen
             KatakanaWord = "マキズシ",
             RussianWord = "роллы",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Суши"),
@@ -69,7 +69,7 @@ internal class JapaneseKitchen
             KatakanaWord = "ウドン",
             RussianWord = "удон",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Соба"),
@@ -87,7 +87,7 @@ internal class JapaneseKitchen
             KatakanaWord = "ソバ",
             RussianWord = "соба",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Удон"),
@@ -105,7 +105,7 @@ internal class JapaneseKitchen
             KatakanaWord = "ラーメン",
             RussianWord = "рамен",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Удон"),
@@ -123,7 +123,7 @@ internal class JapaneseKitchen
             KatakanaWord = "テンプラ",
             RussianWord = "темпура",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Суши"),
@@ -141,7 +141,7 @@ internal class JapaneseKitchen
             KatakanaWord = "ギョウザ",
             RussianWord = "гёдза",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Якитори"),
@@ -159,7 +159,7 @@ internal class JapaneseKitchen
             KatakanaWord = "ミソシル",
             RussianWord = "мисо-суп",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Сукияки"),
@@ -177,7 +177,7 @@ internal class JapaneseKitchen
             KatakanaWord = "ヤキトリ",
             RussianWord = "якитори",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Гёдза"),
@@ -195,7 +195,7 @@ internal class JapaneseKitchen
             KatakanaWord = "ゴハン",
             RussianWord = "рис",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Лапша"),
@@ -213,7 +213,7 @@ internal class JapaneseKitchen
             KatakanaWord = "オチャ",
             RussianWord = "чай",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Кофе"),
@@ -231,7 +231,7 @@ internal class JapaneseKitchen
             KatakanaWord = "チュウモン",
             RussianWord = "заказ",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Меню"),
@@ -249,7 +249,7 @@ internal class JapaneseKitchen
             KatakanaWord = "メニュー",
             RussianWord = "меню",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Заказ"),
@@ -267,7 +267,7 @@ internal class JapaneseKitchen
             KatakanaWord = "オカンジョウ",
             RussianWord = "счёт",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Меню"),

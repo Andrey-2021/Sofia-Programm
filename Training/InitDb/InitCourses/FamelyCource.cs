@@ -15,7 +15,7 @@ internal class FamelyCource
             KatakanaWord = "チチ",
             RussianWord = "отец",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Мать"),
@@ -33,7 +33,7 @@ internal class FamelyCource
             KatakanaWord = "ハハ",
             RussianWord = "мать",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Отец"),
@@ -51,7 +51,7 @@ internal class FamelyCource
             KatakanaWord = "アニ",
             RussianWord = "старший брат",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Младший брат"),
@@ -69,7 +69,7 @@ internal class FamelyCource
             KatakanaWord = "アネ",
             RussianWord = "старшая сестра",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Младшая сестра"),
@@ -87,7 +87,7 @@ internal class FamelyCource
             KatakanaWord = "オトウト",
             RussianWord = "младший брат",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Старший брат"),
@@ -105,7 +105,7 @@ internal class FamelyCource
             KatakanaWord = "イモウト",
             RussianWord = "младшая сестра",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Старшая сестра"),
@@ -123,7 +123,7 @@ internal class FamelyCource
             KatakanaWord = "カゾク",
             RussianWord = "семья",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Дом"),
@@ -141,7 +141,7 @@ internal class FamelyCource
             KatakanaWord = "イエ",
             RussianWord = "дом",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Квартира"),
@@ -159,7 +159,7 @@ internal class FamelyCource
             KatakanaWord = "ヘヤ",
             RussianWord = "комната",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Кухня"),
@@ -177,7 +177,7 @@ internal class FamelyCource
             KatakanaWord = "ダイドコロ",
             RussianWord = "кухня",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Столовая"),
@@ -195,7 +195,7 @@ internal class FamelyCource
             KatakanaWord = "フロ",
             RussianWord = "ванна",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Душ"),
@@ -213,7 +213,7 @@ internal class FamelyCource
             KatakanaWord = "トイレ",
             RussianWord = "туалет",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Ванная"),
@@ -231,7 +231,7 @@ internal class FamelyCource
             KatakanaWord = "フトン",
             RussianWord = "постель",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Подушка"),
@@ -249,7 +249,7 @@ internal class FamelyCource
             KatakanaWord = "タベモノ",
             RussianWord = "еда",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Напиток"),
@@ -267,7 +267,7 @@ internal class FamelyCource
             KatakanaWord = "ミズ",
             RussianWord = "вода",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Сок"),

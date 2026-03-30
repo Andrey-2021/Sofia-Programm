@@ -33,9 +33,15 @@ public class BaseAddModel<TEntity> : BaseModel
         IsBusy = true;
         SaveEntityOperationResponce = await DbRepository.UpdateEntity(MainEntity!);
         IsBusy = false;
-        if(SaveEntityOperationResponce.IsSuccessfullOperation)
-            NavigationManager.NavigateTo(ProjectRouters.loginedHomePageHref);
+        if (SaveEntityOperationResponce.IsSuccessfullOperation)
+            GoAfterSave();
     }
+
+    protected virtual void GoAfterSave()
+    {
+        NavigationManager.NavigateTo(ProjectRouters.loginedHomePageHref);
+    }
+
 
     public virtual void OnCancelClick()
     {
@@ -87,5 +93,7 @@ public class BaseAddModel<TEntity> : BaseModel
 	protected void FieldChanged(object? sender, FieldChangedEventArgs args)
     {
     }
+
+    
 }
 

@@ -96,6 +96,6 @@ public class LoginComponentModel : ComponentBase
 	{
 		//throw new Exception();
 		//NavigationManager.NavigateTo(ProjectRouters.homeHref);
-		NavigationManager.NavigateTo("https://ya.ru");
-	}
+        NavigationManager.NavigateTo(ProjectRouters.homeHref);
+    }
 }

@@ -1,8 +1,10 @@
-﻿namespace Entities;
+﻿using Entities.Validations;
+namespace Entities;
 
 /// <summary>
 /// Вопрос курса
 /// </summary>
+[Comment("Вопрос курса")]
 public class CourseQestion
 {
     /// <summary>
@@ -12,27 +14,39 @@ public class CourseQestion
     public int Id { get; set; }
 
     /// <summary>
-    /// Кандзи (иероглифы)
+    /// Кандзи (иероглиф)
     /// </summary>
-    [Required(ErrorMessage = "Введите Кандзи")]
-    [StringLength(LengthConstants.qestionMaxLength, MinimumLength = LengthConstants.qestionMinLength, ErrorMessage = "Длина кандзи должна быть не менее {2} и не более {1} символов")]
-    [Comment("Вопрос курса")]
-    [DisplayName("Вопрос курса")]
-    public string KanjiWord { get; set; } = default!;
+    [CheckJapanWords()]
+    [MaxLength(LengthConstants.jupanWordMaxLength, ErrorMessage = "Длина должна быть не более {1} символов")]
+    [Comment("Кандзи (иероглиф)")]
+    [DisplayName("Кандзи (иероглиф)")]
+    public string? KanjiWord { get; set; }
 
     /// <summary>
     /// Хирагана (слоговая азбука, 46 знаков)
     /// </summary>
+    [CheckJapanWords()]
+    [MaxLength(LengthConstants.jupanWordMaxLength, ErrorMessage = "Длина должна быть не более {1} символов")]
+    [Comment("Хирагана)")]
+    [DisplayName("Хирагана")]
     public string? HiraganaWord { get; set; }
 
     /// <summary>
     /// Катакана (слоговая азбука, 46 знаков)
     /// </summary>
+    [CheckJapanWords()]
+    [MaxLength(LengthConstants.jupanWordMaxLength, ErrorMessage = "Длина должна быть не более {1} символов")]
+    [Comment("Катакана")]
+    [DisplayName("Катакана")]
     public string? KatakanaWord { get; set; }
 
     /// <summary>
     /// Русское слово
     /// </summary>
+    [Required(ErrorMessage = "Введите русское слово")]
+    [StringLength(LengthConstants.russianWordMaxLength, MinimumLength = LengthConstants.russianWordMinLength, ErrorMessage = "Длина слова должна быть не менее {2} и не более {1} символов")]
+    [Comment("Русское слово")]
+    [DisplayName("Русское слово")]
     public string RussianWord { get; set; } = string.Empty;
 
     /// <summary>
@@ -57,6 +71,7 @@ public class CourseQestion
     [DisplayName("Учебный курс")]
     public TrainingCourse? TrainingCourse { get; set; }
 
+    /*
     /// <summary>
     /// Уровень сложности вопроса
     /// </summary>
@@ -64,6 +79,8 @@ public class CourseQestion
     [Comment("Уровень сложности вопроса")]
     [DisplayName("Уровень сложности вопроса")]
     public int DifficultyLevel { get; set; }
+    */
 
+    [ValidateComplexType]
     public ICollection<WrongRussianWordAnswer>? WrongRussianWordAnswers{ get; set; }
 }

@@ -35,6 +35,8 @@ public static class ProjectRouters
     public const string registeredUsersHref = "registered-users";
     public const string registeredUsers = "/" + registeredUsersHref;
 
+    public const string addMyUserHref = "add-user";
+    public const string addMyUser = "/" + addMyUserHref;
 
 
 

@@ -16,7 +16,7 @@ internal class BusinessInJapan
             KatakanaWord = "カイシャ",
             RussianWord = "компания",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Офис"),
@@ -34,7 +34,7 @@ internal class BusinessInJapan
             KatakanaWord = "シゴト",
             RussianWord = "работа",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Должность"),
@@ -52,7 +52,7 @@ internal class BusinessInJapan
             KatakanaWord = "ジョウシ",
             RussianWord = "начальник",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Подчинённый"),
@@ -70,7 +70,7 @@ internal class BusinessInJapan
             KatakanaWord = "ドウリョウ",
             RussianWord = "коллега",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Друг"),
@@ -88,7 +88,7 @@ internal class BusinessInJapan
             KatakanaWord = "シャイン",
             RussianWord = "сотрудник",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Работник"),
@@ -106,7 +106,7 @@ internal class BusinessInJapan
             KatakanaWord = "カイギ",
             RussianWord = "совещание",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Конференция"),
@@ -124,7 +124,7 @@ internal class BusinessInJapan
             KatakanaWord = "ホウコク",
             RussianWord = "отчёт",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Доклад"),
@@ -142,7 +142,7 @@ internal class BusinessInJapan
             KatakanaWord = "プロジェクト",
             RussianWord = "проект",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Задача"),
@@ -160,7 +160,7 @@ internal class BusinessInJapan
             KatakanaWord = "コキャク",
             RussianWord = "клиент",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Покупатель"),
@@ -178,7 +178,7 @@ internal class BusinessInJapan
             KatakanaWord = "ケイヤク",
             RussianWord = "контракт",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Соглашение"),
@@ -196,7 +196,7 @@ internal class BusinessInJapan
             KatakanaWord = "リエキ",
             RussianWord = "прибыль",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Доход"),
@@ -214,7 +214,7 @@ internal class BusinessInJapan
             KatakanaWord = "ソンシツ",
             RussianWord = "убыток",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Расход"),
@@ -232,7 +232,7 @@ internal class BusinessInJapan
             KatakanaWord = "メイシ",
             RussianWord = "визитка",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Бланк"),
@@ -250,7 +250,7 @@ internal class BusinessInJapan
             KatakanaWord = "シャザイ",
             RussianWord = "извинение",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("Просьба"),
@@ -268,7 +268,7 @@ internal class BusinessInJapan
             KatakanaWord = "オツカレサマデス",
             RussianWord = "спасибо за работу",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
     {
         new("До свидания"),

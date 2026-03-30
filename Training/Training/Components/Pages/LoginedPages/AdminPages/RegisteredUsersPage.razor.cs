@@ -3,13 +3,8 @@ using Radzen;
 using System.Collections.ObjectModel;
 namespace Training.Components.Pages.LoginedPages.AdminPages;
 
-public class RegisteredUsersPageModel : ComponentBase
+public class RegisteredUsersPageModel : BaseModel
 {
-    /// <summary>
-    /// Флаг занятости
-    /// </summary>
-    public bool IsBusy { get; set; }
-
     [Inject]
     protected IServiceProvider ServiceProvider { get; set; } = default!;
 
@@ -40,5 +35,27 @@ public class RegisteredUsersPageModel : ComponentBase
                 + Environment.NewLine + "InnerException:" + result.ex?.InnerException?.Message;
         }
         IsBusy = false;
+    }
+
+
+    public async Task OnEditCommand(MyUser entity)
+    {
+        //_goToUrlService.GoToUrl($"{ProjectRouters.addMyUserHref}?{ParametersNames.queryParametrNameForEditId}={entity.Id}");
+    }
+
+    public async Task OnDelCommandMenuAsync(MyUser entity)
+    {
+        //await OnForeveDelWithQuestionCommandAsync(entity, $"Удалить пользователя {entity.Manager.Fio}?");
+    }
+
+    protected async void OnReloadEvent(object? obj, EventArgs eventArgs)
+    {
+        //if (grid != null)
+          //  await grid.Reload();
+    }
+
+    public void OnAddCommand()
+    {
+        NavigationManager.NavigateTo(ProjectRouters.addMyUserHref);
     }
 }

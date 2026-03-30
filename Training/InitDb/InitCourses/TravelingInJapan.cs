@@ -19,7 +19,7 @@ internal class TravelingInJapan
             KatakanaWord = "デンシャ",
             RussianWord = "поезд",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Автобус"),
@@ -37,7 +37,7 @@ internal class TravelingInJapan
             KatakanaWord = "バス",
             RussianWord = "автобус",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Поезд"),
@@ -55,7 +55,7 @@ internal class TravelingInJapan
             KatakanaWord = "キップ",
             RussianWord = "билет",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Паспорт"),
@@ -73,7 +73,7 @@ internal class TravelingInJapan
             KatakanaWord = "ホテル",
             RussianWord = "отель",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Рёкан"),
@@ -91,7 +91,7 @@ internal class TravelingInJapan
             KatakanaWord = "クウコウ",
             RussianWord = "аэропорт",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Вокзал"),
@@ -109,7 +109,7 @@ internal class TravelingInJapan
             KatakanaWord = "エキ",
             RussianWord = "вокзал",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Аэропорт"),
@@ -127,7 +127,7 @@ internal class TravelingInJapan
             KatakanaWord = "ケンガク",
             RussianWord = "экскурсия",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Путешествие"),
@@ -145,7 +145,7 @@ internal class TravelingInJapan
             KatakanaWord = "オミヤゲ",
             RussianWord = "сувенир",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Подарок"),
@@ -163,7 +163,7 @@ internal class TravelingInJapan
             KatakanaWord = "チズ",
             RussianWord = "карта",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Схема"),
@@ -181,7 +181,7 @@ internal class TravelingInJapan
             KatakanaWord = "メイショ",
             RussianWord = "достопримечательность",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Музей"),
@@ -199,7 +199,7 @@ internal class TravelingInJapan
             KatakanaWord = "アンナイニン",
             RussianWord = "гид",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Переводчик"),
@@ -217,7 +217,7 @@ internal class TravelingInJapan
             KatakanaWord = "リョコウシャ",
             RussianWord = "турист",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Путешественник"),
@@ -235,7 +235,7 @@ internal class TravelingInJapan
             KatakanaWord = "ニモツ",
             RussianWord = "багаж",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Сумка"),
@@ -253,7 +253,7 @@ internal class TravelingInJapan
             KatakanaWord = "ジコクヒョウ",
             RussianWord = "расписание",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Табло"),
@@ -271,7 +271,7 @@ internal class TravelingInJapan
             KatakanaWord = "リョコウ",
             RussianWord = "путешествие",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+               
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
         {
             new("Отдых"),

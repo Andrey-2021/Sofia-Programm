@@ -3,18 +3,24 @@
 @* <RadzenComponents /> *@
 <RadzenComponents @rendermode="InteractiveServer" />
 
+<div>
+@Body
+</div>
 
-<RadzenLayout>
+@*   <RadzenLayout>
+    <RadzenHeader>
+    </RadzenHeader>
     <RadzenBody>
-        <div class="rz-p-4">
+         <div class="rz-p-4"> 
             @Body
-        </div>
+         </div> 
     </RadzenBody>
-
-    <RadzenFooter>
-        2026г.
-    </RadzenFooter>
+     <RadzenFooter Style="position:sticky; bottom:0; left:0; width:stretch; margin-left: -16px; margin-right: -16px; box-sizing: content-box;">
+    </RadzenFooter>   
 </RadzenLayout>
+ *@
+
+
 
 <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.
@@ -45,3 +51,23 @@
     <span class="dismiss">🗙</span>
 </div>
  *@
+
+
+
+
+
+
+@code {
+
+    [Inject] NavigationManager Navigation { get; set; } = default!;
+
+    void LoginClicked()
+    {
+        Navigation.NavigateTo(ProjectRouters.inputLoginandPasswordHref);
+    }
+
+    void RegistrationClicked()
+    {
+        Navigation.NavigateTo(ProjectRouters.newUserRegistrationHref);
+    }
+}

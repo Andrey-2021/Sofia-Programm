@@ -24,6 +24,17 @@ public class LengthConstants
     public const int trainingCourseNameMaxLength = 255;
     public const int trainingCourseNameMinLength = 4;
 
+    /// <summary>
+    /// максимальная длина описания курса
+    /// </summary>
+    public const int trainingCourseDescriptionMaxLength = 255;
+
+    /// <summary>
+	/// Максимальное значение для "Продолжительность курса (минут)"
+	/// </summary>
+	public const decimal maxDurationHours = 180;
+
+
     public const int qestionMaxLength = 255;
     public const int qestionMinLength = 4;
 
@@ -45,8 +56,17 @@ public class LengthConstants
 	/// </summary>
 	public const byte maxPasswordInputCount = 5;
 
+    /// <summary>
+    /// Русское слово
+    /// </summary>
+    public const int russianWordMaxLength = 100;
+    public const int russianWordMinLength = 1;
 
 
+    /// <summary>
+    /// максимальная длина японского слова
+    /// </summary>
+    public const int jupanWordMaxLength = 50;
 
 
 

@@ -1,4 +1,4 @@
-﻿{
+﻿*{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -12,14 +12,14 @@ body {
     scroll-behavior: smooth;
 }
 
-/* контейнер для центрирования */
+ /*контейнер для центрирования*/ 
 .container {
     max-width: 1280px;
     margin: 0 auto;
     padding: 0 24px;
 }
 
-/* ШАПКА (header) */
+ /*ШАПКА (header) */
 .header {
     background: #ffffffdd;
     backdrop-filter: blur(12px);
@@ -103,14 +103,14 @@ body {
         background: #b45f2b;
         transform: translateY(-1px);
         box-shadow: 0 8px 18px rgba(180, 95, 43, 0.25);
-    }
+    }*/
 
-/* основной контент */
+ /*основной контент*/ 
 main {
     padding: 48px 0 64px;
 }
 
-/* герой / вступление (часть основного текста) */
+ /*герой / вступление (часть основного текста)*/ 
 .hero-text {
     background: #fff9f2;
     border-radius: 48px;
@@ -235,7 +235,7 @@ main {
     border: 1px dashed #e9cbaa;
 }
 
-/* подвал */
+ /*подвал*/ 
 .footer {
     background: #2e241b;
     color: #e7cfb5;

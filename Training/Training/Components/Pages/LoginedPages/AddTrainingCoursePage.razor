@@ -10,7 +10,8 @@
 
         @if (EditContext != null)
         {
-            <EditForm EditContext=@EditContext OnValidSubmit="@OnSaveValidEntityClick">
+            <EditForm EditContext=@EditContext OnValidSubmit="@OnSaveValidEntityClick"
+                      Context="CustomerForm">
                 <ObjectGraphDataAnnotationsValidator />
                 <div class="input-table">
                     <table>
@@ -63,7 +64,7 @@
                                                  Style="width:100%;"
                                                  AlignItems="AlignItems.Center">
                                         <div class="required-field">*</div>
-                                        <RadzenLabel Component="_durationHours">Продолжительность курса (часв):</RadzenLabel>
+                                        <RadzenLabel Component="_durationHours">Продолжительность курса (минут):</RadzenLabel>
                                     </RadzenStack>
                                 </td>
                                 <td>
@@ -146,8 +147,139 @@
                     </table>
                 </div>
 
+                <div>
+                    <div>
+                        Карточки курса
+                    </div>
+
+                    <div class="table-box">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Кандзи (иероглиф)</th>
+                                    <th>Хирагана</th>
+                                    <th>Катакана</th>
+                                    <th>Русское слово</th>
+                                    <th>Неправильные русские слова (для тестирования)</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @if (MainEntity.CourseQestions?.Count > 0)
+                                {
+                                    @foreach (var item in MainEntity.CourseQestions)
+                                    {
+                                        <tr>
+                                            <td>
+                                                @item?.KanjiWord
+                                            </td>
+                                            <td>
+                                                @item?.HiraganaWord
+                                            </td>
+                                            <td>
+                                                @item?.KanjiWord
+                                            </td>
+                                            <td>
+                                                @item?.RussianWord
+                                            </td>
+                                            <td>
+                                                @if (item.WrongRussianWordAnswers?.Count > 0)
+                                                {
+                                                    @foreach (var rusWord in item.WrongRussianWordAnswers)
+                                                    {
+                                                        <div>
+                                                            @rusWord.Answer
+                                                        </div>
+                                                    }
+                                                
+                                                }
+                                            </td>
+                                        </tr>
+                            
+                                    }
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="add-card-qestion-box">
+                        @if (IsAddingNewCard == false)
+                        {
+                            <RadzenButton type="button" style="width: 160px" Click=@(() => OnAddNewCardClick()) Text="Добавить карточку"
+                                          Shade="Shade.Light" ButtonStyle="ButtonStyle.Warning" TabIndex="11" />
+                        }
+                        else
+                        {
+                            <EditForm Model="@AddedCourseQestion" Context="AddressForm" OnValidSubmit="@OnSaveCardClick">
+                                <ObjectGraphDataAnnotationsValidator />
+                                <table>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                Кандзи (иероглиф):
+                                            </td>
+                                            <td>
+                                                <RadzenTextBox Name="_name"
+                                                               @bind-Value=@(AddedCourseQestion!.KanjiWord)
+                                                               Style="width: 100%;"
+                                                               aria-label="Default TextBox" autofocus
+                                                               AutoCompleteType="AutoCompleteType.Off" />
+                                                <ValidationMessage For="@(() => AddedCourseQestion!.KanjiWord)" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Хирагана:
+                                            </td>
+                                            <td>
+                                                <RadzenTextBox Name="_name"
+                                                               @bind-Value=@(AddedCourseQestion!.HiraganaWord)
+                                                               Style="width: 100%;"
+                                                               aria-label="Default TextBox" autofocus
+                                                               AutoCompleteType="AutoCompleteType.Off" />
+                                                <ValidationMessage For="@(() => AddedCourseQestion!.HiraganaWord)" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Катакана:
+                                            </td>
+                                            <td>
+                                                <RadzenTextBox Name="_name"
+                                                               @bind-Value=@(AddedCourseQestion!.KatakanaWord)
+                                                               Style="width: 100%;"
+                                                               aria-label="Default TextBox" autofocus
+                                                               AutoCompleteType="AutoCompleteType.Off" />
+                                                <ValidationMessage For="@(() => AddedCourseQestion!.KatakanaWord)" />
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                Правильный ответ, подом уберём этот пункт:
+                                            </td>
+                                            <td>
+                                                <RadzenTextBox Name="_name"
+                                                               @bind-Value=@(AddedCourseQestion!.RussianWord)
+                                                               Style="width: 100%;"
+                                                               aria-label="Default TextBox" autofocus
+                                                               AutoCompleteType="AutoCompleteType.Off" />
+                                                <ValidationMessage For="@(() => AddedCourseQestion!.RussianWord)" />
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                                @* Click=@(() => OnSaveCardClick()) *@
+                                <RadzenButton type="submit" style="width: 160px" Text="Сохранить карточку"
+                                              Shade="Shade.Light" ButtonStyle="ButtonStyle.Warning" TabIndex="11" />
+                            </EditForm>
+                        }
+                    </div>
+
+                </div>
+                <br />
                 <RadzenStack Orientation="Orientation.Horizontal" Gap="2rem" JustifyContent="JustifyContent.Center">
-                    <RadzenButton type="submit" style="width: 160px" IsBusy=@IsBusy Text="Сохранить"
+                    <RadzenButton type="submit" style="width: 160px" IsBusy=@IsBusy Text="Сохранить курс"
                                   Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" TabIndex="10" />
 
                     <RadzenButton type="button" style="width: 160px" Click=@(() => OnCancelClick()) Text="Отмена"

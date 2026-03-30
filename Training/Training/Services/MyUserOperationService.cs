@@ -24,7 +24,7 @@ public class MyUserOperationService
     /// <summary>
     /// Логин и пароль по умолчанию
     /// </summary>
-    private const string adminEmail = "forcreate";
+    private const string adminEmail = "admin";
     private const string adminPassword = "1234";
 
     /// <summary>
@@ -113,11 +113,20 @@ public class MyUserOperationService
         //Guid есть в браузере
         //тогда ищем пользователя с таким Guid в БД
         //var findUserResult = await _usersService.FindUserWithGuidInDbAsync(userGuidKey.guid!); //ReadRepository.FindUserWithGuidInDbAsync(userGuidKey.guid!);
+        var dbAvailable = await Repository.DbAvailableAsync();
+        if (dbAvailable.ex != null)
+        {
+            MyUser = null;
+            return dbAvailable.ex;
+        }
+        if (dbAvailable.checkResult == false)
+        {
+            var result = await CreateNewUserAsync();
+            MyUser = result.myUser;
+            return result.ex;
+        }
 
         var findUserResult = await Repository.GetFirstOrDefaultAsync<MyUser>(predicate: x => x.UserGuid == userGuidKey.guid);
-
-
-
         if (findUserResult.ex != null) // Если ошибка
         {
             MyUser = null;

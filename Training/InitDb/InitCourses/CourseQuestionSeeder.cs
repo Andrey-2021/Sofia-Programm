@@ -22,7 +22,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "ワタシ",
             RussianWord = "я",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Ты"),
@@ -40,7 +40,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "アナタ",
             RussianWord = "ты",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Я"),
@@ -58,7 +58,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "ガクセイ",
             RussianWord = "студент",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Учитель"),
@@ -76,7 +76,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "センセイ",
             RussianWord = "учитель",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Студент"),
@@ -94,7 +94,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "ニホンゴ",
             RussianWord = "японский язык",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Китайский язык"),
@@ -112,7 +112,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "ホン",
             RussianWord = "книга",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Тетрадь"),
@@ -130,7 +130,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "ミズ",
             RussianWord = "вода",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Молоко"),
@@ -148,7 +148,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "タベル",
             RussianWord = "есть (кушать)",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Пить"),
@@ -166,7 +166,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "ノム",
             RussianWord = "пить",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Есть"),
@@ -184,7 +184,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "イク",
             RussianWord = "идти",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Бежать"),
@@ -202,7 +202,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "ミル",
             RussianWord = "смотреть",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Видеть"),
@@ -220,7 +220,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "イヌ",
             RussianWord = "собака",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Кошка"),
@@ -238,7 +238,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "ネコ",
             RussianWord = "кошка",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Собака"),
@@ -256,7 +256,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "ヤマ",
             RussianWord = "гора",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Холм"),
@@ -274,7 +274,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "カワ",
             RussianWord = "река",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Озеро"),
@@ -292,7 +292,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "ハナ",
             RussianWord = "цветок",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Дерево"),
@@ -310,7 +310,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "ソラ",
             RussianWord = "небо",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Земля"),
@@ -328,7 +328,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "アメ",
             RussianWord = "дождь",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Снег"),
@@ -346,7 +346,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "クルマ",
             RussianWord = "машина",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Автобус"),
@@ -364,7 +364,7 @@ public static class CourseQuestionSeeder
             KatakanaWord = "デンシャ",
             RussianWord = "поезд",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
         {
             new("Метро"),
@@ -394,7 +394,7 @@ public static List<CourseQestion> GetSampleQuestions(TrainingCourse trainingCour
             KatakanaWord = "ワタシ",
             RussianWord = "я",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>() {new("Ты"), new("Мы"),new("Город"), new("Село") }
         });
 
@@ -406,7 +406,7 @@ public static List<CourseQestion> GetSampleQuestions(TrainingCourse trainingCour
             KatakanaWord = "アナタ",
             RussianWord = "ты",
             TrainingCourse = trainingCourse,
-            DifficultyLevel = 1,
+             
             WrongRussianWordAnswers = new List<WrongRussianWordAnswer>() { new("Я"), new("Они"), new("Корова"), new("Телёнок") }
         });
 

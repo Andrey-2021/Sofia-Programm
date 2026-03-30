@@ -3,6 +3,7 @@
 /// <summary>
 /// Учебный курс
 /// </summary>
+[Comment("Учебный курс")]
 public class TrainingCourse
 {
     /// <summary>
@@ -21,13 +22,19 @@ public class TrainingCourse
     public string Name { get; set; } = default!;
 
     /// <summary>
-    /// Описание курса.
+    /// Описание курса
     /// </summary>
+    [MaxLength(LengthConstants.trainingCourseDescriptionMaxLength, ErrorMessage = "Длина описания должна быть не более {1} символов")]
+    [Comment("Описание курса")]
+    [DisplayName("Описание курса")]
     public string? Description { get; set; }
 
     /// <summary>
-    /// Продолжительность курса в часах.
+    /// Продолжительность курса (минут)
     /// </summary>
+     [Range(0, (double)LengthConstants.maxDurationHours, ErrorMessage = "Недопустимое значение. Должно быть от {1} до {2}")]
+    [Comment("Продолжительность курса (минут)")]
+    [DisplayName("Продолжительность курса (минут)")]
     public int DurationHours { get; set; }
 
     /// <summary>
@@ -75,6 +82,7 @@ public class TrainingCourse
     [DisplayName("Владелец курса")]
     public MyUser? MyUser { get; set; }
 
+    [ValidateComplexType]
     public IList<CourseQestion>? CourseQestions { get; set; }
     
     /// <summary>

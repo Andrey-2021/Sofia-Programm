@@ -1,0 +1,198 @@
+﻿@inherits AddMyUserComponentModel
+@attribute [Route(ProjectRouters.addMyUser)]
+<PageTitle>Пользователь</PageTitle>
+
+<div class="my-window-conteiner">
+	<div class="my-window-box">
+		<h3 style="text-align:center;">Пользователь</h3>
+
+@* 		<ShowOperrationErrorComponent BaseOperationResponce=@ViewModel?.LoadEditingEntityOperationResponce />
+		<ShowOperrationErrorComponent BaseOperationResponce=@ViewModel?.SaveEntityOperationResponce /> *@
+
+		@if (MainEntity == null)
+		{
+			<div>Нет объекта</div>
+		}
+
+		@if (EditContext != null)
+		{
+			<EditForm EditContext=@EditContext OnValidSubmit="@OnSaveValidEntityClick">
+				<ObjectGraphDataAnnotationsValidator />
+				<div class="input-table">
+					<table>
+						<tbody>
+							<tr>
+								<td>
+									<RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.NoWrap" Style="width:100%;" AlignItems="AlignItems.Center">
+										<div class="required-field">*</div>
+										<RadzenLabel Component="_name">Логин:</RadzenLabel>
+									</RadzenStack>
+								</td>
+								<td>
+									@* @ref=@focusedElement *@
+									<RadzenTextBox Name="_name" @bind-Value=@( MainEntity!.Login)
+												   Style="width: 100%;"
+												   aria-label="Default TextBox" autofocus
+												   AutoCompleteType="AutoCompleteType.Off"/>
+									<ValidationMessage For="@(() => MainEntity!.Login)" />
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.NoWrap" Style="width:100%;" AlignItems="AlignItems.Center">
+										<div class="required-field">*</div>
+										<RadzenLabel Component="_password">Пароль:</RadzenLabel>
+									</RadzenStack>
+								</td>
+								<td>
+									<RadzenTextBox Name="_password" @bind-Value=@( MainEntity!.Password)
+												   Style="width: 100%;"
+												   aria-label="Default TextBox" autofocus
+												   tabindex="2"
+												   AutoCompleteType="AutoCompleteType.Off" /> @* autocomplete="off" *@
+									<ValidationMessage For="@(() =>  MainEntity!.Password)" />
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.NoWrap" Style="width:100%;" AlignItems="AlignItems.Center">
+										<div class="required-field">*</div>
+										<RadzenLabel Component="_password">Повторите пароль:</RadzenLabel>
+									</RadzenStack>
+								</td>
+								<td>
+									<RadzenTextBox Name="_password" @bind-Value=@( MainEntity!.ConfirmedPassword)
+												   Style="width: 100%;"
+												   aria-label="Default TextBox" autofocus
+												   tabindex="2"
+												   AutoCompleteType="AutoCompleteType.Off" /> @* autocomplete="off" *@
+									<ValidationMessage For="@(() => MainEntity!.ConfirmedPassword)" />
+								</td>
+							</tr>
+
+
+							<tr>
+								<td>
+									<RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.NoWrap" Style="width:100%;" AlignItems="AlignItems.Center">
+										<div class="required-field">*</div>
+										<RadzenLabel Component="_role">Роль:</RadzenLabel>
+									</RadzenStack>
+								</td>
+								<td>
+									<InputSelect id="_role" @bind-Value=@MainEntity!.Role
+												 class="my-input-box" autocomplete="off"
+												 tabindex="4">
+										<option value=""></option>
+										@foreach (var item in Enum.GetValues(typeof(RoleEnum)))
+										{
+											<option value="@item"> @item </option>
+										}
+									</InputSelect>
+									<ValidationMessage For="@(() => MainEntity!.Role)" />
+								</td>
+							</tr>
+
+
+
+
+							<tr>
+								<td>
+									<RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.NoWrap" Style="width:100%;" AlignItems="AlignItems.Center">
+										<div class="required-field">*</div>
+										<RadzenLabel Component="_fio">Фамилия:</RadzenLabel>
+									</RadzenStack>
+								</td>
+								<td>
+									<RadzenTextBox Name="_fio" @bind-Value=@( MainEntity!.Manager.LastName)
+												   Style="width: 100%;"
+												   aria-label="Default TextBox" autofocus
+												   tabindex="3"
+												   AutoCompleteType="AutoCompleteType.Off" />
+									<ValidationMessage For="@(() => MainEntity!.Manager.LastName)" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.NoWrap" Style="width:100%;" AlignItems="AlignItems.Center">
+										<div class="required-field">*</div>
+										<RadzenLabel Component="_FirstName">Имя:</RadzenLabel>
+									</RadzenStack>
+								</td>
+								<td>
+									<RadzenTextBox Name="_FirstName" @bind-Value=@( MainEntity!.Manager.FirstName)
+												   Style="width: 100%;"
+												   aria-label="Default TextBox" autofocus
+												   tabindex="3"
+												   AutoCompleteType="AutoCompleteType.Off" />
+									<ValidationMessage For="@(() => MainEntity!.Manager.FirstName)" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.NoWrap" Style="width:100%;" AlignItems="AlignItems.Center">
+										<div class="required-field">*</div>
+										<RadzenLabel Component="_MiddleName">Отчество.:</RadzenLabel>
+									</RadzenStack>
+								</td>
+								<td>
+									<RadzenTextBox Name="_MiddleName" @bind-Value=@( MainEntity!.Manager.MiddleName)
+												   Style="width: 100%;"
+												   aria-label="Default TextBox" autofocus
+												   tabindex="3"
+												   AutoCompleteType="AutoCompleteType.Off" />
+									<ValidationMessage For="@(() => MainEntity!.Manager.MiddleName)" />
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									
+									<RadzenStack Orientation="Orientation.Horizontal" Wrap="FlexWrap.NoWrap" Style="width:100%;" AlignItems="AlignItems.Center">
+										<div class="required-field">*</div>
+										<RadzenLabel Component="_phone_number">Телефон:</RadzenLabel>
+									</RadzenStack>
+								</td>
+								<td>
+									<RadzenMask Name="_phone_number"
+												Mask="+7**********"
+												CharacterPattern="[0-9]"
+												Placeholder="+70000000000"
+												@bind-Value=@MainEntity.Manager.PhoneNumber
+												Style="width: 100%;"
+												AutoCompleteType="AutoCompleteType.Off" />
+									<ValidationMessage For="@(() => MainEntity!.Manager.PhoneNumber)" />
+								</td>
+							</tr>
+
+							<tr>
+								<td>
+									<RadzenLabel Component="_Email">e-mail:</RadzenLabel>
+								</td>
+								<td>
+									<RadzenMask Name="_Email"
+												@bind-Value=@MainEntity.Manager.Email
+												Style="width: 100%;"
+												AutoCompleteType="AutoCompleteType.Off" />
+									<ValidationMessage For="@(() => MainEntity!.Manager.Email)" />
+								</td>
+							</tr>
+							
+
+						</tbody>
+					</table>
+				</div>
+
+				<RadzenStack Orientation="Orientation.Horizontal" Gap="2rem" JustifyContent="JustifyContent.Center">
+					<RadzenButton type="submit" style="width: 160px" IsBusy=@IsBusy Text="Сохранить"
+								  Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" TabIndex="10" />
+
+					<RadzenButton type="button" style="width: 160px" Click=@(()=> OnCancelClickCommand()) Text="Отмена"
+								  Shade="Shade.Light" ButtonStyle="ButtonStyle.Warning" TabIndex="11" />
+				</RadzenStack>
+				<ValidationSummary />
+			</EditForm>
+		}
+	</div>
+</div>
