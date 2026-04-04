@@ -1,0 +1,175 @@
+﻿@using Training.Components.Pages.Components
+@* @attribute [Route(ProjectRouters.viewTrainingCourcePage)] *@
+@* @page "/test" *@
+@inherits ViewTrainingCourcePageModel_Old
+
+<PageTitle>Курс</PageTitle>
+
+<div class="my-window-conteiner">
+    <div class="my-window-box">
+        <h3>@(MainEntity?.Name)</h3>
+
+        @if (MainEntity != null)
+        {
+            <div class="input-table">
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Описание:
+                            </td>
+                            <td>
+                                @(MainEntity!.Description)
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Продолжительность курса (минут):
+                            </td>
+                            <td>
+                                @MainEntity.DurationHours
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Дата создания курса:
+                            </td>
+                            <td>
+                                @(MainEntity!.ContractDate.ToLongDateString())
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Уровень сложности курса
+                            </td>
+                            <td>
+                                @MainEntity.DifficultyLevel
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                Курс виден всем:
+                            </td>
+                            <td>
+                                @if (MainEntity.IsVisableForAll)
+                                {
+                                    <div>
+                                        Да
+                                    </div>
+                                }
+                                else
+                                {
+                                    <div>
+                                        Нет
+                                    </div>
+                                }
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+
+            <RadzenStack>
+                <RadzenCard class="rz-p-4" Variant="Variant.Outlined">
+                    <RadzenStack Orientation="Orientation.Horizontal" AlignItems="AlignItems.Start" Wrap="FlexWrap.Wrap">
+                       @*  <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                            Выбранная  карточка
+                            <RadzenNumeric Style="width:150px;" @bind-Value=@selectedIndex Min="0" Max="@(MainEntity.CourseQestions?.Count - 1)" aria-label="selected index" />
+                        </RadzenStack> *@
+                        <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                            Интервал
+                            <RadzenNumeric Style="width:100px;" @bind-Value=@interval aria-label="interval" />
+                        </RadzenStack>
+                        @* <RadzenStack Orientation="Orientation.Vertical" Gap="4px">
+                            Длительность анимации
+                            <RadzenNumeric Style="width:200px;" @bind-Value=@animationDuration TValue="double?" aria-label="animation duration" />
+                        </RadzenStack> *@
+                        <RadzenStack Orientation="Orientation.Vertical" Gap="8px">
+                            Авто прокрутка
+                            <RadzenSwitch @bind-Value="@auto" InputAttributes="@(new Dictionary<string, object>() { { "aria-label", "auto-cycle" } })" />
+                        </RadzenStack>
+                        <RadzenStack Orientation="Orientation.Vertical" Gap="8px">
+                            Навигация
+                            <RadzenStack Orientation="Orientation.Horizontal" Gap="16px">
+                                <RadzenToggleButton Text="@toggleText" Click="@Toggle" ButtonStyle="ButtonStyle.Base" Variant="Variant.Flat" Size="ButtonSize.Small" />
+                                <RadzenButton Text="К первой" Click="@(args => carousel.Navigate(0))" ButtonStyle="ButtonStyle.Base" Variant="Variant.Flat" Size="ButtonSize.Small" Disabled="@(selectedIndex == 0)" />
+                                <RadzenButton Text="К последней" Click="@(args => carousel.Navigate(MainEntity.CourseQestions?.Count??1 - 1))" ButtonStyle="ButtonStyle.Base" Variant="Variant.Flat" Size="ButtonSize.Small" Disabled="@(selectedIndex == (MainEntity.CourseQestions?.Count??1 - 1))" />
+                            </RadzenStack>
+                        </RadzenStack>
+                    </RadzenStack>
+                </RadzenCard>
+
+                <RadzenCard class="rz-p-4" Variant="Variant.Outlined">
+                    <RadzenCarousel @ref=carousel
+                                    @bind-SelectedIndex="@selectedIndex"
+                                    Auto="@auto" Interval="@interval" AnimationDuration="@animationDuration" PagerOverlay="false" ButtonShade="Shade.Default" 
+                                    Style="height:300px; width:800px"
+                                    Change="@(args => OnChange())">
+                        <Items>
+                            @if (MainEntity?.CourseQestions?.Count > 0)
+                            {
+                            
+                                @for (int i = 0; i < MainEntity.CourseQestions.Count; i++)
+                                {
+                                    var orderID = MainEntity.CourseQestions[i];
+                                    var number = i + 1;
+                                    <RadzenCarouselItem>
+                                        <RadzenCard class="rz-w-75">
+                                            <TrainingCardComponent TotalNumber=@MainEntity.CourseQestions.Count
+                                                                   CurrentNumber=@number
+                                                                   CourseQestion=@orderID />
+                                        </RadzenCard>
+                                    </RadzenCarouselItem>
+                                }
+                            }
+                        </Items>
+                    </RadzenCarousel>
+                </RadzenCard>
+            </RadzenStack>
+
+      
+        }
+
+        <RadzenButton type="button" style="width: 160px" Click=@(() => OnCancelClick())
+                      Text="Закрыть"
+                      Shade="Shade.Light" ButtonStyle="ButtonStyle.Warning" TabIndex="11" />
+
+    </div>
+</div>
+
+@code {
+    RadzenCarousel carousel;
+    bool auto = true;
+    double interval = 4000;
+    double? animationDuration=500;
+    string toggleText = "Стоп";
+    bool started = true;
+    int selectedIndex;
+
+    void Toggle()
+    {
+        if (started)
+        {
+            carousel.Stop();
+            toggleText = "Старт";
+        }
+        else
+        {
+            carousel.Start();
+            toggleText = "Стоп";
+        }
+
+        started = !started;
+    }
+
+    void OnChange()
+    {
+        //console.Log($"SelectedIndex changed to {args}
+    }
+
+}
