@@ -5,7 +5,7 @@
 
 <div class="my-window-conteiner">
     <div class="my-window-box">
-        <h3>Просмотр курса "@(MainEntity?.Name)"</h3>
+        <h3>@(MainEntity?.Name)</h3>
 
         @if (MainEntity != null)
         {
@@ -23,7 +23,7 @@
 
                         <tr>
                             <td>
-                                Продолжительность курса (часв):
+                                Продолжительность курса (минут):
                             </td>
                             <td>
                                 @MainEntity.DurationHours

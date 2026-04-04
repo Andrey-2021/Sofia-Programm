@@ -82,6 +82,9 @@ public class TrainingCourse
     [DisplayName("Владелец курса")]
     public MyUser? MyUser { get; set; }
 
+    /// <summary>
+    /// Вопросы курса
+    /// </summary>
     [ValidateComplexType]
     public IList<CourseQestion>? CourseQestions { get; set; }
     
