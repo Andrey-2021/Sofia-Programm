@@ -50,7 +50,7 @@ else
         <div class="question-card">
             <!-- Номер вопроса вверху -->
             <div class="question-number">
-                Вопрос №@(CurrentQestionIndex + 1) из @(QestionNumber)
+                Карточка №@(CurrentQestionIndex + 1) из @(QestionNumber)
             </div>
 
             <!-- Японские слова в одну строку -->
@@ -131,7 +131,7 @@ else
                 <button class="next-btn"
                         @onclick=@(() => OnNextClick())
                         disabled="@(!IsAnswerSelected)">
-                    ➡️ Следующий вопрос
+                    ➡️ Следующая карточка
                 </button>
             }
             else
