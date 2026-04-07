@@ -22,7 +22,7 @@ internal class BusinessInJapan
         new("Офис"),
         new("Предприятие"),
         new("Организация"),
-        new("Корпорация")
+        //new("Корпорация")
     }
         });
 
@@ -40,7 +40,7 @@ internal class BusinessInJapan
         new("Должность"),
         new("Занятие"),
         new("Труд"),
-        new("Карьера")
+       // new("Карьера")
     }
         });
 
@@ -58,7 +58,7 @@ internal class BusinessInJapan
         new("Подчинённый"),
         new("Директор"),
         new("Менеджер"),
-        new("Руководитель")
+       // new("Руководитель")
     }
         });
 
@@ -76,7 +76,7 @@ internal class BusinessInJapan
         new("Друг"),
         new("Партнёр"),
         new("Сотрудник"),
-        new("Знакомый")
+       // new("Знакомый")
     }
         });
 
@@ -94,7 +94,7 @@ internal class BusinessInJapan
         new("Работник"),
         new("Персонал"),
         new("Штат"),
-        new("Стажёр")
+       // new("Стажёр")
     }
         });
 
@@ -112,7 +112,7 @@ internal class BusinessInJapan
         new("Конференция"),
         new("Переговоры"),
         new("Презентация"),
-        new("Семинар")
+       // new("Семинар")
     }
         });
 
@@ -130,7 +130,7 @@ internal class BusinessInJapan
         new("Доклад"),
         new("Презентация"),
         new("Справка"),
-        new("Анализ")
+       // new("Анализ")
     }
         });
 
@@ -148,7 +148,7 @@ internal class BusinessInJapan
         new("Задача"),
         new("План"),
         new("Инициатива"),
-        new("Программа")
+        //new("Программа")
     }
         });
 
@@ -166,7 +166,7 @@ internal class BusinessInJapan
         new("Покупатель"),
         new("Заказчик"),
         new("Партнёр"),
-        new("Посетитель")
+        //new("Посетитель")
     }
         });
 
@@ -184,7 +184,7 @@ internal class BusinessInJapan
         new("Соглашение"),
         new("Договор"),
         new("Сделка"),
-        new("Оферта")
+       // new("Оферта")
     }
         });
 
@@ -202,7 +202,7 @@ internal class BusinessInJapan
         new("Доход"),
         new("Выручка"),
         new("Оборот"),
-        new("Капитал")
+        //new("Капитал")
     }
         });
 
@@ -220,7 +220,7 @@ internal class BusinessInJapan
         new("Расход"),
         new("Затраты"),
         new("Дефицит"),
-        new("Долг")
+        //new("Долг")
     }
         });
 
@@ -238,7 +238,7 @@ internal class BusinessInJapan
         new("Бланк"),
         new("Карточка"),
         new("Документ"),
-        new("Письмо")
+       // new("Письмо")
     }
         });
 
@@ -256,7 +256,7 @@ internal class BusinessInJapan
         new("Просьба"),
         new("Благодарность"),
         new("Отказ"),
-        new("Объяснение")
+       // new("Объяснение")
     }
         });
 
@@ -274,7 +274,7 @@ internal class BusinessInJapan
         new("До свидания"),
         new("Извините"),
         new("Пожалуйста"),
-        new("Здравствуйте")
+        //new("Здравствуйте")
     }
         });
 

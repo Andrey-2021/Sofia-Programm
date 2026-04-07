@@ -1,4 +1,6 @@
-﻿namespace Entities;
+﻿using Entities.DTO;
+
+namespace Entities;
 
 /// <summary>
 /// Пройденные тесты
@@ -55,7 +57,6 @@ public class CompletedTest
     [DisplayName("Владелец курса")]
     public MyUser? MyUser { get; set; }
 
-
     /// <summary>
     /// Дата прохождения курса
     /// </summary>
@@ -79,6 +80,19 @@ public class CompletedTest
     /// <summary>
     /// Затраченное время на прохождение курса
     /// </summary>
-    public int Duration { get; set; }
+    public TimeSpan Interval { get; set; }
 
+    //public int Duration { get; set; }
+
+    public CompletedTest()
+    { }
+
+    public CompletedTest(MyUser myUser, TrainingCourse trainingCourse, TestHelper testHelper)
+    {
+        MyUserId = myUser.Id;
+        TrainingCourseId = trainingCourse.Id;
+        QestionNumber = testHelper.QestionNumber;
+        CountCorrectAnswers = testHelper.CountCorrectAnswers;
+        Interval= testHelper.Interval;
+    }
 }

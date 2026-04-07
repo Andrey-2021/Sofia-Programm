@@ -399,7 +399,7 @@ public class MyUserOperationService
                 return (null, dbAvailableResult.ex);
 
             //Если БД доступна, тогда НЕ создаём админа по умолчанию
-            if (dbAvailableResult.ex != null && dbAvailableResult.checkResult == true)
+            if (dbAvailableResult.ex == null && dbAvailableResult.checkResult == true)
                 return (null, null);
 
             MyUser admin = new MyUser(guid, 1);//достаточно 1го часа для временного администратора

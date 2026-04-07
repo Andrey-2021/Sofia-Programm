@@ -25,7 +25,7 @@ internal class TravelingInJapan
             new("Автобус"),
             new("Такси"),
             new("Метро"),
-            new("Самолёт")
+          //  new("Самолёт")
         }
         });
 
@@ -43,7 +43,7 @@ internal class TravelingInJapan
             new("Поезд"),
             new("Такси"),
             new("Трамвай"),
-            new("Метро")
+          //  new("Метро")
         }
         });
 
@@ -61,7 +61,7 @@ internal class TravelingInJapan
             new("Паспорт"),
             new("Багаж"),
             new("Карта"),
-            new("Расписание")
+          //  new("Расписание")
         }
         });
 
@@ -79,7 +79,7 @@ internal class TravelingInJapan
             new("Рёкан"),
             new("Гостиница"),
             new("Хостел"),
-            new("Квартира")
+        //    new("Квартира")
         }
         });
 
@@ -97,7 +97,7 @@ internal class TravelingInJapan
             new("Вокзал"),
             new("Порт"),
             new("Станция"),
-            new("Терминал")
+          //  new("Терминал")
         }
         });
 
@@ -115,7 +115,7 @@ internal class TravelingInJapan
             new("Аэропорт"),
             new("Остановка"),
             new("Платформа"),
-            new("Депо")
+           // new("Депо")
         }
         });
 
@@ -133,7 +133,7 @@ internal class TravelingInJapan
             new("Путешествие"),
             new("Тур"),
             new("Прогулка"),
-            new("Отдых")
+          //  new("Отдых")
         }
         });
 
@@ -151,7 +151,7 @@ internal class TravelingInJapan
             new("Подарок"),
             new("Вещь"),
             new("Магазин"),
-            new("Фото")
+          //  new("Фото")
         }
         });
 
@@ -169,7 +169,7 @@ internal class TravelingInJapan
             new("Схема"),
             new("Атлас"),
             new("Путеводитель"),
-            new("Навигатор")
+           // new("Навигатор")
         }
         });
 
@@ -187,7 +187,7 @@ internal class TravelingInJapan
             new("Музей"),
             new("Парк"),
             new("Храм"),
-            new("Замок")
+          //  new("Замок")
         }
         });
 
@@ -205,7 +205,7 @@ internal class TravelingInJapan
             new("Переводчик"),
             new("Турист"),
             new("Сопровождающий"),
-            new("Экскурсовод")
+          //  new("Экскурсовод")
         }
         });
 
@@ -223,7 +223,7 @@ internal class TravelingInJapan
             new("Путешественник"),
             new("Гость"),
             new("Отдыхающий"),
-            new("Эмигрант")
+          //  new("Эмигрант")
         }
         });
 
@@ -241,7 +241,7 @@ internal class TravelingInJapan
             new("Сумка"),
             new("Чемодан"),
             new("Рюкзак"),
-            new("Покупка")
+          //  new("Покупка")
         }
         });
 
@@ -259,7 +259,7 @@ internal class TravelingInJapan
             new("Табло"),
             new("График"),
             new("Маршрут"),
-            new("Время")
+           // new("Время")
         }
         });
 
@@ -277,7 +277,7 @@ internal class TravelingInJapan
             new("Отдых"),
             new("Экскурсия"),
             new("Тур"),
-            new("Прогулка")
+          //  new("Прогулка")
         }
         });
 

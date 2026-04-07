@@ -1,113 +1,135 @@
 ﻿@attribute [Route(ProjectRouters.startTestPage)]
 @inherits StartTestPageModel
 <PageTitle>Тестирование</PageTitle>
+<ShowOperrationErrorComponent BaseOperationResponce="LoadEntityOperationResponce" />
+<ShowOperrationErrorComponent BaseOperationResponce="SaveEntityOperationResponce" />
 
-
-<div class="my-window-conteiner">
-    <div class="my-window-box">
-        <h3>Тестирование. Курс: "@(MainEntity?.Name)"</h3>
-
-       
-        <div>
-            @if (!IsTestFinished)
-            {
-                <div class="question_box">
-                    Вопос @(CurrentQestionIndex + 1) из @(QestionNumber)
-                </div>
-                <br />
-                <div>
-
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    Кандзи (иероглиф):
-                                </td>
-                                <td>
-                                    @CurrentCourseQestion?.KanjiWord
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Хирагана:
-                                </td>
-                                <td>
-                                    @CurrentCourseQestion?.HiraganaWord
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Катакана:
-                                </td>
-                                <td>
-                                    @CurrentCourseQestion?.KatakanaWord
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    Правильный ответ, подом уберём этот пункт:
-                                </td>
-                                <td>
-                                    @CurrentCourseQestion?.RussianWord
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <br />
-
-                <div>
-                    <div>
-                        Выберите ответ:
-                    </div>
-                    <br />
-                    @if (RandomAnswers?.RandomAnswers?.Count() > 0)
+@if (TestHelper == null || TestHelper.MainEntity == null)
+{
+    <div>
+        Нет курса
+    </div>
+}
+else
+{
+    <div class="container">
+        <!-- Шапка с информацией о курсе и статистикой -->
+        <div class="course-header">
+            <h1 class="course-title">📚 @(TestHelper.MainEntity?.Name)</h1>
+            <p class="course-description">
+                @(TestHelper.MainEntity?.Description)
+            </p>
+            <div class="course-meta">
+                <span class="meta-item">📅 Создан: @(TestHelper.MainEntity?.ContractDate.ToLongDateString())</span>
+                <span class="meta-item">⏱️ Длительность: @(TestHelper.MainEntity?.DurationHours) минут</span>
+                <span class="meta-item">🎯 Уровень: @(TestHelper.MainEntity?.DifficultyLevel) из @(LengthConstants.courceDifficultyLevelLength)</span>
+                <span class="meta-item">
+                    👁️
+                    @if (TestHelper.MainEntity?.IsVisableForAll == true)
                     {
-                        @foreach (var item in RandomAnswers.RandomAnswers)
+                        <span>Доступен всем</span>
+                    }
+                    else
+                    {
+                        <span>Не доступен всем</span>
+                    }
+
+                </span>
+
+                <span class="meta-item">
+                    ⏱️ Время: @(TestHelper.Time)
+                </span>
+            </div>
+        </div>
+
+
+        <!-- Карточка вопроса -->
+        <div class="question-card">
+            @if (TestHelper.CurrentQestionIndex + 1 <= TestHelper.QestionNumber && !TestHelper.IsAnswerSelected)
+            {
+                <!-- Номер вопроса вверху -->
+                <div class="question-number">
+                    Карточка №@(TestHelper.CurrentQestionIndex + 1) из @(TestHelper.QestionNumber)
+                </div>
+
+                <!-- Японские слова в одну строку -->
+                <div class="japanese-row">
+                    <div class="japanese-item">
+                        <div class="japanese-label">КАНДЗИ</div>
+                        <div class="japanese-text">@TestHelper.CurrentCourseQestion?.KanjiWord</div>
+                    </div>
+                    <div class="japanese-item">
+                        <div class="japanese-label">ХИРАГАНА</div>
+                        <div class="japanese-text">@TestHelper.CurrentCourseQestion?.HiraganaWord</div>
+                    </div>
+                    <div class="japanese-item">
+                        <div class="japanese-label">КАТАКАНА</div>
+                        <div class="japanese-text">@TestHelper.CurrentCourseQestion?.KatakanaWord</div>
+                    </div>
+                </div>
+
+                <!-- Варианты ответов -->
+                <div class="answers-grid">
+
+                    @if (TestHelper.RandomAnswers?.RandomAnswers?.Count() > 0)
+                    {
+                        @foreach (var item in TestHelper.RandomAnswers.RandomAnswers)
                         {
-                            <div class="btn-box">
-                                <button type="button"
-                                        class="btn btn-outline-secondary"
-                                        @onclick="x => OnAnswerClick(item)">
-                                    @item.RussianWord
-                                </button>
-                            </div>
+                            <button class="answer-btn"
+                                    @onclick="x => OnAnswerClick(item)"
+                                    disabled="@TestHelper.IsAnswerSelected">
+                                <span>@item.CurrentAnswerWord</span>
+                            </button>
                         }
                     }
                 </div>
             }
             else
             {
-                <div>
-                    Тест завершён. Результаты тестирования:
-                </div>
-                
-                <div>
-                    Результаты сохранены.
-                    <ShowOperrationErrorComponent BaseOperationResponce=@SaveEntityOperationResponce />
+                @*  @if (TestHelper.CurrentQestionIndex + 1 == TestHelper.QestionNumber)
+                {
+                    if (TestHelper.IsAnswerSelected)
+                    { *@
+                <div class="test-completed-card">
+                    <div class="completion-icon">🎉</div>
+                    <h2 class="completion-title">Тестирование завершено!</h2>
+                    <p class="completion-message">Вы успешно прошли тест по японскому языку</p>
+
+                    <div class="result-stats">
+                        <div class="result-stat correct-stat">
+                            <div class="result-label">✅ Правильные ответы</div>
+                            <div class="result-value">@TestHelper.CountCorrectAnswers</div>
+                        </div>
+                        <div class="result-stat wrong-stat">
+                            <div class="result-label">❌ Неправильные ответы</div>
+                            <div class="result-value">@TestHelper.CountWrongAnswers</div>
+                        </div>
+                    </div>
+
+                    <div class="total-stat">
+                        <div class="total-label">📊 Всего вопросов</div>
+                        <div class="total-value">@(TestHelper.QestionNumber)</div>
+                    </div>
+
+                    <div class="percentage">
+                        <div class="percentage-label">Результат</div>
+                        <div class="percentage-value">@(TestHelper.PercentageResult)%</div>
+                    </div>
+
+@*                     <div class="final-time">
+                        <span class="final-time-label">⏱️ Время прохождения теста</span>
+                        <span class="final-time-value">12:45</span>
+                    </div> *@
                 </div>
 
-                <div>
-                    Всего вопросов: @QestionNumber
-                </div>
-                <div>
-                    Правильных ответов: @CountCorrectAnswers
-                </div>
-                
-                <RadzenButton type="button" style="width: 160px" Click=@(() => OnGoToCourceListClick())
-                              Text="К списку курсов"
-                              Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" TabIndex="11" />
+
+                <button class="close-btn"
+                        @onclick=@(() => OnCancelClick())>
+                    ✖️ Закрыть
+                </button>
+                @* }
+                } *@
             }
-
-            <br />
-            <br />
-               @*  <RadzenButton type="button" style="width: 160px" Click=@(() => OnCancelClick())
-                              Text="Закрыть"
-                              Shade="Shade.Light" ButtonStyle="ButtonStyle.Warning" TabIndex="11" /> *@
         </div>
-
     </div>
-</div>
-
-
-
+}

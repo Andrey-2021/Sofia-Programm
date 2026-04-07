@@ -28,7 +28,7 @@ public static class CourseQuestionSeeder
             new("Ты"),
             new("Мы"),
             new("Город"),
-            new("Село")
+            //new("Село")
         }
         });
 
@@ -46,7 +46,7 @@ public static class CourseQuestionSeeder
             new("Я"),
             new("Вы"),
             new("Он"),
-            new("Она")
+           // new("Она")
         }
         });
 
@@ -64,7 +64,7 @@ public static class CourseQuestionSeeder
             new("Учитель"),
             new("Школьник"),
             new("Ученик"),
-            new("Преподаватель")
+           // new("Преподаватель")
         }
         });
 
@@ -82,7 +82,7 @@ public static class CourseQuestionSeeder
             new("Студент"),
             new("Директор"),
             new("Врач"),
-            new("Инженер")
+            //new("Инженер")
         }
         });
 
@@ -100,7 +100,7 @@ public static class CourseQuestionSeeder
             new("Китайский язык"),
             new("Английский язык"),
             new("Корейский язык"),
-            new("Русский язык")
+            //new("Русский язык")
         }
         });
 
@@ -118,7 +118,7 @@ public static class CourseQuestionSeeder
             new("Тетрадь"),
             new("Журнал"),
             new("Газета"),
-            new("Словарь")
+           // new("Словарь")
         }
         });
 
@@ -136,7 +136,7 @@ public static class CourseQuestionSeeder
             new("Молоко"),
             new("Сок"),
             new("Чай"),
-            new("Кофе")
+           // new("Кофе")
         }
         });
 
@@ -154,7 +154,7 @@ public static class CourseQuestionSeeder
             new("Пить"),
             new("Готовить"),
             new("Жевать"),
-            new("Глотать")
+           // new("Глотать")
         }
         });
 
@@ -172,7 +172,7 @@ public static class CourseQuestionSeeder
             new("Есть"),
             new("Наливать"),
             new("Пробовать"),
-            new("Глотать")
+           // new("Глотать")
         }
         });
 
@@ -190,7 +190,7 @@ public static class CourseQuestionSeeder
             new("Бежать"),
             new("Ехать"),
             new("Стоять"),
-            new("Лететь")
+           // new("Лететь")
         }
         });
 
@@ -208,7 +208,7 @@ public static class CourseQuestionSeeder
             new("Видеть"),
             new("Глядеть"),
             new("Наблюдать"),
-            new("Разглядывать")
+           // new("Разглядывать")
         }
         });
 
@@ -226,7 +226,7 @@ public static class CourseQuestionSeeder
             new("Кошка"),
             new("Волк"),
             new("Лиса"),
-            new("Медведь")
+           // new("Медведь")
         }
         });
 
@@ -244,7 +244,7 @@ public static class CourseQuestionSeeder
             new("Собака"),
             new("Тигр"),
             new("Лев"),
-            new("Рысь")
+           // new("Рысь")
         }
         });
 
@@ -262,7 +262,7 @@ public static class CourseQuestionSeeder
             new("Холм"),
             new("Скала"),
             new("Вулкан"),
-            new("Пик")
+           // new("Пик")
         }
         });
 
@@ -280,7 +280,7 @@ public static class CourseQuestionSeeder
             new("Озеро"),
             new("Ручей"),
             new("Море"),
-            new("Водопад")
+          //  new("Водопад")
         }
         });
 
@@ -298,7 +298,7 @@ public static class CourseQuestionSeeder
             new("Дерево"),
             new("Трава"),
             new("Лист"),
-            new("Куст")
+         //   new("Куст")
         }
         });
 
@@ -316,7 +316,7 @@ public static class CourseQuestionSeeder
             new("Земля"),
             new("Облако"),
             new("Космос"),
-            new("Горизонт")
+          //  new("Горизонт")
         }
         });
 
@@ -334,7 +334,7 @@ public static class CourseQuestionSeeder
             new("Снег"),
             new("Град"),
             new("Туман"),
-            new("Ветер")
+          //  new("Ветер")
         }
         });
 
@@ -352,7 +352,7 @@ public static class CourseQuestionSeeder
             new("Автобус"),
             new("Мотоцикл"),
             new("Велосипед"),
-            new("Грузовик")
+          //  new("Грузовик")
         }
         });
 
@@ -370,7 +370,7 @@ public static class CourseQuestionSeeder
             new("Метро"),
             new("Трамвай"),
             new("Самолет"),
-            new("Корабль")
+         //   new("Корабль")
         }
         });
 

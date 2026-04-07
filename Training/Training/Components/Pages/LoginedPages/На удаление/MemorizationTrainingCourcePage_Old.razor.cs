@@ -83,7 +83,7 @@ public class MemorizationTrainingCourcePageModel_Old : BaseModel
         else
             CurrentCourseQestion = MainEntity?.CourseQestions[CurrentQestionIndex];
 
-        RandomAnswers = new(CurrentCourseQestion);
+        RandomAnswers = new(CurrentCourseQestion, MainEntity?.CourseQestions);
     }
 
     public void OnNextClick()

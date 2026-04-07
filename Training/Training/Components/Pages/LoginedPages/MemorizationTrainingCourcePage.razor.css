@@ -61,7 +61,7 @@ body {
 
 .stat-card {
     flex: 1;
-    background: #f8f9fa;
+    background: rgb(229, 239, 245, 0.60);/* #f8f9fa;*/
     border-radius: 12px;
     padding: 12px;
     text-align: center;
@@ -264,3 +264,29 @@ body {
         transform: translateY(-2px);
         box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
     }
+
+
+
+
+/* Таймер */
+.timer-card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 12px 20px;
+    text-align: center;
+    color: white;
+}
+
+.timer-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.8;
+    margin-bottom: 5px;
+}
+
+.timer-value {
+    font-size: 24px;
+    font-weight: 700;
+    font-family: monospace;
+}

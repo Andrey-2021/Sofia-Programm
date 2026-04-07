@@ -1,51 +1,13 @@
 ﻿namespace Training.Components.Pages.LoginedPages;
 
-public class StartTestPageModel : BaseModel
+public class StartTestPageModel : BaseModel, IDisposable
 {
     /// <summary>
     /// Результат выполнения операции чтения
     /// </summary>
-    protected OperationResponce<TrainingCourse>? LoadEntityOperationResponce { get; set; }
+    protected OperationResponce<TrainingCourse>? LoadEntityOperationResponce { get; private set; }
 
-    /// <summary>
-    /// Объект
-    /// </summary>
-    protected TrainingCourse? MainEntity { get; set; }
-
-    /// <summary>
-    /// Количество вопросов в курсе
-    /// </summary>
-    protected int QestionNumber => MainEntity?.CourseQestions?.Count ?? 0;
-
-    /// <summary>
-    /// Индекс вопроса
-    /// </summary>
-    protected int CurrentQestionIndex { get; set; } = -1;
-
-    /// <summary>
-    /// Ответы на текущий вопрос в случайном порядке
-    /// </summary>
-    protected AllAnswers? RandomAnswers { get; set; }
-
-    /// <summary>
-    /// Текущий вопрос
-    /// </summary>
-    protected CourseQestion? CurrentCourseQestion { get; set; }
-
-    /// <summary>
-    /// Количество правильных ответов
-    /// </summary>
-    protected int CountCorrectAnswers { get; set; } = 0;
-
-    /// <summary>
-    /// Тестирование завершено
-    /// </summary>
-    protected bool IsTestFinished { get; set; } = false;
-
-    /// <summary>
-    /// Затраченное время на прохождение курса
-    /// </summary>
-    public int Duration { get; set; }
+    protected TestHelper? TestHelper { get; private set; }
 
     private bool isInit = false;
 
@@ -67,64 +29,44 @@ public class StartTestPageModel : BaseModel
     protected async Task LoadEntityFromDb()
     {
         LoadEntityOperationResponce = await DbRepository.GetCourse(EditedEntityId);
-        MainEntity = LoadEntityOperationResponce.Data;
-        CreateNextQuestion();
+        TestHelper = new(LoadEntityOperationResponce.Data);
+        TestHelper.Timer.Elapsed += OnTimedEvent;
     }
 
-    private async Task CreateNextQuestion()
+    protected async Task OnAnswerClick(TestAnswer testAnswer)
     {
-        if (QestionNumber == 0)
-            return;
+        TestHelper?.OnTestAnswerClick(testAnswer);
 
-        //IsAnswerSelected = false;
-
-        CurrentQestionIndex++;
-        if (CurrentQestionIndex >= QestionNumber)
-        {
-            IsTestFinished = true;
-            //CurrentQestionIndex = 0;
-            //CurrentCourseQestion = MainEntity?.CourseQestions?.FirstOrDefault();
+        if(TestHelper?.IsTestFinished==true)
             await SaveRezult();
-            return;
-        }
-        else
-            CurrentCourseQestion = MainEntity?.CourseQestions[CurrentQestionIndex];
-
-        RandomAnswers = new(CurrentCourseQestion);
     }
 
     private async Task SaveRezult()
     {
-        var result = new CompletedTest()
-        {
-            TrainingCourseId = MainEntity.Id,
-            MyUserId = MyUser.Id,
-            QestionNumber = QestionNumber,
-            CountCorrectAnswers = CountCorrectAnswers,
-            Duration = 0
-        };
+        var result = new CompletedTest(MyUser, LoadEntityOperationResponce.Data, TestHelper);
+        //{
+        //    TrainingCourseId = MainEntity.Id,
+        //    MyUserId = MyUser.Id,
+        //    QestionNumber = QestionNumber,
+        //    CountCorrectAnswers = CountCorrectAnswers,
+        //    Duration = 0
+        //};
 
         SaveEntityOperationResponce = await DbRepository.UpdateEntity(result);
     }
 
-
-    protected void OnAnswerClick(TestAnswer testAnswer)
-    {
-        //IsAnswerSelected = true;
-        //SelectedAnswer = testAnswer;
-        if (testAnswer.IsCorrectAnswer)
-            CountCorrectAnswers++;
-
-        CreateNextQuestion();
-    }
-
-    //public void OnCancelClick()
-    //{
-    //    NavigationManager.NavigateTo(ProjectRouters.allTrainingCoursesPageHref);
-    //}
-
-    public void OnGoToCourceListClick()
+    public void OnCancelClick()
     {
         NavigationManager.NavigateTo(ProjectRouters.allTrainingCoursesPageHref);
+    }
+
+    private async void OnTimedEvent(object? source, System.Timers.ElapsedEventArgs e)
+    {
+        await InvokeAsync(StateHasChanged);
+    }
+
+    public void Dispose()
+    {
+        TestHelper?.Timer?.Elapsed -= OnTimedEvent;
     }
 }

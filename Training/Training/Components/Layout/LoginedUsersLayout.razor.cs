@@ -9,7 +9,8 @@ public class LoginedUsersLayoutModel : LayoutComponentBase
     protected bool sidebarExpanded = false;
     protected bool IsInit { get; set; } = false;
 
-    [CascadingParameter] private Task<AuthenticationState>? AuthenticationState { get; set; }
+    [CascadingParameter] 
+    private Task<AuthenticationState>? AuthenticationState { get; set; }
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {

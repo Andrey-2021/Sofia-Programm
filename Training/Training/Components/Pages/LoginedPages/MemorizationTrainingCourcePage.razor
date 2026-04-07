@@ -2,7 +2,7 @@
 @inherits MemorizationTrainingCourcePageModel
 <PageTitle>Заучивание</PageTitle>
 
-@if (MainEntity == null)
+@if (TestHelper == null || TestHelper.MainEntity == null)
 {
     <div>
         Нет курса
@@ -13,17 +13,17 @@ else
     <div class="container">
         <!-- Шапка с информацией о курсе и статистикой -->
         <div class="course-header">
-            <h1 class="course-title">📚 @(MainEntity?.Name)</h1>
+            <h1 class="course-title">📚 @(TestHelper.MainEntity?.Name)</h1>
             <p class="course-description">
-                @(MainEntity?.Description)
+                @(TestHelper.MainEntity?.Description)
             </p>
             <div class="course-meta">
-                <span class="meta-item">📅 Создан: @(MainEntity?.ContractDate.ToLongDateString())</span>
-                <span class="meta-item">⏱️ Длительность: @(MainEntity?.DurationHours) минут</span>
-                <span class="meta-item">🎯 Уровень: @(MainEntity?.DifficultyLevel) из @(LengthConstants.courceDifficultyLevelLength)</span>
+                <span class="meta-item">📅 Создан: @(TestHelper.MainEntity?.ContractDate.ToLongDateString())</span>
+                <span class="meta-item">⏱️ Длительность: @(TestHelper.MainEntity?.DurationHours) минут</span>
+                <span class="meta-item">🎯 Уровень: @(TestHelper.MainEntity?.DifficultyLevel) из @(LengthConstants.courceDifficultyLevelLength)</span>
                 <span class="meta-item">
                     👁️
-                    @if (MainEntity?.IsVisableForAll == true)
+                    @if (TestHelper.MainEntity?.IsVisableForAll == true)
                     {
                         <span>Доступен всем</span>
                     }
@@ -34,62 +34,69 @@ else
 
                 </span>
             </div>
-            <div class="stats">
-                <div class="stat-card">
-                    <div class="stat-label">✅ Правильно</div>
-                    <div class="stat-value correct">@CountCorrectAnswers</div>
+                <div class="stats">
+                    <div class="stat-card">
+                        <div class="stat-label">✅ Правильно</div>
+                        <div class="stat-value correct">@TestHelper.CountCorrectAnswers</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">❌ Неправильно</div>
+                        <div class="stat-value wrong">@(TestHelper.CountWrongAnswers)</div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="timer-label">⏱️ Время прохождения</div>
+                    <div class="timer-value">@(TestHelper.Time)</div>
+                    </div>
+
                 </div>
-                <div class="stat-card">
-                    <div class="stat-label">❌ Неправильно</div>
-                    <div class="stat-value wrong">@(CountWrongAnswers)</div>
-                </div>
-            </div>
         </div>
 
         <!-- Карточка вопроса -->
         <div class="question-card">
             <!-- Номер вопроса вверху -->
             <div class="question-number">
-                Карточка №@(CurrentQestionIndex + 1) из @(QestionNumber)
+                Карточка №@(TestHelper.CurrentQestionIndex + 1) из @(TestHelper.QestionNumber)
             </div>
 
             <!-- Японские слова в одну строку -->
             <div class="japanese-row">
                 <div class="japanese-item">
                     <div class="japanese-label">КАНДЗИ</div>
-                    <div class="japanese-text">@CurrentCourseQestion?.KanjiWord</div>
+                    <div class="japanese-text">@TestHelper.CurrentCourseQestion?.KanjiWord</div>
                 </div>
                 <div class="japanese-item">
                     <div class="japanese-label">ХИРАГАНА</div>
-                    <div class="japanese-text">@CurrentCourseQestion?.HiraganaWord</div>
+                    <div class="japanese-text">@TestHelper.CurrentCourseQestion?.HiraganaWord</div>
                 </div>
                 <div class="japanese-item">
                     <div class="japanese-label">КАТАКАНА</div>
-                    <div class="japanese-text">@CurrentCourseQestion?.KatakanaWord</div>
+                    <div class="japanese-text">@TestHelper.CurrentCourseQestion?.KatakanaWord</div>
                 </div>
             </div>
 
             <!-- Варианты ответов -->
             <div class="answers-grid">
 
-                @if (RandomAnswers?.RandomAnswers?.Count() > 0)
+                @if (TestHelper.RandomAnswers?.RandomAnswers?.Count() > 0)
                 {
-                    @foreach (var item in RandomAnswers.RandomAnswers)
+                    @foreach (var item in TestHelper.RandomAnswers.RandomAnswers)
                     {
-                        <button class=@(IsAnswerSelected == false ?"answer-btn":
-                                                                                (SelectedAnswer == item ? (item.IsCorrectAnswer ? "answer-btn correct" : "answer-btn wrong")
-                                                                                                                : (item.IsCorrectAnswer ? "answer-btn correct-info" : "answer-btn wrong-info")))
-                                @onclick="x => OnAnswerClick(item)"
-                                disabled="@IsAnswerSelected">
-                            <span>@item.RussianWord</span>
+                        <button class=@(TestHelper.IsAnswerSelected == false ?"answer-btn":(TestHelper.SelectedAnswer == item ? (item.IsCorrectAnswer ? "answer-btn correct" : "answer-btn wrong")
+                                                                                    : (item.IsCorrectAnswer ? "answer-btn correct-info" : "answer-btn wrong-info")))
+                                @onclick="x => TestHelper.OnAnswerClick(item)"
+                                disabled="@TestHelper.IsAnswerSelected">
+                            <span>@item.CurrentAnswerWord</span>
 
-                            @if (IsAnswerSelected == true)
+                            @if (TestHelper.IsAnswerSelected == true)
                             {
-                                @if (SelectedAnswer == item && item.IsCorrectAnswer)
+                                <!-- Правильный ответ (зелёный со стрелкой) -->
+                                @if (TestHelper.SelectedAnswer == item && item.IsCorrectAnswer)
                                 {
                                     <span class="answer-icon">✅</span>
                                 }
-                                @if (SelectedAnswer == item && !item.IsCorrectAnswer)
+                                <!-- Неправильные ответы -->
+                                @if (TestHelper.SelectedAnswer == item && !item.IsCorrectAnswer)
                                 {
                                     <span class="answer-icon">❌</span>
                                 }
@@ -99,44 +106,20 @@ else
                         </button>
                     }
                 }
-
-
-
-                <!-- Правильный ответ (зелёный со стрелкой) -->
-                @*  <button class="answer-btn correct">
-                <span>учиться, учёба</span>
-                <span class="answer-icon">✅</span>
-            </button> *@
-
-                <!-- Неправильные ответы -->
-                @*  <button class="answer-btn">
-                <span>читать</span>
-                <span class="answer-icon"></span>
-            </button>
-
-            <button class="answer-btn wrong">
-                <span>писать</span>
-                <span class="answer-icon">❌</span>
-            </button>
-
-            <button class="answer-btn">
-                <span>говорить</span>
-                <span class="answer-icon"></span>
-            </button> *@
             </div>
 
             <!-- Кнопка следующего вопроса -->
-            @if (CurrentQestionIndex + 1 < QestionNumber)
+            @if (TestHelper.CurrentQestionIndex + 1 < TestHelper.QestionNumber)
             {
                 <button class="next-btn"
-                        @onclick=@(() => OnNextClick())
-                        disabled="@(!IsAnswerSelected)">
+                        @onclick=@(() => TestHelper.OnNextClick())
+                        disabled="@(!TestHelper.IsAnswerSelected)">
                     ➡️ Следующая карточка
                 </button>
             }
             else
             {
-                if (IsAnswerSelected)
+                if (TestHelper.IsAnswerSelected)
                 {
                     <button class="close-btn"
                             @onclick=@(() => OnCancelClick())>

@@ -21,7 +21,7 @@ internal class JapaneseKitchen
             new("Сашими"),
             new("Роллы"),
             new("Темпура"),
-            new("Рис")
+          //  new("Рис")
         }
         });
 
@@ -39,7 +39,7 @@ internal class JapaneseKitchen
             new("Суши"),
             new("Роллы"),
             new("Удон"),
-            new("Гёдза")
+        //    new("Гёдза")
         }
         });
 
@@ -57,7 +57,7 @@ internal class JapaneseKitchen
             new("Суши"),
             new("Сашими"),
             new("Темпура"),
-            new("Гёдза")
+         //   new("Гёдза")
         }
         });
 
@@ -75,7 +75,7 @@ internal class JapaneseKitchen
             new("Соба"),
             new("Рамен"),
             new("Якитори"),
-            new("Рис")
+         //   new("Рис")
         }
         });
 
@@ -93,7 +93,7 @@ internal class JapaneseKitchen
             new("Удон"),
             new("Рамен"),
             new("Темпура"),
-            new("Мисо-суп")
+         //   new("Мисо-суп")
         }
         });
 
@@ -111,7 +111,7 @@ internal class JapaneseKitchen
             new("Удон"),
             new("Соба"),
             new("Якитори"),
-            new("Гёдза")
+         //   new("Гёдза")
         }
         });
 
@@ -129,7 +129,7 @@ internal class JapaneseKitchen
             new("Суши"),
             new("Сашими"),
             new("Якитори"),
-            new("Мисо-суп")
+          //  new("Мисо-суп")
         }
         });
 
@@ -147,7 +147,7 @@ internal class JapaneseKitchen
             new("Якитори"),
             new("Темпура"),
             new("Суши"),
-            new("Рамен")
+         //   new("Рамен")
         }
         });
 
@@ -165,7 +165,7 @@ internal class JapaneseKitchen
             new("Сукияки"),
             new("Темпура"),
             new("Якитори"),
-            new("Рис")
+         //   new("Рис")
         }
         });
 
@@ -183,7 +183,7 @@ internal class JapaneseKitchen
             new("Гёдза"),
             new("Темпура"),
             new("Суши"),
-            new("Удон")
+          //  new("Удон")
         }
         });
 
@@ -201,7 +201,7 @@ internal class JapaneseKitchen
             new("Лапша"),
             new("Хлеб"),
             new("Суп"),
-            new("Салат")
+         //   new("Салат")
         }
         });
 
@@ -219,7 +219,7 @@ internal class JapaneseKitchen
             new("Кофе"),
             new("Сок"),
             new("Вода"),
-            new("Молоко")
+        //    new("Молоко")
         }
         });
 
@@ -237,7 +237,7 @@ internal class JapaneseKitchen
             new("Меню"),
             new("Счёт"),
             new("Ресторан"),
-            new("Официант")
+         //   new("Официант")
         }
         });
 
@@ -255,7 +255,7 @@ internal class JapaneseKitchen
             new("Заказ"),
             new("Счёт"),
             new("Ресторан"),
-            new("Кухня")
+         //   new("Кухня")
         }
         });
 
@@ -273,7 +273,7 @@ internal class JapaneseKitchen
             new("Меню"),
             new("Заказ"),
             new("Чаевые"),
-            new("Оплата")
+          //  new("Оплата")
         }
         });
 

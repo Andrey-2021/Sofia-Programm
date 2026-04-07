@@ -21,7 +21,7 @@ internal class FamelyCource
             new("Мать"),
             new("Дедушка"),
             new("Сын"),
-            new("Брат")
+          //  new("Брат")
         }
         });
 
@@ -39,7 +39,7 @@ internal class FamelyCource
             new("Отец"),
             new("Бабушка"),
             new("Дочь"),
-            new("Сестра")
+          //  new("Сестра")
         }
         });
 
@@ -57,7 +57,7 @@ internal class FamelyCource
             new("Младший брат"),
             new("Старшая сестра"),
             new("Отец"),
-            new("Дядя")
+           // new("Дядя")
         }
         });
 
@@ -75,7 +75,7 @@ internal class FamelyCource
             new("Младшая сестра"),
             new("Старший брат"),
             new("Мать"),
-            new("Тётя")
+           // new("Тётя")
         }
         });
 
@@ -93,7 +93,7 @@ internal class FamelyCource
             new("Старший брат"),
             new("Младшая сестра"),
             new("Сын"),
-            new("Внук")
+           // new("Внук")
         }
         });
 
@@ -111,7 +111,7 @@ internal class FamelyCource
             new("Старшая сестра"),
             new("Младший брат"),
             new("Дочь"),
-            new("Внучка")
+          //  new("Внучка")
         }
         });
 
@@ -129,7 +129,7 @@ internal class FamelyCource
             new("Дом"),
             new("Родственники"),
             new("Друзья"),
-            new("Коллеги")
+          //  new("Коллеги")
         }
         });
 
@@ -147,7 +147,7 @@ internal class FamelyCource
             new("Квартира"),
             new("Здание"),
             new("Комната"),
-            new("Двор")
+         //   new("Двор")
         }
         });
 
@@ -165,7 +165,7 @@ internal class FamelyCource
             new("Кухня"),
             new("Ванная"),
             new("Коридор"),
-            new("Балкон")
+         //   new("Балкон")
         }
         });
 
@@ -183,7 +183,7 @@ internal class FamelyCource
             new("Столовая"),
             new("Гостиная"),
             new("Спальня"),
-            new("Кладовая")
+         //   new("Кладовая")
         }
         });
 
@@ -201,7 +201,7 @@ internal class FamelyCource
             new("Душ"),
             new("Бассейн"),
             new("Сауна"),
-            new("Раковина")
+         //   new("Раковина")
         }
         });
 
@@ -219,7 +219,7 @@ internal class FamelyCource
             new("Ванная"),
             new("Прихожая"),
             new("Коридор"),
-            new("Балкон")
+        //    new("Балкон")
         }
         });
 
@@ -237,7 +237,7 @@ internal class FamelyCource
             new("Подушка"),
             new("Одеяло"),
             new("Матрас"),
-            new("Кровать")
+          //  new("Кровать")
         }
         });
 
@@ -255,7 +255,7 @@ internal class FamelyCource
             new("Напиток"),
             new("Блюдо"),
             new("Продукт"),
-            new("Угощение")
+          //  new("Угощение")
         }
         });
 
@@ -273,7 +273,7 @@ internal class FamelyCource
             new("Сок"),
             new("Чай"),
             new("Молоко"),
-            new("Напиток")
+          //  new("Напиток")
         }
         });
 

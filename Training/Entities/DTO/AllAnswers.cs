@@ -2,48 +2,119 @@
 
 public class AllAnswers
 {
-    public TestAnswer[] RandomAnswers { private set; get; }
+    /// <summary>
+    /// Ответы в случайном порядка
+    /// </summary>
+    public TestAnswer[] RandomAnswers { get; private set; }
 
-    public AllAnswers(CourseQestion? courseQestion)
+    /// <summary>
+    /// Конструктор
+    /// </summary>
+    /// <param name="currentCourseQestion">Текущий вопрос</param>
+    /// <param name="courseQestions">Все вопросы уч. курса</param>
+    public AllAnswers(CourseQestion? currentCourseQestion, IList<CourseQestion>? courseQestions)
     {
-        if(courseQestion==null)
+        if(currentCourseQestion==null || courseQestions == null || courseQestions.Count==0)
         {
             RandomAnswers = new TestAnswer[0];
             return;
         }
+        
+        List<String> wrongUnswers=default!; // Список неправильных ответов/слов
+        if (currentCourseQestion?.WrongRussianWordAnswers?.Count>0) // Если есть неправильные ответы/слова для текущего вопроса
+            wrongUnswers=CreteFrowWrongAnswers(currentCourseQestion); // тогда берём их
+        else
+            wrongUnswers=CreteFrowQustions(currentCourseQestion!, courseQestions); // иначе, получаем их другим способом
 
-        int numberAnswers = (courseQestion?.WrongRussianWordAnswers?.Count ?? 0) + 1;
+        int numberAnswers = (currentCourseQestion?.WrongRussianWordAnswers?.Count ?? 0) + 1;
         RandomAnswers = new TestAnswer[numberAnswers];
-
         Random rng = new Random();
 
         //Размещаем неправильные ответы случайным образом
-        if (courseQestion?.WrongRussianWordAnswers != null)
+        if (currentCourseQestion?.WrongRussianWordAnswers != null)
         {
-            foreach (var item in courseQestion.WrongRussianWordAnswers)
+            foreach (var item in currentCourseQestion.WrongRussianWordAnswers)
             {
                 var index= rng.Next(0, numberAnswers);
                 if (RandomAnswers[index] ==null)
                     RandomAnswers[index]= new TestAnswer(item.Answer, false);
                 else
                     WriteToCleanPlase(item.Answer, false);
-
             }
         }
-
-        WriteToCleanPlase(courseQestion.RussianWord, true);
-
-        //// Находим свободное место и туда помещаем правильный ответ
-        //for (int i = 0; i < RandomAnswers.Count(); i++)
-        //{
-        //    if (RandomAnswers[i] == null)
-        //    {
-        //        RandomAnswers[i] = new TestAnswer(courseQestion.RussianWord, true);
-        //        break;
-        //    }
-        //}
-
+        // На свободное место в массивы размещаем правильный ответ
+        WriteToCleanPlase(currentCourseQestion!.RussianWord, true);
     }
+
+    /// <summary>
+    /// Создаём слова из неправильных ответов
+    /// </summary>
+    /// <param name="courseQestion">Текущий вопрос</param>
+    /// <returns></returns>
+    private List<String> CreteFrowWrongAnswers(CourseQestion courseQestion)
+    {
+        return courseQestion!.WrongRussianWordAnswers!.Select(x => x.Answer).ToList();
+    }
+
+    /// <summary>
+    /// Создаём слова из вопросов
+    /// </summary>
+    /// <param name="courseQestion">Текущий вопрос</param>
+    /// <param name="courseQestions">Все вопросы</param>
+    private List<String> CreteFrowQustions(CourseQestion courseQestion, IList<CourseQestion>? courseQestions)
+    {
+        // минимальное количество уникальных вопросов в курсе, по которым создаём неправильные ответы
+        const int minNumberOfQuestions = 5;
+
+        // Максимальное количество неправильных слов-ответов
+        const int maxNumberOfWrongAnswersWords = 3;
+
+        //создаём слова ответы из массива случайных слов
+        List<String> wordsList = new();
+
+        // Создаём слова ответы из других вопросов уч.курса
+        if (courseQestions?.Count > 0)
+        {
+            wordsList = courseQestions.Where(x => x.Id != courseQestion.Id)
+                .Where(x => x.KatakanaWord != courseQestion.KatakanaWord
+                && x.HiraganaWord != courseQestion.HiraganaWord
+                && x.KanjiWord != courseQestion.KanjiWord
+                && x.RussianWord.ToUpper() != courseQestion.RussianWord.ToUpper())
+                .Select(x => x.RussianWord).ToList();
+        }
+
+        if (wordsList.Count < minNumberOfQuestions) // если уникальных слов, полученных из ответа мало, т.е. не получиться создать многовариантные случайные неправильные ответы 
+            wordsList = Words.ToList(); // тогда берём слова из массива
+
+        Random random = new Random();
+        List<String> randomWords = new();
+
+        int i = 0;
+        while(i< maxNumberOfWrongAnswersWords)
+        {
+            int index = random.Next(wordsList.Count);
+            var addedWord = wordsList[index];
+            if (randomWords.Any(x => x == addedWord) // если такое слово уже есть
+                && addedWord.ToUpper()== courseQestion.RussianWord.ToUpper()) // или оно совпадвет с правильным ответом из вопроса
+                continue; 
+            randomWords.Add(addedWord);
+            i++;
+        }
+        return randomWords;
+    }
+
+    /// <summary>
+    /// Случайные слова
+    /// </summary>
+    private static readonly List<string> Words = new List<string>
+    {
+        "apple", "banana", "cherry", "date", "elderberry",
+        "fig", "grape", "honeydew", "kiwi", "lemon",
+        "mango", "nectarine", "orange", "peach", "pear",
+        "quince", "raspberry", "strawberry", "tangerine", "ugli",
+        "vanilla", "watermelon", "xylophone", "yellow", "zucchini",
+        "мыло", "арбуз","помидор","школа","ученик","автобус","самолёт","тетрадь","книга","Карандаш","Урок","пенал"
+    };
 
     private void WriteToCleanPlase(string word, bool isCorrectAnswer)
     {
@@ -64,16 +135,22 @@ public class AllAnswers
 
 public class TestAnswer
 {
-    public string RussianWord { get; set; }
+    /// <summary>
+    /// Текущее слово
+    /// </summary>
+    /// <remarks>
+    /// Руссоке, английское
+    /// </remarks>
+    public string CurrentAnswerWord { get; set; }
     
     /// <summary>
-    /// Правильный ответ
+    /// Это правильный ответ
     /// </summary>
     public bool IsCorrectAnswer { get; set; }
 
     public TestAnswer(string russianWord, bool isWrongAnswer)
     {
-        RussianWord = russianWord;
+        CurrentAnswerWord = russianWord;
         IsCorrectAnswer = isWrongAnswer;
     }
 }
