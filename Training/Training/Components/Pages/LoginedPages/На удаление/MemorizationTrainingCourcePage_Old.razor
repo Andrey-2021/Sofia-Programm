@@ -1,0 +1,99 @@
+﻿@* @attribute [Route(ProjectRouters.memorizationTrainingCourcePage)] *@
+@inherits MemorizationTrainingCourcePageModel_Old
+<PageTitle>Заучивание</PageTitle>
+
+<div class="my-window-conteiner">
+    <div class="my-window-box">
+        <h3>Заучивание. Курс "@(MainEntity?.Name)"</h3>
+
+        <div>
+            <div>
+                Вопос @(CurrentQestionIndex + 1) из @(QestionNumber). Правильных ответов: @CountCorrectAnswers
+            </div>
+            <br />
+            <div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                Кандзи (иероглиф):
+                            </td>
+                            <td>
+                                @CurrentCourseQestion?.KanjiWord
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Хирагана:
+                            </td>
+                            <td>
+                                @CurrentCourseQestion?.HiraganaWord
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Катакана:
+                            </td>
+                            <td>
+                                @CurrentCourseQestion?.KatakanaWord
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Правильный ответ, подом уберём этот пункт:
+                            </td>
+                            <td>
+                                @CurrentCourseQestion?.RussianWord
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <br />
+            <div>
+                <div>
+                    Выберите ответ:
+                </div>
+                <br />
+                @if (RandomAnswers?.RandomAnswers?.Count() > 0)
+                {
+                    @foreach (var item in RandomAnswers.RandomAnswers)
+                    {
+                        <div class="btn-box">
+                            <button type="button"
+                                    class=@(IsAnswerSelected == false ? "btn btn-outline-secondary" :
+                                                (SelectedAnswer == item ? (item.IsCorrectAnswer ? "btn btn-success" : "btn btn-danger")
+                                                :(item.IsCorrectAnswer ? "btn btn-outline-success" : "btn btn-outline-danger")
+                                            ))
+                                    @onclick="x => OnAnswerClick(item)"
+                                    disabled="@IsAnswerSelected">
+                                @item.RussianWord
+                            </button>
+                        </div>
+                    }
+                }
+            </div>
+
+            <br />
+            <br />
+
+            @if (CurrentQestionIndex+1 < QestionNumber)
+            {
+                <RadzenButton type="button" style="width: 160px" Click=@(() => OnNextClick())
+                              Text="Сдедующий"
+                              Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" TabIndex="11" />
+            }
+            else
+            {
+                <RadzenButton type="button" style="width: 160px" Click=@(() => OnCancelClick())
+                              Text="Закрыть"
+                              Shade="Shade.Light" ButtonStyle="ButtonStyle.Warning" TabIndex="11" />
+            }
+
+        </div>
+
+    </div>
+</div>
+
+
+

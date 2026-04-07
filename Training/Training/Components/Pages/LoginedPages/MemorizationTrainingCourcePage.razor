@@ -2,98 +2,148 @@
 @inherits MemorizationTrainingCourcePageModel
 <PageTitle>Заучивание</PageTitle>
 
-<div class="my-window-conteiner">
-    <div class="my-window-box">
-        <h3>Заучивание. Курс "@(MainEntity?.Name)"</h3>
+@if (MainEntity == null)
+{
+    <div>
+        Нет курса
+    </div>
+}
+else
+{
+    <div class="container">
+        <!-- Шапка с информацией о курсе и статистикой -->
+        <div class="course-header">
+            <h1 class="course-title">📚 @(MainEntity?.Name)</h1>
+            <p class="course-description">
+                @(MainEntity?.Description)
+            </p>
+            <div class="course-meta">
+                <span class="meta-item">📅 Создан: @(MainEntity?.ContractDate.ToLongDateString())</span>
+                <span class="meta-item">⏱️ Длительность: @(MainEntity?.DurationHours) минут</span>
+                <span class="meta-item">🎯 Уровень: @(MainEntity?.DifficultyLevel) из @(LengthConstants.courceDifficultyLevelLength)</span>
+                <span class="meta-item">
+                    👁️
+                    @if (MainEntity?.IsVisableForAll == true)
+                    {
+                        <span>Доступен всем</span>
+                    }
+                    else
+                    {
+                        <span>Не доступен всем</span>
+                    }
 
-        <div>
-            <div>
-                Вопос @(CurrentQestionIndex + 1) из @(QestionNumber). Правильных ответов: @CountCorrectAnswers
+                </span>
             </div>
-            <br />
-            <div>
-                <table>
-                    <tbody>
-                        <tr>
-                            <td>
-                                Кандзи (иероглиф):
-                            </td>
-                            <td>
-                                @CurrentCourseQestion?.KanjiWord
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Хирагана:
-                            </td>
-                            <td>
-                                @CurrentCourseQestion?.HiraganaWord
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Катакана:
-                            </td>
-                            <td>
-                                @CurrentCourseQestion?.KatakanaWord
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                Правильный ответ, подом уберём этот пункт:
-                            </td>
-                            <td>
-                                @CurrentCourseQestion?.RussianWord
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <br />
-            <div>
-                <div>
-                    Выберите ответ:
+            <div class="stats">
+                <div class="stat-card">
+                    <div class="stat-label">✅ Правильно</div>
+                    <div class="stat-value correct">@CountCorrectAnswers</div>
                 </div>
-                <br />
+                <div class="stat-card">
+                    <div class="stat-label">❌ Неправильно</div>
+                    <div class="stat-value wrong">@(CountWrongAnswers)</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Карточка вопроса -->
+        <div class="question-card">
+            <!-- Номер вопроса вверху -->
+            <div class="question-number">
+                Вопрос №@(CurrentQestionIndex + 1) из @(QestionNumber)
+            </div>
+
+            <!-- Японские слова в одну строку -->
+            <div class="japanese-row">
+                <div class="japanese-item">
+                    <div class="japanese-label">КАНДЗИ</div>
+                    <div class="japanese-text">@CurrentCourseQestion?.KanjiWord</div>
+                </div>
+                <div class="japanese-item">
+                    <div class="japanese-label">ХИРАГАНА</div>
+                    <div class="japanese-text">@CurrentCourseQestion?.HiraganaWord</div>
+                </div>
+                <div class="japanese-item">
+                    <div class="japanese-label">КАТАКАНА</div>
+                    <div class="japanese-text">@CurrentCourseQestion?.KatakanaWord</div>
+                </div>
+            </div>
+
+            <!-- Варианты ответов -->
+            <div class="answers-grid">
+
                 @if (RandomAnswers?.RandomAnswers?.Count() > 0)
                 {
                     @foreach (var item in RandomAnswers.RandomAnswers)
                     {
-                        <div class="btn-box">
-                            <button type="button"
-                                    class=@(IsAnswerSelected == false ? "btn btn-outline-secondary" :
-                                                (SelectedAnswer == item ? (item.IsCorrectAnswer ? "btn btn-success" : "btn btn-danger")
-                                                :(item.IsCorrectAnswer ? "btn btn-outline-success" : "btn btn-outline-danger")
-                                            ))
-                                    @onclick="x => OnAnswerClick(item)"
-                                    disabled="@IsAnswerSelected">
-                                @item.RussianWord
-                            </button>
-                        </div>
+                        <button class=@(IsAnswerSelected == false ?"answer-btn":
+                                                                                (SelectedAnswer == item ? (item.IsCorrectAnswer ? "answer-btn correct" : "answer-btn wrong")
+                                                                                                                : (item.IsCorrectAnswer ? "answer-btn correct-info" : "answer-btn wrong-info")))
+                                @onclick="x => OnAnswerClick(item)"
+                                disabled="@IsAnswerSelected">
+                            <span>@item.RussianWord</span>
+
+                            @if (IsAnswerSelected == true)
+                            {
+                                @if (SelectedAnswer == item && item.IsCorrectAnswer)
+                                {
+                                    <span class="answer-icon">✅</span>
+                                }
+                                @if (SelectedAnswer == item && !item.IsCorrectAnswer)
+                                {
+                                    <span class="answer-icon">❌</span>
+                                }
+
+                            }
+                            @* <span class="answer-icon"></span> *@
+                        </button>
                     }
                 }
+
+
+
+                <!-- Правильный ответ (зелёный со стрелкой) -->
+                @*  <button class="answer-btn correct">
+                <span>учиться, учёба</span>
+                <span class="answer-icon">✅</span>
+            </button> *@
+
+                <!-- Неправильные ответы -->
+                @*  <button class="answer-btn">
+                <span>читать</span>
+                <span class="answer-icon"></span>
+            </button>
+
+            <button class="answer-btn wrong">
+                <span>писать</span>
+                <span class="answer-icon">❌</span>
+            </button>
+
+            <button class="answer-btn">
+                <span>говорить</span>
+                <span class="answer-icon"></span>
+            </button> *@
             </div>
 
-            <br />
-            <br />
-
-            @if (CurrentQestionIndex+1 < QestionNumber)
+            <!-- Кнопка следующего вопроса -->
+            @if (CurrentQestionIndex + 1 < QestionNumber)
             {
-                <RadzenButton type="button" style="width: 160px" Click=@(() => OnNextClick())
-                              Text="Сдедующий"
-                              Shade="Shade.Light" ButtonStyle="ButtonStyle.Primary" TabIndex="11" />
+                <button class="next-btn"
+                        @onclick=@(() => OnNextClick())
+                        disabled="@(!IsAnswerSelected)">
+                    ➡️ Следующий вопрос
+                </button>
             }
             else
             {
-                <RadzenButton type="button" style="width: 160px" Click=@(() => OnCancelClick())
-                              Text="Закрыть"
-                              Shade="Shade.Light" ButtonStyle="ButtonStyle.Warning" TabIndex="11" />
+                if (IsAnswerSelected)
+                {
+                    <button class="close-btn"
+                            @onclick=@(() => OnCancelClick())>
+                        ✖️ Закрыть
+                    </button>
+                }
             }
-
         </div>
-
     </div>
-</div>
-
-
-
+}

@@ -1,4 +1,266 @@
-﻿
-.btn-box{
-    margin:15px;
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+/* Шапка курса */
+.course-header {
+    background: white;
+    border-radius: 20px;
+    padding: 25px;
+    margin-bottom: 25px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+}
+
+.course-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1e3c72;
+    margin-bottom: 10px;
+}
+
+.course-description {
+    color: #666;
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 15px;
+}
+
+.course-meta {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e0e0e0;
+    margin-bottom: 15px;
+}
+
+.meta-item {
+    font-size: 13px;
+    color: #888;
+}
+
+/* Статистика */
+.stats {
+    display: flex;
+    gap: 15px;
+}
+
+.stat-card {
+    flex: 1;
+    background: #f8f9fa;
+    border-radius: 12px;
+    padding: 12px;
+    text-align: center;
+}
+
+.stat-label {
+    font-size: 12px;
+    color: #888;
+    margin-bottom: 5px;
+}
+
+.stat-value {
+    font-size: 28px;
+    font-weight: bold;
+}
+
+    .stat-value.correct {
+        color: #28a745;
+    }
+
+    .stat-value.wrong {
+        color: #dc3545;
+    }
+
+/* Карточка вопроса */
+.question-card {
+    background: white;
+    border-radius: 20px;
+    padding: 35px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    margin-bottom: 20px;
+}
+
+/* Номер вопроса */
+.question-number {
+    text-align: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: #667eea;
+    background: #f0f0ff;
+    display: inline-block;
+    width: 100%;
+    padding: 8px;
+    border-radius: 20px;
+    margin-bottom: 25px;
+}
+
+/* Японские слова в одну строку */
+.japanese-row {
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.japanese-item {
+    flex: 1;
+    background: linear-gradient(135deg, #fef7e0 0%, #fff5e6 100%);
+    border-radius: 16px;
+    padding: 20px 10px;
+    text-align: center;
+    transition: transform 0.2s;
+}
+
+    .japanese-item:hover {
+        transform: translateY(-3px);
+    }
+
+.japanese-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 600;
+    color: #b8860b;
+    margin-bottom: 10px;
+}
+
+.japanese-text {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2d3748;
+}
+
+/* Сетка ответов */
+.answers-grid {
+    display: grid;
+    gap: 12px;
+    margin-bottom: 30px;
+}
+
+.answer-btn {
+    background: #f8f9fa;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 15px 20px;
+    font-size: 16px;
+    font-weight: 500;
+    color: #333;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.2s;
+}
+
+    .answer-btn:hover {
+        background: #e9ecef;
+        transform: translateX(5px);
+    }
+
+    /* Правильный ответ */
+    .answer-btn.correct {
+        background: #d4edda;
+        border-color: #28a745;
+    }
+
+    .answer-btn.correct-info {
+        /*background: #d4edda;*/
+        border-color: #28a745;
+    }
+
+    /* Неправильный ответ */
+    .answer-btn.wrong {
+        background: #f8d7da;
+        border-color: #dc3545;
+    }
+
+    .answer-btn.wrong-info {
+        /*background: #f8d7da;*/
+        border-color: #dc3545;
+    }
+
+
+
+.answer-icon {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+/* Кнопка перехода */
+.next-btn {
+    width: 100%;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+    .next-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Стиль для disabled кнопки "Следующий вопрос" */
+    .next-btn:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+        transform: none;
+        box-shadow: none;
+    }
+
+        .next-btn:disabled:hover {
+            transform: none;
+            box-shadow: none;
+        }
+
+
+
+/* Прогресс */
+.progress {
+    text-align: center;
+    margin-top: 15px;
+    font-size: 13px;
+    color: #888;
+}
+
+
+/* Кнопка закрыть */
+.close-btn {
+    width: 100%;
+    flex: 1;
+    background: #dc3545;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+    .close-btn:hover {
+        background: #c82333;
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(220, 53, 69, 0.4);
+    }

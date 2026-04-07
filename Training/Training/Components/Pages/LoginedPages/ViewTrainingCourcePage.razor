@@ -108,7 +108,7 @@ else
                             <div class="info-value">
                                 <div>@(MainEntity?.DurationHours) минут</div>
                                 <div style="font-size: 12px; color: #718096; margin-top: 5px;">
-                                    @(string.Format("{0:f2}",MainEntity?.DurationHours / 60.0)) часов
+                                    @(string.Format("{0:f2}", MainEntity?.DurationHours / 60.0)) часов
                                 </div>
                             </div>
                         </div>
@@ -139,121 +139,121 @@ else
                             <div>
                                 @* <input type="number" class="interval-input" value="3" step="0.5" min="0.5" *@
                                 <input type="number" class="interval-input" step="1" min="1"
-                                @bind-value=@interval>
+                                       @bind-value=@interval>
                            
 
-                                @* <InputNumber class="interval-input" TValue="int" @bind-Value="interval" /> *@
+                                    @* <InputNumber class="interval-input" TValue="int" @bind-Value="interval" /> *@
 
-                                <span class="interval-unit">мс.</span>
+                                    <span class="interval-unit">мс.</span>
+                                </div>
                             </div>
-                        </div>
 
-                        <!-- Блок 2: Автопрокрутка -->
-                        <div class="control-block">
-                            <div class="block-title">
-                                Автопрокрутка
-                            </div>
-                            <div>
-                                @* <input type="checkbox" role="switch" id="autoToggle" @bind-value="@auto"> *@
+                            <!-- Блок 2: Автопрокрутка -->
+                            <div class="control-block">
+                                <div class="block-title">
+                                    Автопрокрутка
+                                </div>
+                                <div>
+                                    @* <input type="checkbox" role="switch" id="autoToggle" @bind-value="@auto"> *@
 
-                                <label class="toggle-switch">
-                                    @* <input type="checkbox" id="autoToggle" @bind-value="@Auto"> *@
+                                    <label class="toggle-switch">
+                                        @* <input type="checkbox" id="autoToggle" @bind-value="@Auto"> *@
                                         <input type="checkbox" checked="@Auto" @oninput="CheckboxChanged">
-                                    <span class="toggle-slider"></span>
-                                </label>
-                            </div>
-                        </div>
-
-                        <!-- Блок 3: Навигация -->
-                        <div class="control-block">
-                            <div class="block-title">
-                                Навигация
-                            </div>
-                            <div class="nav-buttons">
-                                        <button class=@($"btn {(started==true?"btn-stop":"btn-last")}")
-                                                @onclick="@Toggle">
-                                    <div class="btn-text">
-                                        <span>
-                                            ⏹️
-                                        </span>
-                                        <span>
-                                                    @toggleText
-                                        </span>
+                                            <span class="toggle-slider"></span>
+                                        </label>
                                     </div>
-                                </button>
+                                </div>
+
+                                <!-- Блок 3: Навигация -->
+                                <div class="control-block">
+                                    <div class="block-title">
+                                        Навигация
+                                    </div>
+                                    <div class="nav-buttons">
+                                        <button class=@($"btn {(started == true ? "btn-stop" : "btn-last")}")
+                                                @onclick="@Toggle">
+                                            <div class="btn-text">
+                                                <span>
+                                                    ⏹️
+                                                </span>
+                                                <span>
+                                                    @toggleText
+                                                </span>
+                                            </div>
+                                        </button>
                                         @* (args => carousel.Navigate(0)) *@
                                         <button class="btn btn-first" @onclick="@GoToFirst">
-                                    <div class="btn-text">
-                                        <span>⏮️</span>
-                                        <span>К&ensp;</span><span>первому</span>
-                                    </div>
-                                </button>
+                                            <div class="btn-text">
+                                                <span>⏮️</span>
+                                                <span>К&ensp;</span><span>первому</span>
+                                            </div>
+                                        </button>
 
                                         @* (args => carousel.Navigate((MainEntity.CourseQestions?.Count ?? 1) - 1)) *@
-                                <button class="btn btn-last" 
+                                        <button class="btn btn-last"
                                                 @onclick="@GoToEnd">
-                                    <div class="btn-text">
-                                        <span>К&ensp;</span>
-                                        <span>последнему</span>
-                                        <span>⏭️</span>
+                                            <div class="btn-text">
+                                                <span>К&ensp;</span>
+                                                <span>последнему</span>
+                                                <span>⏭️</span>
+                                            </div>
+                                        </button>
                                     </div>
-                                </button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div>
 
 
 
-            <RadzenCarousel @ref=carousel
-                            @bind-SelectedIndex="@selectedIndex"
-                            Auto="@Auto" Interval="@interval" AnimationDuration="@animationDuration" PagerOverlay="false" ButtonShade="Shade.Default"
+                    <RadzenCarousel @ref=carousel
+                                    @bind-SelectedIndex="@selectedIndex"
+                                    Auto="@Auto" Interval="@interval" AnimationDuration="@animationDuration" PagerOverlay="false" ButtonShade="Shade.Default"
                                     Style="height:300px; width:100%;"
-                            Change="@(args => OnChange())">
-                <Items>
-                    @if (MainEntity?.CourseQestions?.Count > 0)
-                    {
+                                    Change="@(args => OnChange())">
+                        <Items>
+                            @if (MainEntity?.CourseQestions?.Count > 0)
+                            {
 
-                        @for (int i = 0; i < MainEntity.CourseQestions.Count; i++)
-                        {
-                            var orderID = MainEntity.CourseQestions[i];
-                            var number = i + 1;
-                            <RadzenCarouselItem>
-                                <div class="question-card">
-                                    <div class="question-header">
-                                        <span class="question-counter">Карточка №1 из 20</span>
-                                    </div>
-
-                                    <div class="question-content">
-                                        <div class="question-row">
-                                            <div class="question-field">
-                                                <div class="field-label">Кандзи</div>
-                                                <div class="field-value kanji-text">学</div>
+                                @for (int i = 0; i < MainEntity.CourseQestions.Count; i++)
+                                {
+                                    var orderID = MainEntity.CourseQestions[i];
+                                    var number = i + 1;
+                                    <RadzenCarouselItem>
+                                        <div class="question-card">
+                                            <div class="question-header">
+                                                <span class="question-counter">Карточка №@(number) из @(MainEntity.CourseQestions.Count)</span>
                                             </div>
 
-                                            <div class="question-field">
-                                                <div class="field-label">Хирагана</div>
-                                                <div class="field-value">がく</div>
-                                            </div>
+                                            <div class="question-content">
+                                                <div class="question-row">
+                                                    <div class="question-field">
+                                                        <div class="field-label">Кандзи</div>
+                                                        <div class="field-value kanji-text">@orderID.KanjiWord</div>
+                                                    </div>
 
-                                            <div class="question-field">
-                                                <div class="field-label">Катакана</div>
-                                                <div class="field-value">ガク</div>
-                                            </div>
+                                                    <div class="question-field">
+                                                        <div class="field-label">Хирагана</div>
+                                                        <div class="field-value">@orderID.HiraganaWord</div>
+                                                    </div>
 
-                                            <div class="question-field">
-                                                <div class="field-label">Слово</div>
-                                                <div class="field-value russian-text">учиться, учёба</div>
+                                                    <div class="question-field">
+                                                        <div class="field-label">Катакана</div>
+                                                        <div class="field-value">@orderID.KatakanaWord</div>
+                                                    </div>
+
+                                                    <div class="question-field">
+                                                        <div class="field-label">Слово</div>
+                                                        <div class="field-value russian-text">@orderID.RussianWord</div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </div>
-                            </RadzenCarouselItem>
-                        }
-                    }
-                </Items>
-            </RadzenCarousel>
+                                    </RadzenCarouselItem>
+                                }
+                            }
+                        </Items>
+                    </RadzenCarousel>
 
 
 
@@ -262,21 +262,21 @@ else
 
 
 
-            <!-- Подвал карточки -->
-            @* <div class="card-footer">
+                    <!-- Подвал карточки -->
+                    @* <div class="card-footer">
                 🎓 Учебная платформа | Данные актуальны на текущий момент
             </div> *@
-        </div>
-    </div>
-}
+                </div>
+            </div>
+        }
 
 
 @code {
-    RadzenCarousel carousel=default!;
+    RadzenCarousel carousel = default!;
 
     bool Auto
     {
-        get=>auto;
+        get => auto;
         set
         {
             auto = value;
