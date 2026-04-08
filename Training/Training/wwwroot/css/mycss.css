@@ -85,3 +85,89 @@
 .required-field {
     color:red;
 }
+
+/* Сброс стилей для контейнера таблицы */
+/*.table-reset-container {*/
+    /* Сброс отступов и границ */
+    /*margin: 0;
+    padding: 0;
+    border: none;*/
+    /* Сброс фона */
+    /*background: none;*/
+    /* Сброс шрифтов до базовых */
+    /*font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+    font-size: 10px;*/
+    /*line-height: 1.4;*/
+    /*color: #000;*/
+    /* Сброс размеров */
+    /*width: 100%;
+    max-width: 100%;*/
+    /* Обеспечивает правильное отображение вложенных элементов */
+    /*box-sizing: border-box;
+}*/
+
+    /* Полный сброс стилей для таблицы внутри контейнера */
+    /*.table-reset-container table {*/
+        /* Сброс стандартных стилей таблицы */
+        /*margin: 0 !important;
+        padding: 0 !important;
+        border: none !important;*/
+        /*border-collapse: collapse;*/
+        /*border-spacing: 0 !important;
+        width: 100% !important;
+        background: none !important;*/
+        /*    font-size: inherit;
+        font-family: inherit;*/
+        /*color: inherit;*/
+        /*table-layout: auto;
+    }*/
+
+    /* Сброс стилей для ячеек таблицы */
+    /*.table-reset-container th,
+    .table-reset-container td {
+        margin: 0 !important;
+        padding: 0 !important;*/
+        /*border: 1px solid #ddd;*/
+        /*background: none !important;*/
+        /*        font-size: inherit;
+        font-family: inherit;*/
+        /*color: inherit;*/
+        /*text-align: left;
+        vertical-align: top;*/
+        /*        font-weight: normal;
+*/
+    /*}*/
+
+    /* Сброс стилей для заголовков таблицы */
+    /*.table-reset-container th {*/
+        /*font-weight: bold;
+        background: #f5f5f5;*/
+    /*}*/
+
+    /* Дополнительный сброс для всех вложенных элементов */
+    /*.table-reset-container * {
+        box-sizing: border-box !important;
+    }*/
+
+    /* Убираем стандартные стили браузера для таблицы */
+    /*.table-reset-container table,
+    .table-reset-container tbody,
+    .table-reset-container thead,
+    .table-reset-container tfoot,
+    .table-reset-container tr,
+    .table-reset-container th,
+    .table-reset-container td {
+        all: revert !important;
+    }*/
+
+    /* Более агрессивный сброс через all: initial */
+    /*.table-reset-container.reset-all table,
+    .table-reset-container.reset-all tbody,
+    .table-reset-container.reset-all thead,
+    .table-reset-container.reset-all tr,
+    .table-reset-container.reset-all th,
+    .table-reset-container.reset-all td {
+        all: initial;
+        display: table-cell;
+        border-collapse: collapse;
+    }*/

@@ -99,3 +99,42 @@
         padding: 10px 12px;
     }
 }
+
+
+.add-qestion-box {
+    display: flex;
+    justify-content: center;
+    flex-wrap: nowrap;
+}
+
+.buttons-box{
+    margin:10px;
+}
+
+.button-style {
+    margin: 10px;
+}
+
+.invitation-add {
+    width: 100%;
+    display: flex;
+    justify-content:flex-end;
+
+}
+
+.table-reset-container{
+
+}
+
+/* Убираем стандартные стили браузера для таблицы */
+.table-reset-container table,
+    .table-reset-container tbody,
+    .table-reset-container thead,
+    .table-reset-container tfoot,
+    .table-reset-container tr,
+    .table-reset-container th,
+    .table-reset-container td {
+        all: revert !important;
+    }
+
+    

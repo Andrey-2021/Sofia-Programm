@@ -77,7 +77,7 @@ public class MyUserOperationService
     /// <returns></returns>
     public bool IAmDefaultAdmin(MyUser myUser)
     {
-        if (myUser != null && myUser.Login == adminEmail && myUser.Password == adminPassword && myUser.Role == RoleEnum.admin)
+        if (myUser != null && myUser.Id==0  && myUser.Login == adminEmail && myUser.Password == adminPassword && myUser.Role == RoleEnum.admin)
             return true;
         return false;
     }

@@ -1,131 +1,16 @@
 ﻿@using Entities.Enums
+@using Training.Components.Pages.Components
 @attribute [Route(ProjectRouters.allTrainingCoursesPage)]
 @inherits AllTrainingCoursesPageModel
 <PageTitle>Курсы</PageTitle>
 
-<h3>Все мои курсы</h3>
-
-@if (TrainingCourses == null)
+<h3>Мои курсы</h3>
+<ShowAllTrainingCoursesComponent TrainingCourses=@TrainingCourses MyUser=@MyUser IsMyTrainingCourses ="true"/>
+<br />
+<br />
+<ShowOperrationErrorComponent BaseOperationResponce="OtherPeoplesCoursesThatIChosenResponce"/>
+@if (SelectedOtherPeopleCourse?.Count() > 0)
 {
-    <div>
-        Нет курсов
-    </div>
+    <h3>Выбранные мною курсы, разработанные другими пользователями</h3>
+    <ShowAllTrainingCoursesComponent TrainingCourses=@SelectedOtherPeopleCourse MyUser=@MyUser IsMyTrainingCourses ="false"/>
 }
-else
-{
-    
-    <div class="table-box">
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                    @if (MyUser.Role == RoleEnum.admin)
-                    {
-                        <div>
-                                Владелец Курса
-                        </div>
-                            
-                        
-                    }
-                    </th>
-                    <th>
-                        Название курса
-                    </th>
-                    <th>
-                        Описание курса
-                    </th>
-                    <th>
-                        Продолжительность курса (минут).
-                    </th>
-                    <th>
-                        Дата создания курса
-                    </th>
-                    <th>
-                        Уровень сложности
-                    </th>
-                    <th>
-                        Курс виден всем
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in TrainingCourses)
-                {
-                    <tr>
-                        <td>
-                        @if (MyUser.Role == RoleEnum.admin)
-                        {
-                            
-                                @item.MyUser?.Manager.FIO
-                            
-                        }
-                        </td>
-                        <td>
-                            @item.Name
-                        </td>
-                        <td>
-                            @item.Description
-                        </td>
-                        <td>
-                            @item.DurationHours
-                        </td>
-                        <td>
-                            @item.ContractDate
-                        </td>
-                        <td>
-                            @item.DifficultyLevel
-                        </td>
-                        <td>
-                            @item.IsVisableForAll
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Прсомотреть" Icon="visibility" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnViewTrainingCourseClick(item))">
-                            </RadzenButton>
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Заучивание" Icon="cognition" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnMemorizationTrainingCourseClick(item))">
-                            </RadzenButton>
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Warning" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Тест" Icon="play_circle" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnStartTestClick(item))">
-                            </RadzenButton>
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Редактировать" Icon="edit" Size="ButtonSize.Medium"
-                                          Click="@(args => OnEditClick(item))">
-                            </RadzenButton>
-                        </td>
-                    </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="11">
-                        Всего: @TrainingCourses.Count()
-                    </th>
-                </tr>
-            </tfoot>
-
-        </table>
-    </div>
-    
-}
-
-
-

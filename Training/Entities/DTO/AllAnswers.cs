@@ -14,17 +14,17 @@ public class AllAnswers
     /// <param name="courseQestions">Все вопросы уч. курса</param>
     public AllAnswers(CourseQestion? currentCourseQestion, IList<CourseQestion>? courseQestions)
     {
-        if(currentCourseQestion==null || courseQestions == null || courseQestions.Count==0)
+        if (currentCourseQestion == null || courseQestions == null || courseQestions.Count == 0)
         {
             RandomAnswers = new TestAnswer[0];
             return;
         }
-        
-        List<String> wrongUnswers=default!; // Список неправильных ответов/слов
-        if (currentCourseQestion?.WrongRussianWordAnswers?.Count>0) // Если есть неправильные ответы/слова для текущего вопроса
-            wrongUnswers=CreteFrowWrongAnswers(currentCourseQestion); // тогда берём их
+
+        List<String> wrongUnswers = default!; // Список неправильных ответов/слов
+        if (currentCourseQestion?.WrongRussianWordAnswers?.Count > 0) // Если есть неправильные ответы/слова для текущего вопроса
+            wrongUnswers = CreteFrowWrongAnswers(currentCourseQestion); // тогда берём их
         else
-            wrongUnswers=CreteFrowQustions(currentCourseQestion!, courseQestions); // иначе, получаем их другим способом
+            wrongUnswers = CreteFrowQustions(currentCourseQestion!, courseQestions); // иначе, получаем их другим способом
 
         int numberAnswers = (currentCourseQestion?.WrongRussianWordAnswers?.Count ?? 0) + 1;
         RandomAnswers = new TestAnswer[numberAnswers];
@@ -35,9 +35,9 @@ public class AllAnswers
         {
             foreach (var item in currentCourseQestion.WrongRussianWordAnswers)
             {
-                var index= rng.Next(0, numberAnswers);
-                if (RandomAnswers[index] ==null)
-                    RandomAnswers[index]= new TestAnswer(item.Answer, false);
+                var index = rng.Next(0, numberAnswers);
+                if (RandomAnswers[index] == null)
+                    RandomAnswers[index] = new TestAnswer(item.Answer, false);
                 else
                     WriteToCleanPlase(item.Answer, false);
             }
@@ -63,12 +63,6 @@ public class AllAnswers
     /// <param name="courseQestions">Все вопросы</param>
     private List<String> CreteFrowQustions(CourseQestion courseQestion, IList<CourseQestion>? courseQestions)
     {
-        // минимальное количество уникальных вопросов в курсе, по которым создаём неправильные ответы
-        const int minNumberOfQuestions = 5;
-
-        // Максимальное количество неправильных слов-ответов
-        const int maxNumberOfWrongAnswersWords = 3;
-
         //создаём слова ответы из массива случайных слов
         List<String> wordsList = new();
 
@@ -81,22 +75,23 @@ public class AllAnswers
                 && x.KanjiWord != courseQestion.KanjiWord
                 && x.RussianWord.ToUpper() != courseQestion.RussianWord.ToUpper())
                 .Select(x => x.RussianWord).ToList();
+            wordsList= wordsList.Distinct().ToList(); //Удаляем повторяющиеся слова
         }
 
-        if (wordsList.Count < minNumberOfQuestions) // если уникальных слов, полученных из ответа мало, т.е. не получиться создать многовариантные случайные неправильные ответы 
+        if (wordsList.Count < LengthConstants.minNumberOfWrongWords) // если уникальных слов, полученных из ответа мало, т.е. не получиться создать многовариантные случайные неправильные ответы 
             wordsList = Words.ToList(); // тогда берём слова из массива
 
         Random random = new Random();
         List<String> randomWords = new();
 
         int i = 0;
-        while(i< maxNumberOfWrongAnswersWords)
+        while (i < LengthConstants.numberOfWrongAnswersWords)
         {
             int index = random.Next(wordsList.Count);
             var addedWord = wordsList[index];
             if (randomWords.Any(x => x == addedWord) // если такое слово уже есть
-                && addedWord.ToUpper()== courseQestion.RussianWord.ToUpper()) // или оно совпадвет с правильным ответом из вопроса
-                continue; 
+                && addedWord.ToUpper() == courseQestion.RussianWord.ToUpper()) // или оно совпадвет с правильным ответом из вопроса
+                continue;
             randomWords.Add(addedWord);
             i++;
         }
@@ -142,7 +137,7 @@ public class TestAnswer
     /// Руссоке, английское
     /// </remarks>
     public string CurrentAnswerWord { get; set; }
-    
+
     /// <summary>
     /// Это правильный ответ
     /// </summary>

@@ -39,7 +39,7 @@ public class LengthConstants
     public const int qestionMinLength = 4;
 
     public const int answerMaxLength = 255;
-    public const int answerMinLength = 4;
+    public const int answerMinLength = 1;
 
     /// <summary>
     /// Максимальный уровень сложности курса
@@ -68,6 +68,15 @@ public class LengthConstants
     /// </summary>
     public const int jupanWordMaxLength = 50;
 
+
+
+    /// <summary>
+    /// Минимальное количество неправильных слов из которых составляем неправильные варианты ответов
+    /// </summary>
+    public const int minNumberOfWrongWords = 5;
+
+    // Количество неправильных слов-ответов по умолчанию
+    public const int numberOfWrongAnswersWords = 3;
 
 
 
@@ -116,7 +125,8 @@ public class LengthConstants
     /// Максимальная длина телефона
     /// </summary>
     public const byte phonetMaxLength = 25;
-
+    
+    
     /// <summary>
     /// Максимальная длина e-mail
     /// </summary>
@@ -125,7 +135,8 @@ public class LengthConstants
     /// Минимальная длина e-mail
     /// </summary>
     public const byte emailMinLength = 5;
-
+    
+    /*
     /// <summary>
     /// Максимальная длина e-mail
     /// </summary>
@@ -209,5 +220,5 @@ public class LengthConstants
     /// </summary>
     public const int positionNameMaxLength = 255;
 
-    
+    */
 }

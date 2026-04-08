@@ -1,37 +1,151 @@
-﻿using Training.Components.Pages.Base;
+﻿using Radzen;
+using Training.Components.Pages.Base;
 namespace Training.Components.Pages.LoginedPages;
 
 public class AddTrainingCoursePageModel: BaseAddModel<TrainingCourse>
 {
-    protected override Task OnParametersSetAsync()
+    protected override async Task OnParametersSetAsync()
     {
-        MainEntity = new(MyUser);
-        return base.OnParametersSetAsync();
+        if (EditedEntityId > 0)
+        {
+            LoadEntityOperationResponce = await DbRepository.GetCourse(EditedEntityId);
+            MainEntity = LoadEntityOperationResponce.Data;
+        }
+        else
+        {
+            MainEntity = new(MyUser);
+        }
+        await base.OnParametersSetAsync();
     }
 
     /// <summary>
     /// Добавляемая карточка
     /// </summary>
     protected CourseQestion? AddedCourseQestion { get; set; }
+    private CourseQestion? SelectedForEditCourseQestion { get; set; }
 
     /// <summary>
-    /// Добавляем новую карточку
+    /// Добавляемое ошибочное слово
     /// </summary>
-    protected bool IsAddingNewCard { get; set; } = false;
+    protected WrongRussianWordAnswer? AddingWrongWord { get; set; }
 
-    protected void OnAddNewCardClick()
+    /// <summary>
+    /// Показывать поля карточки
+    /// </summary>
+    protected bool IsShowAddingCard { get; set; } = false;
+    
+    /// <summary>
+    /// Сейчас редактирование
+    /// </summary>
+    protected bool IsEditingCard { get; set; } = false;
+
+    protected bool IsAddWrongWord { get; set; } = false;
+
+    /// <summary>
+    /// Сохранить карточку
+    /// </summary>
+    protected void OnAddCardClick()
     {
-        IsAddingNewCard = true;
-        AddedCourseQestion = new();
+        if (IsEditingCard)
+        {
+            AddedCourseQestion!.CopyTo(SelectedForEditCourseQestion!);
+        }
+        else
+        {
+
+            if (MainEntity!.CourseQestions == null)
+                MainEntity.CourseQestions = new List<CourseQestion>();
+            MainEntity.CourseQestions.Add(AddedCourseQestion!);
+        }
+
+        IsShowAddingCard = false;
+        IsEditingCard = false;
     }
 
-    protected void OnSaveCardClick()
+    /// <summary>
+    /// Создать новую карточку
+    /// </summary>
+    protected void OnCreateNewCardClick()
     {
-        IsAddingNewCard = false;
-        if(MainEntity!.CourseQestions==null)
-        {
-            MainEntity.CourseQestions = new List<CourseQestion>();
-        }
-        MainEntity.CourseQestions.Add(AddedCourseQestion!);
+        IsShowAddingCard = true;
+        IsEditingCard = false;
+        AddedCourseQestion = new() { TrainingCourse = MainEntity };
+    }
+
+    /// <summary>
+    /// Редактировать карточку
+    /// </summary>
+    /// <param name="entity">Редактируемая карточка</param>
+    public async Task OnQestionEditClick(CourseQestion entity)
+    {
+        SelectedForEditCourseQestion = entity;
+        AddedCourseQestion = new();
+        entity.CopyTo(AddedCourseQestion);
+        IsShowAddingCard = true;
+        IsEditingCard = true;
+    }
+
+    
+
+    public async Task OnDeleteWrongWordClick(CourseQestion entity, WrongRussianWordAnswer wordAnswer)
+    {
+        var forDel= entity.WrongRussianWordAnswers?.FirstOrDefault(wordAnswer);
+        if (forDel != null)
+            entity.WrongRussianWordAnswers?.Remove(forDel);
+    }
+
+    public async Task OnAddWrongWordClick(CourseQestion entity)
+    {
+        IsAddWrongWord = true;
+        AddingWrongWord = new() { CourseQestion = entity };
+    }
+
+    public async Task OnCancelAddWrongWordClick(CourseQestion entity)
+    {
+        IsAddWrongWord = false;
+        AddingWrongWord = null;
+    }
+
+    public async Task OnSaveWrongWordClick(CourseQestion entity)
+    {
+        if (AddingWrongWord == null)
+            return;
+
+        if (entity.WrongRussianWordAnswers == null)
+            entity.WrongRussianWordAnswers = new List<WrongRussianWordAnswer>();
+        entity.WrongRussianWordAnswers.Add(AddingWrongWord);
+        IsAddWrongWord = false;
+        
+    }
+
+    /// <summary>
+    /// Отмена добавления/редактирования карточки
+    /// </summary>
+    public void OnCancelAddQestionClick()
+    {
+        IsShowAddingCard = false;
+        IsEditingCard = false;
+        AddedCourseQestion = null;
+    }
+
+    /// <summary>
+    /// Удалить карточку из курса
+    /// </summary>
+    /// <param name="entity">Удаляемая карточка</param>
+    public async Task OnQestionDeleteClick(CourseQestion entity)
+    {
+        var deletd= MainEntity!.CourseQestions?.FirstOrDefault(x=> x.Id == entity.Id
+            && x.RussianWord==entity.RussianWord
+            && x.KanjiWord== entity.KanjiWord
+            && x.KatakanaWord == entity.KatakanaWord
+            && x.HiraganaWord == entity.HiraganaWord);
+
+        if (deletd != null)
+            MainEntity.CourseQestions?.Remove(deletd);
+    }
+
+    protected override void GoAfterSave()
+    {
+        NavigationManager.NavigateTo(ProjectRouters.allTrainingCoursesPageHref);
     }
 }

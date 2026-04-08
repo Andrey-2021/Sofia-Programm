@@ -2,6 +2,7 @@
 using Entities.Enums;
 using Entities.Interfaces;
 using System.Linq.Expressions;
+using System.Net.Http.Headers;
 
 namespace DbLibrary;
 
@@ -361,6 +362,23 @@ public class DbRepository
             return await GetEntities<TrainingCourse>(include: includeData,
                                                     predicate: x => x.MyUserId == myUser.Id); //Читаем только свои курсы
     }
+
+
+    /// <summary>
+    /// Чужие курсы, на которые я выбрал
+    /// </summary>
+    /// <param name="myUser">Пользователь</param>
+    /// <returns></returns>
+    public async Task<OperationResponce<IEnumerable<SelectedOtherPeopleCourse>?>> GetOtherPeoplesCoursesThatIChosenAsync(MyUser myUser)
+    {
+        // Список курсов на которые я уже подписан
+        var mySelectedOtherPeopleCourseResponce = await GetEntities<SelectedOtherPeopleCourse>(predicate: x => x.MyUserId == myUser.Id,
+            include: x=>x.Include(sopc=>sopc.TrainingCourse)
+                            .ThenInclude(tc=>tc.MyUser)
+                            .Include(sopc => sopc.TrainingCourse.CourseQestions));
+        return mySelectedOtherPeopleCourseResponce;
+    }
+
 
     /// <summary>
     /// Получить курсы других заристрированных пользователей, которые открыты для всех

@@ -56,7 +56,7 @@ public class CourseQestion
 	/// Внешний ключ. Связь Один-Ко-Многим
 	///</remarks>
     [Required(ErrorMessage = "Обязательно должн быть выбран учебный курс")]
-    [Range(1, int.MaxValue, ErrorMessage = "Не выбрана учебный курс")]
+    //[Range(1, int.MaxValue, ErrorMessage = "Не выбрана учебный курс")]
     [Comment("Id учебного курса")]
     [DisplayName("Id учебного курса")]
     public int TrainingCourseId { get; set; }
@@ -71,16 +71,22 @@ public class CourseQestion
     [DisplayName("Учебный курс")]
     public TrainingCourse? TrainingCourse { get; set; }
 
-    /*
-    /// <summary>
-    /// Уровень сложности вопроса
-    /// </summary>
-    [Range(0, LengthConstants.qestionDifficultyLevelLength, ErrorMessage = "Не выбрана уровень сложности")]
-    [Comment("Уровень сложности вопроса")]
-    [DisplayName("Уровень сложности вопроса")]
-    public int DifficultyLevel { get; set; }
-    */
-
     [ValidateComplexType]
     public ICollection<WrongRussianWordAnswer>? WrongRussianWordAnswers{ get; set; }
+
+    public void CopyTo(CourseQestion courseQestion)
+    {
+        if (courseQestion == null)
+            throw new ArgumentNullException(nameof(courseQestion));
+
+        // Копирование простых свойств
+        courseQestion.Id = this.Id;
+        courseQestion.KanjiWord = this.KanjiWord;
+        courseQestion.HiraganaWord = this.HiraganaWord;
+        courseQestion.KatakanaWord = this.KatakanaWord;
+        courseQestion.RussianWord = this.RussianWord;
+        courseQestion.TrainingCourseId = this.TrainingCourseId;
+        courseQestion.TrainingCourse = this.TrainingCourse;
+        courseQestion.WrongRussianWordAnswers = this.WrongRussianWordAnswers;
+    }
 }

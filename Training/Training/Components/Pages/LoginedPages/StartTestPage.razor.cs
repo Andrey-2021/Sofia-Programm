@@ -10,6 +10,7 @@ public class StartTestPageModel : BaseModel, IDisposable
     protected TestHelper? TestHelper { get; private set; }
 
     private bool isInit = false;
+    private bool isSavedResult = false;
 
     /// <summary>
     /// Результат выполнения операции записи
@@ -37,21 +38,16 @@ public class StartTestPageModel : BaseModel, IDisposable
     {
         TestHelper?.OnTestAnswerClick(testAnswer);
 
-        if(TestHelper?.IsTestFinished==true)
+        if (TestHelper?.IsTestFinished == true && !isSavedResult)
+        {
+            isSavedResult = true;
             await SaveRezult();
+        }
     }
 
     private async Task SaveRezult()
     {
-        var result = new CompletedTest(MyUser, LoadEntityOperationResponce.Data, TestHelper);
-        //{
-        //    TrainingCourseId = MainEntity.Id,
-        //    MyUserId = MyUser.Id,
-        //    QestionNumber = QestionNumber,
-        //    CountCorrectAnswers = CountCorrectAnswers,
-        //    Duration = 0
-        //};
-
+        var result = new CompletedTest(MyUser, TestHelper!);
         SaveEntityOperationResponce = await DbRepository.UpdateEntity(result);
     }
 

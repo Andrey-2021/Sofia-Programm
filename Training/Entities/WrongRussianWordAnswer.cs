@@ -14,11 +14,11 @@ public class WrongRussianWordAnswer
     /// <summary>
     /// Неправильный ответ на вопрос
     /// </summary>
-    [Required(ErrorMessage = "Введите ответ")]
-    [StringLength(LengthConstants.answerMaxLength, MinimumLength = LengthConstants.answerMinLength, ErrorMessage = "Длина вопроса должна быть не менее {2} и не более {1} символов")]
-    [Comment("Ответ на вопрос")]
-    [DisplayName("Ответ на вопрос")]
-    public string Answer { get; set; } = default!;
+    [Required(ErrorMessage = "Введите слово")]
+    [StringLength(LengthConstants.answerMaxLength, MinimumLength = LengthConstants.answerMinLength, ErrorMessage = "Длина должна быть не менее {2} и не более {1} символов")]
+    [Comment("Слово (перевод)")]
+    [DisplayName("Слово (перевод)")]
+    public string Answer { get; set; } = string.Empty;
 
     /// <summary>
     /// Id вопроса
@@ -27,7 +27,7 @@ public class WrongRussianWordAnswer
 	/// Внешний ключ. Связь Один-Ко-Многим
 	///</remarks>
     [Required(ErrorMessage = "Обязательно должн быть выбран вопрос")]
-    [Range(1, int.MaxValue, ErrorMessage = "Не выбрана вопрос")]
+    //[Range(1, int.MaxValue, ErrorMessage = "Не выбрана вопрос")]
     [Comment("Id вопроса")]
     [DisplayName("Id вопроса")]
     public int CourseQestionId { get; set; }

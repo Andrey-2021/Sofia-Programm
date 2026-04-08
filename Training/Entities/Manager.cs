@@ -19,7 +19,7 @@ public class Manager
     [StringLength(LengthConstants.lastNameMaxLength, MinimumLength = LengthConstants.lastNameMinLength, ErrorMessage = "Длина названия должна быть не менее {2} и не более {1} символов")]
     [Comment("Фамилия")]
     [DisplayName("Фамилия")]
-    public string LastName { get; set; }
+    public string LastName { get; set; } = string.Empty;
 
 
     /// <summary>
@@ -29,7 +29,7 @@ public class Manager
     [StringLength(LengthConstants.firstNameMaxLength, MinimumLength = LengthConstants.firstNameMinLength, ErrorMessage = "Длина названия должна быть не менее {2} и не более {1} символов")]
     [Comment("Имя")]
     [DisplayName("Имя")]
-    public string FirstName { get; set; }
+    public string FirstName { get; set; } = string.Empty;
 
 
     /// <summary>
@@ -39,7 +39,7 @@ public class Manager
     [StringLength(LengthConstants.middleNameMaxLength, MinimumLength = LengthConstants.middleNameMinLength, ErrorMessage = "Длина названия должна быть не менее {2} и не более {1} символов")]
     [Comment("Отчество")]
     [DisplayName("Отчество")]
-    public string MiddleName { get; set; }
+    public string MiddleName { get; set; } = string.Empty;
 
 
     /// <summary>
@@ -50,7 +50,7 @@ public class Manager
     [StringLength(LengthConstants.phonetMaxLength, MinimumLength = LengthConstants.phonetMinLength, ErrorMessage = "Длина номера телефона должна быть не менее {2} и не более {1} символов")]
     [Comment("Телефон")]
     [DisplayName("Телефон")]
-    public string PhoneNumber { get; set; }
+    public string PhoneNumber { get; set; } = string.Empty;
 
     /// <summary>
     /// Электронная почта

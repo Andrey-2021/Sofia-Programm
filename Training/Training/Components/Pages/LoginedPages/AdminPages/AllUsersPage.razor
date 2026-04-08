@@ -1,0 +1,100 @@
+﻿@attribute [Route(ProjectRouters.registeredUsers)]
+@inherits AllUsersPageModel
+<PageTitle>Пользователи</PageTitle>
+
+
+
+<div class="container">
+    <!-- Шапка страницы с кнопками -->
+    <div class="page-header">
+        <div class="page-title">
+            <h1>👥 Управление пользователями</h1>
+            <p>Список администраторов и пользователей системы</p>
+        </div>
+        <div class="header-buttons">
+            <button class="btn btn-primary" @onclick=@OnAddUserClick>➕ Добавить пользователя</button>
+            <button class="btn btn-warning" @onclick="() => OnReloadClick(this, EventArgs.Empty)">🔄 Обновить</button>
+            <button class="btn btn-secondary" @onclick=@OnExitClick>🚪 Выйти</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="user-table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ФИО</th>
+                    <th>Телефон</th>
+                    <th>Email</th>
+                    <th>Login</th>
+                    <th>Password</th>
+                    <th>Роль</th>
+                    @* <th>Статус</th> *@
+                    <th>Действия</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @if (Entities != null)
+                {
+                    @foreach (var item in Entities)
+                    {
+                        <tr>
+                            <td>@item.Id</td>
+                            <td>@item.Manager.FIO</td>
+                            <td>@item.Manager.PhoneNumber</td>
+                            <td>@item.Manager.Email</td>
+                            <td>@item.Login</td>
+                            <td>@item.Password</td>
+                            <td>
+                                @if (item.Role == RoleEnum.admin)
+                                {
+                                    <span class="badge badge-admin">@item.Role</span>
+                                }
+                                else
+                                {
+                                    <span class="badge badge-user">@item.Role</span>
+                                }
+
+                            </td>
+                           @*  <td>
+                                <span class="active-status">● Активен</span>
+                                <span class="blocked-status">● Заблокирован</span> 
+                            </td> *@
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-icon delete" data-tooltip="Удалить"
+                                            @onclick="@(args => OnDeleteUserClick(item))">
+                                        🗑
+                                    </button>
+                                    
+                                   @*  <button class="action-icon block" data-tooltip="Заблокировать"
+                                            @onclick="@(args => OnUserBlockClick(item))">
+                                        🔒
+                                    </button> *@
+
+                                    <button class="action-icon edit" data-tooltip="Редактировать"
+                                            @onclick="@(args => OnEditClick(item))">
+                                        ✏
+                                    </button>
+                                    @* <button class="action-icon reset" data-tooltip="Восстановить пароль"
+                                            @onclick="@(args => OnRestorePasswordClick(item))">
+                                        🔐
+                                    </button> *@
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                }
+
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Футер -->
+    <div class="page-footer">
+        @* <p>Всего пользователей: 10 | Активных: 8 | Заблокированных: 2</p> *@
+
+        <p>Всего пользователей: @Entities?.Count()</p>
+    </div>
+</div>

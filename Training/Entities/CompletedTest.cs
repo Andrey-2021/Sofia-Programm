@@ -87,10 +87,10 @@ public class CompletedTest
     public CompletedTest()
     { }
 
-    public CompletedTest(MyUser myUser, TrainingCourse trainingCourse, TestHelper testHelper)
+    public CompletedTest(MyUser myUser, TestHelper testHelper)
     {
         MyUserId = myUser.Id;
-        TrainingCourseId = trainingCourse.Id;
+        TrainingCourseId = testHelper.MainEntity!.Id;
         QestionNumber = testHelper.QestionNumber;
         CountCorrectAnswers = testHelper.CountCorrectAnswers;
         Interval= testHelper.Interval;
