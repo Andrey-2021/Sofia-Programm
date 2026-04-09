@@ -1,114 +1,22 @@
 ﻿@using Entities.Enums
+@using Training.Components.Pages.Components
 @attribute [Route(ProjectRouters.otherPeoplesCoursesPage)]
 @inherits OtherPeoplesCoursesPageModel
 <PageTitle>Курсы</PageTitle>
 
-<h3>Курсы, других пользователей</h3>
-
-
-
-@if (SelectedOtherPeopleCourse == null)
+@if (SelectedOtherPeopleCourse != null)
 {
-}
-else
-{
+    <h3>Курсы, других пользователей</h3>
     <div>
         Уже мною выбранные чужие курсы (разработанные другими пользователями)
     </div>
-
-    <div class="table-box">
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                        <div>
-                            Владелец Курса
-                        </div>
-                    </th>
-                    <th>
-                        Название курса
-                    </th>
-                    <th>
-                        Описание курса
-                    </th>
-                    <th>
-                        Продолжительность курса (минут).
-                    </th>
-                    <th>
-                        Дата создания курса
-                    </th>
-                    <th>
-                        Уровень сложности
-                    </th>
-                    <th>
-                        Курс виден всем
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in SelectedOtherPeopleCourse)
-                {
-                    <tr>
-                        <td>
-                            @item.MyUser?.Manager.FIO
-                        </td>
-                        <td>
-                            @item.Name
-                        </td>
-                        <td>
-                            @item.Description
-                        </td>
-                        <td>
-                            @item.DurationHours
-                        </td>
-                        <td>
-                            @item.ContractDate
-                        </td>
-                        <td>
-                            @item.DifficultyLevel
-                        </td>
-                        <td>
-                            @item.IsVisableForAll
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Добавить к себе" Icon="add_circle" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnAddTrainingCourseClick(item))">
-                            </RadzenButton>
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Подробно" Icon="info" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnShowInfoTrainingCourseClick(item))">
-                            </RadzenButton>
-                        </td>
-                        
-                    </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="11">
-                        Всего: @SelectedOtherPeopleCourse.Count()
-                    </th>
-                </tr>
-            </tfoot>
-
-        </table>
-    </div>
+    <ShowOperrationErrorComponent BaseOperationResponce="DelSelectedOtherPeopleCourseOperationResponce" />
+    <ShowAllTrainingCoursesComponent TrainingCourses=@SelectedOtherPeopleCourse
+                                 MyUser=@MyUser
+                                 IsMyTrainingCoursesPage="false"
+                                 IsShowDelButton="true" 
+                                     OnDeleteTrainingCourseCallback="DeleteSelectedTrainingCourse" />
 }
-
-
-
 <br />
 <div>
     Курсы открытые для всех. Разработанные другими пользователями.
@@ -121,120 +29,9 @@ else
 }
 else
 {
-    
-    <div class="table-box">
-        <table>
-            <thead>
-                <tr>
-                    <th>
-                            <div>
-                                Владелец Курса
-                            </div>
-                    </th>
-                    <th>
-                        Название курса
-                    </th>
-                    <th>
-                        Описание курса
-                    </th>
-                    <th>
-                        Продолжительность курса (минут).
-                    </th>
-                    <th>
-                        Дата создания курса
-                    </th>
-                    <th>
-                        Уровень сложности
-                    </th>
-                    <th>
-                        Курс виден всем
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-                    <th>
-                    </th>
-
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in NotSelectedOtherPeopleCourse)
-                {
-                    <tr>
-                        <td>
-                            @item.MyUser?.Manager.FIO
-                        </td>
-                        <td>
-                            @item.Name
-                        </td>
-                        <td>
-                            @item.Description
-                        </td>
-                        <td>
-                            @item.DurationHours
-                        </td>
-                        <td>
-                            @item.ContractDate
-                        </td>
-                        <td>
-                            @item.DifficultyLevel
-                        </td>
-                        <td>
-                            @item.IsVisableForAll
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Добавить к себе" Icon="add_circle" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnAddTrainingCourseClick(item))">
-                            </RadzenButton>
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Подробно" Icon="info" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnShowInfoTrainingCourseClick(item))">
-                            </RadzenButton>
-                        </td>
-                        
-                    </tr>
-                }
-            </tbody>
-            <tfoot>
-                <tr>
-                    <th colspan="11">
-                        Всего: @NotSelectedOtherPeopleCourse.Count()
-                    </th>
-                </tr>
-            </tfoot>
-
-        </table>
-    </div>
+    <ShowAllTrainingCoursesComponent TrainingCourses=@NotSelectedOtherPeopleCourse
+                                     MyUser=@MyUser
+                                     IsMyTrainingCoursesPage="false"
+                                     IsShowDelButton="false"
+                                     OnAddTrainingCourseCallback="OnAddTrainingCourseClick" />
 }
-
-@if (SelectedTrainingCourse!=null)
-{
-    <br />
-    <div>
-        <div>
-            Подробная информация
-        </div>
-        <table>
-            <tbody>
-                <tr>
-                    <td>Курс:</td>
-                    <td>@SelectedTrainingCourse.Name</td>
-                </tr>
-                <tr>
-                    <td>Количество подписчиков:</td>
-                    <td>ххх</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-}
-
-
-
-

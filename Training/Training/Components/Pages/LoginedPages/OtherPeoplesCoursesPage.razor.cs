@@ -2,14 +2,13 @@
 
 public class OtherPeoplesCoursesPageModel : BaseModel
 {
-    //protected IEnumerable<TrainingCourse>? TrainingCourses { get; set; }
-
-    protected TrainingCourse? SelectedTrainingCourse { get; set; }
-
-
     protected IEnumerable<TrainingCourse>? SelectedOtherPeopleCourse { get; set; }
     protected IEnumerable<TrainingCourse>? NotSelectedOtherPeopleCourse { get; set; }
 
+    /// <summary>
+    /// Результат операции удаления
+    /// </summary>
+    protected OperationResponce<SelectedOtherPeopleCourse?>? DelSelectedOtherPeopleCourseOperationResponce { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -31,7 +30,6 @@ public class OtherPeoplesCoursesPageModel : BaseModel
     /// <returns></returns>
     public async Task OnAddTrainingCourseClick(TrainingCourse entity)
     {
-        //NavigationManager.NavigateTo($"{ProjectRouters.viewTrainingCourcePageHref}?{ProjectRouters.queryParametrNameForEditId}={entity.Id}");
         var selectedCource = new SelectedOtherPeopleCourse()
         {
             MyUserId = MyUser.Id,
@@ -43,13 +41,11 @@ public class OtherPeoplesCoursesPageModel : BaseModel
     }
 
     /// <summary>
-    /// Показать подробную информацию о курсе
+    /// Удалить курс из списка чужих выбранных курсов
     /// </summary>
-    /// <param name="entity"></param>
-    /// <returns></returns>
-    public async Task OnShowInfoTrainingCourseClick(TrainingCourse entity)
+    protected async Task DeleteSelectedTrainingCourse(TrainingCourse entity)
     {
-        //NavigationManager.NavigateTo($"{ProjectRouters.memorizationTrainingCourcePageHref}?{ProjectRouters.queryParametrNameForEditId}={entity.Id}");
-        SelectedTrainingCourse = entity;
+        DelSelectedOtherPeopleCourseOperationResponce = await DbRepository.DelSelectedTrainingCourceAsync(MyUser, entity);
+        await LoadData();
     }
 }

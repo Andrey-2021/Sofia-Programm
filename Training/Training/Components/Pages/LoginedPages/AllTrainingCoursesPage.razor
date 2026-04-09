@@ -5,12 +5,21 @@
 <PageTitle>Курсы</PageTitle>
 
 <h3>Мои курсы</h3>
-<ShowAllTrainingCoursesComponent TrainingCourses=@TrainingCourses MyUser=@MyUser IsMyTrainingCourses ="true"/>
+<ShowAllTrainingCoursesComponent TrainingCourses=@TrainingCourses
+                                 MyUser=@MyUser
+                                 IsMyTrainingCoursesPage="true"
+                                 IsShowDelButton="false" />
 <br />
 <br />
-<ShowOperrationErrorComponent BaseOperationResponce="OtherPeoplesCoursesThatIChosenResponce"/>
-@if (SelectedOtherPeopleCourse?.Count() > 0)
+<ShowOperrationErrorComponent BaseOperationResponce="OtherPeoplesCoursesThatIChosenResponce" />
+<ShowOperrationErrorComponent BaseOperationResponce="DelSelectedOtherPeopleCourseOperationResponce" />
+
+@if (OtherPeoplesCoursesThatIChosen?.Count() > 0)
 {
     <h3>Выбранные мною курсы, разработанные другими пользователями</h3>
-    <ShowAllTrainingCoursesComponent TrainingCourses=@SelectedOtherPeopleCourse MyUser=@MyUser IsMyTrainingCourses ="false"/>
+    <ShowAllTrainingCoursesComponent TrainingCourses=@OtherPeoplesCoursesThatIChosen
+                                     MyUser=@MyUser
+                                     IsMyTrainingCoursesPage="true"
+                                     IsShowDelButton="true"
+                                     OnDeleteTrainingCourseCallback="DeleteSelectedTrainingCourse" />
 }

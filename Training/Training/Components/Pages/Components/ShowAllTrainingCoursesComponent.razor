@@ -1,5 +1,6 @@
 ﻿@inherits ShowAllTrainingCoursesComponentMode
 
+
 @if (TrainingCourses == null)
 {
     <div>
@@ -13,13 +14,11 @@ else
             <thead>
                 <tr>
                     <th>
-                        @if (MyUser?.Role == RoleEnum.admin || IsMyTrainingCourses == false)
+                        @if (MyUser?.Role == RoleEnum.admin || IsShowDelButton == false)
                         {
                             <div>
                                 Владелец Курса
                             </div>
-                            
-                        
                         }
                     </th>
                     <th>
@@ -56,7 +55,7 @@ else
                 {
                     <tr>
                         <td>
-                            @if (MyUser.Role == RoleEnum.admin || IsMyTrainingCourses==false)
+                            @if (MyUser.Role == RoleEnum.admin || IsShowDelButton == false)
                             {
                             
                                 @item.MyUser?.Manager.FIO
@@ -89,43 +88,79 @@ else
                             }
                             
                         </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Прсомотреть" Icon="visibility" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnViewTrainingCourseClick(item))">
-                            </RadzenButton>
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Заучивание" Icon="cognition" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnMemorizationTrainingCourseClick(item))">
-                            </RadzenButton>
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Warning" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Тест" Icon="play_circle" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnStartTestClick(item))">
-                            </RadzenButton>
-                        </td>
-                        <td>
-                            @if (IsMyTrainingCourses)
-                            {
-                                <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                              title="Редактировать" Icon="edit" Size="ButtonSize.Medium"
-                                              Click="@(args => OnEditClick(item))">
+                        @if (IsMyTrainingCoursesPage)
+                        {
+                            <td>
+                                <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                              title="Прсомотреть" Icon="visibility" Size="ButtonSize.Medium"
+                                              Click="@(args =>OnViewTrainingCourseClick(item))">
                                 </RadzenButton>
-                            }
-                            else
+                            </td>
+                            <td>
+                                <RadzenButton ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                              title="Заучивание" Icon="cognition" Size="ButtonSize.Medium"
+                                              Click="@(args =>OnMemorizationTrainingCourseClick(item))">
+                                </RadzenButton>
+                            </td>
+                            <td>
+                                <RadzenButton ButtonStyle="ButtonStyle.Warning" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                              title="Тест" Icon="play_circle" Size="ButtonSize.Medium"
+                                              Click="@(args =>OnStartTestClick(item))">
+                                </RadzenButton>
+                            </td>
+
+                            @if (IsShowDelButton == false)
                             {
-                                <div>
-                                    Удалить
-                                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                                  title="Удалить" Icon="delete_forever" Size="ButtonSize.Medium"
-                                                  Click="@(args => OnDeleteClick(item))">
-                                    </RadzenButton>
-                                </div>
+                                <td>
+                                    @if (IsMyTrainingCoursesPage)
+                                    {
+                                        <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                                      title="Редактировать" Icon="edit" Size="ButtonSize.Medium"
+                                                      Click="@(args => OnEditClick(item))">
+                                        </RadzenButton>
+                                    }
+                                </td>
                             }
-                        </td>
+                        }
+                        else
+                        {
+                            @* Страница с чужими курсами *@
+                            if (IsShowDelButton == false)
+                            {
+                                <td>
+                                    <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                                  title="Добавить к себе" Icon="add_circle" Size="ButtonSize.Medium"
+                                                  Click="@(args =>OnAddTrainingCourseClick(item))">
+                                    </RadzenButton>
+                                </td>
+                                <td>
+                                    <RadzenButton ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                                  title="Подробно" Icon="info" Size="ButtonSize.Medium"
+                                                  Click="@(args =>OnShowInfoTrainingCourseClick(item))">
+                                    </RadzenButton>
+                                </td>
+                                <td>
+                                </td>
+                                <td>
+                                </td>
+                            }
+                        }
+                        
+                        @if (IsShowDelButton)
+                        {
+                            <td>
+                                <RadzenButton ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                              title="Удалить" Icon="delete_forever" Size="ButtonSize.Medium"
+                                              Click="@(args => OnDeleteClick(item))">
+                                </RadzenButton>
+                            </td>
+                            @if (IsMyTrainingCoursesPage == false)
+                            {
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            }
+                        }
                     </tr>
                 }
             </tbody>
@@ -139,7 +174,27 @@ else
 
         </table>
     </div>
-    
 }
 
 
+@if (SelectedTrainingCourse != null)
+{
+    <br />
+    <div>
+        <div>
+            Подробная информация
+        </div>
+        <table>
+            <tbody>
+                <tr>
+                    <td>Курс:</td>
+                    <td>@SelectedTrainingCourse.Name</td>
+                </tr>
+                <tr>
+                    <td>Количество подписчиков:</td>
+                    <td>ххх</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+}

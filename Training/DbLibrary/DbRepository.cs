@@ -446,8 +446,34 @@ public class DbRepository
             (predicate: x => x.Id == id,
             include: x => x.Include(tc => tc.CourseQestions)
                             .ThenInclude(cq => cq.WrongRussianWordAnswers));
+    }
 
 
+    /// <summary>
+	/// Удалить курс из списка чужих выбранных курсов
+	/// </summary>
+	/// <typeparam name="TEntity"></typeparam>
+	/// <param name="entity"></param>
+	/// <returns></returns>
+	public async Task<OperationResponce<SelectedOtherPeopleCourse?>> DelSelectedTrainingCourceAsync(MyUser myUser, TrainingCourse trainingCourse)
+    {
+        try
+        {
+            using var db = contextFactory.CreateDbContext();
+            var find = await db.Set<SelectedOtherPeopleCourse>().FirstOrDefaultAsync(x => x.MyUserId == myUser.Id && x.TrainingCourseId==trainingCourse.Id);
+
+            if (find != null)
+            {
+                var deletedEntity = db.Remove(find);
+                await db.SaveChangesAsync();
+                return OperationResponce<SelectedOtherPeopleCourse?>.SetSuccessfullOperation(deletedEntity.Entity,"Данные успешно удалены");
+            }
+            return OperationResponce<SelectedOtherPeopleCourse?>.SetSuccessfullOperation(null,"Данные уже удалены");
+        }
+        catch (Exception ex)
+        {
+            return OperationResponce<SelectedOtherPeopleCourse?>.SetExceptionOperation("Ошипка при удалении данных", ex);
+        }
     }
 }
 
