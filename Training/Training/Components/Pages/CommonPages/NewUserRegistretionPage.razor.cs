@@ -1,5 +1,20 @@
 ﻿namespace Training.Components.Pages.CommonPages;
 
-public class NewUserRegistretionPageModel:ComponentBase
+public class NewUserRegistretionPageModel : BaseAddModel<MyUser>
 {
+    protected override Task OnParametersSetAsync()
+    {
+        MainEntity = new();
+        return base.OnParametersSetAsync();
+    }
+
+    protected override void GoAfterSave()
+    {
+        NavigationManager.NavigateTo(ProjectRouters.registeredUsersHref);
+    }
+
+    protected void OnCancelClickCommand()
+    {
+        NavigationManager.NavigateTo(ProjectRouters.registeredUsersHref);
+    }
 }

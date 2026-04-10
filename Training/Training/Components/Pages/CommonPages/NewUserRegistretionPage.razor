@@ -1,7 +1,7 @@
 ﻿@attribute [Route(ProjectRouters.newUserRegistration)]
 @inherits NewUserRegistretionPageModel
 <PageTitle>
- Регистрация | Карточки 和の道
+    Регистрация | Карточки 和の道
 </PageTitle>
 
 <main>
@@ -10,51 +10,79 @@
             <h1 class="form-title">📝 Создайте аккаунт</h1>
             <p class="form-subtitle">Заполните форму, чтобы начать создавать карточки</p>
 
-            <form id="registerForm" novalidate>
+            @* <form id="registerForm" novalidate> *@
+            <EditForm EditContext=@EditContext OnValidSubmit="@OnSaveValidEntityClick">
+                <ObjectGraphDataAnnotationsValidator />
+                
                 <div class="form-group">
                     <label for="lastName">Фамилия *</label>
-                    <input type="text" id="lastName" name="lastName" required maxlength="50" placeholder="Иванов">
+                    <input type="text" id="lastName" name="lastName"
+                           required maxlength=@LengthConstants.lastNameMaxLength
+                           placeholder="Иванов"
+                           @bind-value=@(MainEntity!.Manager.LastName) />
+                    <ValidationMessage For="@(() => MainEntity!.Manager.LastName)" />
                     <div class="error-message" id="lastNameError">Поле обязательно для заполнения</div>
                 </div>
 
                 <div class="form-group">
                     <label for="firstName">Имя *</label>
-                    <input type="text" id="firstName" name="firstName" required maxlength="50" placeholder="Иван">
+                    <input type="text" id="firstName" name="firstName" required maxlength="50" placeholder="Иван"
+                    @bind-value=@( MainEntity!.Manager.FirstName)/>
+                    <ValidationMessage For="@(() => MainEntity!.Manager.FirstName)" />
                     <div class="error-message" id="firstNameError">Поле обязательно для заполнения</div>
                 </div>
 
                 <div class="form-group">
                     <label for="middleName">Отчество *</label>
-                    <input type="text" id="middleName" name="middleName" required maxlength="50" placeholder="Иванович">
+                    <input type="text" id="middleName" name="middleName" required maxlength="50" placeholder="Иванович"
+                    @bind-value=@( MainEntity!.Manager.MiddleName)/>
+                    <ValidationMessage For="@(() => MainEntity!.Manager.MiddleName)" />
                     <div class="error-message" id="middleNameError">Поле обязательно для заполнения</div>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Телефон *</label>
-                    <input type="tel" id="phone" name="phone" required pattern="^(\+7|8)[0-9]{10}$" placeholder="+7 900 123-45-67">
+                    <input type="tel" id="phone" name="phone" required pattern="^(\+7|8)[0-9]{10}$" placeholder="+7 900 123-45-67"
+                    @bind-value=@MainEntity.Manager.PhoneNumber/>
+                    <ValidationMessage For="@(() => MainEntity!.Manager.PhoneNumber)" />
                     <div class="error-message" id="phoneError">Введите корректный номер (например, +7 900 123-45-67)</div>
                 </div>
 
                 <div class="form-group">
                     <label for="email">E-mail *</label>
-                    <input type="email" id="email" name="email" required maxlength="100" placeholder="ivan@example.com">
+                    <input type="email" id="email" name="email" required maxlength="100" placeholder="ivan@example.com"
+                    @bind-value=@MainEntity.Manager.Email/>
+                    <ValidationMessage For="@(() => MainEntity!.Manager.Email)" />
                     <div class="error-message" id="emailError">Введите корректный email</div>
                 </div>
 
                 <div class="form-group">
+                    <label for="login">Логин *</label>
+                    <input type="text" id="login" name="login" required minlength="6" placeholder="Не менее 6 символов"
+                    @bind-value=@( MainEntity!.Login)/>
+                    <ValidationMessage For="@(() => MainEntity!.Login)" />
+                    <div class="error-message" id="loginError">Логин должен содержать не менее 6 символов</div>
+                </div>
+
+
+                <div class="form-group">
                     <label for="password">Пароль *</label>
-                    <input type="password" id="password" name="password" required minlength="6" placeholder="Не менее 6 символов">
+                    <input type="password" id="password" name="password" required minlength="6" placeholder="Не менее 6 символов"
+                    @bind-value=@(MainEntity!.Password)/>
                     <div class="error-message" id="passwordError">Пароль должен содержать не менее 6 символов</div>
                 </div>
 
                 <div class="form-group">
                     <label for="confirmPassword">Подтверждение пароля *</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <input type="password" id="confirmPassword" name="confirmPassword" required
+                        @bind-value=@( MainEntity!.ConfirmedPassword)/>
                     <div class="error-message" id="confirmPasswordError">Пароли не совпадают</div>
                 </div>
 
                 <button type="submit" class="btn-submit">Зарегистрироваться</button>
-            </form>
+            
+            </EditForm>
+            @* </form> *@
 
             <div class="footer-links">
                 Уже есть аккаунт? <a href=@ProjectRouters.inputLoginandPasswordHref>Войдите</a>
