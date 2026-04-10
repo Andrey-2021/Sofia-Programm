@@ -139,6 +139,44 @@
                                                   Name="_isVisableForAll" />
 
                                 </td>
+                                <td>
+                                    <div class="wrapper">
+                                        @* <div class="button-panel"> *@
+                                            <!-- КНОПКА ЗАГРУЗКИ ДАННЫХ ИЗ EXCEL (зеленый фон) -->
+                                            <button class="round-btn btn-upload" id="uploadBtn" aria-label="Импорт Excel"
+                                                type="button"
+                                                @onclick="LoadExcel">
+                                                <!-- Новая иконка: загрузка + стрелка вниз, значок листа Excel -->
+                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12 4V16M12 16L15 13M12 16L9 13" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M4 17V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V17" stroke="white" stroke-width="1.8" stroke-linecap="round" />
+                                                    <rect x="5" y="3" width="14" height="14" rx="1.5" stroke="white" stroke-width="1.5" fill="rgba(255,255,255,0.2)" />
+                                                    <path d="M8 7H16" stroke="white" stroke-width="1.4" stroke-linecap="round" />
+                                                    <path d="M8 10.5H14" stroke="white" stroke-width="1.4" stroke-linecap="round" />
+                                                    <path d="M8 14H12" stroke="white" stroke-width="1.4" stroke-linecap="round" />
+                                                </svg>
+                                                <span class="tooltip-text">Загрузить Excel-файл</span>
+                                            </button>
+
+                                            <!-- КНОПКА ВЫГРУЗКИ ДАННЫХ В EXCEL (синий фон) -->
+                                            <button class="round-btn btn-download" id="downloadBtn" aria-label="Экспорт Excel"
+                                                type="button"
+                                                @onclick="SaveExcel">
+                                                <!-- Новая иконка: выгрузка, стрелка вверх, файл Excel с символом -->
+                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12 20V8M12 8L15 11M12 8L9 11" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M4 17V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V17" stroke="white" stroke-width="1.8" stroke-linecap="round" />
+                                                    <rect x="5" y="3" width="14" height="14" rx="1.5" stroke="white" stroke-width="1.5" fill="rgba(255,255,255,0.2)" />
+                                                    <path d="M8 7H16" stroke="white" stroke-width="1.4" stroke-linecap="round" />
+                                                    <path d="M8 10.5H12" stroke="white" stroke-width="1.4" stroke-linecap="round" />
+                                                    <circle cx="17" cy="6" r="1.5" fill="white" stroke="white" stroke-width="1" />
+                                                </svg>
+                                                <span class="tooltip-text">Выгрузить данные в Excel</span>
+                                            </button>
+                                        @* </div> *@
+                                    </div>
+                                </td>
+                                
                             </tr>
 
                         </tbody>

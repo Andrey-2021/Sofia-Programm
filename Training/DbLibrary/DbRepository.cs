@@ -216,15 +216,13 @@ public class DbRepository
         }
     }
 
-
-
     /// <summary>
 	/// Удалить сущность в БД
 	/// </summary>
 	/// <typeparam name="TEntity"></typeparam>
 	/// <param name="entity"></param>
 	/// <returns></returns>
-	public async Task<(TEntity entity, Exception? ex)> DelEntityAsync<TEntity>(TEntity entity)
+	public async Task<OperationResponce<TEntity>> DelEntityAsync<TEntity>(TEntity entity)
     where TEntity : class, IHaveId
     {
         try
@@ -236,13 +234,13 @@ public class DbRepository
             {
                 var deletedEntity = db.Remove(find);
                 await db.SaveChangesAsync();
-                return (deletedEntity.Entity, null);
+                return OperationResponce<TEntity>.SetSuccessfullOperation(deletedEntity.Entity, "Объект удалён");
             }
-            return (entity, null);
+            return OperationResponce<TEntity>.SetSuccessfullOperation(entity, "Объект уже кем-тоудалён");
         }
         catch (Exception ex)
         {
-            return (entity, ex);
+            return OperationResponce<TEntity>.SetExceptionOperation("Ошибка при обновлении (сохранении) объекта в БД", ex);
         }
     }
 
@@ -416,12 +414,11 @@ public class DbRepository
             .SetSuccessfullOperation((mySelectedOtherPeopleCourseResponce.Data, allOtherPeopleCourseResponce.Data.ToList()), null);
     }
 
-
-
-
-
-
-
+    /// <summary>
+    /// Информация о результатах тестирования
+    /// </summary>
+    /// <param name="myUser">Пользователь</param>
+    /// <returns>Результаты тестирования пользователя</returns>
     public async Task<(IEnumerable<CompletedTest>? data, Exception? ex)> GetAllMyCompletedTest(MyUser myUser)
     {
         if (myUser == null)
@@ -432,13 +429,13 @@ public class DbRepository
 
 
         if (myUser.Role == RoleEnum.admin) //Если это администратор,
-            return await GetEntitiesAsync<CompletedTest>(include: includeData); // Читаем все 
+            return await GetEntitiesAsync<CompletedTest>(include: includeData,
+                                                            orderBy: x=>x.OrderBy(ct=>ct.ContractDate)); // Читаем все 
         else
             return await GetEntitiesAsync<CompletedTest>(predicate: x => x.MyUserId == myUser.Id, //Читаем только свои 
-                                                            include: includeData);
-
+                                                            include: includeData,
+                                                            orderBy: x => x.OrderBy(ct => ct.ContractDate));
     }
-
 
     public async Task<OperationResponce<TrainingCourse>> GetCourse(int? id)
     {

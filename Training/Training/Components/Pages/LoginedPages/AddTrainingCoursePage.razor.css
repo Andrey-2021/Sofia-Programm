@@ -137,4 +137,231 @@
         all: revert !important;
     }
 
-    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Контейнер для кнопок — флексы, отступы */
+.button-panel {
+    display: flex;
+    gap: 3rem;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(8px);
+    border-radius: 100px;
+    padding: 1.8rem 2.8rem;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.15), inset 0 1px 1px rgba(255,255,255,0.5);
+}
+
+/* Общая база для круглых кнопок (чуть меньше — 80x80) */
+.round-btn {
+    position: relative;
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+    outline: none;
+    box-shadow: 0 10px 18px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+    /* Эффекты наведения и нажатия — универсальные */
+    .round-btn:hover {
+        transform: translateY(-5px) scale(1.02);
+        filter: brightness(1.02);
+        box-shadow: 0 20px 28px rgba(0, 0, 0, 0.25);
+    }
+
+    .round-btn:active {
+        transform: translateY(2px) scale(0.96);
+        transition: 0.05s;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Иконки внутри кнопок (размер 38x38 — адаптивно) */
+    .round-btn svg {
+        width: 40px;
+        height: 40px;
+        pointer-events: none;
+        transition: transform 0.2s;
+    }
+
+    .round-btn:hover svg {
+        transform: scale(1.05);
+    }
+
+/* Стили для разных фонов кнопок */
+/* Кнопка ЗАГРУЗКИ — зелёно-изумрудный градиент */
+.btn-upload {
+    background: linear-gradient(145deg, #2b7a3e, #1e5a2e);
+    box-shadow: 0 12px 18px rgba(30, 90, 46, 0.4), inset 0 1px 1px rgba(255,255,255,0.3);
+}
+
+    .btn-upload:hover {
+        background: linear-gradient(145deg, #328f48, #236e36);
+    }
+
+/* Кнопка ВЫГРУЗКИ — сине-стальной градиент */
+.btn-download {
+    background: linear-gradient(145deg, #2c6e9e, #1c4f73);
+    box-shadow: 0 12px 18px rgba(28, 79, 115, 0.4), inset 0 1px 1px rgba(255,255,255,0.25);
+}
+
+    .btn-download:hover {
+        background: linear-gradient(145deg, #3682b8, #235e88);
+    }
+
+/* ВСПЛЫВАЮЩАЯ ПОДСКАЗКА (tooltip) - общая стилизация */
+.round-btn .tooltip-text {
+    visibility: hidden;
+    opacity: 0;
+    background-color: #1e2f3c;
+    color: #f0f9ff;
+    text-align: center;
+    border-radius: 40px;
+    padding: 6px 14px;
+    position: absolute;
+    z-index: 20;
+    bottom: 115%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: 0.8rem;
+    font-weight: 500;
+    letter-spacing: 0.3px;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.2);
+    backdrop-filter: blur(4px);
+    background: rgba(25, 40, 50, 0.95);
+    font-family: inherit;
+    pointer-events: none;
+    border: 1px solid rgba(255,255,240,0.2);
+}
+
+    /* Треугольник снизу тултипа */
+    .round-btn .tooltip-text::after {
+        content: "";
+        position: absolute;
+        top: 100%;
+        left: 50%;
+        margin-left: -6px;
+        border-width: 6px;
+        border-style: solid;
+        border-color: rgba(25, 40, 50, 0.95) transparent transparent transparent;
+    }
+
+/* Показываем при наведении */
+.round-btn:hover .tooltip-text {
+    visibility: visible;
+    opacity: 1;
+}
+
+/* Область статуса / уведомлений */
+.status-area {
+    margin-top: 2rem;
+    text-align: center;
+    font-size: 0.9rem;
+    background: rgba(0, 0, 0, 0.65);
+    backdrop-filter: blur(8px);
+    display: inline-block;
+    width: auto;
+    padding: 10px 24px;
+    border-radius: 60px;
+    color: white;
+    font-weight: 500;
+    transition: all 0.2s;
+    font-family: 'JetBrains Mono', monospace, 'Segoe UI';
+    letter-spacing: 0.3px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    border: 1px solid rgba(255,255,245,0.25);
+    max-width: 90vw;
+}
+
+    .status-area.error-status {
+        background: rgba(200, 60, 45, 0.9);
+    }
+
+    .status-area.success-status {
+        background: rgba(50, 140, 80, 0.92);
+    }
+
+.wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Скрываем стандартный input file */
+#excelInput {
+    display: none;
+}
+
+/* Адаптив: на совсем маленьких экранах кнопки чуть меньше */
+@media (max-width: 500px) {
+    .button-panel {
+        gap: 2rem;
+        padding: 1.2rem 1.8rem;
+    }
+
+    .round-btn {
+        width: 68px;
+        height: 68px;
+    }
+
+        .round-btn svg {
+            width: 34px;
+            height: 34px;
+        }
+
+        .round-btn .tooltip-text {
+            font-size: 0.7rem;
+            padding: 5px 10px;
+            white-space: nowrap;
+        }
+
+    .status-area {
+        font-size: 0.8rem;
+        padding: 6px 18px;
+    }
+}
+
+
+
+
+
+

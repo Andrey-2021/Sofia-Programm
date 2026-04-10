@@ -9,7 +9,7 @@ public class BaseAddModel<TEntity> : BaseModel
     /// <summary>
     /// Результат выполнения операции чтения
     /// </summary>
-    protected OperationResponce<TEntity>? LoadEntityOperationResponce { get; set; }
+    protected OperationResponce<TEntity?>? LoadEntityOperationResponce { get; set; }
 
     /// <summary>
     /// Результат выполнения операции записи

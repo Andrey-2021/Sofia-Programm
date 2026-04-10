@@ -148,4 +148,10 @@ public class AddTrainingCoursePageModel: BaseAddModel<TrainingCourse>
     {
         NavigationManager.NavigateTo(ProjectRouters.allTrainingCoursesPageHref);
     }
+
+    protected async Task LoadExcel()
+    { }
+
+    protected async Task SaveExcel()
+    { }
 }

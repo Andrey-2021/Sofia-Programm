@@ -17,66 +17,108 @@
                 <div class="form-group">
                     <label for="lastName">Фамилия *</label>
                     <input type="text" id="lastName" name="lastName"
-                           required maxlength=@LengthConstants.lastNameMaxLength
+                           required
+                           autocomplete="off"
+                           maxlength=@LengthConstants.lastNameMaxLength
+                           minlength=@LengthConstants.lastNameMinLength
                            placeholder="Иванов"
                            @bind-value=@(MainEntity!.Manager.LastName) />
-                    <ValidationMessage For="@(() => MainEntity!.Manager.LastName)" />
+                    @* <ValidationMessage For="@(() => MainEntity!.Manager.LastName)" /> *@
                     <div class="error-message" id="lastNameError">Поле обязательно для заполнения</div>
                 </div>
 
                 <div class="form-group">
                     <label for="firstName">Имя *</label>
-                    <input type="text" id="firstName" name="firstName" required maxlength="50" placeholder="Иван"
-                    @bind-value=@( MainEntity!.Manager.FirstName)/>
-                    <ValidationMessage For="@(() => MainEntity!.Manager.FirstName)" />
+                    <input type="text" id="firstName" name="firstName"
+                           required
+                           autocomplete="off"
+                           maxlength=@LengthConstants.firstNameMaxLength
+                           minlength=@LengthConstants.firstNameMinLength
+                           placeholder="Иван"
+                           @bind-value=@(MainEntity!.Manager.FirstName) />
+                    @* <ValidationMessage For="@(() => MainEntity!.Manager.FirstName)" /> *@
                     <div class="error-message" id="firstNameError">Поле обязательно для заполнения</div>
                 </div>
 
                 <div class="form-group">
                     <label for="middleName">Отчество *</label>
-                    <input type="text" id="middleName" name="middleName" required maxlength="50" placeholder="Иванович"
-                    @bind-value=@( MainEntity!.Manager.MiddleName)/>
-                    <ValidationMessage For="@(() => MainEntity!.Manager.MiddleName)" />
+                    <input type="text" id="middleName" name="middleName"
+                           required
+                           autocomplete="off"
+                           maxlength=@LengthConstants.middleNameMaxLength
+                           minlength=@LengthConstants.middleNameMinLength
+                           placeholder="Иванович"
+                           @bind-value=@(MainEntity!.Manager.MiddleName) />
+                    @* <ValidationMessage For="@(() => MainEntity!.Manager.MiddleName)" /> *@
                     <div class="error-message" id="middleNameError">Поле обязательно для заполнения</div>
                 </div>
 
                 <div class="form-group">
                     <label for="phone">Телефон *</label>
-                    <input type="tel" id="phone" name="phone" required pattern="^(\+7|8)[0-9]{10}$" placeholder="+7 900 123-45-67"
-                    @bind-value=@MainEntity.Manager.PhoneNumber/>
-                    <ValidationMessage For="@(() => MainEntity!.Manager.PhoneNumber)" />
+                    <input type="tel" id="phone" name="phone"
+                           required
+                           autocomplete="off"
+                           pattern="^(\+7|8)[0-9]{10}$"
+                           placeholder="+7 900 123-45-67"
+                           maxlength=@LengthConstants.phonetMaxLength
+                           minlength=@LengthConstants.phonetMinLength
+                           @bind-value=@MainEntity.Manager.PhoneNumber />
+                    @* <ValidationMessage For="@(() => MainEntity!.Manager.PhoneNumber)" /> *@
                     <div class="error-message" id="phoneError">Введите корректный номер (например, +7 900 123-45-67)</div>
                 </div>
 
                 <div class="form-group">
                     <label for="email">E-mail *</label>
-                    <input type="email" id="email" name="email" required maxlength="100" placeholder="ivan@example.com"
-                    @bind-value=@MainEntity.Manager.Email/>
-                    <ValidationMessage For="@(() => MainEntity!.Manager.Email)" />
+                    <input type="email" id="email" name="email"
+                           required
+                           autocomplete="off"
+                           maxlength=@LengthConstants.emailMaxLength
+                           minlength=@LengthConstants.emailMinLength
+                           placeholder="ivan@example.com"
+                           @bind-value=@MainEntity.Manager.Email />
+                    @* <ValidationMessage For="@(() => MainEntity!.Manager.Email)" /> *@
                     <div class="error-message" id="emailError">Введите корректный email</div>
                 </div>
 
                 <div class="form-group">
                     <label for="login">Логин *</label>
-                    <input type="text" id="login" name="login" required minlength="6" placeholder="Не менее 6 символов"
-                    @bind-value=@( MainEntity!.Login)/>
-                    <ValidationMessage For="@(() => MainEntity!.Login)" />
-                    <div class="error-message" id="loginError">Логин должен содержать не менее 6 символов</div>
+                    <input type="text" id="login" name="login"
+                           required
+                           autocomplete="off"
+                           maxlength=@LengthConstants.loginMaxLength
+                           minlength=@LengthConstants.loginMinLength
+                           placeholder=@($"Не менее {LengthConstants.loginMinLength} символов")
+                           @bind-value=@(MainEntity!.Login) />
+                    @* <ValidationMessage For="@(() => MainEntity!.Login)" /> *@
+                    <div class="error-message" id="loginError">@($"Логин должен содержать не менее {LengthConstants.loginMinLength} символов")</div>
                 </div>
 
 
                 <div class="form-group">
                     <label for="password">Пароль *</label>
-                    <input type="password" id="password" name="password" required minlength="6" placeholder="Не менее 6 символов"
-                    @bind-value=@(MainEntity!.Password)/>
-                    <div class="error-message" id="passwordError">Пароль должен содержать не менее 6 символов</div>
+                    <input type="password" id="password" name="password"
+                           required
+                           autocomplete="off"
+                           maxlength=@LengthConstants.passwordMaxLength
+                           minlength=@LengthConstants.passwordMinLength
+                           placeholder=@($"Не менее {LengthConstants.passwordMinLength} символов")
+                           @bind-value=@(MainEntity!.Password) />
+                    <div class="error-message" id="passwordError">@($"Пароль должен содержать не менее {LengthConstants.passwordMinLength} символов")</div>
+                    @* <ValidationMessage For="@(() => MainEntity!.Password)" /> *@
                 </div>
 
                 <div class="form-group">
                     <label for="confirmPassword">Подтверждение пароля *</label>
-                    <input type="password" id="confirmPassword" name="confirmPassword" required
-                        @bind-value=@( MainEntity!.ConfirmedPassword)/>
+                    <input type="password" id="confirmPassword"
+                           name="confirmPassword"
+                           required
+                           autocomplete="off"
+                           maxlength=@LengthConstants.passwordMaxLength
+                           minlength=@LengthConstants.passwordMinLength
+                           placeholder=@($"Не менее {LengthConstants.passwordMinLength} символов")
+                           @bind-value=@(MainEntity!.ConfirmedPassword) />
                     <div class="error-message" id="confirmPasswordError">Пароли не совпадают</div>
+                    @* <ValidationMessage For="@(() => MainEntity!.ConfirmedPassword)" /> *@
                 </div>
 
                 <button type="submit" class="btn-submit">Зарегистрироваться</button>

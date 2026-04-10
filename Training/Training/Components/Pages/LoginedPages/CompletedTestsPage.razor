@@ -35,19 +35,21 @@ else
                     <th>
                         Название
                     </th>
+                    <th>
+                        Уровень сложности
+                    </th>
 
                     <th>
-                        Количество вопросов в курсе
+                        Кол. вопросов
                     </th>
                     <th>
                         Правильных ответов
                     </th>
-
-
-
                     <th>
-                        Уровень сложности
+                        Результат
+                        %
                     </th>
+                    
                     <th>
                     </th>
                     <th>
@@ -80,40 +82,20 @@ else
                         </td>
 
                         <td>
+                            @item.TrainingCourse?.DifficultyLevel
+                        </td>
+
+                        <td>
                             @item.QestionNumber
                         </td>
                         <td>
                             @item.CountCorrectAnswers
                         </td>
-                        
-                    
+
                         <td>
-                            @item.TrainingCourse?.DifficultyLevel
+                            @(item.PercentageResult)%
                         </td>
-                        @*  <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Прсомотреть" Icon="visibility" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnViewTrainingCourseClick(item))">
-                            </RadzenButton>
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Заучивание" Icon="cognition" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnMemorizationTrainingCourseClick(item))">
-                            </RadzenButton>
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Warning" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Тест" Icon="play_circle" Size="ButtonSize.Medium"
-                                          Click="@(args =>OnStartTestClick(item))">
-                            </RadzenButton>
-                        </td>
-                        <td>
-                            <RadzenButton ButtonStyle="ButtonStyle.Info" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                          title="Редактировать" Icon="edit" Size="ButtonSize.Medium"
-                                          Click="@(args => OnEditClick(item))">
-                            </RadzenButton>
-                        </td> *@
+
                     </tr>
                 }
             </tbody>

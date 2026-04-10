@@ -4,7 +4,7 @@ public class NewUserRegistretionPageModel : BaseAddModel<MyUser>
 {
     protected override Task OnParametersSetAsync()
     {
-        MainEntity = new();
+        MainEntity = new() { Role = RoleEnum.manager };
         return base.OnParametersSetAsync();
     }
 

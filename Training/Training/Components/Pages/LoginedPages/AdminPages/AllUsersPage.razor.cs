@@ -5,42 +5,32 @@ public class AllUsersPageModel : BaseModel
     [Inject]
     protected IServiceProvider ServiceProvider { get; set; } = default!;
 
-    /// <summary>
-    /// Сообщение об ошибке
-    /// </summary>
-    protected string? ErrorMassage { get; set; }
-
-    public IEnumerable<MyUser>? Entities { get; set; }
+    protected OperationResponce<MyUser>? DelOperationResponce { get; set; }
+    protected OperationResponce<IEnumerable<MyUser>?>? ReadEntitiesOperationResponce { get; set; }
+    protected IEnumerable<MyUser>? Entities { get; set; }
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
-
-        IsBusy = true;
-        var repository = ServiceProvider.GetRequiredService<DbRepository>();
-        var result = await repository.GetEntitiesAsync<MyUser>();
-        Entities = result.data;
-
-        if (result.ex is null)
-        {
-            ErrorMassage = null;
-        }
-        else
-        {
-            ErrorMassage = "Ошибка при чтении данных. Попробуйте выполнить операцию позже или обратитесь к администратору."
-                + Environment.NewLine + "Exception:" + result.ex?.Message
-                + Environment.NewLine + "InnerException:" + result.ex?.InnerException?.Message;
-        }
-        IsBusy = false;
+        await LoadData();
     }
 
+    private async Task LoadData()
+    {
+        IsBusy = true;
+        ReadEntitiesOperationResponce = await DbRepository.GetEntities<MyUser>();
+        Entities = ReadEntitiesOperationResponce.Data;
+        IsBusy = false;
+        if (ReadEntitiesOperationResponce.IsSuccessfullOperation)
+            NotifyUser("Данные прочитаны");
+    }
 
     /// <summary>
     /// Редактировать пользователч
     /// </summary>
     public async Task OnEditClick(MyUser entity)
     {
-        //_goToUrlService.GoToUrl($"{ProjectRouters.addMyUserHref}?{ParametersNames.queryParametrNameForEditId}={entity.Id}");
+        NavigationManager.NavigateTo($"{ProjectRouters.addMyUserHref}?{ProjectRouters.queryParametrNameForEditId}={entity.Id}");
     }
 
     /// <summary>
@@ -49,6 +39,11 @@ public class AllUsersPageModel : BaseModel
     public async Task OnDeleteUserClick(MyUser entity)
     {
         //await OnForeveDelWithQuestionCommandAsync(entity, $"Удалить пользователя {entity.Manager.Fio}?");
+        //DelSelectedOtherPeopleCourseOperationResponce
+        DelOperationResponce = await DbRepository.DelEntityAsync<MyUser>(entity);
+        if (DelOperationResponce.IsSuccessfullOperation)
+            NotifyUser("Данные удалены");
+        await LoadData();
     }
 
     /// <summary>
@@ -56,7 +51,6 @@ public class AllUsersPageModel : BaseModel
     /// </summary>
     public async Task OnRestorePasswordClick(MyUser entity)
     {
-
     }
 
     /// <summary>
@@ -72,6 +66,7 @@ public class AllUsersPageModel : BaseModel
     /// </summary>
     protected async void OnReloadClick(object? obj, EventArgs eventArgs)
     {
+        await LoadData();
         //if (grid != null)
         //  await grid.Reload();
     }
@@ -87,9 +82,9 @@ public class AllUsersPageModel : BaseModel
     /// <summary>
     /// Выйти
     /// </summary>
-    public void OnExitClick()
-    {
-        NavigationManager.NavigateTo(ProjectRouters.loginedHomePageHref);
-    }
+    //public void OnExitClick()
+    //{
+    //    NavigationManager.NavigateTo(ProjectRouters.loginedHomePageHref);
+    //}
 }
 

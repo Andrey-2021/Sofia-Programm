@@ -56,9 +56,12 @@ public class Manager
     /// Электронная почта
     /// </summary>
     [EmailAddress(ErrorMessage = "Неверный формат e-mail")]
-    [MaxLength(LengthConstants.emailMaxLength, ErrorMessage = "Длина e-mail должна быть не более {1} символов")]
+    [Required(ErrorMessage = "Введите e-mail")]
+    //[MaxLength(LengthConstants.emailMaxLength, ErrorMessage = "Длина e-mail должна быть не более {1} символов")]
+    [StringLength(LengthConstants.emailMaxLength, MinimumLength = LengthConstants.emailMinLength, ErrorMessage = "Длина номера e-mail должна быть не менее {2} и не более {1} символов")]
     [Comment("e-mail")]
-    public string? Email { get; set; }
+    [DisplayName("e-mail")]
+    public string Email { get; set; } = string.Empty;
 
 
     public Manager()

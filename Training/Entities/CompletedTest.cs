@@ -78,6 +78,13 @@ public class CompletedTest
     public int CountCorrectAnswers { get; set; }
 
     /// <summary>
+    /// Результат в процентах
+    /// </summary>
+    [NotMapped]
+    public decimal PercentageResult => Math.Round(100.0m * CountCorrectAnswers / (QestionNumber == 0 ? 1 : QestionNumber), 2);
+    
+
+    /// <summary>
     /// Затраченное время на прохождение курса
     /// </summary>
     public TimeSpan Interval { get; set; }
