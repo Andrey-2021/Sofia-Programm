@@ -1,4 +1,4 @@
-﻿namespace DbLibrary.Helpers;
+﻿namespace Entities;
 
 /// <summary>
 /// Базовый класс для возврата результата операции с БД

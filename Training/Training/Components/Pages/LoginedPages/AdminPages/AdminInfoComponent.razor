@@ -1,0 +1,108 @@
+﻿@attribute [Route(ProjectRouters.adminInfo)]
+<PageTitle>Информация</PageTitle>
+
+<h3>Информация для администратора</h3>
+
+<table>
+	<tbody>
+		<tr>
+			<td align="right">Откуда было запущено приложение - AppDomain.CurrentDomain.BaseDirectory:</td>
+			<td align="left">@AppDomainCurrentDomainBaseDirectory</td>
+		</tr>
+		<tr>
+			<td align="right">Пути к исполняемому файлу приложения - ExecutingDirectory:</td>
+			<td align="left">@ExecutingDirectory</td>
+		</tr>
+		<tr>
+			<td align="right">ApplicationName:</td>
+			<td align="left">@WebHostEnvironment?.ApplicationName</td>
+		</tr>
+		<tr>
+			<td align="right">EnvironmentName:</td>
+			<td align="left">@WebHostEnvironment?.EnvironmentName</td>
+		</tr>
+		<tr>
+			<td align="right">ContentRootPath:</td>
+			<td align="left">@WebHostEnvironment?.ContentRootPath</td>
+		</tr>
+		<tr>
+			<td align="right">WebRootPath:</td>
+			<td align="left">@WebHostEnvironment?.WebRootPath</td>
+		</tr>
+
+		<tr>
+			<td align="right">TempPath:</td>
+			<td align="left">@TempPath</td>
+		</tr>
+
+
+		<tr>
+			<td align="right">Host:</td>
+			<td align="left">@Host</td>
+		</tr>
+		<tr>
+			<td align="right">Uri:</td>
+			<td align="left">@Navigator?.BaseUri</td>
+		</tr>
+		
+		
+		<tr>
+			<td align="right">Ip:</td>
+			<td align="left">
+				@if (ipHostEntry != null)
+				{
+					@foreach (var ip in ipHostEntry.AddressList)
+					{
+						<div>@ip</div>
+					}
+				}
+			</td>
+		</tr>
+	</tbody>
+</table>
+
+@if(Ex!=null)
+{
+	<div>
+		Exception: @Ex.Message
+	</div>
+	<div>
+		InnerException: @Ex?.InnerException?.Message
+	</div>
+}
+
+@code {
+	[Inject] IWebHostEnvironment? WebHostEnvironment { get; set; }
+	[Inject] NavigationManager? Navigator{ get; set; }
+
+	private string? AppDomainCurrentDomainBaseDirectory { get; set; }
+	private string? ExecutingDirectory { get; set; }
+
+	private string? Host { get; set; }
+	private string? Ip { get; set; }
+	private System.Net.IPHostEntry? ipHostEntry;
+
+	private Exception? Ex { get; set; }
+	private string? TempPath { get; set; }
+
+	protected override async Task OnParametersSetAsync()
+	{
+		try
+		{
+			AppDomainCurrentDomainBaseDirectory = AppDomain.CurrentDomain.BaseDirectory;
+			ExecutingDirectory = System.Reflection.Assembly.GetExecutingAssembly().Location;
+
+			Host = System.Net.Dns.GetHostName();
+			//Ip = System.Net.Dns.GetHostByName(Host)?.AddressList[0].ToString();
+			ipHostEntry = await System.Net.Dns.GetHostEntryAsync(Host);
+			Ip = ipHostEntry?.AddressList[0].ToString();
+
+			TempPath=Path.GetTempPath();
+		}
+		catch (Exception ex)
+		{
+			Ex = ex;
+		}
+		await base.OnParametersSetAsync();
+	}
+}

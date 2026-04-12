@@ -29,6 +29,7 @@
             <RadzenPanelMenuItem Text="Администратор" Icon="admin_panel_settings" Expanded="false">
                 <RadzenPanelMenuItem Text="Создать БД" Icon="database" Path=@($"{ProjectRouters.createDbHref}") />
                 <RadzenPanelMenuItem Text="Пользователи" Icon="group" Path=@ProjectRouters.registeredUsersHref />
+                <RadzenPanelMenuItem Text="Информация о сервере" Icon="info" Path=@($"{ProjectRouters.adminInfoHref}") />
             </RadzenPanelMenuItem>
             <RadzenPanelMenuItem Text="Выход" Icon="logout" Click=@OnLogoutClick />
 

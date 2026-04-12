@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\DbLibrary\DbLibrary.csproj" />
+    <ProjectReference Include="..\DocumentsLibrary\DocumentsLibrary.csproj" />
     <ProjectReference Include="..\Entities\Entities.csproj" />
   </ItemGroup>
 

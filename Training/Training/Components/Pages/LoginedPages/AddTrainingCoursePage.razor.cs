@@ -1,9 +1,16 @@
-﻿using Radzen;
+﻿using DocumentsLibrary;
+using Microsoft.JSInterop;
+using Radzen;
 using Training.Components.Pages.Base;
 namespace Training.Components.Pages.LoginedPages;
 
 public class AddTrainingCoursePageModel: BaseAddModel<TrainingCourse>
 {
+    [Inject] IJSRuntime JS { get; set; } = default!;
+
+    protected OperationResponce<string?>? SaveExcelOperationResponce { get; set; }
+    protected OperationResponce<bool?>? JSTransferExcelOperationResponce { get; set; }
+
     protected override async Task OnParametersSetAsync()
     {
         if (EditedEntityId > 0)
@@ -150,8 +157,36 @@ public class AddTrainingCoursePageModel: BaseAddModel<TrainingCourse>
     }
 
     protected async Task LoadExcel()
-    { }
+    { 
+    
+    }
 
     protected async Task SaveExcel()
-    { }
+    {
+        JSTransferExcelOperationResponce = null;
+        SaveExcelOperationResponce = null;
+
+        var excel = new TrainingCourseExcelExporter();
+        SaveExcelOperationResponce = await excel.ExportCourseToExcelAsync(MainEntity);
+        if(!SaveExcelOperationResponce.IsSuccessfullOperation)
+        {
+            NotifyUser("Ошибка при создании excel-файла", "Ошибка", NotificationSeverity.Warning);
+            return;
+        }
+
+        try
+        {
+            var fileName = SaveExcelOperationResponce.Data;
+            var fileStream = File.OpenRead(fileName);
+            using var streamRef = new DotNetStreamReference(stream: fileStream);
+            await JS.InvokeVoidAsync("downloadFileFromStream", fileName, streamRef);
+
+            JSTransferExcelOperationResponce = OperationResponce<bool?>.SetSuccessfullOperation(true, "excel-файл успешно передан");
+        }
+        catch (Exception ex)
+        {
+            JSTransferExcelOperationResponce = OperationResponce<bool?>.SetExceptionOperation("Ошибка при передаче excel-файла", ex);
+        }
+
+    }
 }

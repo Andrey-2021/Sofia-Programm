@@ -1,7 +1,4 @@
-﻿using DbLibrary.Helpers;
-using Entities.Interfaces;
-using Microsoft.AspNetCore.Components.Forms;
-namespace Training.Components.Pages.Base;
+﻿namespace Training.Components.Pages.Base;
 
 public class BaseAddModel<TEntity> : BaseModel
     where TEntity : class, new()

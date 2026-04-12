@@ -84,7 +84,9 @@ public static class ProjectRouters
     public const string memorizationTrainingCourcePageHref = "memorization";
     public const string memorizationTrainingCourcePage = "/" + memorizationTrainingCourcePageHref;
 
-    
+
+    public const string adminInfoHref = "admin-info";
+    public const string adminInfo = "/" + adminInfoHref;
 
 
 

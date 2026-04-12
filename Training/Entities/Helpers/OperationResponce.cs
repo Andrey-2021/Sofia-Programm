@@ -1,4 +1,4 @@
-﻿namespace DbLibrary.Helpers;
+﻿namespace Entities;
 
 /// <summary>
 /// Результат выполнения операции
