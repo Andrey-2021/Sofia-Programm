@@ -323,7 +323,6 @@ public class DbRepository
         {
             return OperationResponce<TEntity?>.SetExceptionOperation("Ошибка при чтении данных из БД", ex);
         }
-
     }
 
 
@@ -333,10 +332,12 @@ public class DbRepository
             return (null, null);
 
         if (myUser.Role == RoleEnum.admin) //Если это администратор,
-            return await GetEntitiesAsync<TrainingCourse>(include: x => x.Include(c => c.MyUser)); // Читаем все курсы
+            return await GetEntitiesAsync<TrainingCourse>(include: x => x.Include(tc => tc.MyUser),
+                                                            orderBy: x=>x.OrderByDescending(tc=>tc.ContractDate)); // Читаем все курсы
         else
             return await GetEntitiesAsync<TrainingCourse>(predicate: x => x.MyUserId == myUser.Id, //Читаем только свои курсы
-                                                            include: x => x.Include(c => c.MyUser));
+                                                            include: x => x.Include(tc => tc.MyUser),
+                                                            orderBy: x => x.OrderByDescending(tc => tc.ContractDate));
 
     }
 

@@ -1,7 +1,7 @@
 ﻿@inherits ShowAllTrainingCoursesComponentMode
 
 
-@if (TrainingCourses == null)
+@if (TrainingCourses == null || MyUser==null)
 {
     <div>
         Нет курсов
@@ -55,7 +55,7 @@ else
                 {
                     <tr>
                         <td>
-                            @if (MyUser.Role == RoleEnum.admin || IsShowDelButton == false)
+                            @if (MyUser?.Role == RoleEnum.admin || IsShowDelButton == false)
                             {
                             
                                 @item.MyUser?.Manager.FIO

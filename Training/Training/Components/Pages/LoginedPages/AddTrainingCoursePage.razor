@@ -28,7 +28,7 @@
                                         <RadzenLabel Component="_name">Название:</RadzenLabel>
                                     </RadzenStack>
                                 </td>
-                                <td>
+                                <td colspan="2">
                                     <RadzenTextBox Name="_name"
                                                    @bind-Value=@(MainEntity!.Name)
                                                    Style="width: 100%;"
@@ -48,7 +48,7 @@
                                         <RadzenLabel Component="_description">Описание:</RadzenLabel>
                                     </RadzenStack>
                                 </td>
-                                <td>
+                                <td colspan="2">
                                     <RadzenTextBox Name="_description"
                                                    @bind-Value=@(MainEntity!.Description)
                                                    Style="width: 100%;"
@@ -91,8 +91,7 @@
                                 </td>
                                 <td>
                                     <RadzenTextBox Name="_contractDate"
-                                                   Style="width: 100%;"
-                                                   aria-label="Default TextBox" autofocus
+                                                   Style="width: 52%;"
                                                    tabindex="2"
                                                    ReadOnly="true"
                                                    Disabled="true"
@@ -124,6 +123,52 @@
                                                    TextAlign="TextAlign.Right" />
                                     <ValidationMessage For="@(() => MainEntity!.DifficultyLevel)" />
                                 </td>
+
+                                <td rowspan="2">
+                                    <div class="wrapper">
+                                        @* <div class="button-panel"> *@
+                                        <!-- КНОПКА ЗАГРУЗКИ ДАННЫХ ИЗ EXCEL (зеленый фон) -->
+                                        @* class="round-btn btn-upload" *@
+                                        <div style="margin-right:10px;">
+                                            <InputFile id="fileUpload"
+                                                       style="display: none;"
+                                                       aria-label="Импорт Excel"
+                                                       name="fileUpload"
+                                                       accept=".xlsx"
+                                                       OnChange="LoadExcel">
+                                                <!-- Новая иконка: загрузка + стрелка вниз, значок листа Excel -->
+                                            </InputFile>
+                                            <label class="round-btn btn-upload" for="fileUpload">
+                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                    <path d="M12 4V16M12 16L15 13M12 16L9 13" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                                    <path d="M4 17V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V17" stroke="white" stroke-width="1.8" stroke-linecap="round" />
+                                                    <rect x="5" y="3" width="14" height="14" rx="1.5" stroke="white" stroke-width="1.5" fill="rgba(255,255,255,0.2)" />
+                                                    <path d="M8 7H16" stroke="white" stroke-width="1.4" stroke-linecap="round" />
+                                                    <path d="M8 10.5H14" stroke="white" stroke-width="1.4" stroke-linecap="round" />
+                                                    <path d="M8 14H12" stroke="white" stroke-width="1.4" stroke-linecap="round" />
+                                                </svg>
+                                                <span class="tooltip-text">Загрузить Excel-файл</span>
+                                            </label>
+                                        </div>
+
+                                        <!-- КНОПКА ВЫГРУЗКИ ДАННЫХ В EXCEL (синий фон) -->
+                                        <button class="round-btn btn-download" id="downloadBtn" aria-label="Экспорт Excel"
+                                                type="button"
+                                                @onclick="SaveExcel">
+                                            <!-- Новая иконка: выгрузка, стрелка вверх, файл Excel с символом -->
+                                            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M12 20V8M12 8L15 11M12 8L9 11" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+                                                <path d="M4 17V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V17" stroke="white" stroke-width="1.8" stroke-linecap="round" />
+                                                <rect x="5" y="3" width="14" height="14" rx="1.5" stroke="white" stroke-width="1.5" fill="rgba(255,255,255,0.2)" />
+                                                <path d="M8 7H16" stroke="white" stroke-width="1.4" stroke-linecap="round" />
+                                                <path d="M8 10.5H12" stroke="white" stroke-width="1.4" stroke-linecap="round" />
+                                                <circle cx="17" cy="6" r="1.5" fill="white" stroke="white" stroke-width="1" />
+                                            </svg>
+                                            <span class="tooltip-text">Выгрузить данные в Excel</span>
+                                        </button>
+                                        @* </div> *@
+                                    </div>
+                                </td>
                             </tr>
 
                             <tr>
@@ -142,43 +187,7 @@
                                                   Name="_isVisableForAll" />
 
                                 </td>
-                                <td>
-                                    <div class="wrapper">
-                                        @* <div class="button-panel"> *@
-                                            <!-- КНОПКА ЗАГРУЗКИ ДАННЫХ ИЗ EXCEL (зеленый фон) -->
-                                            <button class="round-btn btn-upload" id="uploadBtn" aria-label="Импорт Excel"
-                                                type="button"
-                                                @onclick="LoadExcel">
-                                                <!-- Новая иконка: загрузка + стрелка вниз, значок листа Excel -->
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 4V16M12 16L15 13M12 16L9 13" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M4 17V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V17" stroke="white" stroke-width="1.8" stroke-linecap="round" />
-                                                    <rect x="5" y="3" width="14" height="14" rx="1.5" stroke="white" stroke-width="1.5" fill="rgba(255,255,255,0.2)" />
-                                                    <path d="M8 7H16" stroke="white" stroke-width="1.4" stroke-linecap="round" />
-                                                    <path d="M8 10.5H14" stroke="white" stroke-width="1.4" stroke-linecap="round" />
-                                                    <path d="M8 14H12" stroke="white" stroke-width="1.4" stroke-linecap="round" />
-                                                </svg>
-                                                <span class="tooltip-text">Загрузить Excel-файл</span>
-                                            </button>
-
-                                            <!-- КНОПКА ВЫГРУЗКИ ДАННЫХ В EXCEL (синий фон) -->
-                                            <button class="round-btn btn-download" id="downloadBtn" aria-label="Экспорт Excel"
-                                                type="button"
-                                                @onclick="SaveExcel">
-                                                <!-- Новая иконка: выгрузка, стрелка вверх, файл Excel с символом -->
-                                                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                    <path d="M12 20V8M12 8L15 11M12 8L9 11" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-                                                    <path d="M4 17V19C4 20.1046 4.89543 21 6 21H18C19.1046 21 20 20.1046 20 19V17" stroke="white" stroke-width="1.8" stroke-linecap="round" />
-                                                    <rect x="5" y="3" width="14" height="14" rx="1.5" stroke="white" stroke-width="1.5" fill="rgba(255,255,255,0.2)" />
-                                                    <path d="M8 7H16" stroke="white" stroke-width="1.4" stroke-linecap="round" />
-                                                    <path d="M8 10.5H12" stroke="white" stroke-width="1.4" stroke-linecap="round" />
-                                                    <circle cx="17" cy="6" r="1.5" fill="white" stroke="white" stroke-width="1" />
-                                                </svg>
-                                                <span class="tooltip-text">Выгрузить данные в Excel</span>
-                                            </button>
-                                        @* </div> *@
-                                    </div>
-                                </td>
+                                
                                 
                             </tr>
 
@@ -204,114 +213,124 @@
                             <tbody>
                                 @if (MainEntity.CourseQestions?.Count > 0)
                                 {
-                                    @foreach (var entety in MainEntity.CourseQestions)
-                                    {
-                                        var item = entety;
-                                        <tr>
-                                            <td>
-                                                @item.KanjiWord
-                                            </td>
-                                            <td>
-                                                @item.HiraganaWord
-                                            </td>
-                                            <td>
-                                                @item.KatakanaWord
-                                            </td>
-                                            <td>
-                                                @item.RussianWord
-                                            </td>
-                                            <td>
-                                                @if (item.WrongRussianWordAnswers?.Count > 0)
-                                                {
-                                                    <div class="table-reset-container">
-                                                        <table>
-                                                            <tbody>
-                                                                @foreach (var rusWord in item.WrongRussianWordAnswers)
-                                                                {
-                                                                    <tr>
-                                                                        <td>@rusWord.Answer</td>
-                                                                        <td>
-                                                                            <RadzenButton ButtonStyle="ButtonStyle.Danger"
-                                                                                          Variant="Variant.Flat" Shade="Shade.Lighter"
-                                                                                          type="button"
-                                                                                          title="Удалить"
-                                                                                          Icon="delete_forever"
-                                                                                          Size="ButtonSize.ExtraSmall"
-                                                                                          Click="@(args =>OnDeleteWrongWordClick(item, rusWord))">
-                                                                            </RadzenButton>
-                                                                        </td>
-                                                                    </tr>
-                                                                
-                                                                }
-                                                            </tbody>
-                                                        </table>
-                                                    </div>
-                                                
-                                                }
-                                                <div>
-                                                    @if (IsAddWrongWord && AddingWrongWord != null && AddingWrongWord.CourseQestion == item)
+                                    @* @foreach (var entety in MainEntity.CourseQestions) {*@
+                                    <Virtualize Items="MainEntity.CourseQestions" Context="item"
+                                                ItemSize="25"
+                                                SpacerElement="tr">
+                                        <ItemContent>
+                                            
+                                            @* var item = entety; *@
+                                            <tr>
+                                                <td>
+                                                    @item.KanjiWord
+                                                </td>
+                                                <td>
+                                                    @item.HiraganaWord
+                                                </td>
+                                                <td>
+                                                    @item.KatakanaWord
+                                                </td>
+                                                <td>
+                                                    @item.RussianWord
+                                                </td>
+                                                <td>
+                                                    @if (item.WrongRussianWordAnswers?.Count > 0)
                                                     {
-                                                        <EditForm Model="@AddingWrongWord" Context="WrongWordForm" OnValidSubmit="() => OnSaveWrongWordClick(item)">
-                                                            <ObjectGraphDataAnnotationsValidator />
-                                                            <div class="add-qestion-box">
-                                                                <div>
-                                                                    <RadzenTextBox Name="_word"
-                                                                                   @bind-Value=@(AddingWrongWord!.Answer)
-                                                                                   Style="width: 100%;"
-                                                                                   AutoCompleteType="AutoCompleteType.Off" />
-                                                                    <ValidationMessage For="@(() => AddingWrongWord.Answer)" />
-                                                                </div>
-                                                            
+                                                        <div class="table-reset-container">
+                                                            <table>
+                                                                <tbody>
+                                                                    @foreach (var rusWord in item.WrongRussianWordAnswers)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>@rusWord.Answer</td>
+                                                                            <td>
+                                                                                <RadzenButton ButtonStyle="ButtonStyle.Danger"
+                                                                                              Variant="Variant.Flat" Shade="Shade.Lighter"
+                                                                                              type="button"
+                                                                                              title="Удалить"
+                                                                                              Icon="delete_forever"
+                                                                                              Size="ButtonSize.ExtraSmall"
+                                                                                              Click="@(args =>OnDeleteWrongWordClick(item, rusWord))">
+                                                                                </RadzenButton>
+                                                                            </td>
+                                                                        </tr>
 
-                                                                <RadzenButton ButtonStyle="ButtonStyle.Success"
-                                                                              Variant="Variant.Flat" Shade="Shade.Lighter"
-                                                                              type="submit"
-                                                                              title="Сохранить слово"
-                                                                              Icon="check_circle"
-                                                                              Size="ButtonSize.ExtraSmall">
-                                                                    @* Click="@(args =>OnSaveWrongWordClick(item))" *@
-                                                                </RadzenButton>
-                                                                <RadzenButton ButtonStyle="ButtonStyle.Danger"
-                                                                              Variant="Variant.Flat" Shade="Shade.Lighter"
-                                                                              type="button"
-                                                                              title="Отмена"
-                                                                              Icon="close"
-                                                                              Size="ButtonSize.ExtraSmall"
-                                                                              Click="@(args =>OnCancelAddWrongWordClick(item))">
-                                                                </RadzenButton>
-                                                            </div>
-                                                        </EditForm>
-                                                        
+                                                                    }
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
                                                     }
-                                                    else
-                                                    {
-                                                        <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                                                      type="button"
-                                                                      title="Добавить слово"
-                                                                      Icon="add_circle"
-                                                                      Size="ButtonSize.ExtraSmall"
-                                                                      Click="@(args =>OnAddWrongWordClick(item))">
-                                                        </RadzenButton>
-                                                    }
-                                                </div>
-                                            </td>
-                                            <td>
-                                                <RadzenButton ButtonStyle="ButtonStyle.Warning" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                                              type="button"
-                                                              title="Редактировать" Icon="edit" Size="ButtonSize.Medium"
-                                                              Click="@(args =>OnQestionEditClick(item))">
-                                                </RadzenButton>
-                                            </td>
-                                            <td>
-                                                <RadzenButton ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                                              type="button"
-                                                              title="Удалить" Icon="delete_forever" Size="ButtonSize.Medium"
-                                                              Click="@(args =>OnQestionDeleteClick(item))">
-                                                </RadzenButton>
-                                            </td>
-                                        </tr>
-                            
-                                    }
+                                                    <div>
+                                                        @if (IsAddWrongWord && AddingWrongWord != null && AddingWrongWord.CourseQestion == item)
+                                                        {
+                                                            <EditForm Model="@AddingWrongWord" Context="WrongWordForm" OnValidSubmit="() => OnSaveWrongWordClick(item)">
+                                                                <ObjectGraphDataAnnotationsValidator />
+                                                                <div class="add-qestion-box">
+                                                                    <div>
+                                                                        <RadzenTextBox Name="_word"
+                                                                                       @bind-Value=@(AddingWrongWord!.Answer)
+                                                                                       Style="width: 100%;"
+                                                                                       AutoCompleteType="AutoCompleteType.Off" />
+                                                                        <ValidationMessage For="@(() => AddingWrongWord.Answer)" />
+                                                                    </div>
+
+
+                                                                    <RadzenButton ButtonStyle="ButtonStyle.Success"
+                                                                                  Variant="Variant.Flat" Shade="Shade.Lighter"
+                                                                                  type="submit"
+                                                                                  title="Сохранить слово"
+                                                                                  Icon="check_circle"
+                                                                                  Size="ButtonSize.ExtraSmall">
+                                                                        @* Click="@(args =>OnSaveWrongWordClick(item))" *@
+                                                                    </RadzenButton>
+                                                                    <RadzenButton ButtonStyle="ButtonStyle.Danger"
+                                                                                  Variant="Variant.Flat" Shade="Shade.Lighter"
+                                                                                  type="button"
+                                                                                  title="Отмена"
+                                                                                  Icon="close"
+                                                                                  Size="ButtonSize.ExtraSmall"
+                                                                                  Click="@(args =>OnCancelAddWrongWordClick(item))">
+                                                                    </RadzenButton>
+                                                                </div>
+                                                            </EditForm>
+
+                                                        }
+                                                        else
+                                                        {
+                                                            <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                                                          type="button"
+                                                                          title="Добавить слово"
+                                                                          Icon="add_circle"
+                                                                          Size="ButtonSize.ExtraSmall"
+                                                                          Click="@(args =>OnAddWrongWordClick(item))">
+                                                            </RadzenButton>
+                                                        }
+                                                    </div>
+                                                </td>
+                                                <td>
+                                                    <RadzenButton ButtonStyle="ButtonStyle.Warning" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                                                  type="button"
+                                                                  title="Редактировать" Icon="edit" Size="ButtonSize.Medium"
+                                                                  Click="@(args =>OnQestionEditClick(item))">
+                                                    </RadzenButton>
+                                                </td>
+                                                <td>
+                                                    <RadzenButton ButtonStyle="ButtonStyle.Danger" Variant="Variant.Flat" Shade="Shade.Lighter"
+                                                                  type="button"
+                                                                  title="Удалить" Icon="delete_forever" Size="ButtonSize.Medium"
+                                                                  Click="@(args =>OnQestionDeleteClick(item))">
+                                                    </RadzenButton>
+                                                </td>
+                                            </tr>
+                                        </ItemContent>
+                                        <EmptyContent>
+                                            <p>
+                                                Нет данных
+                                            </p>
+                                        </EmptyContent>
+                                        
+                                    </Virtualize>
                                 }
                             </tbody>
                         </table>
@@ -333,9 +352,7 @@
                                       Context="AddressForm" OnValidSubmit="@OnAddCardClick">
                                 <ObjectGraphDataAnnotationsValidator />
                                 <div class="add-qestion-box">
-
-                                
-                                    <div>
+                                    <div class="input-words-box">
                                         <table>
                                             <tbody>
                                                 <tr>
@@ -358,7 +375,7 @@
                                                         <RadzenTextBox Name="_name"
                                                                        @bind-Value=@(AddedCourseQestion!.HiraganaWord)
                                                                        Style="width: 100%;"
-                                                                       aria-label="Default TextBox" autofocus
+                                                                       
                                                                        AutoCompleteType="AutoCompleteType.Off" />
                                                         <ValidationMessage For="@(() => AddedCourseQestion!.HiraganaWord)" />
                                                     </td>
@@ -371,7 +388,7 @@
                                                         <RadzenTextBox Name="_name"
                                                                        @bind-Value=@(AddedCourseQestion!.KatakanaWord)
                                                                        Style="width: 100%;"
-                                                                       aria-label="Default TextBox" autofocus
+                                                                       
                                                                        AutoCompleteType="AutoCompleteType.Off" />
                                                         <ValidationMessage For="@(() => AddedCourseQestion!.KatakanaWord)" />
 
@@ -384,8 +401,8 @@
                                                     <td>
                                                         <RadzenTextBox Name="_name"
                                                                        @bind-Value=@(AddedCourseQestion!.RussianWord)
-                                                                       Style="width: 100%;"
-                                                                       aria-label="Default TextBox" autofocus
+                                                                       Style="width: 100%; min-width:400px;"
+                                                                       
                                                                        AutoCompleteType="AutoCompleteType.Off" />
                                                         <ValidationMessage For="@(() => AddedCourseQestion!.RussianWord)" />
 

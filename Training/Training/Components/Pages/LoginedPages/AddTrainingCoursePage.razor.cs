@@ -1,4 +1,5 @@
-﻿using DocumentsLibrary;
+﻿using Azure;
+using DocumentsLibrary;
 using Microsoft.JSInterop;
 using Radzen;
 using Training.Components.Pages.Base;
@@ -156,9 +157,65 @@ public class AddTrainingCoursePageModel: BaseAddModel<TrainingCourse>
         NavigationManager.NavigateTo(ProjectRouters.allTrainingCoursesPageHref);
     }
 
-    protected async Task LoadExcel()
-    { 
-    
+    protected async Task LoadExcel2(UploadChangeEventArgs args)
+    {
+
+    }
+
+    protected async Task LoadExcel(InputFileChangeEventArgs e)
+    {
+        const int MAX_FILESIZE = 5000 * 1024; // 5 MB
+        var browserFile = e.File;
+
+        if (browserFile != null)
+        {
+            //FileSize = browserFile.Size;
+            //FileType = browserFile.ContentType;
+            //FileName = browserFile.Name;
+            //LastModified = browserFile.LastModified;
+
+            try
+            {
+                var fileStream = browserFile.OpenReadStream(MAX_FILESIZE);
+
+                var randomFile = Path.GetTempFileName();
+                var extension = Path.GetExtension(browserFile.Name);
+                var targetFilePath = Path.ChangeExtension(randomFile, extension);
+
+                var destinationStream = new FileStream(targetFilePath, FileMode.Create);
+                await fileStream.CopyToAsync(destinationStream);
+                destinationStream.Close();
+
+                var convertResult =await LoadExcelData.ImportFromExcel(targetFilePath);
+
+                if(!convertResult.IsSuccessfullOperation)
+                {
+                    NotifyUser("Ошибка при извлечении данных из excel-файла", "Ошибка", NotificationSeverity.Warning);
+                    return;
+                }
+
+
+                if (MainEntity!.CourseQestions == null)
+                    MainEntity.CourseQestions = new List<CourseQestion>();
+                if (convertResult.Data?.Count > 0)
+                {
+                    foreach (var item in convertResult.Data)
+                    {
+                        item.TrainingCourse = MainEntity;
+                        MainEntity!.CourseQestions.Add(item);
+                    }
+                }
+                NotifyUser($"Данные извлечены из excel-файла ({convertResult.Data?.Count} строки)", "Внимание", NotificationSeverity.Success);
+            }
+            catch (Exception ex)
+            {
+                NotifyUser("Ошибка при копировании excel-файла на сервер" +ex.Message + ex.InnerException?.Message, "Ошибка", NotificationSeverity.Warning);
+                //ErrorMessage = exception.Message;
+            }
+
+            
+        }
+
     }
 
     protected async Task SaveExcel()
