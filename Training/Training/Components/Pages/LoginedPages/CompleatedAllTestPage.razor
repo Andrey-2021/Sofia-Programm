@@ -1,0 +1,120 @@
+﻿@attribute [Route(ProjectRouters.completedTests)]
+@inherits CompleatedAllTestPageModel
+<PageTitle>Пройденные тесты</PageTitle>
+
+<div class="completed-tests-container">
+    <!-- Заголовок страницы -->
+    <div class="page-header">
+        <h1>📊 Результаты пройденных тестов</h1>
+        <p>История прохождения курсов и тестирований</p>
+    </div>
+
+    <ShowOperrationErrorComponent BaseOperationResponce=@LoadEntitiesOperationResponce />
+
+    @if (!(Entities?.Count() > 0))
+    {
+        <div>
+            У Вас нет курсов, по которым Вы прошли тестирование
+        </div>
+    }
+    else
+    {
+        <!-- Контейнер с прокруткой для строк таблицы -->
+        <div class="table-wrapper">
+            <table class="results-table">
+                <!-- Фиксированный заголовок -->
+                <thead>
+                    <tr>
+                        <th>
+                            №
+                        </th>
+                        <th>
+                            Владелец Курса
+                        </th>
+                        <th>
+                            Кто прощёл
+                        </th>
+                        <th>
+                            Дата прохождения
+                        </th>
+                        <th>
+                            Название
+                        </th>
+                        <th>
+                            Уровень сложности
+                        </th>
+
+                        <th>
+                            Кол. вопросов
+                        </th>
+                        <th>
+                            Правильных ответов
+                        </th>
+                        <th>
+                            Результат
+                            %
+                        </th>
+                        <th>Затраченное время</th>
+                    </tr>
+                </thead>
+
+                <!-- Прокручиваемые строки с данными -->
+                <tbody>
+                    @foreach (var item in Entities)
+                    {
+                        Index++;
+                        <tr>
+                            <td>
+                                @Index
+                            </td>
+                            <td>
+                                @item.TrainingCourse?.MyUser?.Manager?.FIO
+                            </td>
+                            <td>
+                                @item.MyUser?.Manager?.FIO
+                            </td>
+                            <td>
+                                @item.ContractDate
+                            </td>
+
+                            <td>
+                                @item.TrainingCourse?.Name
+                            </td>
+
+                            <td>
+                                @item.TrainingCourse?.DifficultyLevel
+                            </td>
+
+                            <td>
+                                @item.QestionNumber
+                            </td>
+                            <td>
+                                @item.CountCorrectAnswers
+                            </td>
+
+                            <td>
+                                @(item.PercentageResult)%
+                            </td>
+                            <td>
+                                @(item.Interval.ToString())
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+
+                <!-- Фиксированный подвал с суммарной информацией -->
+                <tfoot>
+                    <tr>
+                        <td colspan="10">
+                            📈 <strong>Суммарная информация</strong> &nbsp;|&nbsp;
+                            Всего пройдено тестов: <strong>@Entities?.Count()</strong> &nbsp;|&nbsp;
+                            Средний результат: <strong>@(AverageResult)%</strong> &nbsp;|&nbsp;
+                            Общее количество вопросов: <strong>@TotalQuestionsNumber</strong> &nbsp;|&nbsp;
+                            Всего правильных ответов: <strong>@TotalCorrectAnswers</strong>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    }
+</div>

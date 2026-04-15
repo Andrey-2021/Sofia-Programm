@@ -2,10 +2,10 @@
 @inherits AllUsersPageModel
 <PageTitle>Пользователи</PageTitle>
 
-<ShowOperrationErrorComponent BaseOperationResponce=@ReadEntitiesOperationResponce />
-<ShowOperrationErrorComponent BaseOperationResponce=@DelOperationResponce />
-
 <div class="container">
+    <ShowOperrationErrorComponent BaseOperationResponce=@LoadEntitiesOperationResponce />
+    <ShowOperrationErrorComponent BaseOperationResponce=@DelEntetyOperationResponce />
+
     <!-- Шапка страницы с кнопками -->
     <div class="page-header">
         <div class="page-title">
@@ -14,7 +14,7 @@
         </div>
         <div class="header-buttons">
             <button class="btn btn-primary" @onclick=@OnAddUserClick>➕ Добавить пользователя</button>
-            <button class="btn btn-warning" @onclick="() => OnReloadClick(this, EventArgs.Empty)">🔄 Обновить</button>
+            <button class="btn btn-warning" @onclick="() => OnReloadClickAsync(this, EventArgs.Empty)">🔄 Обновить</button>
             @* <button class="btn btn-secondary" @onclick=@OnExitClick>🚪 Выйти</button> *@
         </div>
     </div>
@@ -58,18 +58,18 @@
                                 }
 
                             </td>
-                           @*  <td>
+                            @*  <td>
                                 <span class="active-status">● Активен</span>
                                 <span class="blocked-status">● Заблокирован</span> 
                             </td> *@
                             <td>
                                 <div class="action-buttons">
                                     <button class="action-icon delete" data-tooltip="Удалить"
-                                            @onclick="@(args => OnDeleteUserClick(item))">
+                                            @onclick="@(args => OnDeleteClickAsync(item))">
                                         🗑
                                     </button>
                                     
-                                   @*  <button class="action-icon block" data-tooltip="Заблокировать"
+                                    @*  <button class="action-icon block" data-tooltip="Заблокировать"
                                             @onclick="@(args => OnUserBlockClick(item))">
                                         🔒
                                     </button> *@

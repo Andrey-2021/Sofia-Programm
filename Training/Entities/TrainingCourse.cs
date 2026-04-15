@@ -4,7 +4,7 @@
 /// Учебный курс
 /// </summary>
 [Comment("Учебный курс")]
-public class TrainingCourse
+public class TrainingCourse: IHaveId
 {
     /// <summary>
     /// Id

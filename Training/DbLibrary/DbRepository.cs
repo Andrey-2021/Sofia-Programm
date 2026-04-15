@@ -415,22 +415,29 @@ public class DbRepository
     /// </summary>
     /// <param name="myUser">Пользователь</param>
     /// <returns>Результаты тестирования пользователя</returns>
-    public async Task<(IEnumerable<CompletedTest>? data, Exception? ex)> GetAllMyCompletedTest(MyUser myUser)
+    public async Task<OperationResponce<IEnumerable<CompletedTest>?>> GetAllMyCompletedTest(MyUser myUser)
     {
         if (myUser == null)
-            return (null, null);
+            return OperationResponce<IEnumerable<CompletedTest>?>.SetExceptionOperation("Нет данных о пользователе", new ArgumentNullException("Нет данных о пользователе"));
+            
 
         Func<IQueryable<CompletedTest>, IIncludableQueryable<CompletedTest, object>>? includeData = (x) => x.Include(ct => ct.MyUser).
                                                                                                         Include(ct => ct.TrainingCourse.MyUser);
 
 
         if (myUser.Role == RoleEnum.admin) //Если это администратор,
-            return await GetEntitiesAsync<CompletedTest>(include: includeData,
-                                                            orderBy: x=>x.OrderBy(ct=>ct.ContractDate)); // Читаем все 
+        {
+            return await GetEntities<CompletedTest>(include: includeData,
+                                                            orderBy: x => x.OrderByDescending(ct => ct.ContractDate)); // Читаем все 
+
+        }
+
         else
-            return await GetEntitiesAsync<CompletedTest>(predicate: x => x.MyUserId == myUser.Id, //Читаем только свои 
+        {
+            return await GetEntities<CompletedTest>(predicate: x => x.MyUserId == myUser.Id, //Читаем только свои 
                                                             include: includeData,
-                                                            orderBy: x => x.OrderBy(ct => ct.ContractDate));
+                                                            orderBy: x => x.OrderByDescending(ct => ct.ContractDate));
+        }
     }
 
     public async Task<OperationResponce<TrainingCourse>> GetCourse(int? id)

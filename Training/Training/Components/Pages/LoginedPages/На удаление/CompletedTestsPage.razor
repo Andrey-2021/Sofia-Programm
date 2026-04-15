@@ -1,7 +1,6 @@
-﻿@attribute [Route(ProjectRouters.completedTests)]
+﻿@* @attribute [Route(ProjectRouters.completedTests)] *@
 @inherits CompletedTestsPageModel
-<PageTitle>Курсы</PageTitle>
-
+<PageTitle>Пройденные тесты</PageTitle>
 
 <h3>Пройденные тесты</h3>
 
@@ -14,7 +13,7 @@
 else
 {
     <div class="table-box">
-        <table>
+        <table class="user-table">
             <thead>
                 <tr>
                     @if (MyUser.Role == RoleEnum.admin)
@@ -106,10 +105,6 @@ else
                     </th>
                 </tr>
             </tfoot>
-
         </table>
     </div>
-
-
-
 }

@@ -1,7 +1,7 @@
 ﻿namespace Training.Components.Pages.Base;
 
 public class BaseAddModel<TEntity> : BaseModel
-    where TEntity : class, new()
+    where TEntity : class, IHaveId, new()
 {
     /// <summary>
     /// Результат выполнения операции чтения
@@ -11,22 +11,32 @@ public class BaseAddModel<TEntity> : BaseModel
     /// <summary>
     /// Результат выполнения операции записи
     /// </summary>
-    public OperationResponce<TEntity>? SaveEntityOperationResponce { get; protected set; }
+    protected OperationResponce<TEntity>? SaveEntityOperationResponce { get;  set; }
 
     /// <summary>
     /// EditContext для EditForm с MainEntity
     /// </summary>
-    public EditContext? EditContext { get; protected set; }
+    protected EditContext? EditContext { get;  set; }
 
     /// <summary>
     /// Объект
     /// </summary>
-    public TEntity? MainEntity { get; set; }
+    protected TEntity? MainEntity { get; set; }
 
-    protected override Task OnParametersSetAsync()
+    protected override async Task OnParametersSetAsync()
     {
+        if (EditedEntityId > 0)
+        {
+            LoadEntityOperationResponce = await DbRepository.GetFirstOrDefault<TEntity>(x => x.Id == EditedEntityId);
+            MainEntity = LoadEntityOperationResponce.Data;
+        }
+        else
+        {
+            MainEntity = new();
+        }
+
         EditContext = ConfigEditContext(MainEntity, EditContext);
-        return base.OnParametersSetAsync();
+        await base.OnParametersSetAsync();
     }
     
 
@@ -74,7 +84,7 @@ public class BaseAddModel<TEntity> : BaseModel
     /// Сохранить валидные данные в БД
     /// </summary>
     /// <returns></returns>
-    public virtual async Task OnSaveValidEntityClick()
+    protected virtual async Task OnSaveValidEntityClick()
     {
         if (MainEntity is IDelSpaces delInfo)
             delInfo.DelSpaces();
@@ -86,17 +96,20 @@ public class BaseAddModel<TEntity> : BaseModel
             GoAfterSave();
     }
 
+    /// <summary>
+    /// Переход после операции сохранения
+    /// </summary>
     protected virtual void GoAfterSave()
     {
         NavigationManager.NavigateTo(ProjectRouters.loginedHomePageHref);
     }
 
-
-    public virtual void OnCancelClick()
+    /// <summary>
+    /// Нажата кнопка "отмена"
+    /// </summary>
+    protected virtual void OnCancelClick()
     {
         NavigationManager.NavigateTo(ProjectRouters.loginedHomePageHref);
     }
-
-
 }
 

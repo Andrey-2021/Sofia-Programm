@@ -1,0 +1,80 @@
+﻿
+<main>
+	@* <article class="content px-4"> *@
+
+		@* @ChildContent *@
+
+	<ErrorBoundary @ref="errorBoundary">
+		<ChildContent>
+			@ChildContent
+		</ChildContent>
+		<ErrorContent Context="ex">
+			<div class="alert alert-danger" role="alert">
+				@* Произошла ошибка: @ex.Message
+				@if (ex.InnerException != null)
+				{
+					<br />
+					<span>Внутренняя ошибка:</span> @ex.InnerException.Message
+				} *@
+
+				<RadzenAccordion style="--rz-accordion-item-background-color:#ffd1dc;">
+					<Items>
+						<RadzenAccordionItem Text=@($"Произошла ошибка: {@ex.Message}")
+											 Icon="account_balance_wallet"
+											 CollapseTitle="Свернуть" ExpandTitle="Раскрыть"
+											 CollapseAriaLabel="Свернуть подробности" ExpandAriaLabel="Развернуть подробности">
+							<div>
+								Exception: @ex.Message
+							</div>
+							@if (ex.InnerException != null)
+							{
+								<div>
+									<span>Внутренняя ошибка/InnerException:</span> @ex.InnerException?.Message
+								</div>
+							}
+							<div>
+								Подробная информация:
+							</div>
+							<div>
+								@ex.ToString()
+							</div>
+						</RadzenAccordionItem>
+					</Items>
+				</RadzenAccordion>
+
+				@{
+					SaveLogError(ex);
+				}
+			</div>
+		</ErrorContent>
+	</ErrorBoundary>
+
+	@* </article> *@
+</main>
+
+<div id="blazor-error-ui">
+	Произошла необработанная ошибка (An unhandled error has occurred).
+	<a href="" class="reload">Обновить/Reload</a>
+	<a class="dismiss">🗙</a>
+</div>
+
+
+@code {
+
+	[Parameter]
+	public RenderFragment? ChildContent { get; set; }
+	
+	private ErrorBoundary? errorBoundary;
+
+	protected override void OnParametersSet()
+	{
+		//https://learn.microsoft.com/ru-ru/aspnet/core/blazor/fundamentals/handle-errors?view=aspnetcore-9.0&preserve-view=true
+		errorBoundary?.Recover(); //сброс счётчика ошибок
+										//errorBoundary.ErrorContent.
+	}
+
+	protected void SaveLogError(Exception ex)
+	{
+		//Serilog.Log.Error(ex, "Ошибка перехвачена в ErrorBoundary, компонент " + nameof(CommonErrorHandlerComponent));
+	}
+}

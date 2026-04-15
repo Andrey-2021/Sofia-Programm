@@ -10,7 +10,7 @@
                 <RadzenLabel Text="Добро пожаловать " />
             </RadzenStack>
             <div style="margin-right:2rem;">
-                <RadzenLabel Text=@($"{MyUserOperationService.MyUser?.Manager?.FIO}{(MyUserOperationService.MyUser?.Role==RoleEnum.admin?", администратор":"")}") />
+                <RadzenLabel Text=@($"{MyUserOperationService.MyUser?.Manager?.FIO}{(MyUserOperationService.MyUser?.Role == RoleEnum.admin ? ", администратор" : "")}") />
             </div>
 
         </RadzenStack>
@@ -26,11 +26,14 @@
             <RadzenPanelMenuItem Text="Создать курс" Icon="home" Path=@($"{ProjectRouters.addTrainingCoursePageHref}") />
             <RadzenPanelMenuItem Text="Пройденные тесты" Icon="home" Path=@($"{ProjectRouters.completedTestsHref}") />
 
-            <RadzenPanelMenuItem Text="Администратор" Icon="admin_panel_settings" Expanded="false">
-                <RadzenPanelMenuItem Text="Создать БД" Icon="database" Path=@($"{ProjectRouters.createDbHref}") />
-                <RadzenPanelMenuItem Text="Пользователи" Icon="group" Path=@ProjectRouters.registeredUsersHref />
-                <RadzenPanelMenuItem Text="Информация о сервере" Icon="info" Path=@($"{ProjectRouters.adminInfoHref}") />
-            </RadzenPanelMenuItem>
+            <AuthorizeView Roles=@nameof(RoleEnum.admin)>
+                <RadzenPanelMenuItem Text="Администратор" Icon="admin_panel_settings" Expanded="false">
+                    <RadzenPanelMenuItem Text="Создать БД" Icon="database" Path=@($"{ProjectRouters.createDbHref}") />
+                    <RadzenPanelMenuItem Text="Пользователи" Icon="group" Path=@ProjectRouters.registeredUsersHref />
+                    <RadzenPanelMenuItem Text="Информация о сервере" Icon="info" Path=@($"{ProjectRouters.adminInfoHref}") />
+                </RadzenPanelMenuItem>
+            </AuthorizeView>
+
             <RadzenPanelMenuItem Text="Выход" Icon="logout" Click=@OnLogoutClick />
 
         </RadzenPanelMenu>
@@ -38,9 +41,11 @@
 
     <RadzenBody>
         <CascadingValue Value="@MyUserOperationService.MyUser">
-            @*  <div class="rz-p-4"> *@
-            @Body
-            @* </div> *@
+             <div class="rz-p-4">
+            <CommonErrorHandlerComponent>
+                @Body
+            </CommonErrorHandlerComponent>
+             </div> 
         </CascadingValue>
     </RadzenBody>
 
@@ -49,11 +54,11 @@
     </RadzenFooter> *@
 </RadzenLayout>
 
-<div id="blazor-error-ui" data-nosnippet>
+@* <div id="blazor-error-ui" data-nosnippet>
     An unhandled error has occurred.
     <a href="." class="reload">Reload</a>
     <span class="dismiss">🗙</span>
-</div>
+</div> *@
 
 @code {
     bool sidebar1Expanded = true;

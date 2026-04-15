@@ -5,7 +5,7 @@ namespace Entities;
 /// <summary>
 /// Пройденные тесты
 /// </summary>
-public class CompletedTest
+public class CompletedTest:IHaveId
 {
     /// <summary>
     /// Id

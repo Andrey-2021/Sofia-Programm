@@ -1,0 +1,182 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', 'Roboto', system-ui, sans-serif;
+    background: linear-gradient(135deg, #f0f4f8 0%, #d9e2ec 100%);
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+/* Основной контейнер — занимает весь экран */
+.completed-tests-container {
+    max-width: 1600px;
+    height: 100%;
+    margin: 0 auto;
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 40px -12px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+/* Заголовок страницы — фиксированный */
+.page-header {
+    padding: 1.25rem 1.5rem;
+    background: linear-gradient(135deg, #0b3b5f 0%, #1a5f8b 100%);
+    color: white;
+    flex-shrink: 0;
+}
+
+    .page-header h1 {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 0.25rem;
+    }
+
+    .page-header p {
+        font-size: 0.85rem;
+        opacity: 0.85;
+    }
+
+/* Контейнер таблицы — занимает всё оставшееся место, с прокруткой */
+.table-wrapper {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: auto;
+    position: relative;
+    min-height: 0; /* Важно для правильной работы flex-прокрутки */
+    max-height: calc(90vh - 150px);
+}
+
+/* Таблица */
+.results-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+    background-color: #ffffff;
+    min-width: 800px;
+}
+
+    /* Заголовок таблицы — фиксированный */
+    .results-table thead {
+        position: sticky;
+        top: 0;
+        z-index: 20;
+    }
+
+        .results-table thead tr {
+            background: linear-gradient(135deg, #0b3b5f 0%, #1a5f8b 100%);
+            color: white;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 0.3px;
+        }
+
+        .results-table thead th {
+            padding: 14px 10px;
+            border-bottom: 2px solid #2c7cb6;
+            white-space: nowrap;
+        }
+
+    /* Строки таблицы */
+    .results-table tbody tr {
+        border-bottom: 1px solid #dee9f2;
+        transition: background 0.2s;
+    }
+
+        .results-table tbody tr:nth-child(even) {
+            background-color: #f8fdff;
+        }
+
+        .results-table tbody tr:hover {
+            background-color: #d9edff;
+            cursor: pointer;
+        }
+
+    .results-table td {
+        padding: 12px 10px;
+        color: #1e2a3a;
+        white-space: nowrap;
+    }
+
+    /* Подвал таблицы — фиксированный */
+    .results-table tfoot {
+        position: sticky;
+        bottom: 0;
+        z-index: 20;
+    }
+
+        .results-table tfoot tr {
+            background: #e6f4ff;
+            font-weight: 600;
+            border-top: 2px solid #b3d9ff;
+        }
+
+        .results-table tfoot td {
+            padding: 12px 10px;
+            color: #0a3a58;
+            font-weight: 600;
+            background: #e6f4ff;
+        }
+
+    /* Выравнивание столбцов */
+    .results-table th:nth-child(1),
+    .results-table td:nth-child(1) {
+        text-align: center;
+        width: 60px;
+    }
+
+    .results-table th:nth-child(2),
+    .results-table td:nth-child(2),
+    .results-table th:nth-child(3),
+    .results-table td:nth-child(3) {
+        text-align: left;
+    }
+
+    .results-table th:nth-child(4),
+    .results-table td:nth-child(4),
+    .results-table th:nth-child(5),
+    .results-table td:nth-child(5),
+    .results-table th:nth-child(6),
+    .results-table td:nth-child(6),
+    .results-table th:nth-child(7),
+    .results-table td:nth-child(7),
+    .results-table th:nth-child(8),
+    .results-table td:nth-child(8) {
+        text-align: center;
+    }
+
+/* Стили для пустого состояния */
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: #6c757d;
+    font-size: 1rem;
+}
+
+/* Стили для полосы прокрутки */
+.table-wrapper::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+.table-wrapper::-webkit-scrollbar-thumb {
+    background: #1a5f8b;
+    border-radius: 10px;
+}
+
+    .table-wrapper::-webkit-scrollbar-thumb:hover {
+        background: #0b3b5f;
+    }
