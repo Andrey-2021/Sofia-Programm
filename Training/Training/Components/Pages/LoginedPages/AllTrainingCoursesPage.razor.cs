@@ -34,6 +34,10 @@ public class AllTrainingCoursesPageModel: BaseModel
     protected async Task DeleteSelectedTrainingCourse(TrainingCourse entity)
     {
         DelSelectedOtherPeopleCourseOperationResponce = await DbRepository.DelSelectedTrainingCourceAsync(MyUser, entity);
+        if (DelSelectedOtherPeopleCourseOperationResponce.IsSuccessfullOperation)
+            NotifyUser("Курс удалён из списка выбранных", "Успешно", Radzen.NotificationSeverity.Success);
+        else
+            NotifyUser("Не удалось удалить курс из списка выбранных", "Ошибка", Radzen.NotificationSeverity.Error);
         await Load();
     }
 }

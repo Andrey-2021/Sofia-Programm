@@ -21,10 +21,10 @@
             <RadzenPanelMenuItem Text="На главную" Icon="home" Path=@($"{ProjectRouters.loginedHomePage}") />
             @* <RadzenPanelMenuItem Text="О нас" Icon="home" Path=@($"{ProjectRouters.aboutUsHref}") /> *@
 
-            <RadzenPanelMenuItem Text="Все мои курсы" Icon="home" Path=@($"{ProjectRouters.allTrainingCoursesPageHref}") />
-            <RadzenPanelMenuItem Text="Чужие курсы " Icon="home" Path=@($"{ProjectRouters.otherPeoplesCoursesPageHref}") />
-            <RadzenPanelMenuItem Text="Создать курс" Icon="home" Path=@($"{ProjectRouters.addTrainingCoursePageHref}") />
-            <RadzenPanelMenuItem Text="Пройденные тесты" Icon="home" Path=@($"{ProjectRouters.completedTestsHref}") />
+            <RadzenPanelMenuItem Text="Все мои курсы" Icon="book_ribbon" Path=@($"{ProjectRouters.allTrainingCoursesPageHref}") />
+            <RadzenPanelMenuItem Text="Чужие курсы " Icon="menu_book" Path=@($"{ProjectRouters.otherPeoplesCoursesPageHref}") />
+            <RadzenPanelMenuItem Text="Создать курс" Icon="history_edu" Path=@($"{ProjectRouters.addTrainingCoursePageHref}") />
+            <RadzenPanelMenuItem Text="Пройденные тесты" Icon="inventory" Path=@($"{ProjectRouters.completedTestsHref}") />
 
             <AuthorizeView Roles=@nameof(RoleEnum.admin)>
                 <RadzenPanelMenuItem Text="Администратор" Icon="admin_panel_settings" Expanded="false">

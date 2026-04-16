@@ -1,4 +1,6 @@
-﻿namespace Training.Components.Pages.LoginedPages;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+
+namespace Training.Components.Pages.LoginedPages;
 
 public class OtherPeoplesCoursesPageModel : BaseModel
 {
@@ -37,6 +39,10 @@ public class OtherPeoplesCoursesPageModel : BaseModel
         };
 
         var rezult= await DbRepository.UpdateEntity(selectedCource);
+        if(rezult.IsSuccessfullOperation)
+            NotifyUser("Курс добавлен", "Успешно", Radzen.NotificationSeverity.Success);
+        else
+            NotifyUser("Курс не удалось добавить", "Ошибка", Radzen.NotificationSeverity.Error);
         await LoadData();
     }
 
@@ -46,6 +52,10 @@ public class OtherPeoplesCoursesPageModel : BaseModel
     protected async Task DeleteSelectedTrainingCourse(TrainingCourse entity)
     {
         DelSelectedOtherPeopleCourseOperationResponce = await DbRepository.DelSelectedTrainingCourceAsync(MyUser, entity);
+        if (DelSelectedOtherPeopleCourseOperationResponce.IsSuccessfullOperation)
+            NotifyUser("Курс удалён из списка выбранных", "Успешно", Radzen.NotificationSeverity.Success);
+        else
+            NotifyUser("Не удалось удалить курс из списка выбранных", "Ошибка", Radzen.NotificationSeverity.Error);
         await LoadData();
     }
 }

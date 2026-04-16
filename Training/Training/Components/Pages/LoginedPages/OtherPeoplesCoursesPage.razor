@@ -2,9 +2,10 @@
 @using Training.Components.Pages.Components
 @attribute [Route(ProjectRouters.otherPeoplesCoursesPage)]
 @inherits OtherPeoplesCoursesPageModel
-<PageTitle>Курсы</PageTitle>
+<PageTitle>Открытые курсы</PageTitle>
+@* <h3>Курсы, других пользователей</h3> *@
 
-@if (SelectedOtherPeopleCourse != null)
+@* @if (SelectedOtherPeopleCourse != null)
 {
     <h3>Курсы, других пользователей</h3>
     <div>
@@ -12,9 +13,9 @@
     </div>
     <ShowOperrationErrorComponent BaseOperationResponce="DelSelectedOtherPeopleCourseOperationResponce" />
     <ShowAllTrainingCoursesComponent TrainingCourses=@SelectedOtherPeopleCourse
-                                 MyUser=@MyUser
-                                 IsMyTrainingCoursesPage="false"
-                                 IsShowDelButton="true" 
+                                     MyUser=@MyUser
+                                     IsMyTrainingCoursesPage="false"
+                                     IsShowDelButton="true"
                                      OnDeleteTrainingCourseCallback="DeleteSelectedTrainingCourse" />
 }
 <br />
@@ -34,4 +35,40 @@ else
                                      IsMyTrainingCoursesPage="false"
                                      IsShowDelButton="false"
                                      OnAddTrainingCourseCallback="OnAddTrainingCourseClick" />
+} *@
+
+
+<RadzenTabs @bind-SelectedIndex=@selectedIndex>
+    <Tabs>
+        <RadzenTabsItem Text="Курсы открытые для всех. Разработанные другими пользователями.">
+            @if (NotSelectedOtherPeopleCourse == null)
+            {
+                <div>
+                    Нет курсов
+                </div>
+            }
+            else
+            {
+                <ShowAllTrainingCoursesComponent TrainingCourses=@NotSelectedOtherPeopleCourse
+                                                 MyUser=@MyUser
+                                                 IsMyTrainingCoursesPage="false"
+                                                 IsShowDelButton="false"
+                                                 OnAddTrainingCourseCallback="OnAddTrainingCourseClick" />
+            }
+        </RadzenTabsItem>
+
+        <RadzenTabsItem Text="Уже мною выбранные чужие курсы (разработанные другими пользователями)">
+            <ShowOperrationErrorComponent BaseOperationResponce="DelSelectedOtherPeopleCourseOperationResponce" />
+            <ShowAllTrainingCoursesComponent TrainingCourses=@SelectedOtherPeopleCourse
+                                             MyUser=@MyUser
+                                             IsMyTrainingCoursesPage="false"
+                                             IsShowDelButton="true"
+                                             OnDeleteTrainingCourseCallback="DeleteSelectedTrainingCourse" />
+        </RadzenTabsItem>
+        
+    </Tabs>
+</RadzenTabs>
+
+@code {
+    int selectedIndex = 0;
 }

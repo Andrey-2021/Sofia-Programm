@@ -4,7 +4,7 @@
 @inherits AllTrainingCoursesPageModel
 <PageTitle>Курсы</PageTitle>
 
-<h3>Мои курсы</h3>
+@* <h3>Мои курсы</h3>
 <ShowAllTrainingCoursesComponent TrainingCourses=@TrainingCourses
                                  MyUser=@MyUser
                                  IsMyTrainingCoursesPage="true"
@@ -22,4 +22,31 @@
                                      IsMyTrainingCoursesPage="true"
                                      IsShowDelButton="true"
                                      OnDeleteTrainingCourseCallback="DeleteSelectedTrainingCourse" />
+} *@
+
+
+<RadzenTabs @bind-SelectedIndex=@selectedIndex>
+    <Tabs>
+        <RadzenTabsItem Text="Мои курсы">
+            <ShowAllTrainingCoursesComponent TrainingCourses=@TrainingCourses
+                                             MyUser=@MyUser
+                                             IsMyTrainingCoursesPage="true"
+                                             IsShowDelButton="false" />
+        </RadzenTabsItem>
+
+        <RadzenTabsItem Text="Выбранные мною курсы, разработанные другими пользователями">
+
+            <ShowOperrationErrorComponent BaseOperationResponce="DelSelectedOtherPeopleCourseOperationResponce" />
+            <ShowOperrationErrorComponent BaseOperationResponce="OtherPeoplesCoursesThatIChosenResponce" />
+            <ShowAllTrainingCoursesComponent TrainingCourses=@OtherPeoplesCoursesThatIChosen
+                                             MyUser=@MyUser
+                                             IsMyTrainingCoursesPage="true"
+                                             IsShowDelButton="true"
+                                             OnDeleteTrainingCourseCallback="DeleteSelectedTrainingCourse" />
+        </RadzenTabsItem>
+    </Tabs>
+</RadzenTabs>
+
+@code {
+    int selectedIndex = 0;
 }
