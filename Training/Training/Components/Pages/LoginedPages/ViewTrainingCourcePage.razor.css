@@ -167,8 +167,8 @@ body {
 }
 
 .control-block {
-    flex: 1;
-    min-width: 180px;
+    /*flex: 1;*/
+    min-width: 100px;
     text-align: center;
 }
 

@@ -231,15 +231,15 @@
                                                     @item.KatakanaWord
                                                 </td>
                                                 <td>
-                                                    @item.RussianWord
+                                                    @item.Word
                                                 </td>
                                                 <td>
-                                                    @if (item.WrongRussianWordAnswers?.Count > 0)
+                                                    @if (item.WrongWordAnswers?.Count > 0)
                                                     {
                                                         <div class="table-reset-container">
                                                             <table>
                                                                 <tbody>
-                                                                    @foreach (var rusWord in item.WrongRussianWordAnswers)
+                                                                    @foreach (var rusWord in item.WrongWordAnswers)
                                                                     {
                                                                         <tr>
                                                                             <td>@rusWord.Answer</td>
@@ -400,11 +400,11 @@
                                                     </td>
                                                     <td>
                                                         <RadzenTextBox Name="_name"
-                                                                       @bind-Value=@(AddedCourseQestion!.RussianWord)
+                                                                       @bind-Value=@(AddedCourseQestion!.Word)
                                                                        Style="width: 100%; min-width:400px;"
                                                                        
                                                                        AutoCompleteType="AutoCompleteType.Off" />
-                                                        <ValidationMessage For="@(() => AddedCourseQestion!.RussianWord)" />
+                                                        <ValidationMessage For="@(() => AddedCourseQestion!.Word)" />
 
                                                     </td>
                                                 </tr>

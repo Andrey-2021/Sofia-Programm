@@ -56,8 +56,10 @@ public class TrainingCourse: IHaveId
     public int DifficultyLevel { get; set; }
 
     /// <summary>
-    /// Курс виден всем
+    /// Флаг.Курс виден всем
     /// </summary>
+    [Comment("Флаг.Курс виден всем")]
+    [DisplayName("Флаг.Курс виден всем")]
     public bool IsVisableForAll { get; set; } = false;
 
     /// <summary>
@@ -85,6 +87,9 @@ public class TrainingCourse: IHaveId
     /// <summary>
     /// Вопросы курса
     /// </summary>
+    /// <remarks>
+	/// Навигационное свойство. Связь один-ко-многим
+	///</remarks>
     [ValidateComplexType]
     public IList<CourseQestion>? CourseQestions { get; set; }
     

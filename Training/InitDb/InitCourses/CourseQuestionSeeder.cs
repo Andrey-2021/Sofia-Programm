@@ -20,10 +20,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "私",
             HiraganaWord = "わたし",
             KatakanaWord = "ワタシ",
-            RussianWord = "я",
+            Word = "я",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Ты"),
             new("Мы"),
@@ -38,10 +38,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "貴方",
             HiraganaWord = "あなた",
             KatakanaWord = "アナタ",
-            RussianWord = "ты",
+            Word = "ты",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Я"),
             new("Вы"),
@@ -56,10 +56,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "学生",
             HiraganaWord = "がくせい",
             KatakanaWord = "ガクセイ",
-            RussianWord = "студент",
+            Word = "студент",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Учитель"),
             new("Школьник"),
@@ -74,10 +74,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "先生",
             HiraganaWord = "せんせい",
             KatakanaWord = "センセイ",
-            RussianWord = "учитель",
+            Word = "учитель",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Студент"),
             new("Директор"),
@@ -92,10 +92,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "日本語",
             HiraganaWord = "にほんご",
             KatakanaWord = "ニホンゴ",
-            RussianWord = "японский язык",
+            Word = "японский язык",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Китайский язык"),
             new("Английский язык"),
@@ -110,10 +110,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "本",
             HiraganaWord = "ほん",
             KatakanaWord = "ホン",
-            RussianWord = "книга",
+            Word = "книга",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Тетрадь"),
             new("Журнал"),
@@ -128,10 +128,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "水",
             HiraganaWord = "みず",
             KatakanaWord = "ミズ",
-            RussianWord = "вода",
+            Word = "вода",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Молоко"),
             new("Сок"),
@@ -146,10 +146,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "食べる",
             HiraganaWord = "たべる",
             KatakanaWord = "タベル",
-            RussianWord = "есть (кушать)",
+            Word = "есть (кушать)",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Пить"),
             new("Готовить"),
@@ -164,10 +164,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "飲む",
             HiraganaWord = "のむ",
             KatakanaWord = "ノム",
-            RussianWord = "пить",
+            Word = "пить",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Есть"),
             new("Наливать"),
@@ -182,10 +182,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "行く",
             HiraganaWord = "いく",
             KatakanaWord = "イク",
-            RussianWord = "идти",
+            Word = "идти",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Бежать"),
             new("Ехать"),
@@ -200,10 +200,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "見る",
             HiraganaWord = "みる",
             KatakanaWord = "ミル",
-            RussianWord = "смотреть",
+            Word = "смотреть",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Видеть"),
             new("Глядеть"),
@@ -218,10 +218,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "犬",
             HiraganaWord = "いぬ",
             KatakanaWord = "イヌ",
-            RussianWord = "собака",
+            Word = "собака",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Кошка"),
             new("Волк"),
@@ -236,10 +236,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "猫",
             HiraganaWord = "ねこ",
             KatakanaWord = "ネコ",
-            RussianWord = "кошка",
+            Word = "кошка",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Собака"),
             new("Тигр"),
@@ -254,10 +254,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "山",
             HiraganaWord = "やま",
             KatakanaWord = "ヤマ",
-            RussianWord = "гора",
+            Word = "гора",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Холм"),
             new("Скала"),
@@ -272,10 +272,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "川",
             HiraganaWord = "かわ",
             KatakanaWord = "カワ",
-            RussianWord = "река",
+            Word = "река",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Озеро"),
             new("Ручей"),
@@ -290,10 +290,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "花",
             HiraganaWord = "はな",
             KatakanaWord = "ハナ",
-            RussianWord = "цветок",
+            Word = "цветок",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Дерево"),
             new("Трава"),
@@ -308,10 +308,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "空",
             HiraganaWord = "そら",
             KatakanaWord = "ソラ",
-            RussianWord = "небо",
+            Word = "небо",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Земля"),
             new("Облако"),
@@ -326,10 +326,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "雨",
             HiraganaWord = "あめ",
             KatakanaWord = "アメ",
-            RussianWord = "дождь",
+            Word = "дождь",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Снег"),
             new("Град"),
@@ -344,10 +344,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "車",
             HiraganaWord = "くるま",
             KatakanaWord = "クルマ",
-            RussianWord = "машина",
+            Word = "машина",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Автобус"),
             new("Мотоцикл"),
@@ -362,10 +362,10 @@ public static class CourseQuestionSeeder
             KanjiWord = "電車",
             HiraganaWord = "でんしゃ",
             KatakanaWord = "デンシャ",
-            RussianWord = "поезд",
+            Word = "поезд",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Метро"),
             new("Трамвай"),

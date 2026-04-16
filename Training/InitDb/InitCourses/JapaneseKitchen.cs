@@ -13,10 +13,10 @@ internal class JapaneseKitchen
             KanjiWord = "寿司",
             HiraganaWord = "すし",
             KatakanaWord = "スシ",
-            RussianWord = "суши",
+            Word = "суши",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Сашими"),
             new("Роллы"),
@@ -31,10 +31,10 @@ internal class JapaneseKitchen
             KanjiWord = "刺身",
             HiraganaWord = "さしみ",
             KatakanaWord = "サシミ",
-            RussianWord = "сашими",
+            Word = "сашими",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Суши"),
             new("Роллы"),
@@ -49,10 +49,10 @@ internal class JapaneseKitchen
             KanjiWord = "巻き寿司",
             HiraganaWord = "まきずし",
             KatakanaWord = "マキズシ",
-            RussianWord = "роллы",
+            Word = "роллы",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Суши"),
             new("Сашими"),
@@ -67,10 +67,10 @@ internal class JapaneseKitchen
             KanjiWord = "饂飩",
             HiraganaWord = "うどん",
             KatakanaWord = "ウドン",
-            RussianWord = "удон",
+            Word = "удон",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Соба"),
             new("Рамен"),
@@ -85,10 +85,10 @@ internal class JapaneseKitchen
             KanjiWord = "蕎麦",
             HiraganaWord = "そば",
             KatakanaWord = "ソバ",
-            RussianWord = "соба",
+            Word = "соба",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Удон"),
             new("Рамен"),
@@ -103,10 +103,10 @@ internal class JapaneseKitchen
             KanjiWord = "拉麺",
             HiraganaWord = "らーめん",
             KatakanaWord = "ラーメン",
-            RussianWord = "рамен",
+            Word = "рамен",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Удон"),
             new("Соба"),
@@ -121,10 +121,10 @@ internal class JapaneseKitchen
             KanjiWord = "天ぷら",
             HiraganaWord = "てんぷら",
             KatakanaWord = "テンプラ",
-            RussianWord = "темпура",
+            Word = "темпура",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Суши"),
             new("Сашими"),
@@ -139,10 +139,10 @@ internal class JapaneseKitchen
             KanjiWord = "餃子",
             HiraganaWord = "ぎょうざ",
             KatakanaWord = "ギョウザ",
-            RussianWord = "гёдза",
+            Word = "гёдза",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Якитори"),
             new("Темпура"),
@@ -157,10 +157,10 @@ internal class JapaneseKitchen
             KanjiWord = "味噌汁",
             HiraganaWord = "みそしる",
             KatakanaWord = "ミソシル",
-            RussianWord = "мисо-суп",
+            Word = "мисо-суп",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Сукияки"),
             new("Темпура"),
@@ -175,10 +175,10 @@ internal class JapaneseKitchen
             KanjiWord = "焼き鳥",
             HiraganaWord = "やきとり",
             KatakanaWord = "ヤキトリ",
-            RussianWord = "якитори",
+            Word = "якитори",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Гёдза"),
             new("Темпура"),
@@ -193,10 +193,10 @@ internal class JapaneseKitchen
             KanjiWord = "ご飯",
             HiraganaWord = "ごはん",
             KatakanaWord = "ゴハン",
-            RussianWord = "рис",
+            Word = "рис",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Лапша"),
             new("Хлеб"),
@@ -211,10 +211,10 @@ internal class JapaneseKitchen
             KanjiWord = "お茶",
             HiraganaWord = "おちゃ",
             KatakanaWord = "オチャ",
-            RussianWord = "чай",
+            Word = "чай",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Кофе"),
             new("Сок"),
@@ -229,10 +229,10 @@ internal class JapaneseKitchen
             KanjiWord = "注文",
             HiraganaWord = "ちゅうもん",
             KatakanaWord = "チュウモン",
-            RussianWord = "заказ",
+            Word = "заказ",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Меню"),
             new("Счёт"),
@@ -247,10 +247,10 @@ internal class JapaneseKitchen
             KanjiWord = "",
             HiraganaWord = "",
             KatakanaWord = "メニュー",
-            RussianWord = "меню",
+            Word = "меню",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Заказ"),
             new("Счёт"),
@@ -265,10 +265,10 @@ internal class JapaneseKitchen
             KanjiWord = "お勘定",
             HiraganaWord = "おかんじょう",
             KatakanaWord = "オカンジョウ",
-            RussianWord = "счёт",
+            Word = "счёт",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Меню"),
             new("Заказ"),

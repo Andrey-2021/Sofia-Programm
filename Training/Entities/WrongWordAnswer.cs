@@ -1,9 +1,9 @@
 ﻿namespace Entities;
 
 /// <summary>
-/// Ответ на вопрос курса
+/// Неверный ответ на вопрос курса
 /// </summary>
-public class WrongRussianWordAnswer
+public class WrongWordAnswer
 {
     /// <summary>
     /// Id
@@ -45,14 +45,14 @@ public class WrongRussianWordAnswer
     /// <summary>
     /// Конструктор
     /// </summary>
-    public WrongRussianWordAnswer()
+    public WrongWordAnswer()
     { 
     }
 
     /// <summary>
     /// Конструктор
     /// </summary>
-    public WrongRussianWordAnswer(string answer)
+    public WrongWordAnswer(string answer)
     {
         Answer = answer;
     }

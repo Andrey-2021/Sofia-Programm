@@ -1,7 +1,7 @@
 ﻿namespace DbLibrary;
 
 /// <summary>
-/// Changes Tracking Type for DbSet operations
+/// Отслеживание состояний сужностей БД
 /// </summary>
 public enum TrackingType
 {

@@ -24,19 +24,19 @@ public class AllAnswers
         }
 
         List<String> wrongUnswers = default!; // Список неправильных ответов/слов
-        if (currentCourseQestion?.WrongRussianWordAnswers?.Count > 0) // Если есть неправильные ответы/слова для текущего вопроса
+        if (currentCourseQestion?.WrongWordAnswers?.Count > 0) // Если есть неправильные ответы/слова для текущего вопроса
             wrongUnswers = CreteFrowWrongAnswers(currentCourseQestion); // тогда берём их
         else
             wrongUnswers = CreteFrowQustions(currentCourseQestion!, courseQestions); // иначе, получаем их другим способом
 
-        int numberAnswers = (currentCourseQestion?.WrongRussianWordAnswers?.Count ?? 0) + 1;
+        int numberAnswers = (currentCourseQestion?.WrongWordAnswers?.Count ?? 0) + 1;
         RandomAnswers = new TestAnswer[numberAnswers];
         Random rng = new Random();
 
         //Размещаем неправильные ответы случайным образом
-        if (currentCourseQestion?.WrongRussianWordAnswers != null)
+        if (currentCourseQestion?.WrongWordAnswers != null)
         {
-            foreach (var item in currentCourseQestion.WrongRussianWordAnswers)
+            foreach (var item in currentCourseQestion.WrongWordAnswers)
             {
                 var index = rng.Next(0, numberAnswers);
                 if (RandomAnswers[index] == null)
@@ -46,7 +46,7 @@ public class AllAnswers
             }
         }
         // На свободное место в массивы размещаем правильный ответ
-        WriteToCleanPlase(currentCourseQestion!.RussianWord, true);
+        WriteToCleanPlase(currentCourseQestion!.Word, true);
     }
 
     /// <summary>
@@ -56,7 +56,7 @@ public class AllAnswers
     /// <returns></returns>
     private List<String> CreteFrowWrongAnswers(CourseQestion courseQestion)
     {
-        return courseQestion!.WrongRussianWordAnswers!.Select(x => x.Answer).ToList();
+        return courseQestion!.WrongWordAnswers!.Select(x => x.Answer).ToList();
     }
 
     /// <summary>
@@ -76,8 +76,8 @@ public class AllAnswers
                 .Where(x => x.KatakanaWord != courseQestion.KatakanaWord
                 && x.HiraganaWord != courseQestion.HiraganaWord
                 && x.KanjiWord != courseQestion.KanjiWord
-                && x.RussianWord.ToUpper() != courseQestion.RussianWord.ToUpper())
-                .Select(x => x.RussianWord).ToList();
+                && x.Word.ToUpper() != courseQestion.Word.ToUpper())
+                .Select(x => x.Word).ToList();
             wordsList= wordsList.Distinct().ToList(); //Удаляем повторяющиеся слова
         }
 
@@ -93,7 +93,7 @@ public class AllAnswers
             int index = random.Next(wordsList.Count);
             var addedWord = wordsList[index];
             if (randomWords.Any(x => x == addedWord) // если такое слово уже есть
-                && addedWord.ToUpper() == courseQestion.RussianWord.ToUpper()) // или оно совпадвет с правильным ответом из вопроса
+                && addedWord.ToUpper() == courseQestion.Word.ToUpper()) // или оно совпадвет с правильным ответом из вопроса
                 continue;
             randomWords.Add(addedWord);
             i++;

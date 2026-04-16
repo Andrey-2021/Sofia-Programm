@@ -6,8 +6,10 @@
 <header class="header">
     <div class="container header-container">
         <div class="greeting">
-            <span>📇</span> Карточки «和の道» — учите японский с помощью умных карточек <br>
-            🎴 Создавайте, делитесь, запоминайте легко и быстро
+            <span class="card-icon">📇</span> 
+            Карточки «和の道» — учите японский с помощью умных карточек <br>
+            <span class="card-icon">🎴</span>
+            Создавайте, делитесь, запоминайте легко и быстро
         </div>
         <div class="auth-buttons">
             <button class="btn btn-outline" id="loginButton" @onclick="@LoginClicked">🔐 Войти</button>
@@ -15,7 +17,6 @@
         </div>
     </div>
 </header>
-
 
 <main>
     <div class="container">
@@ -111,7 +112,9 @@
         <div class="footer-links">
             <span>📞 +7 (495) 123-45-67</span>
             <span>✉️ hello@wano-michi.ru</span>
-            <span>📜 Политика конфиденциальности</span>
+            <a href="@ProjectRouters.privacyPolicyHref" class="privacy-policy">
+                <span>📜 Политика конфиденциальности</span>
+            </a>
         </div>
     </div>
     <div class="container">

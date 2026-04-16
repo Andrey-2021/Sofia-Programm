@@ -1,5 +1,79 @@
 ﻿@attribute [Route(ProjectRouters.loginedHomePage)]
+@inherits LoginedHomePageModel
 <PageTitle>Home</PageTitle>
 
-<h3>LoginedHomePage</h3>
+<header class="header">
+    <div class="header-content">
+        <div class="logo">
+            <span>📚</span>
+            <span>Японский язык</span>
+        </div>
+        <div class="logo">
+            <span>🇯🇵</span>
+        </div>
+    </div>
+</header>
 
+
+<div class="container">
+
+    <!-- Герой-блок с описанием -->
+    <div class="hero">
+        <div class="hero-icon">🎴</div>
+        <h1>Изучай японский язык с карточками</h1>
+        <p>
+            Создавайте карточки для запоминания иероглифов, слов и выражений.
+            Изучайте японский язык в удобном формате с помощью интерактивных карточек и тестов.
+        </p>
+    </div>
+    <!-- Раздел "Перейти в разделы" -->
+    <div class="section-header">
+        <h2>📌 Быстрый доступ</h2>
+        <p>Выберите нужный раздел, чтобы продолжить</p>
+    </div>
+
+    <!-- Сетка ссылок на разделы -->
+    <div class="cards-grid">
+
+        <a href="@ProjectRouters.allTrainingCoursesPageHref" class="card">
+            <div class="card-icon">📖</div>
+            <h3>Все мои курсы</h3>
+            <p>Ваши личные курсы с карточками. Редактируйте, тестируйте и изучайте свои материалы.</p>
+            <span class="card-badge">Мои курсы</span>
+        </a>
+
+        <a href="@ProjectRouters.otherPeoplesCoursesPageHref" class="card">
+            <div class="card-icon">🌐</div>
+            <h3>Чужие курсы</h3>
+            <p>Курсы других пользователей. Подписывайтесь и изучайте готовые наборы карточек.</p>
+            <span class="card-badge">Библиотека</span>
+        </a>
+
+        <a href="@ProjectRouters.addTrainingCoursePageHref" class="card">
+            <div class="card-icon">✏️</div>
+            <h3>Создать курс</h3>
+            <p>Создайте новый курс с карточками. Добавляйте слова, иероглифы и переводы.</p>
+            <span class="card-badge">Создание</span>
+        </a>
+
+        <a href="@ProjectRouters.completedTestsHref" class="card">
+            <div class="card-icon">📊</div>
+            <h3>Пройденные тесты</h3>
+            <p>История ваших тестирований. Отслеживайте прогресс и улучшайте результаты.</p>
+            <span class="card-badge">Статистика</span>
+        </a>
+
+        <a class="card exit"
+               @onclick=@OnLogoutClick>
+            <div class="card-icon">🚪</div>
+            <h3>Выход</h3>
+            <p>Завершить сеанс и выйти из приложения.</p>
+            <span class="card-badge">Выход</span>
+        </a>
+
+    </div>
+</div>
+
+<footer class="footer">
+    <p>© 2025 | Изучение японского языка с карточками</p>
+</footer>

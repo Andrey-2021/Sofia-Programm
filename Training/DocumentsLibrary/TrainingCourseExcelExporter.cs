@@ -75,7 +75,7 @@ public class TrainingCourseExcelExporter
                 sheet.Cells[row, 2].Value = question.KanjiWord ?? "";
                 sheet.Cells[row, 3].Value = question.HiraganaWord ?? "";
                 sheet.Cells[row, 4].Value = question.KatakanaWord ?? "";
-                sheet.Cells[row, 5].Value = question.RussianWord;
+                sheet.Cells[row, 5].Value = question.Word;
                 row++;
             }
         }

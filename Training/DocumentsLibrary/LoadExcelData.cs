@@ -48,7 +48,7 @@ public class LoadExcelData
                         KanjiWord = kanjiWord,
                         HiraganaWord=hiraganaWord,
                         KatakanaWord=katakanaWord,
-                        RussianWord=word
+                        Word=word
                     };
 
                     courseQestions.Add(courseQestion);

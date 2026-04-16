@@ -43,11 +43,11 @@ public class CourseQestion
     /// <summary>
     /// Русское слово
     /// </summary>
-    [Required(ErrorMessage = "Введите русское слово")]
+    [Required(ErrorMessage = "Введите слово")]
     [StringLength(LengthConstants.russianWordMaxLength, MinimumLength = LengthConstants.russianWordMinLength, ErrorMessage = "Длина слова должна быть не менее {2} и не более {1} символов")]
-    [Comment("Русское слово")]
-    [DisplayName("Русское слово")]
-    public string RussianWord { get; set; } = string.Empty;
+    [Comment("Слово")]
+    [DisplayName("Слово")]
+    public string Word { get; set; } = string.Empty;
 
     /// <summary>
     /// Id учебного курса
@@ -71,9 +71,20 @@ public class CourseQestion
     [DisplayName("Учебный курс")]
     public TrainingCourse? TrainingCourse { get; set; }
 
+    /// <summary>
+    /// Список ошибочных ответов
+    /// </summary>
+    /// <remarks>
+	/// Навигационное свойство. Связь один-ко-многим
+	///</remarks>
     [ValidateComplexType]
-    public ICollection<WrongRussianWordAnswer>? WrongRussianWordAnswers{ get; set; }
+    public ICollection<WrongWordAnswer>? WrongWordAnswers{ get; set; }
 
+    /// <summary>
+    /// Скопировать свойства
+    /// </summary>
+    /// <param name="courseQestion"></param>
+    /// <exception cref="ArgumentNullException"></exception>
     public void CopyTo(CourseQestion courseQestion)
     {
         if (courseQestion == null)
@@ -84,9 +95,9 @@ public class CourseQestion
         courseQestion.KanjiWord = this.KanjiWord;
         courseQestion.HiraganaWord = this.HiraganaWord;
         courseQestion.KatakanaWord = this.KatakanaWord;
-        courseQestion.RussianWord = this.RussianWord;
+        courseQestion.Word = this.Word;
         courseQestion.TrainingCourseId = this.TrainingCourseId;
         courseQestion.TrainingCourse = this.TrainingCourse;
-        courseQestion.WrongRussianWordAnswers = this.WrongRussianWordAnswers;
+        courseQestion.WrongWordAnswers = this.WrongWordAnswers;
     }
 }

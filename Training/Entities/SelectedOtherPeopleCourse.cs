@@ -55,5 +55,4 @@ public class SelectedOtherPeopleCourse
     [Comment("Учебный курс")]
     [DisplayName("Учебный курс")]
     public TrainingCourse? TrainingCourse { get; set; }
-
 }

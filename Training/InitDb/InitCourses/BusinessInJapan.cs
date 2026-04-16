@@ -14,10 +14,10 @@ internal class BusinessInJapan
             KanjiWord = "会社",
             HiraganaWord = "かいしゃ",
             KatakanaWord = "カイシャ",
-            RussianWord = "компания",
+            Word = "компания",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Офис"),
         new("Предприятие"),
@@ -32,10 +32,10 @@ internal class BusinessInJapan
             KanjiWord = "仕事",
             HiraganaWord = "しごと",
             KatakanaWord = "シゴト",
-            RussianWord = "работа",
+            Word = "работа",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Должность"),
         new("Занятие"),
@@ -50,10 +50,10 @@ internal class BusinessInJapan
             KanjiWord = "上司",
             HiraganaWord = "じょうし",
             KatakanaWord = "ジョウシ",
-            RussianWord = "начальник",
+            Word = "начальник",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Подчинённый"),
         new("Директор"),
@@ -68,10 +68,10 @@ internal class BusinessInJapan
             KanjiWord = "同僚",
             HiraganaWord = "どうりょう",
             KatakanaWord = "ドウリョウ",
-            RussianWord = "коллега",
+            Word = "коллега",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Друг"),
         new("Партнёр"),
@@ -86,10 +86,10 @@ internal class BusinessInJapan
             KanjiWord = "社員",
             HiraganaWord = "しゃいん",
             KatakanaWord = "シャイン",
-            RussianWord = "сотрудник",
+            Word = "сотрудник",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Работник"),
         new("Персонал"),
@@ -104,10 +104,10 @@ internal class BusinessInJapan
             KanjiWord = "会議",
             HiraganaWord = "かいぎ",
             KatakanaWord = "カイギ",
-            RussianWord = "совещание",
+            Word = "совещание",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Конференция"),
         new("Переговоры"),
@@ -122,10 +122,10 @@ internal class BusinessInJapan
             KanjiWord = "報告",
             HiraganaWord = "ほうこく",
             KatakanaWord = "ホウコク",
-            RussianWord = "отчёт",
+            Word = "отчёт",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Доклад"),
         new("Презентация"),
@@ -140,10 +140,10 @@ internal class BusinessInJapan
             KanjiWord = "プロジェクト",
             HiraganaWord = "ぷろじぇくと",
             KatakanaWord = "プロジェクト",
-            RussianWord = "проект",
+            Word = "проект",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Задача"),
         new("План"),
@@ -158,10 +158,10 @@ internal class BusinessInJapan
             KanjiWord = "顧客",
             HiraganaWord = "こきゃく",
             KatakanaWord = "コキャク",
-            RussianWord = "клиент",
+            Word = "клиент",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Покупатель"),
         new("Заказчик"),
@@ -176,10 +176,10 @@ internal class BusinessInJapan
             KanjiWord = "契約",
             HiraganaWord = "けいやく",
             KatakanaWord = "ケイヤク",
-            RussianWord = "контракт",
+            Word = "контракт",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Соглашение"),
         new("Договор"),
@@ -194,10 +194,10 @@ internal class BusinessInJapan
             KanjiWord = "利益",
             HiraganaWord = "りえき",
             KatakanaWord = "リエキ",
-            RussianWord = "прибыль",
+            Word = "прибыль",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Доход"),
         new("Выручка"),
@@ -212,10 +212,10 @@ internal class BusinessInJapan
             KanjiWord = "損失",
             HiraganaWord = "そんしつ",
             KatakanaWord = "ソンシツ",
-            RussianWord = "убыток",
+            Word = "убыток",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Расход"),
         new("Затраты"),
@@ -230,10 +230,10 @@ internal class BusinessInJapan
             KanjiWord = "名刺",
             HiraganaWord = "めいし",
             KatakanaWord = "メイシ",
-            RussianWord = "визитка",
+            Word = "визитка",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Бланк"),
         new("Карточка"),
@@ -248,10 +248,10 @@ internal class BusinessInJapan
             KanjiWord = "謝罪",
             HiraganaWord = "しゃざい",
             KatakanaWord = "シャザイ",
-            RussianWord = "извинение",
+            Word = "извинение",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Просьба"),
         new("Благодарность"),
@@ -266,10 +266,10 @@ internal class BusinessInJapan
             KanjiWord = "お疲れ様です",
             HiraganaWord = "おつかれさまです",
             KatakanaWord = "オツカレサマデス",
-            RussianWord = "спасибо за работу",
+            Word = "спасибо за работу",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("До свидания"),
         new("Извините"),

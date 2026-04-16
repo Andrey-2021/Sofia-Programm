@@ -1,7 +1,15 @@
 ﻿namespace DbLibrary;
 
+/// <summary>
+/// Инициализация БД начальными значениями
+/// </summary>
 public static class MainInit
 {
+    /// <summary>
+    /// Инициализировать БД начальными данными
+    /// </summary>
+    /// <param name="db"></param>
+    /// <returns></returns>
     public static async Task InitDb(SqlDbContext db)
     {
         var users = UserSeeder.GetSampleUsers();
@@ -16,6 +24,9 @@ public static class MainInit
         await AddCompetedTests(trainingCourse, users, db);
     }
 
+    /// <summary>
+    /// Добавить завершенные тесты
+    /// </summary>
     private static async Task AddCompetedTests(List<TrainingCourse> trainingCourse, List<MyUser> users, SqlDbContext db)
     {
         var completedTest1 = new CompletedTest()

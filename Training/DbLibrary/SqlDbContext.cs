@@ -1,34 +1,44 @@
 ﻿namespace DbLibrary;
 
+/// <summary>
+/// Контекст БД
+/// </summary>
 public class SqlDbContext : DbContext
 {
-    
+    /// <summary>
+    /// Пользователи
+    /// </summary>
     public DbSet<MyUser> MyUsers { get; set; }
+    
+    /// <summary>
+    /// Учебные курсы
+    /// </summary>
     public DbSet<TrainingCourse> TrainingCourses{ get; set; }
+    
+    /// <summary>
+    /// Вопросы учебного курса
+    /// </summary>
     public DbSet<CourseQestion> CourseQestions{ get; set; }
-    public DbSet<WrongRussianWordAnswer> WrongRussianWordAnswers { get; set; }
+    
+    /// <summary>
+    /// Неверные ответы для вопроса курса
+    /// </summary>
+    public DbSet<WrongWordAnswer> WrongWordAnswers { get; set; }
+    
+    /// <summary>
+    /// Завершенные тесты
+    /// </summary>
     public DbSet<CompletedTest> CompletedTests{ get; set; }
+    
+    /// <summary>
+    /// Курсы от других посетителей, которые выбраны текущим пользователем
+    /// </summary>
     public DbSet<SelectedOtherPeopleCourse> SelectedOtherPeopleCourses { get; set; }
 
+    /// <summary>
+    /// Конструктор
+    /// </summary>
     public SqlDbContext(DbContextOptions<SqlDbContext> options) : base(options)
     {
-    }
-
-    //public SqlDbContext()
-    //{
-    //    //Database.EnsureCreated();
-    //}
-
-    //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-    //{
-    //    string connection = "Data Source = WIN10PC; Initial Catalog =MedicalCRM ; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-    //    //optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=helloappdb;Trusted_Connection=True;");
-    //    optionsBuilder.UseSqlServer(connection);
-    //}
-
-    protected override void OnModelCreating(ModelBuilder modelBuilder)
-    {
-        //modelBuilder.Entity<Employee>().Navigation(e => e.Position).AutoInclude();
-        //modelBuilder.Entity<MedicalService>().Navigation(e => e.MedicalServiceType).AutoInclude();
     }
 }

@@ -35,7 +35,7 @@ public class AddTrainingCoursePageModel: BaseAddModel<TrainingCourse>
     /// <summary>
     /// Добавляемое ошибочное слово
     /// </summary>
-    protected WrongRussianWordAnswer? AddingWrongWord { get; set; }
+    protected WrongWordAnswer? AddingWrongWord { get; set; }
 
     /// <summary>
     /// Показывать поля карточки
@@ -95,11 +95,11 @@ public class AddTrainingCoursePageModel: BaseAddModel<TrainingCourse>
 
     
 
-    public async Task OnDeleteWrongWordClick(CourseQestion entity, WrongRussianWordAnswer wordAnswer)
+    public async Task OnDeleteWrongWordClick(CourseQestion entity, WrongWordAnswer wordAnswer)
     {
-        var forDel= entity.WrongRussianWordAnswers?.FirstOrDefault(wordAnswer);
+        var forDel= entity.WrongWordAnswers?.FirstOrDefault(wordAnswer);
         if (forDel != null)
-            entity.WrongRussianWordAnswers?.Remove(forDel);
+            entity.WrongWordAnswers?.Remove(forDel);
     }
 
     public async Task OnAddWrongWordClick(CourseQestion entity)
@@ -119,9 +119,9 @@ public class AddTrainingCoursePageModel: BaseAddModel<TrainingCourse>
         if (AddingWrongWord == null)
             return;
 
-        if (entity.WrongRussianWordAnswers == null)
-            entity.WrongRussianWordAnswers = new List<WrongRussianWordAnswer>();
-        entity.WrongRussianWordAnswers.Add(AddingWrongWord);
+        if (entity.WrongWordAnswers == null)
+            entity.WrongWordAnswers = new List<WrongWordAnswer>();
+        entity.WrongWordAnswers.Add(AddingWrongWord);
         IsAddWrongWord = false;
         
     }
@@ -143,7 +143,7 @@ public class AddTrainingCoursePageModel: BaseAddModel<TrainingCourse>
     public async Task OnQestionDeleteClick(CourseQestion entity)
     {
         var deletd= MainEntity!.CourseQestions?.FirstOrDefault(x=> x.Id == entity.Id
-            && x.RussianWord==entity.RussianWord
+            && x.Word==entity.Word
             && x.KanjiWord== entity.KanjiWord
             && x.KatakanaWord == entity.KatakanaWord
             && x.HiraganaWord == entity.HiraganaWord);

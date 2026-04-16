@@ -17,10 +17,10 @@ internal class TravelingInJapan
             KanjiWord = "電車",
             HiraganaWord = "でんしゃ",
             KatakanaWord = "デンシャ",
-            RussianWord = "поезд",
+            Word = "поезд",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Автобус"),
             new("Такси"),
@@ -35,10 +35,10 @@ internal class TravelingInJapan
             KanjiWord = "バス",
             HiraganaWord = "ばす",
             KatakanaWord = "バス",
-            RussianWord = "автобус",
+            Word = "автобус",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Поезд"),
             new("Такси"),
@@ -53,10 +53,10 @@ internal class TravelingInJapan
             KanjiWord = "切符",
             HiraganaWord = "きっぷ",
             KatakanaWord = "キップ",
-            RussianWord = "билет",
+            Word = "билет",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Паспорт"),
             new("Багаж"),
@@ -71,10 +71,10 @@ internal class TravelingInJapan
             KanjiWord = "ホテル",
             HiraganaWord = "ほてる",
             KatakanaWord = "ホテル",
-            RussianWord = "отель",
+            Word = "отель",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Рёкан"),
             new("Гостиница"),
@@ -89,10 +89,10 @@ internal class TravelingInJapan
             KanjiWord = "空港",
             HiraganaWord = "くうこう",
             KatakanaWord = "クウコウ",
-            RussianWord = "аэропорт",
+            Word = "аэропорт",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Вокзал"),
             new("Порт"),
@@ -107,10 +107,10 @@ internal class TravelingInJapan
             KanjiWord = "駅",
             HiraganaWord = "えき",
             KatakanaWord = "エキ",
-            RussianWord = "вокзал",
+            Word = "вокзал",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Аэропорт"),
             new("Остановка"),
@@ -125,10 +125,10 @@ internal class TravelingInJapan
             KanjiWord = "見学",
             HiraganaWord = "けんがく",
             KatakanaWord = "ケンガク",
-            RussianWord = "экскурсия",
+            Word = "экскурсия",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Путешествие"),
             new("Тур"),
@@ -143,10 +143,10 @@ internal class TravelingInJapan
             KanjiWord = "お土産",
             HiraganaWord = "おみやげ",
             KatakanaWord = "オミヤゲ",
-            RussianWord = "сувенир",
+            Word = "сувенир",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Подарок"),
             new("Вещь"),
@@ -161,10 +161,10 @@ internal class TravelingInJapan
             KanjiWord = "地図",
             HiraganaWord = "ちず",
             KatakanaWord = "チズ",
-            RussianWord = "карта",
+            Word = "карта",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Схема"),
             new("Атлас"),
@@ -179,10 +179,10 @@ internal class TravelingInJapan
             KanjiWord = "名所",
             HiraganaWord = "めいしょ",
             KatakanaWord = "メイショ",
-            RussianWord = "достопримечательность",
+            Word = "достопримечательность",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Музей"),
             new("Парк"),
@@ -197,10 +197,10 @@ internal class TravelingInJapan
             KanjiWord = "案内人",
             HiraganaWord = "あんないにん",
             KatakanaWord = "アンナイニン",
-            RussianWord = "гид",
+            Word = "гид",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Переводчик"),
             new("Турист"),
@@ -215,10 +215,10 @@ internal class TravelingInJapan
             KanjiWord = "旅行者",
             HiraganaWord = "りょこうしゃ",
             KatakanaWord = "リョコウシャ",
-            RussianWord = "турист",
+            Word = "турист",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Путешественник"),
             new("Гость"),
@@ -233,10 +233,10 @@ internal class TravelingInJapan
             KanjiWord = "荷物",
             HiraganaWord = "にもつ",
             KatakanaWord = "ニモツ",
-            RussianWord = "багаж",
+            Word = "багаж",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Сумка"),
             new("Чемодан"),
@@ -251,10 +251,10 @@ internal class TravelingInJapan
             KanjiWord = "時刻表",
             HiraganaWord = "じこくひょう",
             KatakanaWord = "ジコクヒョウ",
-            RussianWord = "расписание",
+            Word = "расписание",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Табло"),
             new("График"),
@@ -269,10 +269,10 @@ internal class TravelingInJapan
             KanjiWord = "旅行",
             HiraganaWord = "りょこう",
             KatakanaWord = "リョコウ",
-            RussianWord = "путешествие",
+            Word = "путешествие",
             TrainingCourse = trainingCourse,
                
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>
+            WrongWordAnswers = new List<WrongWordAnswer>
         {
             new("Отдых"),
             new("Экскурсия"),

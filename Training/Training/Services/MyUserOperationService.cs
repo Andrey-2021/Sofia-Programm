@@ -126,41 +126,58 @@ public class MyUserOperationService
             return result.ex;
         }
 
-        var findUserResult = await Repository.GetFirstOrDefaultAsync<MyUser>(predicate: x => x.UserGuid == userGuidKey.guid);
-        if (findUserResult.ex != null) // Если ошибка
+        //-- var findUserResult = await Repository.GetFirstOrDefaultAsync<MyUser>(predicate: x => x.UserGuid == userGuidKey.guid);
+        var findUserResult = await Repository.GetFirstOrDefault<MyUser>(predicate: x => x.UserGuid == userGuidKey.guid);
+        //if (findUserResult.ex != null) // Если ошибка
+        //{
+        //    MyUser = null;
+        //    return findUserResult.ex;
+        //}
+        if (!findUserResult.IsSuccessfullOperation)
         {
             MyUser = null;
-            return findUserResult.ex;
+            return findUserResult.Exception;
         }
 
-        if (findUserResult.entity == null) // Нет данных в БД - Нет пользователя с таким ключом в БД
+        //if (findUserResult.entity == null) // Нет данных в БД - Нет пользователя с таким ключом в БД
+        //{
+        //    var result = await CreateNewUserAsync();
+        //    MyUser = result.myUser;
+        //    return result.ex;
+        //}
+        //Нет данных в БД
+        if (findUserResult.Data == null)
         {
             var result = await CreateNewUserAsync();
             MyUser = result.myUser;
             return result.ex;
         }
 
+
+
         //Это зарегистрированный пользователь?
-        if (CheckIsRegisteredUser(findUserResult.entity))
+        if (CheckIsRegisteredUser(findUserResult.Data))
         {
             //Время Guid закончилось?
-            if (findUserResult.entity.ExpiredAt < DateTime.Now)
+            if (findUserResult.Data.ExpiredAt < DateTime.Now)
             {
-                var result = await LogoutAsync(findUserResult.entity);
+                var result = await LogoutAsync(findUserResult.Data);
                 return result;
             }
             //прибавить часы
-            findUserResult.entity.ExpiredAt = DateTime.Now.AddHours(UserLoginActiveHours);
+            findUserResult.Data.ExpiredAt = DateTime.Now.AddHours(UserLoginActiveHours);
         }
 
-        //var saveEntityOperationResponce = await _usersService.Update(findUserResult.Data);
-        var saveEntityOperationResponce = await Repository.UpdateEntityAsync<MyUser>(findUserResult.entity);
+        var saveEntityOperationResponce = await Repository.UpdateEntity<MyUser>(findUserResult.Data);
+        //var saveEntityOperationResponce = await Repository.UpdateEntityAsync<MyUser>(findUserResult.entity);
 
-        if (saveEntityOperationResponce != null)
-            return saveEntityOperationResponce;
+        //if (saveEntityOperationResponce != null)
+        //return saveEntityOperationResponce;
+        if (!saveEntityOperationResponce.IsSuccessfullOperation)
+            return saveEntityOperationResponce.Exception;
 
         //MyUser = saveEntityOperationResponce.Data!.Value.entity;
-        MyUser = findUserResult.entity;
+        MyUser = findUserResult.Data;
         return null;
     }
 
@@ -280,12 +297,16 @@ public class MyUserOperationService
 
         //переделал , но не проверил
         //var saveEntityOperationResponce = await _usersService.Update(user);
-        var repository = ServiceProvider.GetRequiredService<DbRepository>();
-        var saveEntityOperationResponce = await repository.UpdateEntityAsync<MyUser>(user);
 
+        //var repository = ServiceProvider.GetRequiredService<DbRepository>();
+        //var saveEntityOperationResponce = await repository.UpdateEntityAsync<MyUser>(user);
+        var saveEntityOperationResponce = await Repository.UpdateEntity<MyUser>(user);
 
-        if (saveEntityOperationResponce != null)
-            return saveEntityOperationResponce;
+        //if (saveEntityOperationResponce != null)
+            //return saveEntityOperationResponce;
+        if (!saveEntityOperationResponce.IsSuccessfullOperation)
+            return saveEntityOperationResponce.Exception;
+
         return null;
     }
 
@@ -312,16 +333,19 @@ public class MyUserOperationService
         //          return (false, "Ошибка при проверке данных", findUserWithSameEmailResult.Exception);
 
         //переделал , но не проверил
-        var findUserWithSameEmailResult = await Repository.GetFirstOrDefaultAsync<MyUser>(x => x.Login!.ToUpper() == loginModel.Login!.ToUpper());
-        if (findUserWithSameEmailResult.ex != null)
-            return (false, "Ошибка при проверке данных", findUserWithSameEmailResult.ex);
+        //var findUserWithSameEmailResult = await Repository.GetFirstOrDefaultAsync<MyUser>(x => x.Login!.ToUpper() == loginModel.Login!.ToUpper());
+        var findUserWithSameEmailResult = await Repository.GetFirstOrDefault<MyUser>(x => x.Login!.ToUpper() == loginModel.Login!.ToUpper());
+        //if (findUserWithSameEmailResult.ex != null)
+           // return (false, "Ошибка при проверке данных", findUserWithSameEmailResult.ex);
+        if (!findUserWithSameEmailResult.IsSuccessfullOperation)
+            return (false, "Ошибка при проверке данных", findUserWithSameEmailResult.Exception);
 
 
         //В БД нет такого e-mail
-        if (findUserWithSameEmailResult.entity == null)
+        if (findUserWithSameEmailResult.Data == null)
             return (false, "Нет пользователя с таким логином. Проверьте логин или зарегистрируйтесь.", null);
 
-        var finedUser = findUserWithSameEmailResult.entity;
+        var finedUser = findUserWithSameEmailResult.Data;
 
         //пароль верный?
         if (finedUser.Password != loginModel.Password)
@@ -331,14 +355,19 @@ public class MyUserOperationService
 
             //var saveEntityOperationResponce = await ReadRepository.UpdateAsync(finedUser);
             // todo переделал, но не проверил
-            var saveEntityOperationResponce = await Repository.UpdateEntityAsync(finedUser);
+            //var saveEntityOperationResponce = await Repository.UpdateEntityAsync(finedUser);
+            var saveEntityOperationResponce = await Repository.UpdateEntity(finedUser);
 
             //количество попыток > 5
             if (finedUser.PasswordInputCount > LengthConstants.maxPasswordInputCount)
                 return (false, "Вы исчерпали количество попыток ввода пароля. Повторите вход завтра или обратитесь к администратору сайта", null);
 
-            if (saveEntityOperationResponce != null)
-                return (false, "Ошибка при проверке данных", saveEntityOperationResponce);
+            //if (saveEntityOperationResponce != null)
+            //return (false, "Ошибка при проверке данных", saveEntityOperationResponce);
+            if (!saveEntityOperationResponce.IsSuccessfullOperation)
+                return (false, "Ошибка при проверке данных", saveEntityOperationResponce.Exception);
+
+
             return (false, "Неправильно ввели пароль.", null);
         }
 
@@ -348,7 +377,7 @@ public class MyUserOperationService
 
         var result = await SaveLoginUserAsync(finedUser, MyUser, UserLoginActiveHours);
         if (result.ex != null)
-            return (false, "Ошибка при проверке данных. Обновите страницу или попробуйте зайти попозже", findUserWithSameEmailResult.ex);
+            return (false, "Ошибка при проверке данных. Обновите страницу или попробуйте зайти попозже", findUserWithSameEmailResult.Exception);
 
         MyUser = result.loginedUser;
         var saveGuidResult = await SaveUserGuidToBrowserAsync(MyUser!.UserGuid!);
@@ -360,24 +389,27 @@ public class MyUserOperationService
 
     public async Task<(MyUser? loginedUser, Exception? ex)> SaveLoginUserAsync(MyUser loginingUser, MyUser? currentUser, int userLoginActiveHours)
     {
-        var finedUser = await Repository.GetFirstOrDefaultAsync<MyUser>(x => x.Id == loginingUser.Id, trackingType: TrackingType.Tracking);
-        if (finedUser.entity == null)
+        //var finedUser = await Repository.GetFirstOrDefaultAsync<MyUser>(x => x.Id == loginingUser.Id, trackingType: TrackingType.Tracking);
+        var finedUser = await Repository.GetFirstOrDefault<MyUser>(x => x.Id == loginingUser.Id, trackingType: TrackingType.Tracking);
+
+        if (finedUser.Data == null)
             return (null, new Exception("Пользователь не найден. Возможно он уже кем-то удалён или изменён"));
 
-        if (finedUser.entity.UserGuid == null || finedUser.entity.ExpiredAt < DateTime.Now)
+        if (finedUser.Data.UserGuid == null || finedUser.Data.ExpiredAt < DateTime.Now)
         {
             if (currentUser != null && !string.IsNullOrEmpty(currentUser.UserGuid))
-                finedUser.entity.UserGuid = currentUser.UserGuid;
+                finedUser.Data.UserGuid = currentUser.UserGuid;
             else
-                finedUser.entity.UserGuid = Guid.NewGuid().ToString();
+                finedUser.Data.UserGuid = Guid.NewGuid().ToString();
         }
 
-        finedUser.entity.LastOperationDate = DateTime.Now;
-        finedUser.entity.PasswordInputCount = 0;
-        finedUser.entity.ExpiredAt = DateTime.Now.AddHours(userLoginActiveHours);
+        finedUser.Data.LastOperationDate = DateTime.Now;
+        finedUser.Data.PasswordInputCount = 0;
+        finedUser.Data.ExpiredAt = DateTime.Now.AddHours(userLoginActiveHours);
 
-        var ex = await Repository.UpdateEntityAsync<MyUser>(finedUser.entity);
-        return (finedUser.entity, null);
+        //--var ex = await Repository.UpdateEntityAsync<MyUser>(finedUser.entity);
+        var result = await Repository.UpdateEntity<MyUser>(finedUser.Data);
+        return (finedUser.Data, null);
 
     }
 

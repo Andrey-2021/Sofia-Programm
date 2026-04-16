@@ -4,7 +4,6 @@
 /// Создатель курса
 /// </summary>
 [Owned]
-[Comment("Создатель курса")]
 public class Manager
 {
     /// <summary>

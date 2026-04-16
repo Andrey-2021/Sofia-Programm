@@ -1,6 +1,9 @@
 ﻿using Entities.DTO;
 namespace DbLibrary;
 
+/// <summary>
+/// Репозиторий для БД
+/// </summary>
 public class DbRepository
 {
     /// <summary>
@@ -165,29 +168,7 @@ public class DbRepository
             query = orderBy(query);
         return query;
     }
-
-    /// <summary>
-	/// Обновить сущность в БД
-	/// </summary>
-	/// <typeparam name="TEntity">Тип</typeparam>
-	/// <param name="entity">Обновляемая сущность</param>
-	/// <returns>Исключение</returns>
-	public async Task<Exception?> UpdateEntityAsync<TEntity>(TEntity entity)
-    where TEntity : class
-    {
-        try
-        {
-            using var db = contextFactory.CreateDbContext();
-            var result = db.Update<TEntity>(entity);
-            var n = await db.SaveChangesAsync();
-            return null;
-        }
-        catch (Exception ex)
-        {
-            return ex;
-        }
-    }
-
+     
     /// <summary>
     /// Обновить сущность
     /// </summary>
@@ -238,52 +219,7 @@ public class DbRepository
             return OperationResponce<TEntity>.SetExceptionOperation("Ошибка при обновлении (сохранении) объекта в БД", ex);
         }
     }
-
-    /// <summary>
-    /// Найти первую сущность удовлетворяющую условию
-    /// </summary>
-    public async Task<(TEntity? entity, Exception? ex)> GetFirstOrDefaultAsync<TEntity>(Expression<Func<TEntity, bool>>? predicate = null,
-                                                                Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
-                                                                Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
-                                                                TrackingType trackingType = TrackingType.NoTracking)
-        where TEntity : class
-    {
-        try
-        {
-            using var db = contextFactory.CreateDbContext();
-
-            var _dbSet = db.Set<TEntity>();
-
-            var query = trackingType switch
-            {
-                TrackingType.NoTracking => _dbSet.AsNoTracking(),
-                TrackingType.NoTrackingWithIdentityResolution => _dbSet.AsNoTrackingWithIdentityResolution(),
-                TrackingType.Tracking => _dbSet,
-                _ => throw new ArgumentOutOfRangeException(nameof(trackingType), trackingType, null)
-            };
-
-            if (include is not null)
-            {
-                query = include(query);
-            }
-
-            if (predicate is not null)
-            {
-                query = query.Where(predicate);
-            }
-
-            var rezult = orderBy is not null
-                ? await orderBy(query).FirstOrDefaultAsync()
-                : await query.FirstOrDefaultAsync();
-
-            return (rezult, null);
-        }
-        catch (Exception ex)
-        {
-            return (null, ex);
-        }
-    }
-
+    
     /// <summary>
     /// Найти первую сущность удовлетворяющую условию
     /// </summary>
@@ -443,7 +379,7 @@ public class DbRepository
         return await GetFirstOrDefault<TrainingCourse>
             (predicate: x => x.Id == id,
             include: x => x.Include(tc => tc.CourseQestions)
-                            .ThenInclude(cq => cq.WrongRussianWordAnswers));
+                            .ThenInclude(cq => cq.WrongWordAnswers));
     }
 
     /// <summary>

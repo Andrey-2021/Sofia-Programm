@@ -5,6 +5,10 @@ public static class ProjectRouters
 	public const string homeHref = "";
 	public const string home = "/" + homeHref;
 
+    // Политика конфиденциальности
+    public const string privacyPolicyHref = "privacy-policy";
+    public const string privacyPolicy= "/" + privacyPolicyHref;
+
     /// <summary>
 	/// Страница входа (ввод логина и пароля)
 	/// </summary>
@@ -16,8 +20,6 @@ public static class ProjectRouters
 	/// </summary>
 	public const string newUserRegistrationHref = "new-user-registretion";
     public const string newUserRegistration = "/" + newUserRegistrationHref;
-
-
 
     /// <summary>
 	/// Вход выполнен
@@ -37,8 +39,6 @@ public static class ProjectRouters
 
     public const string addMyUserHref = "add-user";
     public const string addMyUser = "/" + addMyUserHref;
-
-
 
     /// <summary>
     /// Все курсы
@@ -69,14 +69,12 @@ public static class ProjectRouters
     /// </summary>
     public const string startTestPageHref = "start-test";
     public const string startTestPage = "/" + startTestPageHref;
-
     
     /// <summary>
     /// Все курсы
     /// </summary>
     public const string viewTrainingCourcePageHref = "view-course";
     public const string viewTrainingCourcePage = "/" + viewTrainingCourcePageHref;
-
 
     /// <summary>
     /// Заучивание
@@ -87,35 +85,9 @@ public static class ProjectRouters
 
     public const string adminInfoHref = "admin-info";
     public const string adminInfo = "/" + adminInfoHref;
-
-
-
-    // -----------------------------------------------------------------
+   
     /// <summary>
     /// Название в параметре запроса (URL) для id редактируемой сущности
     /// </summary>
     public const string queryParametrNameForEditId = "edited-id";
-
-    /*
-    /// <summary>
-    /// Название в параметре запроса (URL) для выделения объекта c id (строчки в таблице)
-    /// </summary>
-    public const string queryParametrForSelectedRowId = "selected-id";
-
-    /// <summary>
-    /// Название в параметре запроса (URL) для того, чтобы определить находимся ли мы в корзине или просто показываем все сущности
-    /// </summary>
-    public const string queryParametrIsInBasket = "is-in-basket";
-
-
-
-    public const string queryParameterSelectedColorProductId = "color-product-id";
-
-    public const string queryParameterDepartmentId = "parent-id";
-
-    /// <summary>
-    /// Название в параметре запроса (URL) для id сущности, копию которой надо сделать
-    /// </summary>
-    public const string queryParameterNameForCopyId = "copied-id";
-    */
 }

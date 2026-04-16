@@ -13,10 +13,10 @@ internal class FamelyCource
             KanjiWord = "父",
             HiraganaWord = "ちち",
             KatakanaWord = "チチ",
-            RussianWord = "отец",
+            Word = "отец",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Мать"),
             new("Дедушка"),
@@ -31,10 +31,10 @@ internal class FamelyCource
             KanjiWord = "母",
             HiraganaWord = "はは",
             KatakanaWord = "ハハ",
-            RussianWord = "мать",
+            Word = "мать",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Отец"),
             new("Бабушка"),
@@ -49,10 +49,10 @@ internal class FamelyCource
             KanjiWord = "兄",
             HiraganaWord = "あに",
             KatakanaWord = "アニ",
-            RussianWord = "старший брат",
+            Word = "старший брат",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Младший брат"),
             new("Старшая сестра"),
@@ -67,10 +67,10 @@ internal class FamelyCource
             KanjiWord = "姉",
             HiraganaWord = "あね",
             KatakanaWord = "アネ",
-            RussianWord = "старшая сестра",
+            Word = "старшая сестра",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Младшая сестра"),
             new("Старший брат"),
@@ -85,10 +85,10 @@ internal class FamelyCource
             KanjiWord = "弟",
             HiraganaWord = "おとうと",
             KatakanaWord = "オトウト",
-            RussianWord = "младший брат",
+            Word = "младший брат",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Старший брат"),
             new("Младшая сестра"),
@@ -103,10 +103,10 @@ internal class FamelyCource
             KanjiWord = "妹",
             HiraganaWord = "いもうと",
             KatakanaWord = "イモウト",
-            RussianWord = "младшая сестра",
+            Word = "младшая сестра",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Старшая сестра"),
             new("Младший брат"),
@@ -121,10 +121,10 @@ internal class FamelyCource
             KanjiWord = "家族",
             HiraganaWord = "かぞく",
             KatakanaWord = "カゾク",
-            RussianWord = "семья",
+            Word = "семья",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Дом"),
             new("Родственники"),
@@ -139,10 +139,10 @@ internal class FamelyCource
             KanjiWord = "家",
             HiraganaWord = "いえ",
             KatakanaWord = "イエ",
-            RussianWord = "дом",
+            Word = "дом",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Квартира"),
             new("Здание"),
@@ -157,10 +157,10 @@ internal class FamelyCource
             KanjiWord = "部屋",
             HiraganaWord = "へや",
             KatakanaWord = "ヘヤ",
-            RussianWord = "комната",
+            Word = "комната",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Кухня"),
             new("Ванная"),
@@ -175,10 +175,10 @@ internal class FamelyCource
             KanjiWord = "台所",
             HiraganaWord = "だいどころ",
             KatakanaWord = "ダイドコロ",
-            RussianWord = "кухня",
+            Word = "кухня",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Столовая"),
             new("Гостиная"),
@@ -193,10 +193,10 @@ internal class FamelyCource
             KanjiWord = "風呂",
             HiraganaWord = "ふろ",
             KatakanaWord = "フロ",
-            RussianWord = "ванна",
+            Word = "ванна",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Душ"),
             new("Бассейн"),
@@ -211,10 +211,10 @@ internal class FamelyCource
             KanjiWord = "トイレ",
             HiraganaWord = "といれ",
             KatakanaWord = "トイレ",
-            RussianWord = "туалет",
+            Word = "туалет",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Ванная"),
             new("Прихожая"),
@@ -229,10 +229,10 @@ internal class FamelyCource
             KanjiWord = "布団",
             HiraganaWord = "ふとん",
             KatakanaWord = "フトン",
-            RussianWord = "постель",
+            Word = "постель",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Подушка"),
             new("Одеяло"),
@@ -247,10 +247,10 @@ internal class FamelyCource
             KanjiWord = "食べ物",
             HiraganaWord = "たべもの",
             KatakanaWord = "タベモノ",
-            RussianWord = "еда",
+            Word = "еда",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Напиток"),
             new("Блюдо"),
@@ -265,10 +265,10 @@ internal class FamelyCource
             KanjiWord = "水",
             HiraganaWord = "みず",
             KatakanaWord = "ミズ",
-            RussianWord = "вода",
+            Word = "вода",
             TrainingCourse = trainingCourse,
              
-            WrongRussianWordAnswers = new List<WrongRussianWordAnswer>()
+            WrongWordAnswers = new List<WrongWordAnswer>()
         {
             new("Сок"),
             new("Чай"),

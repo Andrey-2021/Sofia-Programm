@@ -57,6 +57,10 @@ body {
         margin-right: 6px;
     }
 
+.card-icon{
+    color:black;
+}
+
 .auth-buttons {
     display: flex;
     gap: 16px;
@@ -271,6 +275,12 @@ main {
             opacity: 0.7;
             color: #fad6a5;
         }
+
+.privacy-policy {
+    text-decoration: none;
+    background: #2e241b;
+    color: #e7cfb5;
+}
 
 hr {
     margin: 28px 0 16px;

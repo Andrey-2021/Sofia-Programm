@@ -1,4 +1,5 @@
-﻿using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Numerics;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Training.Components.Pages.LoginedPages;
 
@@ -7,7 +8,8 @@ public class CompleatedAllTestPageModel : BaseShowAllDataModel<CompletedTest>
     /// <summary>
     /// Средний результат
     /// </summary>
-    protected decimal? AverageResult => Entities?.Sum(x => x.PercentageResult)/(Entities?.Count()??1);
+    protected string? AverageResult => string.Format("{0:f2}",(Entities?.Sum(x => x.PercentageResult) / (Entities?.Count() ?? 1)));
+    //protected decimal? AverageResult => Entities?.Sum(x => x.PercentageResult)/(Entities?.Count()??1);
 
     /// <summary>
     /// Общее количество вопросов
