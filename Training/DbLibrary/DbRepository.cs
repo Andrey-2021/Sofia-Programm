@@ -333,7 +333,7 @@ public class DbRepository
 
         if (myUser.Role == RoleEnum.admin) //Если это администратор,
             return await GetEntitiesAsync<TrainingCourse>(include: x => x.Include(tc => tc.MyUser),
-                                                            orderBy: x=>x.OrderByDescending(tc=>tc.ContractDate)); // Читаем все курсы
+                                                            orderBy: x => x.OrderByDescending(tc => tc.ContractDate)); // Читаем все курсы
         else
             return await GetEntitiesAsync<TrainingCourse>(predicate: x => x.MyUserId == myUser.Id, //Читаем только свои курсы
                                                             include: x => x.Include(tc => tc.MyUser),
@@ -349,7 +349,7 @@ public class DbRepository
     public async Task<OperationResponce<IEnumerable<TrainingCourse>?>> GetAllMyTrainingCourseAsync(MyUser myUser)
     {
         Func<IQueryable<TrainingCourse>, IIncludableQueryable<TrainingCourse, object>>? includeData = (x) => x.Include(tc => tc.MyUser)
-                                                                                                             .Include(tc=>tc.CourseQestions);
+                                                                                                             .Include(tc => tc.CourseQestions);
 
         if (myUser.Role == RoleEnum.admin) //Если это администратор,
             return await GetEntities<TrainingCourse>(include: includeData,
@@ -370,48 +370,47 @@ public class DbRepository
     {
         // Список курсов на которые я уже подписан
         var mySelectedOtherPeopleCourseResponce = await GetEntities<SelectedOtherPeopleCourse>(predicate: x => x.MyUserId == myUser.Id,
-            include: x=>x.Include(sopc=>sopc.TrainingCourse)
-                            .ThenInclude(tc=>tc.MyUser)
+            include: x => x.Include(sopc => sopc.TrainingCourse)
+                            .ThenInclude(tc => tc.MyUser)
                             .Include(sopc => sopc.TrainingCourse.CourseQestions));
         return mySelectedOtherPeopleCourseResponce;
     }
-
 
     /// <summary>
     /// Получить курсы других заристрированных пользователей, которые открыты для всех
     /// </summary>
     /// <param name="myUser"></param>
-    /// <returns></returns>
-    public async Task<OperationResponce<(IEnumerable<SelectedOtherPeopleCourse>? mySelectedOtherPeopleCourse, List<TrainingCourse>? allOtherPeopleCourse)>> GetOtherPeoplesCoursesAsync(MyUser myUser)
+    /// <returns>
+    /// mySelectedOtherPeopleCourse - Уже мною выбранные чужие курсы (разработанные другими пользователями).
+    /// notSelectedAllOtherPeopleCourse - Курсы открытые для всех. Разработанные другими пользователями, не считая моих.
+    /// </returns>
+    public async Task<OperationResponce<(IEnumerable<TrainingCourse>? mySelectedOtherPeopleCourse, IEnumerable<TrainingCourse>? notSelectedAllOtherPeopleCourse)>> GetOtherPeoplesCoursesAsync(MyUser myUser)
     {
         // Список курсов на которые я уже подписан
         var mySelectedOtherPeopleCourseResponce = await GetEntities<SelectedOtherPeopleCourse>(predicate: x => x.MyUserId == myUser.Id);
+
         if (!mySelectedOtherPeopleCourseResponce.IsSuccessfullOperation) //Если ошибка чтения
-            return OperationResponce<(IEnumerable<SelectedOtherPeopleCourse>? mySelectedCourses, List<TrainingCourse>? allOtherPeopleCourse)>
-                .SetExceptionOperation("Ошибка чтения данных", mySelectedOtherPeopleCourseResponce.Exception);
+            return OperationResponce<(IEnumerable<TrainingCourse>? mySelectedCourses, IEnumerable<TrainingCourse>? notSelectedAllOtherPeopleCourse)>.SetExceptionOperation("Ошибка чтения данных о выбранных мною чужих курсах", mySelectedOtherPeopleCourseResponce.Exception);
 
-        // Список всех чужих курсов
-        OperationResponce <IEnumerable<TrainingCourse>> allOtherPeopleCourseResponce;
-        Func<IQueryable<TrainingCourse>, IIncludableQueryable<TrainingCourse, object>>? includeData = (x) => x.Include(ct => ct.MyUser);
-        if (myUser.Role == RoleEnum.admin) //Если это администратор,
-        {
-            allOtherPeopleCourseResponce = await GetEntities<TrainingCourse>(include: includeData,
-                                                                    predicate: x => x.MyUserId != myUser.Id && x.IsVisableForAll == true); // Читаем все открытые курсы
+        // чужие курсы доступные для всех
+        var allOtherPeopleCourseResponce
+            = await GetEntities<TrainingCourse>(include: x => x.Include(tc => tc.MyUser)
+                                                               .Include(tc=> tc.CourseQestions),
+                                                predicate: x => x.MyUserId != myUser.Id && x.IsVisableForAll == true); //Читаем чужие курсы доступные для всех
 
-
-        }
-        else
-        {
-            allOtherPeopleCourseResponce = await GetEntities<TrainingCourse>(include: includeData,
-                                                    predicate: x => x.MyUserId != myUser.Id && x.IsVisableForAll == true); //Читаем чужие курсы лоступные для всех
-        }
-
-        if(!allOtherPeopleCourseResponce.IsSuccessfullOperation) //Если ошибка чтения
-            return OperationResponce<(IEnumerable<SelectedOtherPeopleCourse>? mySelectedCourses, List<TrainingCourse>? allOtherPeopleCourse)>.SetExceptionOperation("Ошибка чтения данных", allOtherPeopleCourseResponce.Exception);
+        if (!allOtherPeopleCourseResponce.IsSuccessfullOperation) //Если ошибка чтения
+            return OperationResponce<(IEnumerable<TrainingCourse>? mySelectedCourses, IEnumerable<TrainingCourse>? notSelectedAllOtherPeopleCourse)>
+                .SetExceptionOperation("Ошибка чтения данных о всех открытых курсах, разработанных другими пользователями", allOtherPeopleCourseResponce.Exception);
         
-        // Возвращаем результат
-        return OperationResponce<(IEnumerable<SelectedOtherPeopleCourse>? mySelectedCourses, List<TrainingCourse>? allOtherPeopleCourse)>
-            .SetSuccessfullOperation((mySelectedOtherPeopleCourseResponce.Data, allOtherPeopleCourseResponce.Data.ToList()), null);
+        // Уже мною выбранные чужие курсы (разработанные другими пользователями)
+        var selectedOtherPeopleCourse = allOtherPeopleCourseResponce.Data!.Where(x => mySelectedOtherPeopleCourseResponce.Data!.Any(s => s.TrainingCourseId == x.Id)).ToList();
+
+        // Курсы открытые для всех. Разработанные другими пользователями, не считая моих
+        var notSelectedOtherPeopleCourse = allOtherPeopleCourseResponce.Data?.ToList();
+        var i = notSelectedOtherPeopleCourse?.RemoveAll(x => selectedOtherPeopleCourse.Any(z => z.Id == x.Id)); // Удаляем уже мною выбранные курсы
+
+        return OperationResponce<(IEnumerable<TrainingCourse>? mySelectedCourses, IEnumerable<TrainingCourse>? notSelectedAllOtherPeopleCourse)>
+            .SetSuccessfullOperation((selectedOtherPeopleCourse, notSelectedOtherPeopleCourse), null);
     }
 
     /// <summary>
@@ -423,7 +422,7 @@ public class DbRepository
     {
         if (myUser == null)
             return OperationResponce<IEnumerable<CompletedTest>?>.SetExceptionOperation("Нет данных о пользователе", new ArgumentNullException("Нет данных о пользователе"));
-            
+
 
         Func<IQueryable<CompletedTest>, IIncludableQueryable<CompletedTest, object>>? includeData = (x) => x.Include(ct => ct.MyUser).
                                                                                                         Include(ct => ct.TrainingCourse.MyUser);
@@ -464,15 +463,15 @@ public class DbRepository
         try
         {
             using var db = contextFactory.CreateDbContext();
-            var find = await db.Set<SelectedOtherPeopleCourse>().FirstOrDefaultAsync(x => x.MyUserId == myUser.Id && x.TrainingCourseId==trainingCourse.Id);
+            var find = await db.Set<SelectedOtherPeopleCourse>().FirstOrDefaultAsync(x => x.MyUserId == myUser.Id && x.TrainingCourseId == trainingCourse.Id);
 
             if (find != null)
             {
                 var deletedEntity = db.Remove(find);
                 await db.SaveChangesAsync();
-                return OperationResponce<SelectedOtherPeopleCourse?>.SetSuccessfullOperation(deletedEntity.Entity,"Данные успешно удалены");
+                return OperationResponce<SelectedOtherPeopleCourse?>.SetSuccessfullOperation(deletedEntity.Entity, "Данные успешно удалены");
             }
-            return OperationResponce<SelectedOtherPeopleCourse?>.SetSuccessfullOperation(null,"Данные уже удалены");
+            return OperationResponce<SelectedOtherPeopleCourse?>.SetSuccessfullOperation(null, "Данные уже удалены");
         }
         catch (Exception ex)
         {

@@ -4,27 +4,6 @@
 @inherits AllTrainingCoursesPageModel
 <PageTitle>Курсы</PageTitle>
 
-@* <h3>Мои курсы</h3>
-<ShowAllTrainingCoursesComponent TrainingCourses=@TrainingCourses
-                                 MyUser=@MyUser
-                                 IsMyTrainingCoursesPage="true"
-                                 IsShowDelButton="false" />
-<br />
-<br />
-<ShowOperrationErrorComponent BaseOperationResponce="OtherPeoplesCoursesThatIChosenResponce" />
-<ShowOperrationErrorComponent BaseOperationResponce="DelSelectedOtherPeopleCourseOperationResponce" />
-
-@if (OtherPeoplesCoursesThatIChosen?.Count() > 0)
-{
-    <h3>Выбранные мною курсы, разработанные другими пользователями</h3>
-    <ShowAllTrainingCoursesComponent TrainingCourses=@OtherPeoplesCoursesThatIChosen
-                                     MyUser=@MyUser
-                                     IsMyTrainingCoursesPage="true"
-                                     IsShowDelButton="true"
-                                     OnDeleteTrainingCourseCallback="DeleteSelectedTrainingCourse" />
-} *@
-
-
 <RadzenTabs @bind-SelectedIndex=@selectedIndex>
     <Tabs>
         <RadzenTabsItem Text="Мои курсы">

@@ -4,7 +4,7 @@ using Training.Components.Pages.Base;
 
 namespace Training.Components.Pages.LoginedPages;
 
-public class AllTrainingCoursesPageModel : BaseShowAllDataModel<TrainingCourse> //BaseModel
+public class AllTrainingCoursesPageModel : BaseShowAllDataModel<TrainingCourse> 
 {
     //protected IEnumerable<TrainingCourse>? Entities { get; set; }
 

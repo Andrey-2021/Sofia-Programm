@@ -1,11 +1,9 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-
-namespace Training.Components.Pages.LoginedPages;
+﻿namespace Training.Components.Pages.LoginedPages;
 
 public class OtherPeoplesCoursesPageModel : BaseModel
 {
     /// <summary>
-    /// Курсы открытые для всех. Разработанные другими пользователями.
+    /// Курсы открытые для всех. Разработанные другими пользователями, не считая моих
     /// </summary>
     protected IEnumerable<TrainingCourse>? NotSelectedOtherPeopleCourse { get; set; }
 
@@ -13,12 +11,16 @@ public class OtherPeoplesCoursesPageModel : BaseModel
     /// Уже мною выбранные чужие курсы (разработанные другими пользователями)
     /// </summary>
     protected IEnumerable<TrainingCourse>? SelectedOtherPeopleCourse { get; set; }
-    
 
     /// <summary>
     /// Результат операции удаления
     /// </summary>
     protected OperationResponce<SelectedOtherPeopleCourse?>? DelSelectedOtherPeopleCourseOperationResponce { get; set; }
+
+    /// <summary>
+    /// Результат операции чтения чужих открытых курсов
+    /// </summary>
+    protected OperationResponce<(IEnumerable<TrainingCourse>? mySelectedOtherPeopleCourse, IEnumerable<TrainingCourse>? notSelectedAllOtherPeopleCourse)>? LoadOtherPeoplesCoursesResponce { get; set; }
 
     protected override async Task OnParametersSetAsync()
     {
@@ -27,10 +29,13 @@ public class OtherPeoplesCoursesPageModel : BaseModel
 
     private async Task LoadData()
     {
-        var rezult = await DbRepository.GetOtherPeoplesCoursesAsync(MyUser);
-        SelectedOtherPeopleCourse = rezult.Data.allOtherPeopleCourse?.Where(x => rezult.Data.mySelectedOtherPeopleCourse.Any(s=>s.TrainingCourseId==x.Id)).ToList();
-        rezult.Data.allOtherPeopleCourse?.RemoveAll(x => SelectedOtherPeopleCourse.Any(z => z.Id == x.Id));
-        NotSelectedOtherPeopleCourse = rezult.Data.allOtherPeopleCourse;
+        IsBusy = true;
+        LoadOtherPeoplesCoursesResponce = await DbRepository.GetOtherPeoplesCoursesAsync(MyUser);
+        SelectedOtherPeopleCourse = LoadOtherPeoplesCoursesResponce.Data.mySelectedOtherPeopleCourse;
+        NotSelectedOtherPeopleCourse = LoadOtherPeoplesCoursesResponce.Data.notSelectedAllOtherPeopleCourse;
+        IsBusy = false;
+        if (LoadOtherPeoplesCoursesResponce.IsSuccessfullOperation)
+            NotifyUser("Данные прочитаны");
     }
 
     /// <summary>
