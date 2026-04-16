@@ -141,21 +141,22 @@ else
                             {
                                 <td>
                                     <RadzenButton ButtonStyle="ButtonStyle.Success" Variant="Variant.Flat" Shade="Shade.Lighter"
-                                                  title="Добавить к себе" Icon="add_circle" Size="ButtonSize.Medium"
-                                                  Click="@(args =>OnAddTrainingCourseClick(item))">
+                                    title="Добавить к себе" Icon="add_circle" Size="ButtonSize.Medium"
+                                    Click="@(args =>OnAddTrainingCourseClick(item))">
                                     </RadzenButton>
                                 </td>
-                                <td>
+                            }
+                            <td>
                                     <RadzenButton ButtonStyle="ButtonStyle.Primary" Variant="Variant.Flat" Shade="Shade.Lighter"
                                                   title="Подробно" Icon="info" Size="ButtonSize.Medium"
                                                   Click="@(args =>OnShowInfoTrainingCourseClick(item))">
                                     </RadzenButton>
                                 </td>
-                                <td>
+                            @*     <td>
                                 </td>
                                 <td>
-                                </td>
-                            }
+                                </td> *@
+                            
                         }
                         
                         @if (IsShowDelButton)

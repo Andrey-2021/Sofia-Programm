@@ -1,4 +1,6 @@
 ﻿
+using Entities.DTO;
+
 namespace DbLibrary;
 
 public class DbRepository
@@ -476,6 +478,35 @@ public class DbRepository
         catch (Exception ex)
         {
             return OperationResponce<SelectedOtherPeopleCourse?>.SetExceptionOperation("Ошипка при удалении данных", ex);
+        }
+    }
+
+    /// <summary>
+    /// Информаци о курсе
+    /// </summary>
+    /// <param name="trainingCourse"></param>
+    /// <returns></returns>
+    public async Task<OperationResponce<TrainingCourseInfoDto?>> GetInfoAboutTrainingCourceAsync(TrainingCourse trainingCourse)
+    {
+        try
+        {
+            using var db = contextFactory.CreateDbContext();
+            var completedTests = await db.Set<CompletedTest>().Where(x => x.Id == trainingCourse.Id).ToListAsync();
+            var percentageResult = completedTests?.Count>0?(completedTests.Sum(x => x.PercentageResult) / completedTests.Count):0;
+
+            var find = await db.Set<TrainingCourse>()
+                .Include(x=>x.CourseQestions)
+                .Include(x => x.MyUser)
+                .FirstOrDefaultAsync(x => x.Id == trainingCourse.Id);
+
+            var subscribersNumber = await db.Set<SelectedOtherPeopleCourse>().CountAsync(x => x.TrainingCourseId == trainingCourse.Id);
+            var trainingCourseInfoDto = new TrainingCourseInfoDto(find, subscribersNumber, percentageResult);
+
+            return OperationResponce<TrainingCourseInfoDto?>.SetSuccessfullOperation(trainingCourseInfoDto, "Данные прочитаны");
+        }
+        catch (Exception ex)
+        {
+            return OperationResponce<TrainingCourseInfoDto?>.SetExceptionOperation("Ошипка при чтении данных о курсе", ex);
         }
     }
 }

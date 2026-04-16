@@ -1,7 +1,15 @@
-﻿namespace Training.Components.Pages.Components;
+﻿using Radzen;
+
+namespace Training.Components.Pages.Components;
 
 public class ShowAllTrainingCoursesComponentMode:ComponentBase
 {
+    [Inject]
+    protected DbRepository DbRepository { get; set; } = default!;
+
+    [Inject]
+    DialogService DialogService { get; set; } = default!;
+
     [Inject]
     protected NavigationManager NavigationManager { get; set; } = default!;
     
@@ -84,6 +92,19 @@ public class ShowAllTrainingCoursesComponentMode:ComponentBase
     /// <returns></returns>
     public async Task OnShowInfoTrainingCourseClick(TrainingCourse entity)
     {
-        SelectedTrainingCourse = entity;
+        //SelectedTrainingCourse = entity;
+        var info = await DbRepository.GetInfoAboutTrainingCourceAsync(entity);
+
+
+        await DialogService.OpenAsync<ShowTrainingCourseInfo>($"Курс {entity.Name}",
+               new Dictionary<string, object>() { { nameof(ShowTrainingCourseInfoModel.TrainingCourseInfo), info.Data! } },
+               new DialogOptions()
+               {
+                   CloseDialogOnOverlayClick = true,
+                   Resizable = true,
+                   Draggable = true,
+                   Width =  "1200px"
+               });
+
     }
 }

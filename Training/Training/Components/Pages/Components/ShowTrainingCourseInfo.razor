@@ -1,0 +1,164 @@
+﻿@inherits ShowTrainingCourseInfoModel
+
+
+<!-- Карточка курса — без внешнего контейнера -->
+@* <div class="course-card"> *@
+<!-- Шапка курса -->
+<div class="course-header">
+    <h1>📚 @TrainingCourseInfo?.TrainingCourse?.Name</h1>
+    <div class="course-header-meta">
+        <span>📅 Создан: @TrainingCourseInfo?.TrainingCourse?.ContractDate.ToLongDateString()</span>
+        <span>⏱️ Продолжительность: @TrainingCourseInfo?.TrainingCourse?.DurationHours мин</span>
+        <span class="badge badge-difficulty">⭐ Уровень: @TrainingCourseInfo?.TrainingCourse?.DifficultyLevel</span>
+        <span class="badge badge-visibility">
+            🌍
+            @if (@TrainingCourseInfo?.TrainingCourse?.IsVisableForAll == true)
+            {
+                <span>Доступен всем</span>
+            }
+            else
+            {
+                <span>Только себе</span>
+            }
+        </span>
+    </div>
+</div>
+
+<!-- Тело карточки -->
+<div class="course-body">
+    <!-- Статистические карточки -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">👥</div>
+            <div class="stat-number">@TrainingCourseInfo?.SubscribersNumber</div>
+            <div class="stat-label">Подписчиков</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">📋</div>
+            <div class="stat-number">@TrainingCourseInfo?.CardsNumber</div>
+            <div class="stat-label">Карточек</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">✅</div>
+            <div class="stat-number">@TrainingCourseInfo?.PercentageResult %</div>
+            <div class="stat-label">Средний результат</div>
+        </div>
+        @* <div class="stat-card">
+            <div class="stat-icon">⭐</div>
+            <div class="stat-number">4.8</div>
+            <div class="stat-label">Рейтинг</div>
+        </div> *@
+    </div>
+
+    
+
+
+    <!-- Характеристики курса -->
+    <div class="section">
+        <div class="section-title">
+            ⚙️ Характеристики
+        </div>
+        <div class="info-grid">
+            <!-- Уровень сложности -->
+            <div class="info-item">
+                <div class="info-label">
+                    🎯 Уровень сложности
+                </div>
+                <div class="info-value">
+                    <div class="stars">
+                        @for (int i = 0; i < @@TrainingCourseInfo?.TrainingCourse?.DifficultyLevel; i++)
+                        {
+                            <span class="star star-filled">★</span>
+                        }
+
+                        @for (int i = 0; i < LengthConstants.courceDifficultyLevelLength - @TrainingCourseInfo?.TrainingCourse?.DifficultyLevel; i++)
+                        {
+                            <span class="star star-empty">☆</span>
+                        }
+                    </div>
+                    <div style="margin-top: 8px; font-size: 12px; color: #718096;">
+                        @(@TrainingCourseInfo?.TrainingCourse ?.DifficultyLevel) из @(LengthConstants.courceDifficultyLevelLength)
+                    </div>
+                </div>
+            </div>
+
+            <!-- Доступность -->
+            <div class="info-item">
+                <div class="info-label">
+                    🌐 Доступность
+                </div>
+                <div class="info-value">
+                    @if (@TrainingCourseInfo?.TrainingCourse?.IsVisableForAll == true)
+                    {
+                        <span class="badge badge-public">
+                            👁️ Доступен всем
+                        </span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-private">
+                            👁️ Недоступен
+                        </span>
+                    }
+
+
+                </div>
+            </div>
+
+            <!-- Продолжительность -->
+            <div class="info-item">
+                <div class="info-label">
+                    ⏰ Продолжительность
+                </div>
+                <div class="info-value">
+                    <div>@(@TrainingCourseInfo?.TrainingCourse?.DurationHours) минут</div>
+                    <div style="font-size: 12px; color: #718096; margin-top: 5px;">
+                        @(string.Format("{0:f2}", @TrainingCourseInfo?.TrainingCourse?.DurationHours / 60.0)) часов
+                    </div>
+                </div>
+            </div>
+
+            <!-- Дата создания -->
+            <div class="info-item">
+                <div class="info-label">
+                    📅 Дата создания
+                </div>
+                <div class="info-value">
+                    <div>@(@TrainingCourseInfo?.TrainingCourse?.ContractDate.ToLongDateString())</div>
+                    <div style="font-size: 12px; color: #718096; margin-top: 5px;">
+                        @(@TrainingCourseInfo?.TrainingCourse?.ContractDate.ToShortDateString())
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <!-- Описание курса -->
+    <div class="section">
+        <div class="section-title">
+            📖 Описание курса
+        </div>
+        <div class="description">
+            @(TrainingCourseInfo?.TrainingCourse?.Description)
+        </div>
+    </div>
+
+
+    <!-- Информация о владельце -->
+    <div class="info-section">
+        <div class="section-title">Владелец курса</div>
+        <div class="owner-card">
+            <div class="owner-avatar">👨‍🏫</div>
+            <div class="owner-info">
+                <div class="owner-name">
+                    @TrainingCourseInfo?.MyUser?.Manager.LastName
+                    @TrainingCourseInfo?.MyUser?.Manager.FirstName
+                    @TrainingCourseInfo?.MyUser?.Manager.MiddleName
+                </div>
+                <div class="owner-contact">✉️ @TrainingCourseInfo?.MyUser?.Manager.Email | 📞 @TrainingCourseInfo?.MyUser?.Manager.PhoneNumber</div>
+            </div>
+        </div>
+    </div>
+</div>
