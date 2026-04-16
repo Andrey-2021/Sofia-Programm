@@ -1,12 +1,16 @@
-﻿
-using Entities.DTO;
-
+﻿using Entities.DTO;
 namespace DbLibrary;
 
 public class DbRepository
 {
+    /// <summary>
+    /// Фабрика создания контекста БД
+    /// </summary>
     private readonly IDbContextFactory<SqlDbContext> contextFactory;
 
+    /// <summary>
+    /// Конструктор
+    /// </summary>
     public DbRepository(IDbContextFactory<SqlDbContext> contextFactory)
     {
         this.contextFactory = contextFactory;
@@ -42,36 +46,30 @@ public class DbRepository
     /// <summary>
 	/// Создать новую БД
 	/// </summary>
-	public async Task<(bool operationResult, Exception? ex)> CreateNewDbAsync()
+	public async Task<OperationResponce<bool>> CreateNewDbAsync()
     {
         try
         {
-            //using var db = contextFactory.CreateDbContext();
-            //await db.CreateClearDbAsync();
-            //await InitDb(db);
-            //return (true, null);
-
-            //using (var db = new SqlDbContext())
             using (var db = contextFactory.CreateDbContext())
             {
                 await db.Database.EnsureDeletedAsync();
                 var rezult = await db.Database.EnsureCreatedAsync();
 
                 if (!rezult)
-                    return (false, null);
-                return (true, null);
+                    return OperationResponce<bool>.SetSuccessfullOperation(false);
+                return OperationResponce<bool>.SetSuccessfullOperation(true);
             }
         }
         catch (Exception ex)
         {
-            return (false, ex);
+            return OperationResponce<bool>.SetExceptionOperation("Оибка при создании БД", ex);
         }
     }
 
     /// <summary>
     /// Загрузить начальные данные в БД
     /// </summary>
-    public async Task<(bool operationResult, Exception? ex)> SaveInitDataInDbAsync()
+    public async Task<OperationResponce<bool>> SaveInitDataInDbAsync()
     {
         try
         {
@@ -84,11 +82,11 @@ public class DbRepository
                     await db.SaveChangesAsync();
                 }
             }
-            return (true, null);
+            return OperationResponce<bool>.SetSuccessfullOperation(true);
         }
         catch (Exception ex)
         {
-            return (false, ex);
+            return OperationResponce<bool>.SetExceptionOperation("Оибка при записи данных в БД", ex);
         }
     }
 
@@ -195,7 +193,12 @@ public class DbRepository
         }
     }
 
-
+    /// <summary>
+    /// Обновить сущность
+    /// </summary>
+    /// <typeparam name="TEntity">Тип сущности</typeparam>
+    /// <param name="entity">Сущность</param>
+    /// <returns>Результат выполнения операции обновления</returns>
     public async Task<OperationResponce<TEntity>> UpdateEntity<TEntity>(TEntity entity)
     where TEntity : class
     {
@@ -216,9 +219,9 @@ public class DbRepository
     /// <summary>
 	/// Удалить сущность в БД
 	/// </summary>
-	/// <typeparam name="TEntity"></typeparam>
-	/// <param name="entity"></param>
-	/// <returns></returns>
+    /// <typeparam name="TEntity">Тип сущности</typeparam>
+    /// <param name="entity">Сущность</param>
+    /// <returns>Результат выполнения операции обновления</returns>
 	public async Task<OperationResponce<TEntity>> DelEntityAsync<TEntity>(TEntity entity)
     where TEntity : class, IHaveId
     {
@@ -284,7 +287,15 @@ public class DbRepository
 
     }
 
-
+    /// <summary>
+    /// Найти первую сущность удовлетворяющую условию
+    /// </summary>
+    /// <typeparam name="TEntity">Тип сущности</typeparam>
+    /// <param name="predicate">Условие</param>
+    /// <param name="orderBy">Сортировка</param>
+    /// <param name="include">Вкключение зависимых сущностей</param>
+    /// <param name="trackingType">Отслеживание</param>
+    /// <returns>Результат выполнения операции</returns>
     public async Task<OperationResponce<TEntity?>> GetFirstOrDefault<TEntity>(Expression<Func<TEntity, bool>>? predicate = null,
                                                                 Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
                                                                 Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
@@ -397,13 +408,13 @@ public class DbRepository
         // чужие курсы доступные для всех
         var allOtherPeopleCourseResponce
             = await GetEntities<TrainingCourse>(include: x => x.Include(tc => tc.MyUser)
-                                                               .Include(tc=> tc.CourseQestions),
+                                                               .Include(tc => tc.CourseQestions),
                                                 predicate: x => x.MyUserId != myUser.Id && x.IsVisableForAll == true); //Читаем чужие курсы доступные для всех
 
         if (!allOtherPeopleCourseResponce.IsSuccessfullOperation) //Если ошибка чтения
             return OperationResponce<(IEnumerable<TrainingCourse>? mySelectedCourses, IEnumerable<TrainingCourse>? notSelectedAllOtherPeopleCourse)>
                 .SetExceptionOperation("Ошибка чтения данных о всех открытых курсах, разработанных другими пользователями", allOtherPeopleCourseResponce.Exception);
-        
+
         // Уже мною выбранные чужие курсы (разработанные другими пользователями)
         var selectedOtherPeopleCourse = allOtherPeopleCourseResponce.Data!.Where(x => mySelectedOtherPeopleCourseResponce.Data!.Any(s => s.TrainingCourseId == x.Id)).ToList();
 
@@ -492,10 +503,10 @@ public class DbRepository
         {
             using var db = contextFactory.CreateDbContext();
             var completedTests = await db.Set<CompletedTest>().Where(x => x.Id == trainingCourse.Id).ToListAsync();
-            var percentageResult = completedTests?.Count>0?(completedTests.Sum(x => x.PercentageResult) / completedTests.Count):0;
+            var percentageResult = completedTests?.Count > 0 ? (completedTests.Sum(x => x.PercentageResult) / completedTests.Count) : 0;
 
             var find = await db.Set<TrainingCourse>()
-                .Include(x=>x.CourseQestions)
+                .Include(x => x.CourseQestions)
                 .Include(x => x.MyUser)
                 .FirstOrDefaultAsync(x => x.Id == trainingCourse.Id);
 

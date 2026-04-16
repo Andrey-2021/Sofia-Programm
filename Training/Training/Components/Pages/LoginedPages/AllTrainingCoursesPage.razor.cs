@@ -1,14 +1,15 @@
-﻿using Microsoft.AspNetCore.Http.HttpResults;
-using Radzen;
-using Training.Components.Pages.Base;
-
-namespace Training.Components.Pages.LoginedPages;
+﻿namespace Training.Components.Pages.LoginedPages;
 
 public class AllTrainingCoursesPageModel : BaseShowAllDataModel<TrainingCourse> 
 {
-    //protected IEnumerable<TrainingCourse>? Entities { get; set; }
-
+    /// <summary>
+    /// Результат выполнения операции чтения чужих курсов, которые я выбрал
+    /// </summary>
     protected OperationResponce<IEnumerable<SelectedOtherPeopleCourse>?> OtherPeoplesCoursesThatIChosenResponce { get; set; } = default!;
+    
+    /// <summary>
+    /// Чужие курсы, которые выбраны мною
+    /// </summary>
     protected IEnumerable<TrainingCourse>? OtherPeoplesCoursesThatIChosen { get; set; }
 
     /// <summary>
@@ -18,13 +19,14 @@ public class AllTrainingCoursesPageModel : BaseShowAllDataModel<TrainingCourse>
 
     protected override async Task OnParametersSetAsync()
     {
-        //await LoadMyCourses();
         await LoadOtherPeoplesCourses();
     }
 
+    /// <summary>
+    /// Загрузка своих курсов
+    /// </summary>
     protected override async Task LoadEntetiesAsync()
     {
-        //var rezult = await DbRepository.GetAllMyTrainingCourse(MyUser);
         IsBusy = true;
         LoadEntitiesOperationResponce = await DbRepository.GetAllMyTrainingCourseAsync(MyUser);
         Entities = LoadEntitiesOperationResponce.Data;
@@ -33,8 +35,9 @@ public class AllTrainingCoursesPageModel : BaseShowAllDataModel<TrainingCourse>
             NotifyUser("Данные прочитаны");
     }
 
-
-
+    /// <summary>
+    /// Загрузка чужих курсов
+    /// </summary>
     private async Task LoadOtherPeoplesCourses()
     {
         OtherPeoplesCoursesThatIChosenResponce = await DbRepository.GetOtherPeoplesCoursesThatIChosenAsync(MyUser);

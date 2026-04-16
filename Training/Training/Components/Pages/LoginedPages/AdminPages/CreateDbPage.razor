@@ -2,15 +2,23 @@
 @inherits CreateDbPageModel
 <PageTitle>Создать БД</PageTitle>
 
+<br />
 <h3>Создание новой БД</h3>
+<br />
+<br />
 
+<ShowOperrationErrorComponent BaseOperationResponce="CreateNewDbResponce" />
 <div>
     <button class="btn btn-primary" @onclick="CretaeNewDb">Создать новую БД</button>
 </div>
+
 <div>
     @CreteDbMassage
 </div>
 <br />
+<br />
+
+<ShowOperrationErrorComponent BaseOperationResponce="SaveDataToDbResponce" />
 <div>
     <button class="btn btn-primary" @onclick="SaveDataInDb">Записать начальные данные в БД</button>
 </div>
