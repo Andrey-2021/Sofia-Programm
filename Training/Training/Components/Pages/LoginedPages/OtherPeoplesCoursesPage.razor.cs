@@ -4,8 +4,16 @@ namespace Training.Components.Pages.LoginedPages;
 
 public class OtherPeoplesCoursesPageModel : BaseModel
 {
-    protected IEnumerable<TrainingCourse>? SelectedOtherPeopleCourse { get; set; }
+    /// <summary>
+    /// Курсы открытые для всех. Разработанные другими пользователями.
+    /// </summary>
     protected IEnumerable<TrainingCourse>? NotSelectedOtherPeopleCourse { get; set; }
+
+    /// <summary>
+    /// Уже мною выбранные чужие курсы (разработанные другими пользователями)
+    /// </summary>
+    protected IEnumerable<TrainingCourse>? SelectedOtherPeopleCourse { get; set; }
+    
 
     /// <summary>
     /// Результат операции удаления

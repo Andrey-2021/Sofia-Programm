@@ -346,20 +346,23 @@ public class DbRepository
     /// </summary>
     /// <param name="myUser">Зарегистрированный пользователь</param>
     /// <returns>Список своих курсов</returns>
-    public async Task<OperationResponce<IEnumerable<TrainingCourse>>> GetAllMyTrainingCourseAsync(MyUser myUser)
+    public async Task<OperationResponce<IEnumerable<TrainingCourse>?>> GetAllMyTrainingCourseAsync(MyUser myUser)
     {
-        Func<IQueryable<TrainingCourse>, IIncludableQueryable<TrainingCourse, object>>? includeData = (x) => x.Include(ct => ct.MyUser);
+        Func<IQueryable<TrainingCourse>, IIncludableQueryable<TrainingCourse, object>>? includeData = (x) => x.Include(tc => tc.MyUser)
+                                                                                                             .Include(tc=>tc.CourseQestions);
 
         if (myUser.Role == RoleEnum.admin) //Если это администратор,
-            return await GetEntities<TrainingCourse>(include: includeData); // Читаем все курсы
+            return await GetEntities<TrainingCourse>(include: includeData,
+                                                            orderBy: x => x.OrderByDescending(tc => tc.ContractDate)); // Читаем все курсы
         else
             return await GetEntities<TrainingCourse>(include: includeData,
-                                                    predicate: x => x.MyUserId == myUser.Id); //Читаем только свои курсы
+                                                    predicate: x => x.MyUserId == myUser.Id,
+                                                    orderBy: x => x.OrderByDescending(tc => tc.ContractDate)); //Читаем только свои курсы
     }
 
 
     /// <summary>
-    /// Чужие курсы, на которые я выбрал
+    /// Чужие курсы, которые я выбрал
     /// </summary>
     /// <param name="myUser">Пользователь</param>
     /// <returns></returns>
@@ -384,7 +387,8 @@ public class DbRepository
         // Список курсов на которые я уже подписан
         var mySelectedOtherPeopleCourseResponce = await GetEntities<SelectedOtherPeopleCourse>(predicate: x => x.MyUserId == myUser.Id);
         if (!mySelectedOtherPeopleCourseResponce.IsSuccessfullOperation) //Если ошибка чтения
-            return OperationResponce<(IEnumerable<SelectedOtherPeopleCourse>? mySelectedCourses, List<TrainingCourse>? allOtherPeopleCourse)>.SetExceptionOperation("Ошибка чтения данных", mySelectedOtherPeopleCourseResponce.Exception);
+            return OperationResponce<(IEnumerable<SelectedOtherPeopleCourse>? mySelectedCourses, List<TrainingCourse>? allOtherPeopleCourse)>
+                .SetExceptionOperation("Ошибка чтения данных", mySelectedOtherPeopleCourseResponce.Exception);
 
         // Список всех чужих курсов
         OperationResponce <IEnumerable<TrainingCourse>> allOtherPeopleCourseResponce;

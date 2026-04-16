@@ -27,6 +27,15 @@ else
                     <th>
                         Описание курса
                     </th>
+
+                    <th>
+                        Кол.
+                        <div>
+                            карточек
+                        </div>
+                        
+                    </th>
+
                     <th>
                         Продолжительность курса (минут).
                     </th>
@@ -67,6 +76,9 @@ else
                         </td>
                         <td>
                             @item.Description
+                        </td>
+                        <td>
+                            @item.CourseQestions?.Count
                         </td>
                         <td>
                             @item.DurationHours

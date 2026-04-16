@@ -1,12 +1,13 @@
-﻿using Radzen;
+﻿using Microsoft.AspNetCore.Http.HttpResults;
+using Radzen;
 using Training.Components.Pages.Base;
 
 namespace Training.Components.Pages.LoginedPages;
 
-public class AllTrainingCoursesPageModel: BaseModel
+public class AllTrainingCoursesPageModel : BaseShowAllDataModel<TrainingCourse> //BaseModel
 {
-    protected IEnumerable<TrainingCourse>? TrainingCourses { get; set; }
-    
+    //protected IEnumerable<TrainingCourse>? Entities { get; set; }
+
     protected OperationResponce<IEnumerable<SelectedOtherPeopleCourse>?> OtherPeoplesCoursesThatIChosenResponce { get; set; } = default!;
     protected IEnumerable<TrainingCourse>? OtherPeoplesCoursesThatIChosen { get; set; }
 
@@ -17,12 +18,24 @@ public class AllTrainingCoursesPageModel: BaseModel
 
     protected override async Task OnParametersSetAsync()
     {
-        var rezult = await DbRepository.GetAllMyTrainingCourse(MyUser);
-        TrainingCourses = rezult.data;
-        await Load();
+        //await LoadMyCourses();
+        await LoadOtherPeoplesCourses();
     }
 
-    private async Task Load()
+    protected override async Task LoadEntetiesAsync()
+    {
+        //var rezult = await DbRepository.GetAllMyTrainingCourse(MyUser);
+        IsBusy = true;
+        LoadEntitiesOperationResponce = await DbRepository.GetAllMyTrainingCourseAsync(MyUser);
+        Entities = LoadEntitiesOperationResponce.Data;
+        IsBusy = false;
+        if (LoadEntitiesOperationResponce.IsSuccessfullOperation)
+            NotifyUser("Данные прочитаны");
+    }
+
+
+
+    private async Task LoadOtherPeoplesCourses()
     {
         OtherPeoplesCoursesThatIChosenResponce = await DbRepository.GetOtherPeoplesCoursesThatIChosenAsync(MyUser);
         OtherPeoplesCoursesThatIChosen = OtherPeoplesCoursesThatIChosenResponce.Data?.Select(x => x.TrainingCourse!)?.ToList();
@@ -38,6 +51,6 @@ public class AllTrainingCoursesPageModel: BaseModel
             NotifyUser("Курс удалён из списка выбранных", "Успешно", Radzen.NotificationSeverity.Success);
         else
             NotifyUser("Не удалось удалить курс из списка выбранных", "Ошибка", Radzen.NotificationSeverity.Error);
-        await Load();
+        await LoadOtherPeoplesCourses();
     }
 }
