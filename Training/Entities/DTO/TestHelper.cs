@@ -1,5 +1,8 @@
 ﻿namespace Entities.DTO;
 
+/// <summary>
+/// Вспомогательный класс для проведения тестирования по курсу
+/// </summary>
 public class TestHelper:IDisposable
 {
     /// <summary>

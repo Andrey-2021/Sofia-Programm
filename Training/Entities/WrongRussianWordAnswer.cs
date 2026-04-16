@@ -42,12 +42,18 @@ public class WrongRussianWordAnswer
     [DisplayName("Вопрос курса")]
     public CourseQestion? CourseQestion { get; set; }
 
+    /// <summary>
+    /// Конструктор
+    /// </summary>
     public WrongRussianWordAnswer()
-    { }
+    { 
+    }
 
+    /// <summary>
+    /// Конструктор
+    /// </summary>
     public WrongRussianWordAnswer(string answer)
     {
         Answer = answer;
     }
-
 }

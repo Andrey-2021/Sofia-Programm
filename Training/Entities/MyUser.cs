@@ -4,6 +4,7 @@ namespace Entities;
 /// <summary>
 /// Данные вводимые при регистрации пользователя
 /// </summary>
+[Comment("Пользователь")]
 public class MyUser :  IHaveId
 {
     /// <summary>

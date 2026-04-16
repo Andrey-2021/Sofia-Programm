@@ -55,16 +55,11 @@ public class LoadExcelData
                     row++;
                 }
                 return OperationResponce<List<CourseQestion>>.SetSuccessfullOperation(courseQestions, "Данные из Excel файла прочитаны");
-
-
             }
         }
         catch (Exception ex)
         {
             return OperationResponce<List<CourseQestion>>.SetExceptionOperation("Ошибк при извлечении данных из Excel файла", ex);
         }
-
-
-        
     }
 }

@@ -39,29 +39,12 @@ public class TrainingCourseExcelExporter
             // Автонастройка ширины колонок
             courseSheet.Cells[courseSheet.Dimension.Address].AutoFitColumns();
 
-            // Сохраняем файл или возвращаем массив байт
-
+            // Сохраняем файл
             var TempPath = Path.GetTempPath();
             var trustedFileNameForFileStorage = "temp.xlsx"; // Path.GetRandomFileName();
             var path = Path.Combine(TempPath, trustedFileNameForFileStorage);
 
-
             await package.SaveAsAsync(path);// Сохраняем файл
-            /*
-             
-            if (File.Exists(p_strPath))
-					File.Delete(p_strPath);
-
-				// Create excel file on physical disk  
-				FileStream objFileStrm = File.Create(p_strPath);
-				objFileStrm.Close();
-
-				// Write content to excel file  
-				File.WriteAllBytes(p_strPath, excel.GetAsByteArray());
-				//Close Excel package 
-				excel.Dispose();
-
-             */
             return OperationResponce<string?>.SetSuccessfullOperation(path, "Excel файл создан");
         }
         catch (Exception ex)

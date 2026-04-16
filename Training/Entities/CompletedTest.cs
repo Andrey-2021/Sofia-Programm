@@ -1,10 +1,10 @@
 ﻿using Entities.DTO;
-
 namespace Entities;
 
 /// <summary>
 /// Пройденные тесты
 /// </summary>
+[Comment("Пройденные тесты")]
 public class CompletedTest:IHaveId
 {
     /// <summary>
@@ -70,11 +70,15 @@ public class CompletedTest:IHaveId
     /// <summary>
     /// Количество вопросов в курсе
     /// </summary>
+    [Comment("Количество вопросов в курсе")]
+    [DisplayName("Количество вопросов в курсе")]
     public int QestionNumber { get; set; }
 
     /// <summary>
     /// Количество правильных ответов
     /// </summary>
+    [Comment("Количество правильных ответов")]
+    [DisplayName("Количество правильных ответов")]
     public int CountCorrectAnswers { get; set; }
 
     /// <summary>
@@ -82,18 +86,22 @@ public class CompletedTest:IHaveId
     /// </summary>
     [NotMapped]
     public decimal PercentageResult => Math.Round(100.0m * CountCorrectAnswers / (QestionNumber == 0 ? 1 : QestionNumber), 2);
-    
 
     /// <summary>
     /// Затраченное время на прохождение курса
     /// </summary>
     public TimeSpan Interval { get; set; }
 
-    //public int Duration { get; set; }
-
+    /// <summary>
+    /// Конструктор
+    /// </summary>
     public CompletedTest()
-    { }
+    { 
+    }
 
+    /// <summary>
+    /// Конструктор
+    /// </summary>
     public CompletedTest(MyUser myUser, TestHelper testHelper)
     {
         MyUserId = myUser.Id;

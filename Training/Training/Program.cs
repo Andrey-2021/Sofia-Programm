@@ -1,6 +1,4 @@
 using Microsoft.AspNetCore.Components.Authorization;
-using Microsoft.EntityFrameworkCore;
-using Radzen;
 using Training.Components;
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,25 +15,13 @@ builder.Services.AddRazorComponents()
             });
 
 builder.Services.AddTransient<DbRepository>(); // регистрируем репозиторий
+DbConteinerConfiguration.AddToServiceCollection(builder.Services);
 
 builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthenticationStateProvider>();
 builder.Services.AddScoped<MyUserOperationService>();
 
 builder.Services.AddAuthorization();
 builder.Services.AddCascadingAuthenticationState(); //новая аутентификация
-
-
-string connectionString = "Data Source = WIN10PC; Initial Catalog =2026TrainingCRM ; Integrated Security = True; Connect Timeout = 30; Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
-
-builder.Services.AddDbContextFactory<SqlDbContext>
-        (
-            options => options.UseSqlServer(connectionString
-                                            // описание  EnableRetryOnFailure -  https://makolyte.com/how-to-do-retries-in-ef-core/
-                                            , options => { options.EnableRetryOnFailure(); }
-                                            )
-            );
-
-
 
 builder.Services.AddRadzenComponents(); // Для Radzen компонентов
 var app = builder.Build();

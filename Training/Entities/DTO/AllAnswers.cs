@@ -1,5 +1,8 @@
 ﻿namespace Entities.DTO;
 
+/// <summary>
+/// Создаём ответы для тестирования знаний по курсу
+/// </summary>
 public class AllAnswers
 {
     /// <summary>

@@ -4,6 +4,7 @@
 /// Создатель курса
 /// </summary>
 [Owned]
+[Comment("Создатель курса")]
 public class Manager
 {
     /// <summary>
@@ -21,7 +22,6 @@ public class Manager
     [DisplayName("Фамилия")]
     public string LastName { get; set; } = string.Empty;
 
-
     /// <summary>
     /// Имя
     /// </summary>
@@ -31,7 +31,6 @@ public class Manager
     [DisplayName("Имя")]
     public string FirstName { get; set; } = string.Empty;
 
-
     /// <summary>
     /// Отчество
     /// </summary>
@@ -40,7 +39,6 @@ public class Manager
     [Comment("Отчество")]
     [DisplayName("Отчество")]
     public string MiddleName { get; set; } = string.Empty;
-
 
     /// <summary>
     /// Номер телефона
@@ -62,7 +60,6 @@ public class Manager
     [Comment("e-mail")]
     [DisplayName("e-mail")]
     public string Email { get; set; } = string.Empty;
-
 
     public Manager()
     {

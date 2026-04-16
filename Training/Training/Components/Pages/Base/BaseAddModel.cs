@@ -86,9 +86,6 @@ public class BaseAddModel<TEntity> : BaseModel
     /// <returns></returns>
     protected virtual async Task OnSaveValidEntityClick()
     {
-        if (MainEntity is IDelSpaces delInfo)
-            delInfo.DelSpaces();
-
         IsBusy = true;
         SaveEntityOperationResponce = await DbRepository.UpdateEntity(MainEntity!);
         IsBusy = false;

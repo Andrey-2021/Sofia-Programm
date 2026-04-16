@@ -28,7 +28,9 @@ public class TrainingCourseInfoDto
     [NotMapped]
     public decimal PercentageResult { get; private set; }
 
-
+    /// <summary>
+    /// Конструктор
+    /// </summary>
     public TrainingCourseInfoDto(TrainingCourse? trainingCourse, int subscribersNumber, decimal percentageResult)
     {
         TrainingCourse = trainingCourse;

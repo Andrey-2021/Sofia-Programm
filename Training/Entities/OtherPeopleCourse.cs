@@ -3,6 +3,7 @@
 /// <summary>
 /// Выбранный мною чужой курс
 /// </summary>
+[Comment("Выбранный мною чужой курс")]
 public class SelectedOtherPeopleCourse
 {
     /// <summary>

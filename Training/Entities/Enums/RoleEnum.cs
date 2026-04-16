@@ -17,19 +17,3 @@ public enum RoleEnum
     [Description("Менеджер")]
     manager =2
 }
-
-
-public class TranslateRoleEnum
-{
-	public static Dictionary<RoleEnum, string> Roles
-	{
-		get
-		{
-			return new Dictionary<RoleEnum, string>()
-			{
-				[RoleEnum.admin] = "Администратор",
-				[RoleEnum.manager] = "Оператор"
-			};
-		}
-	}
-}

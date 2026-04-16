@@ -90,31 +90,15 @@ public class DbRepository
         }
     }
 
-
-    public async Task<(IEnumerable<TEntity> data, Exception? ex)> GetEntitiesAsync<TEntity>(System.Linq.Expressions.Expression<Func<TEntity, bool>>? predicate = null,
-                                                                                            Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
-                                                                                            Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
-                                                                                            TrackingType trackingType = TrackingType.NoTracking)
-        where TEntity : class
-    {
-        try
-        {
-            //using var db = contextFactory.CreateDbContext();
-            using (var db = contextFactory.CreateDbContext())
-            {
-                var query = db.Set<TEntity>().AsQueryable(); //.AsSplitQuery();
-                query = TrackingPart(trackingType, query);
-                query = Common_Predicat_OrderBy_Include(query, predicate, orderBy, include);
-                var result = await query.ToListAsync();
-                return (result, null);
-            }
-        }
-        catch (Exception ex)
-        {
-            return (new List<TEntity>(), ex);
-        }
-    }
-
+    /// <summary>
+    /// Прочитать сущнисти из БД
+    /// </summary>
+    /// <typeparam name="TEntity">Тип сущности</typeparam>
+    /// <param name="predicate">Условие выборки</param>
+    /// <param name="orderBy">Сортировка</param>
+    /// <param name="include">Включение зависимых сущностей</param>
+    /// <param name="trackingType">Отслеживание изменений</param>
+    /// <returns>Результат выполнения операции</returns>
     public async Task<OperationResponce<IEnumerable<TEntity>?>> GetEntities<TEntity>(System.Linq.Expressions.Expression<Func<TEntity, bool>>? predicate = null,
                                                                                             Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
                                                                                             Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
@@ -140,7 +124,9 @@ public class DbRepository
         }
     }
 
-
+    /// <summary>
+    /// Настройка отслеживания сущностей
+    /// </summary>
     protected IQueryable<T> TrackingPart<T>(TrackingType trackingType, IQueryable<T> entities)
         where T : class
     {
@@ -154,6 +140,15 @@ public class DbRepository
         return query;
     }
 
+    /// <summary>
+    /// Наствройка выборки
+    /// </summary>
+    /// <typeparam name="T">Тип</typeparam>
+    /// <param name="query">Запрос</param>
+    /// <param name="predicate">Условие</param>
+    /// <param name="orderBy">Сортировка</param>
+    /// <param name="include">Включение зависимых сущностей</param>
+    /// <returns>Результат выполнения операции</returns>
     private IQueryable<T> Common_Predicat_OrderBy_Include<T>(IQueryable<T> query,
                                                                 System.Linq.Expressions.Expression<Func<T, bool>>? predicate = null,
                                                                 Func<IQueryable<T>, IOrderedQueryable<T>>? orderBy = null,
@@ -174,9 +169,9 @@ public class DbRepository
     /// <summary>
 	/// Обновить сущность в БД
 	/// </summary>
-	/// <typeparam name="TEntity"></typeparam>
-	/// <param name="entity"></param>
-	/// <returns></returns>
+	/// <typeparam name="TEntity">Тип</typeparam>
+	/// <param name="entity">Обновляемая сущность</param>
+	/// <returns>Исключение</returns>
 	public async Task<Exception?> UpdateEntityAsync<TEntity>(TEntity entity)
     where TEntity : class
     {
@@ -244,6 +239,9 @@ public class DbRepository
         }
     }
 
+    /// <summary>
+    /// Найти первую сущность удовлетворяющую условию
+    /// </summary>
     public async Task<(TEntity? entity, Exception? ex)> GetFirstOrDefaultAsync<TEntity>(Expression<Func<TEntity, bool>>? predicate = null,
                                                                 Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
                                                                 Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null,
@@ -284,7 +282,6 @@ public class DbRepository
         {
             return (null, ex);
         }
-
     }
 
     /// <summary>
@@ -338,22 +335,6 @@ public class DbRepository
         }
     }
 
-
-    public async Task<(IEnumerable<TrainingCourse>? data, Exception? ex)> GetAllMyTrainingCourse(MyUser myUser)
-    {
-        if (myUser == null)
-            return (null, null);
-
-        if (myUser.Role == RoleEnum.admin) //Если это администратор,
-            return await GetEntitiesAsync<TrainingCourse>(include: x => x.Include(tc => tc.MyUser),
-                                                            orderBy: x => x.OrderByDescending(tc => tc.ContractDate)); // Читаем все курсы
-        else
-            return await GetEntitiesAsync<TrainingCourse>(predicate: x => x.MyUserId == myUser.Id, //Читаем только свои курсы
-                                                            include: x => x.Include(tc => tc.MyUser),
-                                                            orderBy: x => x.OrderByDescending(tc => tc.ContractDate));
-
-    }
-
     /// <summary>
     /// Получить все свои курсы
     /// </summary>
@@ -363,7 +344,6 @@ public class DbRepository
     {
         Func<IQueryable<TrainingCourse>, IIncludableQueryable<TrainingCourse, object>>? includeData = (x) => x.Include(tc => tc.MyUser)
                                                                                                              .Include(tc => tc.CourseQestions);
-
         if (myUser.Role == RoleEnum.admin) //Если это администратор,
             return await GetEntities<TrainingCourse>(include: includeData,
                                                             orderBy: x => x.OrderByDescending(tc => tc.ContractDate)); // Читаем все курсы
@@ -373,12 +353,11 @@ public class DbRepository
                                                     orderBy: x => x.OrderByDescending(tc => tc.ContractDate)); //Читаем только свои курсы
     }
 
-
     /// <summary>
     /// Чужие курсы, которые я выбрал
     /// </summary>
     /// <param name="myUser">Пользователь</param>
-    /// <returns></returns>
+    /// <returns>Результат выполнения операции</returns>
     public async Task<OperationResponce<IEnumerable<SelectedOtherPeopleCourse>?>> GetOtherPeoplesCoursesThatIChosenAsync(MyUser myUser)
     {
         // Список курсов на которые я уже подписан
@@ -445,9 +424,7 @@ public class DbRepository
         {
             return await GetEntities<CompletedTest>(include: includeData,
                                                             orderBy: x => x.OrderByDescending(ct => ct.ContractDate)); // Читаем все 
-
         }
-
         else
         {
             return await GetEntities<CompletedTest>(predicate: x => x.MyUserId == myUser.Id, //Читаем только свои 
@@ -456,6 +433,11 @@ public class DbRepository
         }
     }
 
+    /// <summary>
+    /// Прочитать курс
+    /// </summary>
+    /// <param name="id">id-курса</param>
+    /// <returns>Результат выполнения операции</returns>
     public async Task<OperationResponce<TrainingCourse>> GetCourse(int? id)
     {
         return await GetFirstOrDefault<TrainingCourse>
@@ -464,13 +446,12 @@ public class DbRepository
                             .ThenInclude(cq => cq.WrongRussianWordAnswers));
     }
 
-
     /// <summary>
 	/// Удалить курс из списка чужих выбранных курсов
 	/// </summary>
-	/// <typeparam name="TEntity"></typeparam>
-	/// <param name="entity"></param>
-	/// <returns></returns>
+	/// <typeparam name="TEntity">Тип</typeparam>
+	/// <param name="entity">Удаляемая сущность</param>
+	/// <returns>Результат выполнения операции</returns>
 	public async Task<OperationResponce<SelectedOtherPeopleCourse?>> DelSelectedTrainingCourceAsync(MyUser myUser, TrainingCourse trainingCourse)
     {
         try
