@@ -18,8 +18,8 @@ else
                 @(TestHelper.MainEntity?.Description)
             </p>
             <div class="course-meta">
-                <span class="meta-item">📅 Создан: @(TestHelper.MainEntity?.ContractDate.ToLongDateString())</span>
-                <span class="meta-item">⏱️ Длительность: @(TestHelper.MainEntity?.DurationHours) минут</span>
+                <span class="meta-item">📅 Создан: @(TestHelper.MainEntity?.CreateDate.ToLongDateString())</span>
+                <span class="meta-item">⏱️ Длительность: @(TestHelper.MainEntity?.Duration) минут</span>
                 <span class="meta-item">🎯 Уровень: @(TestHelper.MainEntity?.DifficultyLevel) из @(LengthConstants.courceDifficultyLevelLength)</span>
                 <span class="meta-item">
                     👁️

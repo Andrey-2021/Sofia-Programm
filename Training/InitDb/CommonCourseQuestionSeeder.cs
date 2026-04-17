@@ -23,6 +23,9 @@ public static class CommonCourseQuestionSeeder
         var qestions5 = BusinessInJapan.GetSampleQuestionsForBusinessJapan(trainingCourses[4]);
         courseQestions.AddRange(qestions5);
 
+        var qestions6 = JLPT_N1.GetJapan(trainingCourses[5]);
+        courseQestions.AddRange(qestions6);
+
         return courseQestions;
     }
 }

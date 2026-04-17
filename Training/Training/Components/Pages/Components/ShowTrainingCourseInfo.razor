@@ -7,8 +7,8 @@
 <div class="course-header">
     <h1>📚 @TrainingCourseInfo?.TrainingCourse?.Name</h1>
     <div class="course-header-meta">
-        <span>📅 Создан: @TrainingCourseInfo?.TrainingCourse?.ContractDate.ToLongDateString()</span>
-        <span>⏱️ Продолжительность: @TrainingCourseInfo?.TrainingCourse?.DurationHours мин</span>
+        <span>📅 Создан: @TrainingCourseInfo?.TrainingCourse?.CreateDate.ToLongDateString()</span>
+        <span>⏱️ Продолжительность: @TrainingCourseInfo?.TrainingCourse?.Duration мин</span>
         <span class="badge badge-difficulty">⭐ Уровень: @TrainingCourseInfo?.TrainingCourse?.DifficultyLevel</span>
         <span class="badge badge-visibility">
             🌍
@@ -111,9 +111,9 @@
                     ⏰ Продолжительность
                 </div>
                 <div class="info-value">
-                    <div>@(@TrainingCourseInfo?.TrainingCourse?.DurationHours) минут</div>
+                    <div>@(@TrainingCourseInfo?.TrainingCourse?.Duration) минут</div>
                     <div style="font-size: 12px; color: #718096; margin-top: 5px;">
-                        @(string.Format("{0:f2}", @TrainingCourseInfo?.TrainingCourse?.DurationHours / 60.0)) часов
+                        @(string.Format("{0:f2}", @TrainingCourseInfo?.TrainingCourse?.Duration / 60.0)) часов
                     </div>
                 </div>
             </div>
@@ -124,9 +124,9 @@
                     📅 Дата создания
                 </div>
                 <div class="info-value">
-                    <div>@(@TrainingCourseInfo?.TrainingCourse?.ContractDate.ToLongDateString())</div>
+                    <div>@(@TrainingCourseInfo?.TrainingCourse?.CreateDate.ToLongDateString())</div>
                     <div style="font-size: 12px; color: #718096; margin-top: 5px;">
-                        @(@TrainingCourseInfo?.TrainingCourse?.ContractDate.ToShortDateString())
+                        @(@TrainingCourseInfo?.TrainingCourse?.CreateDate.ToShortDateString())
                     </div>
                 </div>
             </div>

@@ -16,7 +16,7 @@ internal class BusinessInJapan
             KatakanaWord = "カイシャ",
             Word = "компания",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Офис"),
@@ -34,7 +34,7 @@ internal class BusinessInJapan
             KatakanaWord = "シゴト",
             Word = "работа",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Должность"),
@@ -52,7 +52,7 @@ internal class BusinessInJapan
             KatakanaWord = "ジョウシ",
             Word = "начальник",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Подчинённый"),
@@ -70,7 +70,7 @@ internal class BusinessInJapan
             KatakanaWord = "ドウリョウ",
             Word = "коллега",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Друг"),
@@ -88,7 +88,7 @@ internal class BusinessInJapan
             KatakanaWord = "シャイン",
             Word = "сотрудник",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Работник"),
@@ -106,7 +106,7 @@ internal class BusinessInJapan
             KatakanaWord = "カイギ",
             Word = "совещание",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Конференция"),
@@ -124,7 +124,7 @@ internal class BusinessInJapan
             KatakanaWord = "ホウコク",
             Word = "отчёт",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Доклад"),
@@ -142,7 +142,7 @@ internal class BusinessInJapan
             KatakanaWord = "プロジェクト",
             Word = "проект",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Задача"),
@@ -160,7 +160,7 @@ internal class BusinessInJapan
             KatakanaWord = "コキャク",
             Word = "клиент",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Покупатель"),
@@ -178,7 +178,7 @@ internal class BusinessInJapan
             KatakanaWord = "ケイヤク",
             Word = "контракт",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Соглашение"),
@@ -196,7 +196,7 @@ internal class BusinessInJapan
             KatakanaWord = "リエキ",
             Word = "прибыль",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Доход"),
@@ -214,7 +214,7 @@ internal class BusinessInJapan
             KatakanaWord = "ソンシツ",
             Word = "убыток",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Расход"),
@@ -232,7 +232,7 @@ internal class BusinessInJapan
             KatakanaWord = "メイシ",
             Word = "визитка",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Бланк"),
@@ -250,7 +250,7 @@ internal class BusinessInJapan
             KatakanaWord = "シャザイ",
             Word = "извинение",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("Просьба"),
@@ -268,7 +268,7 @@ internal class BusinessInJapan
             KatakanaWord = "オツカレサマデス",
             Word = "спасибо за работу",
             TrainingCourse = trainingCourse,
-             
+
             WrongWordAnswers = new List<WrongWordAnswer>
     {
         new("До свидания"),

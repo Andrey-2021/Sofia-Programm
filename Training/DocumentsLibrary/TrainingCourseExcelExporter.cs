@@ -130,8 +130,8 @@ public class TrainingCourseExcelExporter
         //AddPropertyRow(sheet, currentRow++, "ID курса", course.Id.ToString());
         AddPropertyRow(sheet, currentRow++, "Название", course.Name);
         AddPropertyRow(sheet, currentRow++, "Описание", course.Description ?? "Не указано");
-        AddPropertyRow(sheet, currentRow++, "Продолжительность", FormatDuration(course.DurationHours));
-        AddPropertyRow(sheet, currentRow++, "Дата создания", course.ContractDate.ToString("dd.MM.yyyy"));
+        AddPropertyRow(sheet, currentRow++, "Продолжительность", FormatDuration(course.Duration));
+        AddPropertyRow(sheet, currentRow++, "Дата создания", course.CreateDate.ToString("dd.MM.yyyy"));
         AddPropertyRow(sheet, currentRow++, "Уровень сложности", FormatDifficultyLevel(course.DifficultyLevel));
         AddPropertyRow(sheet, currentRow++, "Видимость", course.IsVisableForAll ? "👁️ Доступен всем" : "🔒 Ограниченный доступ");
     }

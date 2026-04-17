@@ -197,6 +197,44 @@ main {
     font-size: 0.98rem;
 }
 
+.feature-list {
+    margin-top: 12px;
+    padding-left:10px;
+    list-style: none;
+}
+
+.feature-list li {
+    margin-bottom: 8px;
+    color: #4d3a2a;
+    position: relative;
+    padding-left: 20px;
+}
+
+    .feature-list li::before {
+        content: "•";
+        color: #d48c4a;
+        font-weight: bold;
+        position: absolute;
+        left: 0;
+    }
+
+.mode-badge {
+    display: inline-block;
+    background: #f0e0ce;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #b45f2b;
+    margin-top: 12px;
+}
+
+
+
+
+
+
+
 .program-list {
     background: #fffbf5;
     border-radius: 28px;

@@ -35,7 +35,7 @@ public class TrainingCourse: IHaveId
      [Range(0, (double)LengthConstants.maxDurationHours, ErrorMessage = "Недопустимое значение. Должно быть от {1} до {2}")]
     [Comment("Продолжительность курса (минут)")]
     [DisplayName("Продолжительность курса (минут)")]
-    public int DurationHours { get; set; }
+    public int Duration { get; set; }
 
     /// <summary>
     /// Дата создания курса
@@ -45,7 +45,7 @@ public class TrainingCourse: IHaveId
     [Range(typeof(DateTime), "1/1/2000", "1/1/2035", ErrorMessage = "Дата заключения вне допустимого диапазона")]
     [Comment("Дата создания курса")]
     [DisplayName("Дата создания курса")]
-    public DateTime ContractDate { get; set; } = DateTime.Now;
+    public DateTime CreateDate { get; set; } = DateTime.Now;
 
     /// <summary>
     /// Уровень сложности курса

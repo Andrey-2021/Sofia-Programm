@@ -282,11 +282,11 @@ public class DbRepository
                                                                                                              .Include(tc => tc.CourseQestions);
         if (myUser.Role == RoleEnum.admin) //Если это администратор,
             return await GetEntities<TrainingCourse>(include: includeData,
-                                                            orderBy: x => x.OrderByDescending(tc => tc.ContractDate)); // Читаем все курсы
+                                                            orderBy: x => x.OrderByDescending(tc => tc.CreateDate)); // Читаем все курсы
         else
             return await GetEntities<TrainingCourse>(include: includeData,
                                                     predicate: x => x.MyUserId == myUser.Id,
-                                                    orderBy: x => x.OrderByDescending(tc => tc.ContractDate)); //Читаем только свои курсы
+                                                    orderBy: x => x.OrderByDescending(tc => tc.CreateDate)); //Читаем только свои курсы
     }
 
     /// <summary>

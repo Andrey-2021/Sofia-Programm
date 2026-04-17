@@ -22,10 +22,10 @@ else
                 </h1>
                 <div class="course-meta">
                     <div class="meta-item">
-                        📅 @(MainEntity?.ContractDate.ToLongDateString())
+                        📅 @(MainEntity?.CreateDate.ToLongDateString())
                     </div>
                     <div class="meta-item">
-                        ⏱️ @MainEntity?.DurationHours минут
+                        ⏱️ @MainEntity?.Duration минут
                     </div>
                 </div>
             </div>
@@ -106,9 +106,9 @@ else
                                 ⏰ Продолжительность
                             </div>
                             <div class="info-value">
-                                <div>@(MainEntity?.DurationHours) минут</div>
+                                <div>@(MainEntity?.Duration) минут</div>
                                 <div style="font-size: 12px; color: #718096; margin-top: 5px;">
-                                    @(string.Format("{0:f2}", MainEntity?.DurationHours / 60.0)) часов
+                                    @(string.Format("{0:f2}", MainEntity?.Duration / 60.0)) часов
                                 </div>
                             </div>
                         </div>
@@ -119,9 +119,9 @@ else
                                 📅 Дата создания
                             </div>
                             <div class="info-value">
-                                <div>@(MainEntity!.ContractDate.ToLongDateString())</div>
+                                <div>@(MainEntity!.CreateDate.ToLongDateString())</div>
                                 <div style="font-size: 12px; color: #718096; margin-top: 5px;">
-                                    @(MainEntity!.ContractDate.ToShortDateString())
+                                    @(MainEntity!.CreateDate.ToShortDateString())
                                 </div>
                             </div>
                         </div>

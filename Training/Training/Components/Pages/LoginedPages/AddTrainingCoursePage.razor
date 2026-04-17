@@ -73,12 +73,12 @@
                                     Min="0"
                                                    Max="@LengthConstants.maxDurationHours"
                                                    TValue="int"
-                                                   @bind-Value=@MainEntity.DurationHours
+                                                   @bind-Value=@MainEntity.Duration
                                                    AutoCompleteType="AutoCompleteType.Off"
                                                    Step="1"
                                                    Placeholder="0"
                                                    TextAlign="TextAlign.Right" />
-                                    <ValidationMessage For="@(() => MainEntity!.DurationHours)" />
+                                    <ValidationMessage For="@(() => MainEntity!.Duration)" />
                                 </td>
                             </tr>
 
@@ -95,10 +95,10 @@
                                                    tabindex="2"
                                                    ReadOnly="true"
                                                    Disabled="true"
-                                                   Value=@(MainEntity!.ContractDate.ToLongDateString())>
+                                                   Value=@(MainEntity!.CreateDate.ToLongDateString())>
                                     </RadzenTextBox>
 
-                                    <ValidationMessage For="@(() => MainEntity!.ContractDate)" />
+                                    <ValidationMessage For="@(() => MainEntity!.CreateDate)" />
                                 </td>
                             </tr>
 
